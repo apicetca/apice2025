@@ -1,0 +1,152 @@
+<style>
+
+.menu-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-width: 100vw;
+  z-index: 10;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #0C0854;
+  padding: 24px 32px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .menu-header {
+    padding: 16px 0px;
+  }
+}
+
+.menu-icon {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.logo img {
+  height: 48px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+.icons {
+  display: flex;
+  gap: 24px;
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.icone {
+  font-size: 1.25rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  background-color: #0C0854;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  max-width: 400px;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+  z-index: 150;
+  padding: 32px 24px;;
+  overflow-y: auto;
+  box-shadow: 8px 0 32px rgba(0,0,0,0.2);
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+#menuOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+  z-index: 99;
+}
+
+#menuOverlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu ul {
+  list-style: none;
+}
+
+.mobile-menu li {
+  margin: 24px 0;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 16px;
+}
+
+.mobile-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.mobile-menu a:hover {
+  color: #00C4FF;
+}
+
+.visitante {
+  font-weight: bold;
+}
+
+.dstqMenu2 {
+  color: #FFC52D;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+</style>
+<header class="menu-header">
+  <button class="menu-icon" id="menuHamburguer" aria-label="Abrir menu">
+    ☰
+  </button>
+  <span class="logo">
+    <img src="/img/logoapc.png" alt="Logo Ápice">
+  </span>
+  <span class="icons">
+    <button class="icone" aria-label="Perfil"><img src="/img/Icon.png"></button>
+  </span>
+  <nav class="mobile-menu" id="mobileMenu">
+    <ul>
+      <p>Olá, <span class="visitante">visitante</span><br>
+      <a href="/login" class="dstqMenu2">Entre</a> ou <a class="dstqMenu2">Cadastre-se</a></p>
+      <li><a href="/">Home</a></li>
+      <li><a href="/cursos">Cursos</a></li>
+      <li><a href="/vagas">Vagas</a></li>
+      <li><a href="/empresa">Empresas</a></li>
+    </ul>
+  </nav>
+  <span id="menuOverlay"></span>
+</header>

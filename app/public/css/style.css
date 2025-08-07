@@ -1,0 +1,249 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #0C0854;
+  color: white;
+}
+
+.textoinicio {
+   font-family: "Montserrat", sans-serif;
+   color: white;
+   font-weight: 500;
+   display: block;
+   font-size: 17.5px;
+   margin-left: 20px;
+}
+
+main {
+  padding-top: 110px;
+  color: white;
+  text-align: left;
+  padding-bottom: 40px;
+}
+
+.destaque {
+  color: #FFC52D;
+  font-weight: bold;
+}
+
+.txthome {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.destaque2 {
+  font-weight: bold;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  margin-top: 40px;
+  justify-content: center; 
+}
+
+.btnhome {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  border: 2px solid #FFC52D;
+  border-radius: 15px;
+  padding: 16px 32px;
+  width: 320px;
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: 0.3s;
+  background-color: #0C0854;
+  white-space: nowrap;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btnhome .seta {
+  margin-left: auto;
+  color: #FFC52D;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.btnhome:hover {
+  background-color: #FFC52D;
+  color: #0C0854;
+}
+
+.btnhome:hover .seta {
+  color: #0C0854;
+}
+
+.saibamais {
+  margin-top: 40px;
+  font-size: 1rem;
+  color: white;
+  text-decoration: underline;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.saibamais img {
+  height: 32px;
+  width: 32px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.foto-grupo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 320px;
+  height: 320px;
+}
+
+.foto-grupo2 {
+  width: 296px;
+  height: 178px;
+}
+
+.destaque-secundaria {
+  background: #fff;
+  padding: 40px 24px;
+  color: black;
+  font-family: Montserrat, sans-serif;
+  width: 100%;       
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+}
+
+.txtsec {
+  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+}
+
+.dtq-sec {
+  color: #0C0854;
+  font-weight: bold;
+}
+
+.dtq-sec2 {
+  font-weight: bold;
+}
+
+.txt {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+
+.btnhome2 {
+  display: inline-flex;
+  justify-content: flex-start;
+  gap: 50px;
+  padding-left: 5px;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50px;
+  color: #0C0854;
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: 0.3s;
+  background-color: none;
+  padding-left: 10px;
+  padding-right: 5px;  
+}
+
+.btnhome3 {
+  display: inline-flex;
+  justify-content: flex-start;
+  gap: 18px;
+  padding-left: 5px;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50px;
+  color: #0C0854;
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: 0.3s;
+  background-color: none;
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+.btnhome4 {
+  display: inline-flex;
+  justify-content: flex-start;
+  gap: 73px;
+  padding-left: 5px;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50px;
+  color: #0C0854;
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: 0.3s;
+  background-color: none;
+  padding-left: 10px;
+  padding-right: 5px;  
+}
+
+.btnhome4 .seta2 {
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+}
+
+.btnhome5 {
+  display: inline-flex;
+  justify-content: flex-start;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50px;
+  color: #0C0854;
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: 0.3s;
+  background-color: none;
+  padding: 5px 3px 5px 10px;
+  min-width: none;
+}
+
+.btnhome5 .seta3 {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  margin-left: 0px;
+  margin-right: 6px;
+}
+
+.seta2 {
+  margin-top: 7px;
+  height: 16px;
+  width: 16px;
+}
+
