@@ -17,20 +17,108 @@
     <%- include('../partials/menu') %>
     <main>
     <section class="filter-wrapper">
-        <div class="filter-header">
+        <nav class="filtroinicial">
             <img src="/img/filtro.png" alt= "Ícone de filtro" class="filter-icon">
             <span class="filter-text">Filtrar</span>
-        </div>
+        </nav>
         <nav class="button-group">
             <button class="toggle-button active" data-target="vagas" aria-pressed="true">Vagas</button>
             <button class="toggle-button" data-target="cursos" aria-pressed="false">Cursos</button>
         </nav>
-        <nav class="filtro-escondido">
-          <form class="caixa-filtro" method="post">
-            <img src="/img/filtro2.png" alt="Ícone de filtro" class="filter-icon2">
-            <button>Limpar filtro</button>
-          </form>
-        </nav>
+        <form class="filter-box">
+  <nav class="filter-header">
+    <span class="clear-filters">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="filter-icon"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+        />
+      </svg>
+      Limpar Filtros
+    </span>
+    <button type="button" class="close-btn">&times;</button>
+  </nav>
+
+  <fieldset class="filter-group">
+    <legend class="filter-title">Duração</legend>
+    <nav class="filter-options">
+      <input type="radio" id="duracao-curta" name="duracao" value="curta" />
+      <label for="duracao-curta">Curta duração</label>
+
+      <input type="radio" id="duracao-media" name="duracao" value="media" />
+      <label for="duracao-media">Média duração</label>
+
+      <input type="radio" id="duracao-longa" name="duracao" value="longa" />
+      <label for="duracao-longa">Longa duração</label>
+    </nav>
+  </fieldset>
+
+  <hr class="divider" />
+
+  <fieldset class="filter-group">
+    <legend class="filter-title">Tipos de cursos</legend>
+    <nav class="filter-options checkbox-options">
+      <input
+        type="checkbox"
+        id="desenv"
+        name="tipos_cursos"
+        value="desenvolvimento"
+      />
+      <label for="desenv">Desenvolvimento Profissional e Pessoal</label>
+
+      <input type="checkbox" id="negocios" name="tipos_cursos" value="negocios" />
+      <label for="negocios">Negócios e Inovação</label>
+
+      <input
+        type="checkbox"
+        id="programacao"
+        name="tipos_cursos"
+        value="programacao"
+      />
+      <label for="programacao">Programação</label>
+
+      <input type="checkbox" id="ti" name="tipos_cursos" value="ti" />
+      <label for="ti">Tecnologia da Informação</label>
+    </nav>
+  </fieldset>
+
+  <hr class="divider" />
+
+  <fieldset class="filter-group">
+    <legend class="filter-title">Nível de dificuldade</legend>
+    <nav class="filter-options">
+      <input
+        type="radio"
+        id="dificuldade-iniciante"
+        name="dificuldade"
+        value="iniciante"
+      />
+      <label for="dificuldade-iniciante">Iniciante</label>
+
+      <input
+        type="radio"
+        id="dificuldade-intermediario"
+        name="dificuldade"
+        value="intermediario"
+      />
+      <label for="dificuldade-intermediario">Intermediário</label>
+
+      <input
+        type="radio"
+        id="dificuldade-avancado"
+        name="dificuldade"
+        value="avancado"
+      />
+      <label for="dificuldade-avancado">Avançado</label>
+    </nav>
+  </fieldset>
+</form>
     </section>
     </main>
     <script src="/js/script.js"></script>
