@@ -22,31 +22,29 @@
     
 <h1 class="LOGIN montserrat">Login</h1>
 <br>
-  <nav class="form-section">
+  <section class="form-section">
         <p>Digite seus dados de acesso para entrar</p>
-    <form class="login-form">
-      <input type="text" id="email" name="email" placeholder="Email ou telefone" required />
-
-    <form class="login-form">
-      <input type="text" id="password" name="password" placeholder="Senha" required />
+    <form action="/login/verify" method="post" class="login-form">
+      <input type="text" id="email" name="email" placeholder="Email ou telefone"  value="<%= email %>" required />
+      <input type="text" id="password" name="password" placeholder="Senha" value="<%= password %>" required />
 
       <a href="#" class="forgot-password">Esqueceu a senha?</a>
 
     </form>
-  </nav> 
+  </section> 
 
-  <nav class="actions-section">
+  <section class="actions-section">
       <button type="submit" class="btn-primary">Confirmar</button>
       <button type="button" class="btn-secondary">Cadastre-se</button>
 
-      <nav class="social-login">
+      <section class="social-login">
       <img src="/img/google.png" alt="Login com Google" />
       <img src="/img/microsoft.png" alt="Login com Microsoft" />
       <img src="/img/meta.png" alt="Login com Meta" />
       <img src="/img/Linkedi2.png" alt="Login com Linkedin" />
-  </nav>
+  </section>
 
-    </nav>
+    </section>
   </main>
   <script src="/js/script.js"></script>
 
