@@ -18,9 +18,14 @@
     <main>
     <section class="filter-wrapper">
         <nav class="filtroinicial">
-            <img src="/img/filtro.png" alt= "Ícone de filtro" class="filter-icon">
-            <span class="filter-text">Filtrar</span>
+            <span class="openfilter">
+      <img src="/img/filtro2.png" width="18px" height="18px">
+      Limpar Filtros
+    </span>
+    <button type="button" class="close-btn"></button>
         </nav>
+
+        <br>
         <nav class="button-group">
             <button class="toggle-button active" data-target="vagas" aria-pressed="true">Vagas</button>
             <button class="toggle-button" data-target="cursos" aria-pressed="false">Cursos</button>
@@ -28,18 +33,7 @@
         <form class="filter-box">
   <nav class="filter-header">
     <span class="clear-filters">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="filter-icon"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
-        />
-      </svg>
+      <img src="/img/filtro2.png">
       Limpar Filtros
     </span>
     <button type="button" class="close-btn">&times;</button>
@@ -122,5 +116,5 @@
     </section>
     </main>
     <script src="/js/script.js"></script>
-    <%- include('../partials/footer') %>    
+    <%- include('../partials/footer') %>
 </body>
