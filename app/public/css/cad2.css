@@ -1,0 +1,107 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.cadastro {
+    text-align: center;
+    margin-top: 20px;
+    color: #2B4062;
+    font-family: 'montserrat', sans-serif;
+}
+
+.cad-container {
+  
+  margin: 1rem;
+  padding: 0;
+  border-radius: 0;
+  text-align: center;
+  background: none;
+}
+
+
+.cad-container p {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.cad-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: left;
+}
+
+.cad-form label {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.cad-form input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.btn-primary {
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #160B5D;
+  color: white;
+  width: 100%;
+}
+
+.form-section {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.actions-section {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lado {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.cep {
+  width: 30%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.comp {
+  width: 65%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+@media (min-width: 600px) {
+  .cad-container {
+    width: 400px;
+    margin: 2rem auto;
+  }
+}
