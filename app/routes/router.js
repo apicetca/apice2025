@@ -27,5 +27,13 @@ router.post('/login/verify',
     body('password').isLength({min: 8}).withMessage('senha inválida')
 )
 
+router.get('/cadastro', function(req, res) {
+    res.render('pages/cadastro');    
+});
+
+router.get('/cad2', function(req, res) {
+    res.render('pages/cad2');    
+});
+
 
 module.exports = router;
