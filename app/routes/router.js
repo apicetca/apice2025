@@ -49,5 +49,13 @@ router.post('/login/verify',
         }); 
 });
 
+router.get('/cadastro', function(req, res) {
+    res.render('pages/cadastro');    
+});
+
+router.get('/cad2', function(req, res) {
+    res.render('pages/cad2');    
+});
+
 
 module.exports = router;
