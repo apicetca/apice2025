@@ -60,14 +60,26 @@ body {
   color: #333;
 }
 
+
+  .spanerro {
+      color: #a12929;
+      font-size: 0.95rem;
+      margin-left: 0.4rem;
+      display: inline-block;
+      min-height: 1.2em;
+    }
+  .erro{
+    padding: 0.6rem;
+    border: 1px solid #a12929;
+    border-radius: 5px;
+}
 .login-form input {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
 .password-wrapper {
-  position: relative;
+position: relative;
 }
 
 .toggle-password {
@@ -135,6 +147,7 @@ body {
   margin-bottom: 1.5rem;
   font-family: "Montserrat" sans-serif;
 }
+
 
 .actions-section {
   background: #fff;

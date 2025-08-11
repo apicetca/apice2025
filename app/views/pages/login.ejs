@@ -15,8 +15,23 @@
 </head>
 <body>
   <%- include('../partials/menu') %>
+<%
+  let erroValidacao = { email: "", password: "" };
+  let msgErro = { email: "", password: "" };
 
-    
+  if (listaErros && listaErros.length > 0) {
+    listaErros.forEach(function(erro) {
+      if (erro.path === "email") {
+        erroValidacao.email = "erro";
+        msgErro.email = erro.msg;
+      }
+      if (erro.path === "password") {
+        erroValidacao.password = "erro";
+        msgErro.password = erro.msg;
+      }
+    });
+  }
+%>
 
   <main class="login-container">
     
@@ -24,9 +39,23 @@
 <br>
   <section class="form-section">
         <p>Digite seus dados de acesso para entrar</p>
-    <form action="/login/verify" method="post" class="login-form">
-      <input type="text" id="email" name="email" placeholder="Email ou telefone"  value="<%= email %>" required />
-      <input type="text" id="password" name="password" placeholder="Senha" value="<%= password %>" required />
+    <form id="loginForm" action="/login/verify" method="post" class="login-form">
+      <input 
+      type="text" 
+      id="email" 
+      name="email" 
+      placeholder="Insira seu email"  
+      value="<%= email %>" 
+      class="input-base <%= erroValidacao.email %>" required/>
+      <span class="spanerro"><%= msgErro.email %> </span>
+      <input 
+      type="text" 
+      id="password" 
+      name="password" 
+      placeholder="Sua senha" 
+      value="<%= password %>" 
+      class="<%= erroValidacao.password %>" required/>
+      <span class="spanerro"><%= msgErro.password %></span>
 
       <a href="#" class="forgot-password">Esqueceu a senha?</a>
 
@@ -34,7 +63,7 @@
   </section> 
 
   <section class="actions-section">
-      <button type="submit" class="btn-primary">Confirmar</button>
+      <button form="loginForm" type="submit" class="btn-primary">Confirmar</button>
       <button type="button" class="btn-secondary">Cadastre-se</button>
 
       <section class="social-login">
