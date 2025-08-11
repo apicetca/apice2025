@@ -1,11 +1,12 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = 3000;
 
-app.use(express.static('app/public'));
+app.use(express.static(path.join(__dirname, 'app/public')));
 
 app.set('view engine', 'ejs');
-app.set('views', './app/views');
+app.set('views', path.join(__dirname, 'app/views'));
 
 var rotas = require('./app/routes/router');
 app.use('/', rotas);
