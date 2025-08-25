@@ -274,10 +274,21 @@ main {
 }
 
 @media (max-width: 768px) {
-  .filter-box {
+
+main {
+    padding: 130px 40px 0 40px;
+  }
+
+.filter-box {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+.filter-box.visivel {
   min-width: 250px;
   max-width: 95%;
-  margin: 0 auto;
+  margin: 10px;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
