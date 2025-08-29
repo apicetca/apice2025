@@ -41,9 +41,14 @@
     </form>
   </nav> 
 
-  <nav class="actions-section">
-      <a href="/cad2" class="btn-primary">Próximo</a>
+<nav class="actions-section">
+      <button id="btnProximo" class="btn-primary">Próximo</button>
   </nav>
+<script>
+  document.getElementById('btnProximo').onclick = function() {
+    window.location.href = '/cad2';
+  };
+</script>
 
 </main>
 

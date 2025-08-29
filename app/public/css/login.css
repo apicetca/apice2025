@@ -18,7 +18,6 @@ body {
 
 .LOGIN {
     text-align: center;
-    margin-top: 0px;
     color: #2B4062;
 }
 
@@ -120,6 +119,7 @@ position: relative;
   color: #160B5D;
   background-color: white;
   width: 100%;
+  text-decoration: none;
 
 }
 
