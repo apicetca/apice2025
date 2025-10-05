@@ -17,110 +17,60 @@
     <section class="filter-wrapper">
         <nav class="filtroinicial">
           <button class="btn-filtrar">
-            <img src="/img/filtro.png" alt= "Ícone de filtro" class="filter-icon">
+            <img src="/img/filtro.png" alt="Ícone de filtro" class="filter-icon">
             Filtrar
-            </button>
+          </button>
         </nav>
-
-        
-
-
         <form class="filter-box">
   <nav class="filter-header">
-    <span class="clear-filters">
+    <span class="clear-filters" id="limparFiltros">
       <img src="/img/filtro2.png">
       Limpar Filtros
     </span>
     <button type="button" class="close-btn">&times;</button>
   </nav>
 
-  <fieldset class="filter-group">
-    <legend class="filter-title">Duração</legend>
-    <nav class="filter-options">
-      <input type="radio" id="duracao-curta" name="duracao" value="curta" />
-      <label for="duracao-curta">Curta duração</label>
-
-      <input type="radio" id="duracao-media" name="duracao" value="media" />
-      <label for="duracao-media">Média duração</label>
-
-      <input type="radio" id="duracao-longa" name="duracao" value="longa" />
-      <label for="duracao-longa">Longa duração</label>
-    </nav>
+  <fieldset class="filter-local">
+    <input type="text" placeholder="Locais">
   </fieldset>
 
-  <hr class="divider" />
-
   <fieldset class="filter-group">
-    <legend class="filter-title">Tipos de cursos</legend>
-    <nav class="filter-options checkbox-options">
-      <input
-        type="checkbox"
-        id="desenv"
-        name="tipos_cursos"
-        value="desenvolvimento"
-      />
-      <label for="desenv">Desenvolvimento Profissional e Pessoal</label>
-
-      <input type="checkbox" id="negocios" name="tipos_cursos" value="negocios" />
-      <label for="negocios">Negócios e Inovação</label>
-
-      <input
-        type="checkbox"
-        id="programacao"
-        name="tipos_cursos"
-        value="programacao"
-      />
-      <label for="programacao">Programação</label>
-
-      <input type="checkbox" id="ti" name="tipos_cursos" value="ti" />
-      <label for="ti">Tecnologia da Informação</label>
-    </nav>
-  </fieldset>
-
-  <hr class="divider" />
-
-  <fieldset class="filter-group">
-    <legend class="filter-title">Nível de dificuldade</legend>
+    <legend class="filter-title">Tipos de vaga</legend>
     <nav class="filter-options">
-      <input
-        type="radio"
-        id="dificuldade-iniciante"
-        name="dificuldade"
-        value="iniciante"
-      />
-      <label for="dificuldade-iniciante">Iniciante</label>
-
-      <input
-        type="radio"
-        id="dificuldade-intermediario"
-        name="dificuldade"
-        value="intermediario"
-      />
-      <label for="dificuldade-intermediario">Intermediário</label>
-
-      <input
-        type="radio"
-        id="dificuldade-avancado"
-        name="dificuldade"
-        value="avancado"
-      />
-      <label for="dificuldade-avancado">Avançado</label>
+      <input type="radio" id="presencial" name="tipo-presencial" value="presencial" />
+      <label for="presencial">Presencial</label>
+      <input type="radio" id="hibrido" name="tipo-hibrido" value="hibrido" />
+      <label for="hibrido">Híbrido</label>
+      <input type="radio" id="remoto" name="tipo-remoto" value="remoto" />
+      <label for="remoto">Remoto</label>
     </nav>
+
+    <br>
+
+    <legend class="filter-title">Tipos de vagas</legend>
+    <nav class="checkbox-options">
+      <input type="checkbox" id="jovem-aprendiz" name="jovem-aprendiz" value="jovem-aprendiz" />
+      <label for="jovem-aprendiz">Jovem Aprendiz</label>
+
+      <input type="checkbox" id="estagio" name="estagio" value="estagio" />
+      <label for="estagio">Estágio</label>
+
+      <input type="checkbox" id="trainee" name="trainee" value="trainee" />
+      <label for="trainee">Trainee</label>
+    </nav>
+
   </fieldset>
 </form>
 
+
+
         <nav class="button-group">
             <button class="toggle-button active" data-target="vagas" aria-pressed="true">Vagas</button>
-            <button class="toggle-button" data-target="cursos" aria-pressed="false">Cursos</button>
         </nav>
   <br>
   <br>
 
-
-
-
-
-
+<a href="/vagas/rolta" class="card-link">
 <article class="card">
   <img src="/img/rolta.png" alt="Foto do programa ROLTA Jovem Aprendiz" class="card-image" />
   <section class="card-content">
@@ -129,13 +79,12 @@
     <time datetime="2025-10-09">09/10</time> - <time datetime="2025-10-16">16/10</time>
   </section>
 </article>
+</a>
 <br>
 <br>
 
-
-
-
-
+<a href="/vagas/rimberio">
+<a href="/vagas/rimberio" class="card-link">
 <article class="card">
   <img src="/img/rimberio.png" alt="Foto do programa rimberio Jovem Aprendiz" class="card-image" />
   <section class="card-content">
@@ -144,12 +93,9 @@
     <time datetime="2025-10-30">30/10</time> - <time datetime="2025-12-01">01/12</time>
   </section>
 </article>
+</a>
 <br>
 <br>
-
-
-
-
 
 <article class="card">
   <img src="/img/contafor.png" alt="Foto do programa CONTAFOR Jovem Aprendiz" class="card-image" />
@@ -162,10 +108,6 @@
 <br>
 <br>
 
-
-
-
-
 <article class="card">
   <img src="/img/borcelle.png" alt="Foto do programa BORCELLE Jovem Aprendiz" class="card-image" />
   <section class="card-content">
@@ -177,6 +119,7 @@
   </section>
     </main>
     <script src="/js/script.js"></script>
+    <script src="/js/filtros.js"></script>
     <%- include('../partials/footer') %>    
 </body>
  

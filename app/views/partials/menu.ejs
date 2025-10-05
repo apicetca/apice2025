@@ -1,4 +1,26 @@
 <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  padding-top: 76px; /* Reduzido para ter menos espaço */
+}
+
+@media (max-width: 600px) {
+  body {
+    padding-top: 0px;
+  }
+}
+
+@media (max-width: 375px) {
+  body {
+    padding-top: 64px;
+  }
+}
 
 .menu-header {
   display: flex;
@@ -7,14 +29,15 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  min-width: 100vw;
-  z-index: 10;
+  width: 100%;
+  z-index: 100;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #0C0854;
-  padding: 24px 32px;
+  padding: 16px 32px;
   box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .dstqMenu2[href="/login"] {
@@ -27,7 +50,42 @@
 
 @media (max-width: 600px) {
   .menu-header {
-    padding: 16px 0px;
+    padding: 16px;
+  }
+  
+  .menu-icon {
+    left: 16px;
+  }
+  
+  .icons {
+    right: 16px;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+}
+
+@media (max-width: 375px) {
+  .menu-header {
+    padding: 12px 8px;
+  }
+  
+  .menu-icon {
+    left: 8px;
+  }
+  
+  .icons {
+    right: 8px;
+    gap: 16px;
+  }
+  
+  .logo img {
+    height: 32px;
+  }
+
+  .mobile-menu {
+    max-width: 100%;
   }
 }
 
@@ -75,14 +133,14 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: 100vw;
-  max-width: 400px;
+  width: min(400px, 100%);
   transform: translateX(-100%);
   transition: transform 0.4s cubic-bezier(.77,0,.18,1);
   z-index: 150;
-  padding: 32px 24px;;
+  padding: 32px 24px;
   overflow-y: auto;
   box-shadow: 8px 0 32px rgba(0,0,0,0.2);
+  box-sizing: border-box;
 }
 
 .mobile-menu.open {
@@ -137,15 +195,27 @@
 }
 
 .close-mobile-menu {
-  position: absolute;
-  top: 18px;
-  right: 18px;
+  position: fixed;
+  top: 16px;
+  right: max(16px, calc(50% - 200px));
   background: none;
   border: none;
   font-size: 2rem;
   color: #fff;
   cursor: pointer;
   z-index: 200;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 400px) {
+  .close-mobile-menu {
+    right: 8px;
+  }
 }
 
 .dstqMenu2 {
@@ -156,6 +226,10 @@
 .conector {
   color: white;
   font-weight: 300;
+}
+
+ul li {
+  font-family: 'Albert Sans', sans-serif;
 }
 
 
@@ -176,7 +250,6 @@
       <p>Olá, <span class="visitante">visitante</span><br>
       <a href="/login" class="dstqMenu2">Entre</a> <span class="conector">ou</span> <a href="/cadastro" class="dstqMenu2">Cadastre-se</a></p>
       <li><a href="/">Home</a></li>
-      <li><a href="/cursos">Cursos</a></li>
       <li><a href="/vagas">Vagas</a></li>
       <li><a href="/empresa">Empresas</a></li>
     </ul>

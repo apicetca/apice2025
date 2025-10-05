@@ -6,7 +6,7 @@ body {
 }
 
 main {
-  padding: 130px;
+  padding: 100px;
 }
 
 .filtroinicial {
@@ -110,7 +110,8 @@ main {
 .filter-options {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
+  justify-content: flex-start;
 }
 
 .filter-options input[type="radio"],
@@ -119,59 +120,83 @@ main {
 }
 
 .filter-options label {
-  display: block;
-  border: 1px solid #ffcc00;
-  border-radius: 20px;
-  padding: 8px 16px;
+  display: inline-block;
+  border: 2px solid #FFC107;
+  border-radius: 24px;
+  padding: 8px 4px;
+  flex: 1;
+  text-align: center;
   color: #333;
+  background: #fff;
   cursor: pointer;
   font-size: 0.875rem;
+  font-weight: 500;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  min-width: 0;
 }
 
-.filter-options input[type="radio"]:checked label {
-  background-color: #ffcc00;
+.filter-options input[type="radio"]:checked + label {
+  background-color: #FFC107;
   color: #fff;
-  border-color: #ffcc00;
+  border-color: #FFC107;
 }
 
 .checkbox-options {
-  flex-direction: column;
-  gap: 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
 .checkbox-options label {
   display: flex;
   align-items: center;
-  font-size: 0.95rem;
-  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.checkbox-options input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  cursor: pointer;
+  margin: 0;
   padding: 0;
-  border-radius: 0;
+}
+
+.checkbox-options label:last-child {
+  margin-bottom: 0;
 }
 
 .checkbox-options label::before {
   content: "";
   display: inline-block;
-  width: 18px;
-  height: 18px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #FFC107;
+  border-radius: 6px;
   margin-right: 12px;
   background-color: #fff;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
-.checkbox-options input[type="checkbox"]:checked label::before {
-  background-color: #ffcc00;
-  border-color: #ffcc00;
+.checkbox-options input[type="checkbox"]:checked + label::before {
+  background-color: #FFC107;
+  border-color: #FFC107;
 }
 
-.checkbox-options input[type="checkbox"]:checked label::after {
-  content: "✓";
+.checkbox-options input[type="checkbox"]:checked + label::after {
+  content: "";
+  color: white;
   position: absolute;
-  color: #fff;
-  font-size: 14px;
-  margin-left: 5px;
+  left: 8px;
+  top: 4px;
+  font-size: 16px;
 }
 
 .filter-icon {
@@ -217,6 +242,33 @@ main {
 
 .filter-box.visivel {
   display: block;
+  margin: 24px 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+}
+
+.filter-local {
+  border: none;
+  outline: none;
+}
+
+.filter-local input[type="text"] {
+  border-radius: 16px;
+  border: 1px solid #e0e0e0;
+  padding: 18px 18px;
+  background: #F5F5F5;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 18px;
+  color: #333;
+}
+
+.filter-local input[type="text"]:focus {
+  border: 1.5px solid #bdbdbd;
+  background: #fff;
 }
 
 .card {
@@ -273,30 +325,29 @@ main {
   color: #999;
 }
 
-@media (max-width: 768px) {
-
-main {
+@media (max-width: 640px) {
+  main {
     padding: 130px 40px 0 40px;
   }
 
-.filter-box {
+  .filter-box {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
   }
 
 .filter-box.visivel {
-  min-width: 250px;
-  max-width: 95%;
   margin: 10px;
   background-color: #fff;
-  border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   font-family: sans-serif;
   color: #333;
-  margin: 20px auto;
   border: none;
+  border-radius: 16px;
+  padding: 32px 24px;
+  min-width: 0;
+  max-width: 100%;
+  margin: 10px auto;
 }
 
 .filter-wrapper {
@@ -305,12 +356,49 @@ main {
   align-items: center;
 }
 
-.filter-options,
+.filter-options {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 .checkbox-options {
- min-width: 100%; 
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.checkbox-row:last-child {
+  margin-bottom: 0;
 }
 
 .card {
   min-width: 250px;
 }
+
+.filter-options input {
+  max-width: 98px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1.5px solid #FFC52D;
 }
+
+.filter-local input[type="text"]{
+  width: 100%;
+  min-width: 0;
+  height: 52px;
+  box-sizing: border-box;
+  padding: 16px 12px;
+  font-size: 1rem;
+}}
