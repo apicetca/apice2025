@@ -1,0 +1,312 @@
+/* Estilo geral da página */
+.vaga-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Banner da vaga */
+.vaga-banner {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: linear-gradient(to right, #000851, #1CB5E0);
+    overflow: hidden;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.banner-content {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    color: white;
+}
+
+.banner-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.banner-subtitle {
+    font-size: 1.8rem;
+    opacity: 0.9;
+}
+
+/* Informações da empresa */
+.empresa-info {
+    max-width: 1200px;
+    margin: -50px auto 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+}
+
+.empresa-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.empresa-detalhes {
+    color: #333;
+}
+
+.tipo-vaga {
+    background: #E8F5E9;
+    color: #2E7D32;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.empresa-titulo {
+    font-size: 2rem;
+    margin: 10px 0;
+}
+
+.data-encerramento {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Navegação da vaga */
+.vaga-navegacao {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.nav-button {
+    padding: 15px 30px;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    color: #666;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-button.active {
+    color: #1CB5E0;
+    font-weight: 600;
+}
+
+.nav-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #1CB5E0;
+}
+
+/* Conteúdo da vaga */
+.vaga-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.sobre-empresa {
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+/* Timeline */
+.vaga-timeline {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 40px 0;
+}
+
+.timeline-item h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.timeline-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.timeline-label {
+    color: #666;
+}
+
+.timeline-date {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Requisitos */
+.requisitos-section {
+    margin: 40px 0;
+}
+
+.requisitos-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.requisitos-lista {
+    list-style: none;
+    padding: 0;
+}
+
+.requisitos-lista li {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    color: #555;
+}
+
+.requisitos-lista li::before {
+    content: "•";
+    color: #1CB5E0;
+    margin-right: 15px;
+    font-size: 1.5em;
+}
+
+/* Benefícios */
+.beneficios-section {
+    margin: 40px 0;
+}
+
+.beneficios-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.beneficios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.beneficio-item {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.beneficio-texto {
+    color: #555;
+}
+
+/* Status da vaga */
+.vaga-status {
+    margin: 40px 0;
+}
+
+.status-wrapper {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.status-count {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 500;
+}
+
+.status-bar {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.status-progress {
+    width: 75%;
+    height: 100%;
+    background: #1CB5E0;
+}
+
+/* Botões de ação */
+.vaga-acoes {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.btn-inscricao {
+    display: inline-block;
+    padding: 16px 40px;
+    background: #1CB5E0;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-inscricao:hover {
+    background: #0091ea;
+    transform: translateY(-2px);
+}
+
+.inscricao-info {
+    margin-top: 15px;
+    color: #666;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .banner-content h1 {
+        font-size: 2rem;
+    }
+
+    .banner-subtitle {
+        font-size: 1.4rem;
+    }
+
+    .empresa-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .empresa-logo {
+        margin: 0 auto;
+    }
+
+    .timeline-info {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .beneficios-grid {
+        grid-template-columns: 1fr;
+    }
+}

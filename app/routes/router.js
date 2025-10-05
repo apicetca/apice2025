@@ -10,8 +10,26 @@ router.get('/empresa', function(req, res) {
     res.render('pages/empresa');    
 });
 
+const vagas = require('../data/vagas');
+console.log('Vagas carregadas:', Object.keys(vagas));
+
+router.get('/vagas/:id', function(req, res) {
+    const vagaId = req.params.id;
+    console.log('Acessando vaga:', vagaId);
+    console.log('Vagas disponíveis:', Object.keys(vagas));
+    const vaga = vagas[vagaId];
+    console.log('Vaga encontrada:', vaga ? 'Sim' : 'Não');
+    
+    if (!vaga) {
+        console.log('Vaga não encontrada, redirecionando...');
+        return res.redirect('/vagas');
+    }
+    
+    res.render('pages/vaga-detalhes', { vaga });
+});
+
 router.get('/vagas', function(req, res) {
-    res.render('pages/vagas');    
+    res.render('pages/vagas', { vagas });    
 });
 
 router.get('/login', (req, res) => {
@@ -24,7 +42,6 @@ router.get('/login', (req, res) => {
 
 router.post('/login/verify',
     body('email').isEmail().withMessage('O email não é válido').normalizeEmail(),
-
     body('password').isLength({min: 8}).withMessage('senha inválida'),
 
     (req, res) => {
