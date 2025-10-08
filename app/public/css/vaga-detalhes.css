@@ -6,13 +6,6 @@
 }
 
 /* Banner da vaga */
-.vaga-banner {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    background-image: linear-gradient(to right, #000851, #1CB5E0);
-    overflow: hidden;
-}
 
 .banner-overlay {
     position: absolute;
@@ -283,9 +276,19 @@
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .banner-content h1 {
         font-size: 2rem;
+    }
+
+    .banner-overlay {
+        width: 392px;
+        height: 196px;
+    }
+    
+    .banner-overlay img {
+        width: 392px;
+        height: 196px;
     }
 
     .banner-subtitle {
@@ -299,6 +302,8 @@
 
     .empresa-logo {
         margin: 0 auto;
+        margin-top: 70px;
+        margin-left: 10px;
     }
 
     .timeline-info {
