@@ -1,6 +1,41 @@
 var express = require('express');
 var router = express.Router();
 const { body, validationResult } = require("express-validator");
+const multer = require('multer');
+const fs = require('fs');
+
+// cria a pasta de uploads caso nao exista
+const uploadDir = '/uploads/';
+
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+//configuração de destino de armazenamento e nome do arquivo
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadDir);
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+//configuração do multer
+const upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!allowedTypes.includes(file.mimetype)) {
+            return cb(new Error('Apenas imagens são permitidas!'), false);
+        }
+        cb(null, true);
+    },
+    limits: {
+        fileSize: 5 * 1024 * 1024 // limita a 5MB
+    }
+});
+
 
 router.get('/', function(req, res) {
     res.render('pages/home');    
@@ -11,7 +46,6 @@ router.get('/empresa', function(req, res) {
 });
 
 const vagas = require('../data/vagas');
-console.log('Vagas carregadas:', Object.keys(vagas));
 
 router.get('/vagas/:id', function(req, res) {
     const vagaId = req.params.id;
@@ -73,6 +107,45 @@ router.get('/cadastro', function(req, res) {
 router.get('/cad2', function(req, res) {
     res.render('pages/cad2');    
 });
+
+const users = require('../data/users');
+
+router.get('/perfil', (req, res) => {
+    const user = users.user1; // (lembrar de usar ID dinâmico posteriormente)
+    res.render('pages/perfil', { 
+        profileImage: null,
+        user: user 
+})
+});
+
+// Rota para processar o upload
+router.post('/upload-profile', upload.single('profileImage'), (req, res) => {
+    const user = users.user1; // Mantém os dados do usuário
+    
+    if (!req.file) {
+        return res.render('pages/perfil', {
+            profileImage: null,
+            user: user,
+            error: 'Nenhum arquivo foi enviado.'
+        });
+    }
+
+    try {
+        const imageUrl = `/uploads/${req.file.filename}`;
+        res.render('pages/perfil', { 
+            profileImage: imageUrl,
+            user: user,
+            error: null
+        });
+    } catch (error) {
+        res.render('pages/perfil', {
+            profileImage: null,
+            user: user,
+            error: 'Erro ao processar o upload da imagem.'
+        });
+    }
+});
+
 
 
 module.exports = router;

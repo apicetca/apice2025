@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Profissional</title>
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+<body>
+    <header>
+        <%- include('../partials/menu') %>
+    </header>
+<main>
+    <nav class="profile-container">
+        <div class="profile-header">
+            <% if (profileImage) { %>
+                <img src="<%= profileImage %>" alt="Foto de perfil" class="profile-pic">
+            <% } else { %>
+                <img src="/images/default-profile.png" alt="Foto padrão" class="profile-pic">
+            <% } %>
+            
+            <div class="profile-info">
+                <h1><%= user.informacoesPessoais.nome %></h1>
+                <p><%= user.informacoesPessoais.idade %></p>
+                <p><%= user.formacaoAcademica.curso %></p>
+            </div>
+        </div>
+
+        <form action="/upload-profile" method="POST" enctype="multipart/form-data" class="upload-section">
+            <input type="file" name="profileImage" accept="image/*" id="profileImage" style="display: none;">
+            <button type="button" class="upload-btn" onclick="document.getElementById('profileImage').click()">
+                Alterar foto de perfil
+            </button>
+            <button type="submit" class="upload-btn" style="margin-left: 10px;">Salvar foto</button>
+        </form>
+
+        <section class="section">
+            <h2>Informações Pessoais</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Gênero</strong>
+                    <span>Feminino</span>
+                </div>
+                <div class="info-item">
+                    <strong>Estado Civil</strong>
+                    <span>Solteira</span>
+                </div>
+                <div class="info-item">
+                    <strong>Endereço</strong>
+                    <span>Rua Francisco Marques, Vila Formosa</span>
+                </div>
+                <div class="info-item">
+                    <strong>CEP</strong>
+                    <span>14400-342</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Formação Acadêmica</h2>
+            <div class="info-item">
+                <strong>Curso</strong>
+                <span>Matemática Computacional</span>
+            </div>
+            <div class="info-item">
+                <strong>Instituição</strong>
+                <span>UNESP</span>
+            </div>
+            <div class="info-item">
+                <strong>Ano de Formação</strong>
+                <span>2023</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Experiência</h2>
+            <div class="info-item">
+                <strong>Cargo</strong>
+                <span>Assistente</span>
+            </div>
+            <div class="info-item">
+                <strong>Empresa</strong>
+                <span>DataSmart</span>
+            </div>
+            <div class="info-item">
+                <strong>Período</strong>
+                <span>2022 - Presente</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Habilidades</h2>
+            <div class="skills-list">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">Análise de Dados</span>
+                <span class="skill-tag">Machine Learning</span>
+            </div>
+        </section>
+    </div></main>
+    
+
+    <script>
+        document.getElementById('profileImage').addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                document.querySelector('form').submit();
+            }
+        });
+    </script>
+    <script src="/js/script.js" defer></script>
+    <%- include('../partials/footer') %>
+</body>
+</html>
