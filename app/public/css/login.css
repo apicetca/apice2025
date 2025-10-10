@@ -33,7 +33,7 @@ body {
   border-radius: 0;
   text-align: center;
   background: none;
-  padding-top: 90px;
+  padding-top: 0;
 }
 
 .login-container h1 {
@@ -72,7 +72,7 @@ body {
     border-radius: 5px;
 }
 .login-form input {
-  padding: 0.6rem;
+  padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 10px;
 }
@@ -162,6 +162,106 @@ position: relative;
   margin-top: 1rem;
 }
 
+/* Estilo para as abas de perfil */
+.profile-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  background-color: #f5f5f5;
+  border-radius: 2rem;
+  padding: 0.25rem;
+  width: 80%;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-tab {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: none;
+  border-radius: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-tab.active {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#jovem-tab.active {
+  color: #FFD700;
+}
+
+#empresa-tab.active {
+  color: #3498db;
+}
+
+/* Conteúdo das abas */
+.profile-content {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.profile-content.hidden {
+  display: none;
+}
+
+/* Estrutura do formulário */
+.form-group input {
+  margin-bottom: 1rem;
+  padding: auto;
+}
+
+.form-options {
+  width: 100%;
+  text-align: right;
+  margin-top: 0.5rem;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* Acessibilidade */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Social login */
+.social-login {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.social-login-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.social-login-btn:hover {
+  transform: scale(1.1);
+}
+
 /* Responsividade */
 @media (min-width: 600px) {
 
@@ -173,5 +273,16 @@ position: relative;
 .LOGIN-Montserrat {
   font-family: "Montserrat", sans-serif;
   font-weight: medium; 
+}
+
+/* Responsividade para os inputs */
+@media (max-width: 600px) {
+  .input-base {
+    padding: 0.8rem;
+  }
+  
+  .form-section {
+    padding: 1.5rem;
+  }
 }
 }

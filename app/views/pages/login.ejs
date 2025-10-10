@@ -31,55 +31,115 @@
   }
 %>
 
-  <main class="login-container">
-    
-<h1 class="LOGIN montserrat">Login</h1>
-<br>
-  <section class="form-section">
-        <p>Digite seus dados de acesso para entrar</p>
-    <form id="loginForm" action="/login/verify" method="post" class="login-form">
-      <input 
-      type="text" 
-      id="email" 
-      name="email" 
-      placeholder="Insira seu email"  
-      value="<%= email %>" 
-      class="input-base <%= erroValidacao.email %>" required/>
-      <span class="spanerro"><%= msgErro.email %> </span>
-      <input 
-      type="text" 
-      id="password" 
-      name="password" 
-      placeholder="Sua senha" 
-      value="<%= password %>" 
-      class="<%= erroValidacao.password %>" required/>
-      <span class="spanerro"><%= msgErro.password %></span>
+<main class="login-container">
+  <header>
+    <h1 class="login-title montserrat">Login</h1>
+  </header>
 
-      <a href="#" class="forgot-password">Esqueceu a senha?</a>
+  <div class="profile-selector" role="tablist" aria-label="Tipo de perfil">
+    <button class="profile-tab active" id="jovem-tab" role="tab" aria-selected="true" aria-controls="jovem-content">Jovem</button>
+    <button class="profile-tab" id="empresa-tab" role="tab" aria-selected="false" aria-controls="empresa-content">Empresa</button>
+  </div>
 
-    </form>
-  </section> 
+  <div class="profile-content" id="jovem-content" role="tabpanel" aria-labelledby="jovem-tab">
+    <section class="form-section">
+      <p class="form-description">Digite seus dados de acesso para entrar</p>
+      <form id="loginForm" action="/login/verify" method="post" class="login-form">
+        <div class="form-group">
+          <label for="email" class="visually-hidden">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="Insira seu email"  
+            value="<%= email %>" 
+            class="input-base <%= erroValidacao.email %>" 
+            aria-describedby="email-error"
+            required
+          />
+          <span id="email-error" class="error-message"><%= msgErro.email %></span>
+        </div>
+        
+        <div class="form-group">
+          <label for="password" class="visually-hidden">Senha</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Sua senha" 
+            value="<%= password %>" 
+            class="input-base <%= erroValidacao.password %>"
+            aria-describedby="password-error" 
+            required
+          />
+          <span id="password-error" class="error-message"><%= msgErro.password %></span>
+        </div>
+        
+        <div class="form-options">
+          <a href="/recuperar-senha" class="forgot-password">Esqueceu a senha?</a>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="profile-content hidden" id="empresa-content" role="tabpanel" aria-labelledby="empresa-tab">
+    <section class="form-section">
+      <p class="form-description">Digite suas credenciais de empresa</p>
+      <form id="empresaForm" action="/login/empresa" method="post" class="login-form">
+        <div class="form-group">
+          <label for="credencial" class="visually-hidden">Credencial</label>
+          <input 
+            type="text" 
+            id="credencial" 
+            name="credencial" 
+            placeholder="Credencial de acesso"  
+            class="input-base" 
+            required
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="chave" class="visually-hidden">Chave</label>
+          <input 
+            type="password" 
+            id="chave" 
+            name="chave" 
+            placeholder="Chave" 
+            class="input-base" 
+            required
+          />
+        </div>
+        
+        <div class="form-options">
+          <a href="/recuperar-chave" class="forgot-password">Esqueceu a chave?</a>
+        </div>
+      </form>
+    </section>
+  </div>
 
   <section class="actions-section">
-      <button form="loginForm" type="submit" class="btn-primary">Confirmar</button>
-      <button id="btn-secondary" class="btn-secondary">Cadastre-se</button>
-  
-  <script>
-    document.getElementById('btn-secondary').onclick = function() {
-      window.location.href = '/cadastro';
-    };
-  </script>
-
-      <section class="social-login">
-      <img src="/img/google.png" alt="Login com Google" />
-      <img src="/img/microsoft.png" alt="Login com Microsoft" />
-      <img src="/img/meta.png" alt="Login com Meta" />
-      <img src="/img/Linkedi2.png" alt="Login com Linkedin" />
+    <button form="loginForm" type="submit" id="submit-btn" class="btn-primary">Confirmar</button>
+    <a href="/cadastro" id="btn-secondary" class="btn-secondary">Cadastre-se</a>
+    
+    <div class="social-login" aria-label="Login com redes sociais">
+      <button class="social-login-btn" aria-label="Login com Google">
+        <img src="/img/google.png" alt="Google" />
+      </button>
+      <button class="social-login-btn" aria-label="Login com Microsoft">
+        <img src="/img/microsoft.png" alt="Microsoft" />
+      </button>
+      <button class="social-login-btn" aria-label="Login com Meta">
+        <img src="/img/meta.png" alt="Meta" />
+      </button>
+      <button class="social-login-btn" aria-label="Login com LinkedIn">
+        <img src="/img/Linkedi2.png" alt="LinkedIn" />
+      </button>
+    </div>
   </section>
-
-    </section>
-  </main>
-  <script src="/js/script.js"></script>
+</main>
+</main>
+<script src="/js/login.js"></script>
+<script src="/js/script.js"></script>
 
   <footer>
     
