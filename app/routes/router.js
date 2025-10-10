@@ -7,10 +7,6 @@ const fs = require('fs');
 // cria a pasta de uploads caso nao exista
 const uploadDir = '/uploads/';
 
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
-
 //configuração de destino de armazenamento e nome do arquivo
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
