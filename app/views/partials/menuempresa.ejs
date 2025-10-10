@@ -10,10 +10,6 @@ body {
   padding-top: 76px; /* Reduzido para ter menos espaço */
 }
 
-ul li img {
-  margin-right: 10px;
-}
-
 .menu-header {
   display: flex;
   justify-content: center;
@@ -98,6 +94,10 @@ ul li img {
   transform: translateX(0);
 }
 
+ul li {
+  font-family: 'Albert sans', sans-serif;
+}
+
 #menuOverlay {
   position: fixed;
   top: 0; left: 0;
@@ -177,6 +177,10 @@ ul li img {
   font-weight: 300;
 }
 
+ul img {
+  margin-right: 10px;
+}
+
 @media (max-width: 640px) {
   .menu-header {
     padding: 16px;
@@ -201,7 +205,6 @@ ul li img {
 
 
 
-
 </style>
 <header class="menu-header">
   <button class="menu-icon" id="menuHamburguer" aria-label="Abrir menu">
@@ -218,7 +221,7 @@ ul li img {
     <ul>
       <p>Olá, <span class="visitante">Jovem</span><br>
       <li><a href="/"><span class="icon"><img src="img/casa.svg"></span>Home</a></li>
-      <li><a href="/perfil"><span class="icon"><img src="img/perfil.svg"></span>Perfil</a></li>
+      <li><a href="/perfil"><span class="icon"><img src="img/perfilempresa.svg"></span>Perfil da empresa</a></li>
       <li><a href="/curriculo"><span class="icon"><img src="img/curriculo.svg"></span>Currículo</a></li>
       <li><a href="/vagas"><span class="icon"><img src="img/vaga.svg"></span>Vaga</a></li>
       <li><a href="/config"><span class="icon"><img src="img/config.svg"></span>Configurações</a></li>

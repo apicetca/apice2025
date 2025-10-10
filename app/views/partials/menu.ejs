@@ -10,18 +10,6 @@ body {
   padding-top: 76px; /* Reduzido para ter menos espaço */
 }
 
-@media (max-width: 600px) {
-  body {
-    padding-top: 0px;
-  }
-}
-
-@media (max-width: 375px) {
-  body {
-    padding-top: 64px;
-  }
-}
-
 .menu-header {
   display: flex;
   justify-content: center;
@@ -46,47 +34,6 @@ body {
 
 .dstqMenu2[href="/cadastro"] {
   color: #FFC52D;
-}
-
-@media (max-width: 600px) {
-  .menu-header {
-    padding: 16px;
-  }
-  
-  .menu-icon {
-    left: 16px;
-  }
-  
-  .icons {
-    right: 16px;
-  }
-  
-  .logo img {
-    height: 40px;
-  }
-}
-
-@media (max-width: 375px) {
-  .menu-header {
-    padding: 12px 8px;
-  }
-  
-  .menu-icon {
-    left: 8px;
-  }
-  
-  .icons {
-    right: 8px;
-    gap: 16px;
-  }
-  
-  .logo img {
-    height: 32px;
-  }
-
-  .mobile-menu {
-    max-width: 100%;
-  }
 }
 
 .menu-icon {
@@ -212,11 +159,9 @@ body {
   height: 40px;
 }
 
-@media (max-width: 400px) {
   .close-mobile-menu {
     right: 8px;
   }
-}
 
 .dstqMenu2 {
   color: #FFC52D;
@@ -228,8 +173,26 @@ body {
   font-weight: 300;
 }
 
-ul li {
-  font-family: 'Albert Sans', sans-serif;
+@media (max-width: 640px) {
+  .menu-header {
+    padding: 16px;
+  }
+  
+  .menu-icon {
+    left: 16px;
+  }
+  
+  .icons {
+    right: 16px;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+
+    body {
+    padding-top: 0px;
+  }
 }
 
 
