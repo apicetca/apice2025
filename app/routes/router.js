@@ -146,6 +146,8 @@ router.post('/upload-profile', upload.single('profileImage'), (req, res) => {
     }
 });
 
-
+router.get('/teste', function(req, res) {
+    res.render('pages/testemenu');    
+});
 
 module.exports = router;
