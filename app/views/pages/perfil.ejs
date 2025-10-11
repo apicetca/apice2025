@@ -12,19 +12,13 @@
     </header>
 <main>
     <nav class="profile-container">
-        <div class="profile-header">
+        <header class="profile-header">
             <% if (profileImage) { %>
                 <img src="<%= profileImage %>" alt="Foto de perfil" class="profile-pic">
             <% } else { %>
-                <img src="/images/default-profile.png" alt="Foto padrão" class="profile-pic">
+                <img src="/img/default-profile.png" alt="Foto padrão" class="profile-pic">
             <% } %>
-            
-            <div class="profile-info">
-                <h1><%= user.informacoesPessoais.nome %></h1>
-                <p><%= user.informacoesPessoais.idade %></p>
-                <p><%= user.formacaoAcademica.curso %></p>
-            </div>
-        </div>
+        </header>
 
         <form action="/upload-profile" method="POST" enctype="multipart/form-data" class="upload-section">
             <input type="file" name="profileImage" accept="image/*" id="profileImage" style="display: none;">
@@ -35,69 +29,85 @@
         </form>
 
         <section class="section">
-            <h2>Informações Pessoais</h2>
-            <div class="info-grid">
-                <div class="info-item">
-                    <strong>Gênero</strong>
-                    <span>Feminino</span>
-                </div>
-                <div class="info-item">
-                    <strong>Estado Civil</strong>
-                    <span>Solteira</span>
-                </div>
-                <div class="info-item">
-                    <strong>Endereço</strong>
-                    <span>Rua Francisco Marques, Vila Formosa</span>
-                </div>
-                <div class="info-item">
-                    <strong>CEP</strong>
-                    <span>14400-342</span>
-                </div>
-            </div>
+            <header class="profile-info">
+                <h1><%= user.informacoesPessoais.nome %></h1>
+            </header>
+            <br>
+            <dl class="info-grid">
+                <section class="info-item">
+                    <dt>Idade</dt>
+                    <dd><%= user.informacoesPessoais.idade %></dd>
+                </section>
+                <section class="info-item">
+                    <dt>Curso</dt>
+                    <dd><%= user.formacaoAcademica.curso %></dd>
+                </section>
+                <section class="info-item">
+                    <dt>Gênero</dt>
+                    <dd>Feminino</dd>
+                </section>
+                <section class="info-item">
+                    <dt>Estado Civil</dt>
+                    <dd>Solteira</dd>
+                </section>
+                <section class="info-item">
+                    <dt>Endereço</dt>
+                    <dd>Rua Francisco Marques, Vila Formosa</dd>
+                </section>
+                <section class="info-item">
+                    <dt>CEP</dt>
+                    <dd>14400-342</dd>
+                </section>
+            </dl>
         </section>
 
         <section class="section">
             <h2>Formação Acadêmica</h2>
-            <div class="info-item">
-                <strong>Curso</strong>
-                <span>Matemática Computacional</span>
-            </div>
-            <div class="info-item">
-                <strong>Instituição</strong>
-                <span>UNESP</span>
-            </div>
-            <div class="info-item">
-                <strong>Ano de Formação</strong>
-                <span>2023</span>
-            </div>
+            <dl class="info-grid">
+                <section class="info-item">
+                    <dt>Curso</dt>
+                    <dd>Matemática Computacional</dd>
+                </section>
+                <section class="info-item">
+                    <dt>Instituição</dt>
+                    <dd>UNESP</dd>
+                </section>
+                <section class="info-item">
+                    <dt>Ano de Formação</dt>
+                    <dd>2023</dd>
+                </section>
+            </dl>
         </section>
 
         <section class="section">
             <h2>Experiência</h2>
-            <div class="info-item">
-                <strong>Cargo</strong>
-                <span>Assistente</span>
-            </div>
-            <div class="info-item">
-                <strong>Empresa</strong>
-                <span>DataSmart</span>
-            </div>
-            <div class="info-item">
-                <strong>Período</strong>
-                <span>2022 - Presente</span>
-            </div>
+            <dl class="info-grid">
+                <section class="info-item">
+                    <dt>Cargo</dt>
+                    <dd>Assistente</dd>
+                </section>
+                <section class="info-item">
+                    <dt>Empresa</dt>
+                    <dd>DataSmart</dd>
+                </section>
+                <section class="info-item">
+                    <dt>Período</dt>
+                    <dd>2022 - Presente</dd>
+                </section>
+            </dl>
         </section>
 
         <section class="section">
             <h2>Habilidades</h2>
-            <div class="skills-list">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">SQL</span>
-                <span class="skill-tag">Análise de Dados</span>
-                <span class="skill-tag">Machine Learning</span>
-            </div>
+            <ul class="skills-list">
+                <li class="skill-tag">Python</li>
+                <li class="skill-tag">SQL</li>
+                <li class="skill-tag">Análise de Dados</li>
+                <li class="skill-tag">Machine Learning</li>
+            </ul>
         </section>
-    </div></main>
+    </nav>
+    </main>
     
 
     <script>
@@ -111,3 +121,4 @@
     <%- include('../partials/footer') %>
 </body>
 </html>
+
