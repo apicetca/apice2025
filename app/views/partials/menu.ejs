@@ -19,9 +19,7 @@ body {
   left: 0;
   width: 100%;
   z-index: 100;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: #0C0854;
+  background-color: #160B5D;
   padding: 16px 32px;
   box-sizing: border-box;
   max-width: 100%;
@@ -63,6 +61,18 @@ body {
   right: 32px;
   top: 50%;
   transform: translateY(-50%);
+  align-items: center;
+}
+
+.login-btn {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  color: #ffffff !important;
 }
 
 .icone {
@@ -74,7 +84,7 @@ body {
 }
 
 .mobile-menu {
-  background-color: #0C0854;
+  background-color: #160B5D;
   display: block;
   position: fixed;
   top: 0;
@@ -88,6 +98,7 @@ body {
   overflow-y: auto;
   box-shadow: 8px 0 32px rgba(0,0,0,0.2);
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 .mobile-menu.open {
@@ -205,7 +216,7 @@ body {
     <img src="/img/logoapc.png" alt="Logo Ápice">
   </span>
   <span class="icons">
-    <button class="icone" aria-label="Perfil"><img src="/img/Icon.png"></button>
+    <a href="/perfil"><button class="icone" aria-label="Perfil"><img src="/img/Icon.png"></button></a>
   </span>
   <nav class="mobile-menu" id="mobileMenu">
   <button class="close-mobile-menu" aria-label="Fechar menu">&times;</button>
@@ -219,3 +230,4 @@ body {
   </nav>
   <span id="menuOverlay"></span>
 </header>
+<script src="/js/script.js" defer></script>

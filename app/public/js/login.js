@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const empresaContent = document.getElementById('empresa-content');
     const submitBtn = document.getElementById('submit-btn');
     
+    // Elementos de toggle de senha
+    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+    
     // Evento de clique para a aba Jovem
     jovemTab.addEventListener('click', function() {
       // Ativa a aba Jovem
@@ -36,5 +39,25 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Configura o botão para o formulário correto
       submitBtn.setAttribute('form', 'empresaForm');
+    });
+    
+    // Funcionalidade de mostrar/ocultar senha
+    togglePasswordButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const passwordField = this.previousElementSibling;
+        const type = passwordField.getAttribute('type');
+        
+        if (type === 'password') {
+          passwordField.setAttribute('type', 'text');
+          this.querySelector('i').classList.remove('fa-eye');
+          this.querySelector('i').classList.add('fa-eye-slash');
+          this.setAttribute('aria-label', 'Ocultar senha');
+        } else {
+          passwordField.setAttribute('type', 'password');
+          this.querySelector('i').classList.remove('fa-eye-slash');
+          this.querySelector('i').classList.add('fa-eye');
+          this.setAttribute('aria-label', 'Mostrar senha');
+        }
+      });
     });
   });

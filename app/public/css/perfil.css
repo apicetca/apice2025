@@ -1,3 +1,7 @@
+main {
+    margin-top: 50px;
+}
+
 .profile-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -9,6 +13,7 @@
     gap: 20px;
     margin-bottom: 30px;
     align-items: center;
+    justify-content: flex-start;
 }
 
 .profile-pic {
@@ -106,6 +111,7 @@ dl.info-grid, .info-grid {
     margin-top: 10px;
     margin-bottom: 10px;
     padding-left: 0;
+    font-family: 'Albert Sans', sans-serif;
 }
 
 .skill-tag {
@@ -121,8 +127,12 @@ dl.info-grid, .info-grid {
 }
 
 .upload-section {
-    text-align: center;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 0;
 }
 
 .upload-btn {
@@ -132,6 +142,10 @@ dl.info-grid, .info-grid {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.save-btn {
+    margin-left: 8px;
 }
 
 .upload-btn:hover {
@@ -181,5 +195,58 @@ dl.info-grid, .info-grid {
 @media (max-width: 640px) {
     main {
         padding: 10px;
+    }
+}
+
+.info-item strong {
+    font-family: 'Albert sans', sans-serif;
+    font-weight: 600;
+    color: #160B5D
+}
+
+.info-item dt {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #121212;
+}
+
+.info-item dd {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #121212;
+}
+
+.profile-info h1 {
+    font-family: 'Albert sans', sans-serif;
+    font-weight: 700;
+    color: #160B5D
+}
+
+.section h2 {
+    font-family: 'Albert sans', sans-serif;
+    font-weight: 600;
+    font-style: semibold;
+    color: #160B5D
+}
+
+@media (max-width: 640px) {
+    main {
+        padding: 10px;
+    }
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .upload-section {
+        align-items: center;
+        width: 100%;
     }
 }
