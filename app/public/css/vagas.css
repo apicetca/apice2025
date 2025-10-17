@@ -21,7 +21,7 @@ main {
 .button-group {
     display: flex;
     width: 100%;
-    background-color: #f0f0f0;
+    background-color: #FFFFFF;
     border-radius: 8px;
     padding: 4px;
 }
@@ -50,7 +50,7 @@ main {
 }
 
 .toggle-button:hover:not(.active) {
-    background-color: #e0e0e0;
+    background-color: #FFFFFF;
 }
 
 
@@ -233,7 +233,7 @@ main {
   cursor: pointer;
   font-size: 18px;
   font-weight: bold;
-  color: #40366F;
+  color: #160B5D;
   }
 
 .filter-box {
@@ -256,7 +256,7 @@ main {
   border-radius: 16px;
   border: 1px solid #e0e0e0;
   padding: 18px 18px;
-  background: #F5F5F5;
+  background: #FFFFFF;
   font-size: 1rem;
   outline: none;
   transition: border 0.2s;
