@@ -173,6 +173,52 @@ dl.info-grid, .info-grid {
     font-weight: 500;
     font-style: Medium;
     font-size: 20px;
+    leading-trim: NONE;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #121212;
+}
+
+.profile-info h1 {
+    font-family: 'Albert sans', sans-serif;
+    font-weight: 700;
+    color: #160B5D
+}
+
+.section h2 {
+    font-family: 'Albert sans', sans-serif;
+    font-weight: 600;
+    font-style: semibold;
+    color: #160B5D
+}
+
+@media (max-width: 640px) {
+    main {
+        padding: 10px;
+    }
+}
+
+.info-item strong {
+    font-family: 'Albert sans', sans-serif;
+    font-weight: 600;
+    color: #160B5D
+}
+
+.info-item dt {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #121212;
+}
+
+.info-item dd {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
     line-height: 22px;
     letter-spacing: 0px;
     color: #121212;
