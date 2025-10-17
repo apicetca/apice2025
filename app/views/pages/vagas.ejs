@@ -3,25 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu Responsivo</title>
+  <title>Apice - Vagas</title>
   <link rel="stylesheet" href="/css/vagas.css">
   <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100900;1,100900&family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
  </style>
 </head>
 <body>
-    <%- include('../partials/menu') %>
-    <main>
+  <header>
+    <%- include('../partials/menujovem') %>
+  </header>
+  <main>
+    <section class="vagas-header">
+        <article style="padding: 20px 25px;">
+            <!-- Logo e título de VAGAS -->
+            <nav style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="/img/mala.svg" alt="">
+                <h1 style="font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 600; color: #FFC52D; margin: 0; margin-left: 8px;">VAGAS</h1>
+            </nav>
+            
+            <p style="font-family: 'Poppins', sans-serif; font-size: 14px; color: #333; margin: 0 0 15px 0;">Pesquise e encontre sua vaga ideal!</p>
+            
+            <!-- Barra de pesquisa com botão de filtro -->
+            <form style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                <fieldset style="position: relative; flex-grow: 1; margin-right: 10px; border: none; padding: 0;">
+                    <input type="text" placeholder="Pesquise e encontre sua vaga ideal!" 
+                        style="width: 100%; height: 42px; padding: 0 40px 0 15px; border: 1px solid #ccc; border-radius: 50px; font-family: 'Poppins', sans-serif; font-size: 14px; color: #333; outline: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%);">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </fieldset>
+                <button id="btnMostrarFiltro" style="background: none; border: none; padding: 0; margin: 0; font-size: 20px; color: #160B5D; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; cursor: pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" stroke="#160B5D" stroke-width="1.5">
+                        <path d="M1.5 3a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </button>
+            </form>
+        </article>
+    </section>
+
     <section class="filter-wrapper">
-        <nav class="filtroinicial">
-          <button class="btn-filtrar">
-            <img src="/img/filtro.png" alt="Ícone de filtro" class="filter-icon">
-            Filtrar
-          </button>
-        </nav>
-        <form class="filter-box">
+        <!-- Conteúdo do filtro -->
+        <aside class="filter-box" id="filterBox">
   <nav class="filter-header">
     <span class="clear-filters" id="limparFiltros">
       <img src="/img/filtro2.png">
@@ -60,66 +86,24 @@
     </nav>
 
   </fieldset>
-</form>
+        </aside>
+        <!-- Fim do conteúdo do filtro -->
 
-
-
-        <nav class="button-group">
-            <button class="toggle-button active" data-target="vagas" aria-pressed="true">Vagas</button>
-        </nav>
-  <br>
-  <br>
-
-<a href="/vagas/rolta" class="card-link">
-<article class="card">
-  <img src="/img/rolta.png" alt="Foto do programa ROLTA Jovem Aprendiz" class="card-image" />
-  <section class="card-content">
-    <h2 id="title" class="card-title">ROLTA</h2>
-    <p class="card-subtitle">Programa Jovem Aprendiz - 2025</p>
-    <time datetime="2025-10-09">09/10</time> - <time datetime="2025-10-16">16/10</time>
-  </section>
-</article>
-</a>
-<br>
-<br>
-
-<a href="/vagas/rimberio">
-<a href="/vagas/rimberio" class="card-link">
-<article class="card">
-  <img src="/img/rimberio.png" alt="Foto do programa rimberio Jovem Aprendiz" class="card-image" />
-  <section class="card-content">
-    <h2 class="card-title">RIMBERIO</h2>
-    <p class="card-subtitle">Programa Estágio - 2025</p>
-    <time datetime="2025-10-30">30/10</time> - <time datetime="2025-12-01">01/12</time>
-  </section>
-</article>
-</a>
-<br>
-<br>
-
-<article class="card">
-  <img src="/img/contafor.png" alt="Foto do programa CONTAFOR Jovem Aprendiz" class="card-image" />
-  <section class="card-content">
-    <h2 class="card-title">CONTAFOR</h2>
-    <p class="card-subtitle">Estágio Técnico - 2025</p>
-    <time datetime="2025-09-15">15/09</time> - <time datetime="2025-10-30">30/10</time>
-  </section>
-</article>
-<br>
-<br>
-
-<article class="card">
-  <img src="/img/borcelle.png" alt="Foto do programa BORCELLE Jovem Aprendiz" class="card-image" />
-  <section class="card-content">
-    <h2 class="card-title">BORCELLE</h2>
-    <p class="card-subtitle">Trainee - 2025</p>
-    <time datetime="2025-11-04">04/11</time> - <time datetime="2025-11-24">24/11</time>
-  </section>
-</article>
+<section class="jobs-container">
+  <% if (vagas && Object.keys(vagas).length) { %>
+    <% Object.values(vagas).forEach(function(vaga) { %>
+      <a href="/vagas/<%= vaga.id %>" class="card-link">
+        <%- include('../partials/job-card', { vaga: vaga, infoVagas: typeof infoVagas !== 'undefined' ? infoVagas : {} }) %>
+      </a>
+    <% }) %>
+  <% } else { %>
+    <p>Nenhuma vaga encontrada.</p>
+  <% } %>
+</section>
   </section>
     </main>
     <script src="/js/script.js"></script>
     <script src="/js/filtros.js"></script>
+    
     <%- include('../partials/footer') %>    
 </body>
- 

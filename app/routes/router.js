@@ -63,36 +63,105 @@ router.get('/vagas', function(req, res) {
 });
 
 router.get('/login', (req, res) => {
+    // Determinar qual aba mostrar com base na consulta da URL
+    const activeTab = req.query.tab || 'jovem';
+    
     res.render('pages/login', {
-        listaErros: null,
+        listaErros: [],
         email: null,
-        password: null
+        password: null,
+        credencial: null,
+        chave: null,
+        activeTab
     });    
 });
 
-router.post('/login/verify',
-    body('email').isEmail().withMessage('O email não é válido').normalizeEmail(),
-    body('password').isLength({min: 8}).withMessage('senha inválida'),
-
+router.post('/login/verify', [
+    // Validação de email
+    body('email')
+        .notEmpty().withMessage('O campo de email é obrigatório')
+        .isEmail().withMessage('Por favor, insira um email válido')
+        .normalizeEmail(),
+    
+    // Validação de senha
+    body('password')
+        .notEmpty().withMessage('O campo de senha é obrigatório')
+        .isLength({min: 8}).withMessage('A senha deve ter no mínimo 8 caracteres')
+        .matches(/\d/).withMessage('A senha deve conter pelo menos um número')
+        .matches(/[a-zA-Z]/).withMessage('A senha deve conter pelo menos uma letra')
+],
     (req, res) => {
-         const listaErros = validationResult(req);
-    if (!listaErros.isEmpty()) {
-        console.log(listaErros);
-        return res.render("pages/login",
-            {
-            listaErros: listaErros.array(),
-            email: req.body.email,
-            password: req.body.password
-            }
-        )
-    }
+        const listaErros = validationResult(req);
+        if (!listaErros.isEmpty()) {
+            console.log(listaErros);
+            return res.render("pages/login",
+                {
+                listaErros: listaErros.array(),
+                email: req.body.email,
+                password: req.body.password,
+                credencial: null,
+                chave: null,
+                activeTab: 'jovem'
+                }
+            )
+        }
         
-    const { email, password } = req.body;
+        const { email, password } = req.body;
 
-        res.render('pages/login',{
-            listaErros,
+        // Aqui seria feita a autenticação
+        // Por enquanto apenas renderizamos a página novamente
+        res.render('pages/login', {
+            listaErros: [],
             email,
-            password
+            password,
+            credencial: null,
+            chave: null,
+            activeTab: 'jovem'
+        }); 
+});
+
+router.post('/login/empresa', [
+    // Validação de credencial
+    body('credencial')
+        .notEmpty().withMessage('O campo de credencial é obrigatório')
+        .isLength({min: 5}).withMessage('A credencial deve ter no mínimo 5 caracteres')
+        .matches(/^[A-Za-z0-9]+$/).withMessage('A credencial deve conter apenas letras e números'),
+    
+    // Validação de chave
+    body('chave')
+        .notEmpty().withMessage('O campo de chave é obrigatório')
+        .isLength({min: 6}).withMessage('A chave deve ter no mínimo 6 caracteres')
+        .matches(/\d/).withMessage('A chave deve conter pelo menos um número')
+        .matches(/[A-Z]/).withMessage('A chave deve conter pelo menos uma letra maiúscula')
+        .matches(/[a-z]/).withMessage('A chave deve conter pelo menos uma letra minúscula')
+],
+    (req, res) => {
+        const listaErros = validationResult(req);
+        if (!listaErros.isEmpty()) {
+            console.log(listaErros);
+            return res.render("pages/login",
+                {
+                    listaErros: listaErros.array(),
+                    email: null,
+                    password: null,
+                    credencial: req.body.credencial,
+                    chave: req.body.chave,
+                    activeTab: 'empresa'
+                }
+            )
+        }
+        
+        const { credencial, chave } = req.body;
+
+        // Aqui seria feita a autenticação da empresa
+        // Por enquanto apenas renderizamos a página novamente
+        res.render('pages/login', {
+            listaErros: [],
+            email: null,
+            password: null,
+            credencial,
+            chave,
+            activeTab: 'empresa'
         }); 
 });
 
