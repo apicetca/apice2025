@@ -74,6 +74,9 @@ router.get('/vagas', function (req, res) {
 
 
 router.get('/login', (req, res) => {
+    // Determinar qual aba mostrar com base na consulta da URL
+    const activeTab = req.query.tab || 'jovem';
+    
     res.render('pages/login', {
         listaErros: [],
         email: "",
