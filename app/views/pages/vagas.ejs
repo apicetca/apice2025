@@ -93,7 +93,7 @@
   <% if (vagas && Object.keys(vagas).length) { %>
     <% Object.values(vagas).forEach(function(vaga) { %>
       <a href="/vagas/<%= vaga.id %>" class="card-link">
-        <%- include('../partials/job-card', { vaga: vaga, infoVagas: typeof infoVagas !== 'undefined' ? infoVagas : {} }) %>
+        <%- include('../partials/job-card', { vaga: vaga }) %>
       </a>
     <% }) %>
   <% } else { %>

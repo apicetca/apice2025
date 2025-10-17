@@ -209,4 +209,4 @@ const infoVagas = {
     }
 };
 
-module.exports = infoVagas;
+module.exports = infoVagas; 
