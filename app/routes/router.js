@@ -72,6 +72,23 @@ router.get('/vagas', function (req, res) {
     res.render('pages/vagas', { vagas: todasVagas, infoVagas });
 });
 
+router.get('/vaga-detalhes', function (req, res) {
+    const vagaId = req.query.id;
+    console.log('Acessando vaga-detalhes:', vagaId);
+    
+    // Verificar em todas as fontes de dados
+    let vaga = vagas[vagaId] || infoVagas[vagaId];
+    
+    console.log('Vaga encontrada:', vaga ? 'Sim' : 'Não');
+
+    if (!vaga) {
+        console.log('Vaga não encontrada, redirecionando...');
+        return res.redirect('/vagas');
+    }
+
+    res.render('pages/vaga-detalhes', { vaga, infoVagas });
+});
+
 
 router.get('/login', (req, res) => {
     // Determinar qual aba mostrar com base na consulta da URL

@@ -8,16 +8,37 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  padding-top: 76px !important;
+  margin-top: 0 !important;
+}
+
+.menu-header {
+  height: auto !important;
+  min-height: 64px !important;
+  padding: 16px 32px !important;
+}
+
+@media (max-width: 640px) {
+  body {
+    padding-top: 76px !important;
+  }
+  
+  .menu-header {
+    min-height: 56px !important;
+    padding: 16px !important;
+  }
+}
  </style>
 </head>
 <body>
   <header>
-    <%- include('../partials/menujovem') %>
+    <%- include('../partials/menu') %>
   </header>
   <main>
     <section class="vagas-header">
         <article style="padding: 20px 25px;">
-            <!-- Logo e título de VAGAS -->
             <nav style="display: flex; align-items: center; margin-bottom: 8px;">
                 <img src="/img/mala.svg" alt="">
                 <h1 style="font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 600; color: #FFC52D; margin: 0; margin-left: 8px;">VAGAS</h1>
@@ -25,7 +46,6 @@
             
             <p style="font-family: 'Poppins', sans-serif; font-size: 14px; color: #333; margin: 0 0 15px 0;">Pesquise e encontre sua vaga ideal!</p>
             
-            <!-- Barra de pesquisa com botão de filtro -->
             <form style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                 <fieldset style="position: relative; flex-grow: 1; margin-right: 10px; border: none; padding: 0;">
                     <input type="text" placeholder="Pesquise e encontre sua vaga ideal!" 
@@ -46,7 +66,6 @@
     </section>
 
     <section class="filter-wrapper">
-        <!-- Conteúdo do filtro -->
         <aside class="filter-box" id="filterBox">
   <nav class="filter-header">
     <span class="clear-filters" id="limparFiltros">
@@ -87,14 +106,11 @@
 
   </fieldset>
         </aside>
-        <!-- Fim do conteúdo do filtro -->
 
 <section class="jobs-container">
   <% if (vagas && Object.keys(vagas).length) { %>
     <% Object.values(vagas).forEach(function(vaga) { %>
-      <a href="/vagas/<%= vaga.id %>" class="card-link">
-        <%- include('../partials/job-card', { vaga: vaga }) %>
-      </a>
+      <%- include('../partials/job-card', { vaga: vaga }) %>
     <% }) %>
   <% } else { %>
     <p>Nenhuma vaga encontrada.</p>

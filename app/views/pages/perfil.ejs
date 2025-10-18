@@ -13,10 +13,10 @@
 <main>
     <nav class="profile-container">
         <header class="profile-header">
-            <% if (profileImage) { %>
+            <% if (profileImage && profileImage.trim() !== '') { %>
                 <img src="<%= profileImage %>" alt="Foto de perfil" class="profile-pic">
             <% } else { %>
-                <img src="/img/default-profile.png" alt="Foto padrão" class="profile-pic">
+                <img src="/img/profile-pic.jpg" alt="Foto padrão" class="profile-pic">
             <% } %>
         </header>
 
