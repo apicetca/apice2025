@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro</title>
-  <link rel="stylesheet" href="/css/cadastro-empresa3.css" />  
+  <link rel="stylesheet" href="/css/cadastro-empresa3.css" />
+  <link rel="stylesheet" href="/css/validation.css" />  
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -22,7 +23,7 @@
   <main class="cad-container">
     <h1 class="cadastro">Cadastro</h1>
 
-    <form class="cad-form" action="/teste3" method="get" novalidate>
+    <form id="empresaForm3" class="cad-form" action="/teste3" method="get" novalidate>
       <ol class="form-steps" aria-hidden="true">
         <li><span class="step active">1</span><span class="step-label">Empresa</span></li>
         <li><span class="step">2</span><span class="step-label">Representante<br/>responsável</span></li>
@@ -54,7 +55,14 @@
   </main>
   <footer></footer>
 
+  <script src="/js/validation.js"></script>
   <script src="/js/script.js"></script>
+  <script>
+  // Inicializar validação para o formulário cadastro-empresa3
+  document.addEventListener('DOMContentLoaded', function() {
+    const empresaValidator3 = initFormValidation('empresaForm3');
+  });
+  </script>
 
 </body>
 </html>

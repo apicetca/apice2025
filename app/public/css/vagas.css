@@ -622,14 +622,14 @@ main {
   display: flex;
   align-items: center;
   font-size: 0.75rem;
-  color: #333;
+  color: #000000;
   gap: 6px;
   font-weight: 400;
   justify-content: flex-start;
 }
 
 .company-icon, .tech-icon, .type-icon, .location-icon {
-  color: #666;
+  color: #000000;
   min-width: 12px;
   height: 12px;
   flex-shrink: 0;

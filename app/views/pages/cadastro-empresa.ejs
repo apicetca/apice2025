@@ -5,38 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro</title>
     <link rel="stylesheet" href="/css/cadastro-empresa.css" />
+    <link rel="stylesheet" href="/css/validation.css" />
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100900;1,100900&family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-    </style>
-
-    <!-- small helpers for inline field errors -->
-    <style>
-      .field-error {
-        color: #c62828;
-        font-size: 12px;
-        margin-top: 6px;
-        display: block;
-      }
-
-      input.invalid {
-        border-color: #c62828;
-        box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.06);
-      }
-
-      ul.server-errors {
-        list-style: none;
-        padding: 8px 12px;
-        background: #fff0f0;
-        border: 1px solid #ffd0d0;
-        border-radius: 8px;
-        color: #c62828;
-      }
-
-      ul.server-errors li {
-        margin: 4px 0;
-      }
     </style>
   </head>
 
@@ -48,7 +21,7 @@
     <main class="cad-container">
       <h1 class="cadastro">Cadastro</h1>
 
-      <form class="cad-form" action="/cadastro-empresa" method="POST" novalidate>
+      <form id="form-cadastro" class="cad-form" action="/cadastro-empresa" method="POST" novalidate>
         <ol class="form-steps" aria-hidden="true">
           <li>
             <span class="step active">1</span>
@@ -70,11 +43,11 @@
           <p>Digite os dados da sua empresa para se cadastrar</p>
 
           <% if (typeof errors !== 'undefined' && errors && errors.length) { %>
-            <ul class="server-errors">
+            <div class="general-error">
               <% errors.forEach(function (err) { %>
-                <li><%= err.msg %></li>
+                <%= err.msg %><br>
               <% }) %>
-            </ul>
+            </div>
           <% } %>
 
           <% var e = (errors && errors.length) ? errors.find(function (it) { return it.param === 'razao_social'; }) : null; %>
@@ -84,6 +57,7 @@
             name="razao_social"
             placeholder="Razão social (nome jurídico)"
             value="<%= (form && form.razao_social) ? form.razao_social : '' %>"
+            required
           />
           <span class="field-error"><%= e ? e.msg : '' %></span>
 
@@ -94,6 +68,7 @@
             name="nome_fantasia"
             placeholder="Nome Fantasia"
             value="<%= (form && form.nome_fantasia) ? form.nome_fantasia : '' %>"
+            required
           />
           <span class="field-error"><%= e ? e.msg : '' %></span>
 
@@ -106,6 +81,7 @@
             inputmode="numeric"
             maxlength="18"
             value="<%= (form && form.cnpj) ? form.cnpj : '' %>"
+            required
           />
           <span class="field-error"><%= e ? e.msg : '' %></span>
 
@@ -118,6 +94,7 @@
             inputmode="tel"
             maxlength="15"
             value="<%= (form && form.telefone) ? form.telefone : '' %>"
+            required
           />
           <span class="field-error"><%= e ? e.msg : '' %></span>
 
@@ -130,6 +107,7 @@
             name="logradouro"
             placeholder="Rua"
             value="<%= (form && form.logradouro) ? form.logradouro : '' %>"
+            required
           />
           <span class="field-error"><%= e ? e.msg : '' %></span>
 
@@ -140,11 +118,12 @@
             name="cidade"
             placeholder="Cidade"
             value="<%= (form && form.cidade) ? form.cidade : '' %>"
+            required
           />
           <span class="field-error"><%= e ? e.msg : '' %></span>
 
           <% var e = (errors && errors.length) ? errors.find(function (it) { return it.param === 'estado'; }) : null; %>
-          <select id="estado" name="estado">
+          <select id="estado" name="estado" required>
             <option value="">Selecione o estado</option>
             <option value="AC" <%= (form && form.estado==='AC') ? 'selected' : '' %>>Acre (AC)</option>
             <option value="AL" <%= (form && form.estado==='AL') ? 'selected' : '' %>>Alagoas (AL)</option>
@@ -332,6 +311,26 @@
           }
         });
       })();
+    </script>
+    
+    <script src="/js/validation.js"></script>
+    <script>
+    // Inicializar validação padronizada para o formulário de cadastro de empresa
+    document.addEventListener('DOMContentLoaded', function() {
+      const empresaValidator = initFormValidation('form-cadastro');
+      
+      // Aplicar máscaras específicas
+      const cnpjInput = document.querySelector('input[name="cnpj"]');
+      if (cnpjInput) {
+        cnpjInput.setAttribute('data-mask', 'cnpj');
+        InputMasks.cnpj(cnpjInput);
+      }
+      
+      const telefoneInput = document.querySelector('input[name="telefone"]');
+      if (telefoneInput) {
+        InputMasks.phone(telefoneInput);
+      }
+    });
     </script>
   </body>
 </html>

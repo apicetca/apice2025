@@ -3,6 +3,7 @@ var router = express.Router();
 const { body, validationResult } = require('express-validator');
 const multer = require('multer');
 const fs = require('fs');
+const { validationSets, handleValidationErrors, renderWithErrors } = require('../validations/validations');
 
 // cria a pasta de uploads caso nao exista
 const uploadDir = '/uploads/';
@@ -46,6 +47,10 @@ router.get('/empresa', function (req, res) {
 const vagas = require('../data/vagas');
 const infoVagas = require('../data/vagaspt2-completo');
 const { encontrarVaga } = require('../data/vagasLoader');
+
+// Sistema simples para armazenar candidaturas (em produção, use banco de dados)
+let vagasCandidatadas = [];
+let vagasAnteriores = [];
 
 router.get('/vagas/:id', function (req, res) {
     const vagaId = req.params.id;
@@ -98,51 +103,123 @@ router.get('/login', (req, res) => {
         listaErros: [],
         email: "",
         password: "",
+        activeTab: activeTab,
+        query: req.query
     });
 });
 
 
 router.post(
     '/login/verify',
-    body('email').isEmail().withMessage('O email não é válido').normalizeEmail(),
-    body('password').isLength({ min: 8 }).withMessage('senha inválida'),
-
+    validationSets.loginJovem,
+    handleValidationErrors,
     (req, res) => {
-        const listaErros = validationResult(req);
-        if (!listaErros.isEmpty()) {
-            console.log(listaErros);
-            return res.render('pages/login', {
-                listaErros: listaErros.array(),
-                email: req.body.email,
-                password: req.body.password,
-            });
-        }
-
-        const { email, password } = req.body;
-
-        // Processar login aqui
-        // Se o login for bem-sucedido, redirecione para a página principal ou perfil
-        // Como exemplo, vou redirecionar para home
-        return res.redirect('/');
+        // Verificar se há erros de validação e renderizar com erros
+        const errorRender = renderWithErrors(req, res, 'pages/login', {
+            activeTab: 'jovem',
+            email: req.body.email,
+            password: req.body.password
+        });
         
-        // Se houver erro no login (mas não na validação), você pode renderizar:
-        // res.render('pages/login', {
-        //     listaErros: [{ path: 'email', msg: 'Email ou senha incorretos' }],
-        //     email,
-        //     password: '',
-        // });
+        if (errorRender !== null) return errorRender;
+
+        // Se chegou aqui, validação passou - implementar lógica de autenticação
+        console.log('Login validado com sucesso:', req.body.email);
+        
+        // TODO: Implementar autenticação real
+        res.redirect('/');
+    }
+);
+
+// Rota para login de empresa
+router.post(
+    '/login/empresa',
+    validationSets.loginEmpresa,
+    handleValidationErrors,
+    (req, res) => {
+        // Verificar se há erros de validação e renderizar com erros
+        const errorRender = renderWithErrors(req, res, 'pages/login', {
+            activeTab: 'empresa',
+            credencial: req.body.credencial,
+            chave: req.body.chave
+        });
+        
+        if (errorRender !== null) return errorRender;
+
+        // Se chegou aqui, validação passou - implementar lógica de autenticação
+        console.log('Login empresa validado com sucesso:', req.body.credencial);
+        
+        // TODO: Implementar autenticação real
+        res.redirect('/empresa');
     }
 );
 
 
 router.get('/cadastro', function (req, res) {
-    res.render('pages/cadastro');
+    res.render('pages/cadastro', { errors: null, form: {} });
 });
 
+// POST: Validar primeira página do cadastro de jovem
+router.post(
+    '/cadastro',
+    validationSets.cadastroJovem,
+    handleValidationErrors,
+    (req, res) => {
+        // Verificar se há erros de validação e renderizar com erros
+        const errorRender = renderWithErrors(req, res, 'pages/cadastro');
+        
+        if (errorRender !== null) return errorRender;
+
+        // Se validação passou, armazenar dados na sessão e ir para próxima página
+        req.session.cadastroJovem = req.body;
+        console.log('Primeira página do cadastro validada:', req.body);
+        
+        res.redirect('/cad2');
+    }
+);
 
 router.get('/cad2', function (req, res) {
-    res.render('pages/cad2');
+    // Verificar se passou pela primeira página
+    if (!req.session.cadastroJovem) {
+        return res.redirect('/cadastro');
+    }
+    
+    res.render('pages/cad2', { errors: null, form: {} });
 });
+
+// POST: Validar segunda página do cadastro de jovem
+router.post(
+    '/cad2',
+    validationSets.cadastroJovem2,
+    handleValidationErrors,
+    (req, res) => {
+        // Verificar se passou pela primeira página
+        if (!req.session.cadastroJovem) {
+            return res.redirect('/cadastro');
+        }
+        
+        // Verificar se há erros de validação e renderizar com erros
+        const errorRender = renderWithErrors(req, res, 'pages/cad2');
+        
+        if (errorRender !== null) return errorRender;
+
+        // Se validação passou, combinar dados das duas páginas
+        const dadosCompletos = {
+            ...req.session.cadastroJovem,
+            ...req.body
+        };
+        
+        console.log('Cadastro completo validado:', dadosCompletos);
+        
+        // TODO: Salvar no banco de dados
+        
+        // Limpar sessão
+        delete req.session.cadastroJovem;
+        
+        // Redirecionar para sucesso
+        res.redirect('/login?cadastro=sucesso');
+    }
+);
 
 
 const users = require('../data/users');
@@ -186,6 +263,49 @@ router.post('/upload-profile', upload.single('profileImage'), (req, res) => {
 });
 
 
+router.get('/minhas-vagas', function (req, res) {
+    // Enviando todas as vagas, igual à rota /vagas
+    const todasVagas = { ...infoVagas };
+    
+    res.render('pages/minhasvagas', { 
+        vagas: todasVagas, 
+        infoVagas,
+        vagasCandidatadas,
+        vagasAnteriores 
+    });
+});
+
+// Rota para processar candidatura
+router.post('/candidatar', function (req, res) {
+    const { vagaId } = req.body;
+    
+    if (vagaId && infoVagas[vagaId]) {
+        // Verificar se já não está candidatado
+        if (!vagasCandidatadas.includes(vagaId)) {
+            vagasCandidatadas.push(vagaId);
+        }
+    }
+    
+    // Redirecionar de volta para a página de detalhes
+    res.redirect(`/vaga-detalhes?id=${vagaId}`);
+});
+
+// Rota para cancelar candidatura
+router.post('/cancelar-candidatura', function (req, res) {
+    const { vagaId } = req.body;
+    
+    // Remover da lista de candidatadas e adicionar às anteriores
+    const index = vagasCandidatadas.indexOf(vagaId);
+    if (index > -1) {
+        vagasCandidatadas.splice(index, 1);
+        if (!vagasAnteriores.includes(vagaId)) {
+            vagasAnteriores.push(vagaId);
+        }
+    }
+    
+    res.redirect('/minhas-vagas');
+});
+
 
 router.get('/teste2', function (req, res) {
     res.render('pages/cadastro-empresa2', { form: {}, errors: null });
@@ -206,33 +326,21 @@ router.get('/cadastro-empresa', function (req, res) {
 // POST: validar dados do cadastro da empresa no servidor
 router.post(
     '/cadastro-empresa',
-    // validações
-    body('razao_social').trim().notEmpty().withMessage('Razão social é obrigatória'),
-    body('nome_fantasia').trim().notEmpty().withMessage('Nome fantasia é obrigatória'),
-    body('cnpj').trim().matches(/^\d{14}$/).withMessage('CNPJ inválido. Informe 14 números sem pontuação'),
-    body('telefone').trim().matches(/^\d{10,11}$/).withMessage('Telefone inválido. Informe 10 ou 11 números'),
-    body('logradouro').trim().notEmpty().withMessage('Logradouro é obrigatório'),
-    body('cidade').trim().notEmpty().withMessage('Cidade é obrigatória'),
-    body('estado').trim().notEmpty().withMessage('Estado é obrigatório'),
-    body('cep').trim().matches(/^\d{8}$/).withMessage('CEP inválido. Informe 8 números'),
-
+    validationSets.cadastroEmpresa,
+    handleValidationErrors,
     (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            // retornar a página com erros e valores preenchidos
-            return res.render('pages/cadastro-empresa', {
-                errors: errors.array(),
-                form: req.body,
-            });
-        }
+        // Verificar se há erros de validação e renderizar com erros
+        const errorRender = renderWithErrors(req, res, 'pages/cadastro-empresa');
+        
+        if (errorRender !== null) return errorRender;
 
-        // Se passou na validação, seguir para próximo passo (temporariamente redireciona)
-        // Armazenamos os dados da primeira etapa em session para uso posterior
-        if (!req.session) {
-            req.session = {};
-        }
-        req.session.empresaData = req.body;
-        return res.redirect('/teste2');
+        // Se validação passou, armazenar dados na sessão e ir para próxima página
+        req.session.cadastroEmpresa = req.body;
+        console.log('Cadastro empresa validado:', req.body);
+        
+        // TODO: Salvar no banco de dados
+        
+        res.redirect('/teste2');
     }
 );
 

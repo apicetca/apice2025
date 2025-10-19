@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu Responsivo</title>
   <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="/css/validation.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&display=swap');
@@ -44,6 +45,13 @@
   <header>
     <h1 class="login-title montserrat">Login</h1>
   </header>
+
+  <!-- Mensagem de sucesso para cadastro -->
+  <% if (typeof query !== 'undefined' && query.cadastro === 'sucesso') { %>
+    <div class="success-message">
+      Cadastro realizado com sucesso! Faça login para continuar.
+    </div>
+  <% } %>
 
   <div class="profile-selector" role="tablist" aria-label="Tipo de perfil">
     <% const tab = typeof activeTab !== 'undefined' ? activeTab : 'jovem'; %>
@@ -164,8 +172,18 @@
   </section>
 </main>
 </main>
+<script src="/js/validation.js"></script>
 <script src="/js/login.js"></script>
 <script src="/js/script.js"></script>
+<script>
+// Inicializar validação para ambos os formulários
+let jovemValidator, empresaValidator;
+
+document.addEventListener('DOMContentLoaded', function() {
+  jovemValidator = initFormValidation('loginForm');
+  empresaValidator = initFormValidation('empresaForm');
+});
+</script>
 
   <footer>
     
