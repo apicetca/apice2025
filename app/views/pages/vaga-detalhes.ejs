@@ -16,6 +16,16 @@
     </header>
     
     <main class="detalhes-container">
+        <!-- Botão Voltar -->
+        <nav class="navigation-container">
+            <button onclick="history.back()" class="btn-voltar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Voltar</span>
+            </button>
+        </nav>
+        
         <!-- Header da vaga -->
         <header class="vaga-header">
             <figure class="empresa-logo-container">
@@ -42,13 +52,12 @@
             </section>
             
             <nav class="vaga-actions">
-                <button class="btn-candidatar">
-                    <span>Candidatar-me</span>
-                </button>
-                <button class="btn-favoritar">
-                    <span>⭐</span>
-                    <span>Favoritar</span>
-                </button>
+                <form action="/candidatar" method="POST" style="width: 100%;">
+                    <input type="hidden" name="vagaId" value="<%= typeof vagaId !== 'undefined' ? vagaId : (typeof vaga !== 'undefined' ? vaga.id : '') %>">
+                    <button type="submit" class="btn-candidatar">
+                        <span>Candidatar-me</span>
+                    </button>
+                </form>
             </nav>
         </header>
 
@@ -65,7 +74,6 @@
                 </p>
             </section>
 
-            <!-- Seção Requisitos -->
             <section class="requisitos-section">
                 <h2 class="section-title">Requisitos</h2>
                 <ul class="requisitos-lista">

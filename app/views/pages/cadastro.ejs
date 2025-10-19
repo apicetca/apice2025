@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ápice</title>
-  <link rel="stylesheet" href="/css/cadastro.css" />  
+  <link rel="stylesheet" href="/css/cadastro.css" />
+  <link rel="stylesheet" href="/css/validation.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" /> 
 </head>
 
@@ -23,19 +24,19 @@
 
   <nav class="form-section">
         <p>Digite seus dados de acesso para se cadastrar</p>
-    <form class="cad-form">
+    <form id="cadastroForm" class="cad-form">
       <input type="text" id="nome" name="nome" placeholder="Nome completo" required />
 
-      <input type="text" id="email" name="email" placeholder="Email" required />
+      <input type="email" id="email" name="email" placeholder="Email" required />
 
   
-      <input type="text" id="telefone" name="telefone" placeholder="Telefone" required />
+      <input type="tel" id="telefone" name="telefone" placeholder="Telefone" required />
 
 
-      <input type="text" id="password" name="password" placeholder="Crie uma senha" required />
+      <input type="password" id="password" name="password" placeholder="Crie uma senha" required />
 
 
-      <input type="text" id="password" name="password" placeholder="Confirme sua senha" required />
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirme sua senha" required />
 
 
     </form>
@@ -43,11 +44,28 @@
 
 <nav class="actions-section">
       <button id="btnProximo" class="btn-primary">Próximo</button>
+      <div class="divider">
+        <span>ou</span>
+      </div>
+      <button id="btnEmpresa" class="btn-secondary">Cadastrar Empresa</button>
   </nav>
+<script src="/js/validation.js"></script>
 <script>
-  document.getElementById('btnProximo').onclick = function() {
-    window.location.href = '/cad2';
-  };
+document.addEventListener('DOMContentLoaded', function() {
+  const cadastroValidator = initFormValidation('cadastroForm');
+  
+  // Botão próximo com validação
+  document.getElementById('btnProximo').addEventListener('click', function() {
+    if (cadastroValidator.validateForm()) {
+      window.location.href = '/cad2';
+    }
+  });
+  
+
+  document.getElementById('btnEmpresa').addEventListener('click', function() {
+    window.location.href = '/cadastro-empresa';
+  });
+});
 </script>
 
 </main>

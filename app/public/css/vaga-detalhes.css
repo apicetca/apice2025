@@ -31,7 +31,6 @@
   --transition: all 0.3s ease;
 }
 
-/* ========== RESET E BASE ========== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -47,7 +46,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ========== CONTAINER PRINCIPAL ========== */
 .detalhes-container {
   max-width: 500px;
   margin: 20px auto;
@@ -56,6 +54,42 @@ body {
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   position: relative;
+}
+
+
+.navigation-container {
+  padding: 16px 24px 0;
+  background: var(--card);
+}
+
+.btn-voltar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-voltar:hover {
+  background: var(--bg);
+  color: var(--primary);
+  transform: translateX(-2px);
+}
+
+.btn-voltar svg {
+  transition: var(--transition);
+}
+
+.btn-voltar:hover svg {
+  transform: translateX(-2px);
 }
 
 /* ========== HEADER DA VAGA ========== */
@@ -295,6 +329,12 @@ body {
   flex-direction: column;
   gap: 12px;
   margin-top: 20px;
+}
+
+.vaga-actions form {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* ========== BOTÃO CANDIDATAR ========== */
