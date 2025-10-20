@@ -1,7 +1,7 @@
-<div class="job-card">
-  <div class="job-card-info">
+<article class="job-card">
+  <section class="job-card-info">
     <h3 class="job-title"><%= vaga.programa && vaga.programa.includes("Coordenador") ? "Coordenador de Projetos Sênior" : vaga.titulo %></h3>
-    <div class="job-location">
+    <address class="job-location">
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="location-icon">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
         <circle cx="12" cy="10" r="3"></circle>
@@ -11,10 +11,10 @@
       <% } else { %>
         Alphaville, São Paulo
       <% } %>
-    </div>
+    </address>
     
-    <div class="badge-list">
-      <div class="badge-item">
+    <ul class="badge-list">
+      <li class="badge-item">
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="company-icon">
           <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
           <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
@@ -26,9 +26,9 @@
           }
         %>
         <%= empresa %>
-      </div>
+      </li>
       
-      <div class="badge-item">
+      <li class="badge-item">
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tech-icon">
           <path d="M16 18l6-6-6-6"></path>
           <path d="M8 6l-6 6 6 6"></path>
@@ -40,9 +40,9 @@
           }
         %>
         <%= categoria %>
-      </div>
+      </li>
       
-      <div class="badge-item">
+      <li class="badge-item">
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="type-icon">
           <rect x="3" y="3" width="7" height="7"></rect>
           <rect x="14" y="3" width="7" height="7"></rect>
@@ -56,10 +56,10 @@
           }
         %>
         <%= tipo %>
-      </div>
-    </div>
+      </li>
+    </ul>
     
-    <div class="salary-section">
+    <aside class="salary-section">
       <% 
         let salario = '3.540,00';
         if (infoVagas && infoVagas[vaga.id] && infoVagas[vaga.id].salario) {
@@ -67,11 +67,11 @@
         }
       %>
       <h4 class="salary-value">R$ <%= salario %></h4>
-    </div>
+    </aside>
     
-    <div class="job-actions">
+    <nav class="job-actions">
       <a href="/vaga-detalhes?id=<%= vaga.id %>" class="btn-apply">Candidatar-se</a>
       <a href="/vaga-detalhes?id=<%= vaga.id %>" class="btn-expand">Expandir</a>
-    </div>
-  </div>
-</div>
+    </nav>
+  </section>
+</article>
