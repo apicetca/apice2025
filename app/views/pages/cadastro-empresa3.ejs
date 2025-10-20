@@ -4,24 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro</title>
-  <link rel="stylesheet" href="/css/cadastro-empresa3.css" />
-  <link rel="stylesheet" href="/css/validation.css" />  
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100900;1,100900&family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
- 
-</style>
+  <link rel="stylesheet" href="/css/cadastro-comum.css" />
+  <link rel="stylesheet" href="/css/validation.css" />
 </head>
 
 <body>
 
   <header>
-    <%- include('../partials/menuempresa') %>
+    <%- include('../partials/menu') %>
   </header>
 
   <main class="cad-container">
-    <h1 class="cadastro">Cadastro</h1>
+    <h1 class="cadastro" style="display: block !important; visibility: visible !important; color: #160B5D !important; font-size: 34px !important; text-align: center !important; margin: 20px 0 !important; font-weight: 600 !important; font-family: 'Poppins', sans-serif !important;">Cadastro</h1>
 
     <form id="empresaForm3" class="cad-form" action="/teste3" method="get" novalidate>
       <ol class="form-steps" aria-hidden="true">
@@ -33,30 +27,24 @@
       <section class="form-section">
         <p>Insira as informações referentes ao eixo de atuação da empresa</p>
 
-        <fieldset>
+        <input type="text" id="area" name="area" placeholder="Área" />
 
-          <label for="area" class="sr-only">Área</label>
-          <input class="form-input" type="text" id="area" name="area" placeholder="Área">
-
-          <label for="eixo" class="sr-only">Eixo de atuação</label>
-          <input class="form-input" type="text" id="eixo" name="eixo" placeholder="Eixo de atuação">
-
-        </fieldset>
+        <input type="text" id="eixo" name="eixo" placeholder="Eixo de atuação" />
 
         <footer class="actions-section" aria-hidden="true">
           <button type="button" class="btn-add" aria-label="Adicionar">Adicionar <span aria-hidden="true">+</span></button>
         </footer>
       </section>
-      <br>
-      <nav class="form-nav" aria-label="Ações do formulário">
-        <button type="submit" class="btn-primary">Próximo</button>
-      </nav>
     </form>
+
+    <nav class="actions-section">
+      <button type="submit" form="empresaForm3" class="btn-primary">Próximo</button>
+
+    </nav>
   </main>
   <footer></footer>
 
   <script src="/js/validation.js"></script>
-  <script src="/js/script.js"></script>
   <script>
   // Inicializar validação para o formulário cadastro-empresa3
   document.addEventListener('DOMContentLoaded', function() {

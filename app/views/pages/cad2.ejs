@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ápice</title>
-  <link rel="stylesheet" href="/css/cad2.css" />
-  <link rel="stylesheet" href="/css/validation.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" /> 
+  <link rel="stylesheet" href="/css/cadastro-comum.css" />
+  <link rel="stylesheet" href="/css/validation.css" /> 
 </head>
 <body>
 
@@ -14,15 +13,25 @@
 
     <%- include('../partials/menu') %>
 
-    <h1 class="cadastro">Cadastro</h1>
+    <h1 class="cadastro" style="display: block !important; visibility: visible !important; color: #160B5D !important; font-size: 34px !important; text-align: center !important; margin: 20px 0 !important; font-weight: 600 !important; font-family: 'Poppins', sans-serif !important;">Cadastro</h1>
 
   </header>
 
   <main class="cad-container">
 
-  <nav class="form-section">
+  <section class="form-section">
         <p>Informe suas informações para o registro</p>
-    <form id="cad2Form" class="cad-form">
+        
+        <!-- Mostrar erros gerais se existirem -->
+        <% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
+          <article class="general-error">
+            <% errors.forEach(function(error) { %>
+              <%= error.msg %><br>
+            <% }) %>
+          </article>
+        <% } %>
+        
+    <form id="cad2Form" class="cad-form" method="POST" action="/cad2">
       <input type="text" id="rg" name="rg" placeholder="RG" required />
 
       <input type="date" id="data" name="data" placeholder="Data de nascimento" required />
@@ -47,29 +56,25 @@
 
       <input type="text" id="endereco" name="endereco" placeholder="Endereço" required />
 
-    <nav class="lado">
+    <section class="lado">
       <input type="text" id="cep" name="cep" placeholder="CEP" required class="cep"/>
 
       <input type="text" id="complemento" name="complemento" placeholder="Complemento" class="comp"/>
       
-    </nav>
-
+    </section>
 
     </form>
-  </nav> 
+  </section>
 
   <nav class="actions-section">
       <button form="cad2Form" type="submit" class="btn-primary">Próximo</button>
-  </nav>
-
-</main>
+  </nav></main>
 
 <footer>
 
 </footer>
 
 <script src="/js/validation.js"></script>
-<script src="/js/script.js"></script>
 <script>
 // Inicializar validação para o formulário cad2
 document.addEventListener('DOMContentLoaded', function() {

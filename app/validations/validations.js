@@ -1,8 +1,4 @@
 const { body, validationResult } = require('express-validator');
-
-// ========== VALIDAÇÕES PADRONIZADAS ========== //
-
-// Validações para campos comuns
 const commonValidations = {
   // Nome completo
   nome: body('nome')
@@ -16,7 +12,6 @@ const commonValidations = {
     .matches(/^[a-zA-ZÀ-ÿ\s]+$/)
     .withMessage('Nome deve conter apenas letras e espaços'),
 
-  // Email
   email: body('email')
     .trim()
     .notEmpty()

@@ -48,22 +48,22 @@
 
   <!-- Mensagem de sucesso para cadastro -->
   <% if (typeof query !== 'undefined' && query.cadastro === 'sucesso') { %>
-    <div class="success-message">
+    <aside class="success-message">
       Cadastro realizado com sucesso! Faça login para continuar.
-    </div>
+    </aside>
   <% } %>
 
-  <div class="profile-selector" role="tablist" aria-label="Tipo de perfil">
+  <nav class="profile-selector" role="tablist" aria-label="Tipo de perfil">
     <% const tab = typeof activeTab !== 'undefined' ? activeTab : 'jovem'; %>
     <button class="profile-tab <%= tab === 'jovem' ? 'active' : '' %>" id="jovem-tab" role="tab" aria-selected="<%= tab === 'jovem' ? 'true' : 'false' %>" aria-controls="jovem-content">Jovem</button>
     <button class="profile-tab <%= tab === 'empresa' ? 'active' : '' %>" id="empresa-tab" role="tab" aria-selected="<%= tab === 'empresa' ? 'true' : 'false' %>" aria-controls="empresa-content">Empresa</button>
-  </div>
+  </nav>
 
-  <div class="profile-content <%= tab === 'jovem' ? '' : 'hidden' %>" id="jovem-content" role="tabpanel" aria-labelledby="jovem-tab">
+  <main class="profile-content <%= tab === 'jovem' ? '' : 'hidden' %>" id="jovem-content" role="tabpanel" aria-labelledby="jovem-tab">
     <section class="form-section">
       <p class="form-description">Digite seus dados de acesso para entrar</p>
       <form id="loginForm" action="/login/verify" method="post" class="login-form">
-        <div class="form-group">
+        <section class="form-group">
           <label for="email" class="visually-hidden">Email</label>
           <input 
             type="email" 
@@ -76,11 +76,11 @@
             required
           />
           <span id="email-error" class="error-message"><%= typeof listaErros !== 'undefined' && listaErros !== null && listaErros.find ? (listaErros.find(erro => erro.path === 'email') ? listaErros.find(erro => erro.path === 'email').msg : '') : '' %></span>
-        </div>
+        </section>
         
-        <div class="form-group">
+        <section class="form-group">
           <label for="password" class="visually-hidden">Senha</label>
-          <div class="password-wrapper">
+          <article class="password-wrapper">
             <input 
               type="password" 
               id="password" 
@@ -96,20 +96,20 @@
             </button>
           </div>
           <span id="password-error" class="error-message"><%= typeof listaErros !== 'undefined' && listaErros !== null && listaErros.find ? (listaErros.find(erro => erro.path === 'password') ? listaErros.find(erro => erro.path === 'password').msg : '') : '' %></span>
-        </div>
+        </section>
         
-        <div class="form-options">
+        <nav class="form-options">
           <a href="/recuperar-senha" class="forgot-password">Esqueceu a senha?</a>
-        </div>
+        </nav>
       </form>
     </section>
-  </div>
+  </main>
 
-  <div class="profile-content <%= tab === 'empresa' ? '' : 'hidden' %>" id="empresa-content" role="tabpanel" aria-labelledby="empresa-tab">
+  <main class="profile-content <%= tab === 'empresa' ? '' : 'hidden' %>" id="empresa-content" role="tabpanel" aria-labelledby="empresa-tab">
     <section class="form-section">
       <p class="form-description">Digite suas credenciais de empresa</p>
       <form id="empresaForm" action="/login/empresa" method="post" class="login-form">
-        <div class="form-group">
+        <section class="form-group">
           <label for="credencial" class="visually-hidden">Credencial</label>
           <input 
             type="text" 
@@ -124,9 +124,9 @@
           <span id="credencial-error" class="error-message"><%= typeof listaErros !== 'undefined' && listaErros !== null && listaErros.find ? (listaErros.find(erro => erro.path === 'credencial') ? listaErros.find(erro => erro.path === 'credencial').msg : '') : '' %></span>
         </div>
         
-        <div class="form-group">
+        <section class="form-group">
           <label for="chave" class="visually-hidden">Chave</label>
-          <div class="password-wrapper">
+          <article class="password-wrapper">
             <input 
               type="password" 
               id="chave" 
@@ -140,22 +140,22 @@
             <button type="button" class="toggle-password" aria-label="Mostrar/ocultar chave">
               <i class="fas fa-eye"></i>
             </button>
-          </div>
+          </article>
           <span id="chave-error" class="error-message"><%= typeof listaErros !== 'undefined' && listaErros !== null && listaErros.find ? (listaErros.find(erro => erro.path === 'chave') ? listaErros.find(erro => erro.path === 'chave').msg : '') : '' %></span>
-        </div>
+        </section>
         
-        <div class="form-options">
+        <nav class="form-options">
           <a href="/recuperar-chave" class="forgot-password">Esqueceu a chave?</a>
-        </div>
+        </nav>
       </form>
     </section>
-  </div>
+  </main>
 
   <section class="actions-section">
     <button form="<%= tab === 'jovem' ? 'loginForm' : 'empresaForm' %>" type="submit" id="submit-btn" class="btn-primary">Confirmar</button>
     <a href="/cadastro" id="btn-secondary" class="btn-secondary">Cadastre-se</a>
     
-    <div class="social-login" aria-label="Login com redes sociais">
+    <nav class="social-login" aria-label="Login com redes sociais">
       <button class="social-login-btn" aria-label="Login com Google">
         <img src="/img/google.png" alt="Google" />
       </button>
@@ -176,7 +176,6 @@
 <script src="/js/login.js"></script>
 <script src="/js/script.js"></script>
 <script>
-// Inicializar validação para ambos os formulários
 let jovemValidator, empresaValidator;
 
 document.addEventListener('DOMContentLoaded', function() {
