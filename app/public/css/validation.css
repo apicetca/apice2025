@@ -3,7 +3,10 @@
 /* Campo com erro */
 input.error,
 select.error,
-textarea.error {
+textarea.error,
+input.field-error,
+select.field-error,
+textarea.field-error {
   border-color: #dc3545 !important;
   box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1) !important;
 }
@@ -48,6 +51,8 @@ textarea.error {
 /* Animação para campos com erro */
 input.error,
 select.error,
+input.field-error,
+select.field-error,
 textarea.error {
   animation: shake 0.3s ease-in-out;
 }
@@ -106,6 +111,28 @@ textarea.valid {
 /* Sobrepor estilos antigos quando estiver vazio */
 .field-error:empty {
   display: none !important;
+}
+
+/* Estilos adicionais de validação */
+input.invalid, 
+select.invalid,
+.input-error {
+  border-color: #c62828 !important;
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.06);
+}
+
+ul.error-list {
+  list-style: none;
+  padding: 8px 12px;
+  background: #fff0f0;
+  border: 1px solid #ffd0d0;
+  border-radius: 8px;
+  color: #c62828;
+  margin-bottom: 16px;
+}
+
+ul.error-list li {
+  margin: 4px 0;
 }
 
 /* Estilos responsivos */

@@ -333,6 +333,144 @@ class InputMasks {
   }
 }
 
+// ========== VALIDAÇÕES ESPECÍFICAS PARA LOGIN ==========
+
+class LoginValidator {
+  constructor(formId, loginType = 'jovem') {
+    this.form = document.getElementById(formId);
+    this.loginType = loginType;
+    this.errors = {};
+    
+    if (this.form) {
+      this.init();
+    }
+  }
+
+  init() {
+    // Adicionar validação em tempo real
+    const inputs = this.form.querySelectorAll('input');
+    inputs.forEach(input => {
+      input.addEventListener('blur', () => this.validateField(input));
+      input.addEventListener('input', () => this.clearFieldError(input));
+    });
+
+    // Interceptar submit
+    this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+  }
+
+  validateField(field) {
+    const fieldName = field.name || field.id;
+    const value = field.value.trim();
+    let isValid = true;
+    let errorMessage = '';
+
+    // Limpar erro anterior
+    this.clearFieldError(field);
+
+    if (this.loginType === 'jovem') {
+      // Validações para login de jovem
+      if (fieldName === 'email') {
+        if (!value) {
+          errorMessage = 'Email é obrigatório';
+          isValid = false;
+        } else if (!this.isValidEmail(value)) {
+          errorMessage = 'Digite um email válido';
+          isValid = false;
+        }
+      } else if (fieldName === 'password') {
+        if (!value) {
+          errorMessage = 'Senha é obrigatória';
+          isValid = false;
+        }
+      }
+    } else if (this.loginType === 'empresa') {
+      // Validações para login de empresa
+      if (fieldName === 'credencial') {
+        if (!value) {
+          errorMessage = 'Credencial é obrigatória';
+          isValid = false;
+        } else if (value.length < 3) {
+          errorMessage = 'Credencial deve ter pelo menos 3 caracteres';
+          isValid = false;
+        }
+      } else if (fieldName === 'chave') {
+        if (!value) {
+          errorMessage = 'Chave é obrigatória';
+          isValid = false;
+        }
+      }
+    }
+
+    if (!isValid) {
+      this.showFieldError(field, errorMessage);
+      this.errors[fieldName] = errorMessage;
+    } else {
+      delete this.errors[fieldName];
+    }
+
+    return isValid;
+  }
+
+  validateForm() {
+    let isFormValid = true;
+    const inputs = this.form.querySelectorAll('input[required], input[name="email"], input[name="password"], input[name="credencial"], input[name="chave"]');
+    
+    inputs.forEach(input => {
+      if (!this.validateField(input)) {
+        isFormValid = false;
+      }
+    });
+
+    return isFormValid;
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    
+    // Validar todos os campos
+    if (this.validateForm()) {
+      // Se válido, remover prevent default e submeter o formulário
+      this.form.removeEventListener('submit', this.handleSubmit.bind(this));
+      this.form.submit();
+    } else {
+      // Focar no primeiro campo com erro
+      const firstErrorField = this.form.querySelector('.field-error');
+      if (firstErrorField) {
+        firstErrorField.focus();
+      }
+    }
+  }
+
+  showFieldError(field, message) {
+    field.classList.add('field-error');
+    
+    // Remover mensagem de erro existente
+    const existingError = field.parentNode.querySelector('.error-message');
+    if (existingError) {
+      existingError.remove();
+    }
+
+    // Adicionar nova mensagem de erro
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    field.parentNode.appendChild(errorDiv);
+  }
+
+  clearFieldError(field) {
+    field.classList.remove('field-error');
+    const errorMessage = field.parentNode.querySelector('.error-message');
+    if (errorMessage) {
+      errorMessage.remove();
+    }
+  }
+
+  isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+}
+
 // Inicialização automática quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', function() {
   // Aplicar máscaras automaticamente
@@ -346,6 +484,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelectorAll('input[data-mask="cnpj"]').forEach(input => {
     InputMasks.cnpj(input);
+  });
+
+  // Inicializar validação de login automaticamente se houver formulário de login
+  const loginForms = document.querySelectorAll('form[data-login-type]');
+  loginForms.forEach(form => {
+    const loginType = form.getAttribute('data-login-type');
+    new LoginValidator(form.id, loginType);
   });
 });
 

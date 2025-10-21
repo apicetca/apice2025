@@ -1,4 +1,5 @@
 const { body, validationResult } = require('express-validator');
+const { validationSets: empresaValidationSets } = require('./empresa-validations');
 const commonValidations = {
   // Nome completo
   nome: body('nome')
@@ -68,7 +69,7 @@ const commonValidations = {
       const age = today.getFullYear() - birthDate.getFullYear();
       
       if (age < 14 || age > 120) {
-        throw new Error('Idade deve estar entre 14 e 120 anos');
+        throw new Error('Idade deve ser no mínimo de 14 anos');
       }
       return true;
     }),
@@ -216,11 +217,16 @@ const loginValidations = {
       .notEmpty()
       .withMessage('Email é obrigatório')
       .isEmail()
-      .withMessage('Digite um email válido'),
+      .withMessage('Digite um email válido')
+      .normalizeEmail()
+      .isLength({ max: 254 })
+      .withMessage('Email muito longo'),
     
     body('password')
       .notEmpty()
       .withMessage('Senha é obrigatória')
+      .isLength({ min: 1, max: 128 })
+      .withMessage('Senha inválida')
   ],
 
   // Login empresa
@@ -229,12 +235,16 @@ const loginValidations = {
       .trim()
       .notEmpty()
       .withMessage('Credencial é obrigatória')
-      .isLength({ min: 3 })
-      .withMessage('Credencial deve ter pelo menos 3 caracteres'),
+      .isLength({ min: 3, max: 50 })
+      .withMessage('Credencial deve ter entre 3 e 50 caracteres')
+      .matches(/^[a-zA-Z0-9@._-]+$/)
+      .withMessage('Credencial contém caracteres inválidos'),
     
     body('chave')
       .notEmpty()
       .withMessage('Chave é obrigatória')
+      .isLength({ min: 1, max: 128 })
+      .withMessage('Chave inválida')
   ]
 };
 
@@ -260,16 +270,11 @@ const validationSets = {
     commonValidations.complemento
   ],
 
-  // Cadastro empresa - primeira página
-  cadastroEmpresa: [
-    empresaValidations.razao_social,
-    empresaValidations.nome_fantasia,
-    empresaValidations.cnpj,
-    commonValidations.telefone,
-    empresaValidations.logradouro,
-    empresaValidations.cidade,
-    empresaValidations.estado_empresa
-  ],
+  // Cadastro empresa - primeira página (importado do arquivo específico)
+  cadastroEmpresa: empresaValidationSets.cadastroEmpresaEtapa1,
+
+  // Cadastro empresa - segunda página (representante)
+  cadastroEmpresaRepresentante: empresaValidationSets.cadastroEmpresaRepresentante,
 
   // Login jovem
   loginJovem: loginValidations.loginJovem,

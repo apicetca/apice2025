@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Apice - Vagas</title>
   <link rel="stylesheet" href="/css/vagas.css">
+  <link rel="stylesheet" href="/css/home-jovem.css">
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -24,66 +25,109 @@
             
             <p style="font-family: 'Poppins', sans-serif; font-size: 14px; color: #333; margin: 0 0 15px 0;">Pesquise e encontre sua vaga ideal!</p>
             
-            <form style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                <fieldset style="position: relative; flex-grow: 1; margin-right: 10px; border: none; padding: 0;">
-                    <input type="text" placeholder="Pesquise e encontre sua vaga ideal!" 
-                        style="width: 100%; height: 42px; padding: 0 40px 0 15px; border: 1px solid #ccc; border-radius: 50px; font-family: 'Poppins', sans-serif; font-size: 14px; color: #333; outline: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-                        style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%);">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </fieldset>
-                <button id="btnMostrarFiltro" style="background: none; border: none; padding: 0; margin: 0; font-size: 20px; color: #160B5D; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; cursor: pointer;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16" stroke="#160B5D" stroke-width="1.5">
-                        <path d="M1.5 3a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
-                    </svg>
+            <div style="display: flex; align-items: center; width: 100%; gap: 8px;">
+              <form class="search-form" action="/buscar" method="GET">
+                <input type="search" 
+                       name="q" 
+                       placeholder="Buscar novas vagas" 
+                       class="search-input"
+                       aria-label="Buscar vagas">
+                <button type="submit" class="search-btn" aria-label="Buscar">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                  </svg>
                 </button>
-            </form>
+              </form>
+              
+              <button id="btnMostrarFiltro" style="background: none; border: none; padding: 0; margin: 0; font-size: 20px; color: #160B5D; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; cursor: pointer; border-radius: 50%; transition: all 0.3s ease;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 16 16" stroke="#160B5D" stroke-width="1.5">
+                  <path d="M1.5 3a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+              </button>
+            </div>
         </article>
     </section>
 
     <section class="filter-wrapper">
+        <div class="filter-overlay" id="filterOverlay"></div>
         <aside class="filter-box" id="filterBox">
-  <nav class="filter-header">
-    <span class="clear-filters" id="limparFiltros">
-      <img src="/img/filtro2.png">
-      Limpar Filtros
-    </span>
-    <button type="button" class="close-btn">&times;</button>
-  </nav>
+          <nav class="filter-header">
+            <button type="button" class="close-btn">&times;</button>
+          </nav>
 
-  <fieldset class="filter-local">
-    <input type="text" placeholder="Locais">
-  </fieldset>
+          <form class="filter-form">
+            <!-- Local -->
+            <fieldset class="filter-group">
+              <input type="text" class="filter-input" placeholder="Local...">
+            </fieldset>
 
-  <fieldset class="filter-group">
-    <legend class="filter-title">Tipos de vaga</legend>
-    <nav class="filter-options">
-      <input type="radio" id="presencial" name="tipo-presencial" value="presencial" />
-      <label for="presencial">Presencial</label>
-      <input type="radio" id="hibrido" name="tipo-hibrido" value="hibrido" />
-      <label for="hibrido">Híbrido</label>
-      <input type="radio" id="remoto" name="tipo-remoto" value="remoto" />
-      <label for="remoto">Remoto</label>
-    </nav>
+            <!-- Formato de trabalho -->
+            <fieldset class="filter-group">
+              <legend class="filter-legend">Formato de trabalho</legend>
+              <nav class="format-options">
+                <label class="format-option">
+                  <input type="radio" name="formato" value="presencial">
+                  <span class="format-label">Presencial</span>
+                </label>
+                <label class="format-option">
+                  <input type="radio" name="formato" value="hibrido">
+                  <span class="format-label">Híbrido</span>
+                </label>
+                <label class="format-option">
+                  <input type="radio" name="formato" value="remoto">
+                  <span class="format-label">Remoto</span>
+                </label>
+              </nav>
+            </fieldset>
 
-    <br>
+            <!-- Área -->
+            <fieldset class="filter-group">
+              <legend class="filter-legend">Área</legend>
+              <select class="filter-select">
+                <option value="">Selecione</option>
+                <option value="tecnologia">Tecnologia</option>
+                <option value="vendas">Vendas</option>
+                <option value="marketing">Marketing</option>
+                <option value="rh">Recursos Humanos</option>
+                <option value="financeiro">Financeiro</option>
+              </select>
+            </fieldset>
 
-    <legend class="filter-title">Tipos de vagas</legend>
-    <nav class="checkbox-options">
-      <input type="checkbox" id="jovem-aprendiz" name="jovem-aprendiz" value="jovem-aprendiz" />
-      <label for="jovem-aprendiz">Jovem Aprendiz</label>
+            <!-- Faixa salarial -->
+            <fieldset class="filter-group">
+              <legend class="filter-legend">Faixa salarial</legend>
+              <select class="filter-select">
+                <option value="">Selecione</option>
+                <option value="ate-1000">Até R$ 1.000</option>
+                <option value="1000-2000">R$ 1.000 - R$ 2.000</option>
+                <option value="2000-3000">R$ 2.000 - R$ 3.000</option>
+                <option value="3000-5000">R$ 3.000 - R$ 5.000</option>
+                <option value="acima-5000">Acima de R$ 5.000</option>
+              </select>
+            </fieldset>
 
-      <input type="checkbox" id="estagio" name="estagio" value="estagio" />
-      <label for="estagio">Estágio</label>
+            <!-- Contrato -->
+            <fieldset class="filter-group">
+              <legend class="filter-legend">Contrato</legend>
+              <select class="filter-select">
+                <option value="">Selecione</option>
+                <option value="estagio">Estágio</option>
+                <option value="jovem-aprendiz">Jovem Aprendiz</option>
+                <option value="trainee">Trainee</option>
+                <option value="clt">CLT</option>
+                <option value="pj">PJ</option>
+              </select>
+            </fieldset>
 
-      <input type="checkbox" id="trainee" name="trainee" value="trainee" />
-      <label for="trainee">Trainee</label>
-    </nav>
-
-  </fieldset>
+            <!-- Botões -->
+            <nav class="filter-actions">
+              <button type="submit" class="btn-apply">Aplicar filtros</button>
+              <button type="button" class="btn-clear" id="limparFiltros">Limpar</button>
+            </nav>
+          </form>
         </aside>
+    </section>
 
 <section class="jobs-container">
   <% if (vagas && Object.keys(vagas).length) { %>
@@ -96,6 +140,23 @@
 </section>
   </section>
     </main>
+    
+    <script>
+      // Adicionar interatividade para busca
+      document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.querySelector('.search-input');
+        const searchForm = document.querySelector('.search-form');
+        
+        if (searchForm && searchInput) {
+          searchForm.addEventListener('submit', function(e) {
+            if (searchInput.value.trim() === '') {
+              e.preventDefault();
+              searchInput.focus();
+            }
+          });
+        }
+      });
+    </script>
     <script src="/js/script.js"></script>
     <script src="/js/filtros.js"></script>
     

@@ -6,37 +6,6 @@
   <title>Cadastro</title>
   <link rel="stylesheet" href="/css/cadastro-comum.css" />
   <link rel="stylesheet" href="/css/validation.css" />
-<style>
-    .field-error {
-        color: #c62828;
-        font-size: 12px;
-        margin-top: 6px;
-        display: block;
-    }
-
-    input.invalid, select.invalid {
-        border-color: #c62828 !important;
-        box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.06);
-    }
-
-    ul.error-list {
-        list-style: none;
-        padding: 8px 12px;
-        background: #fff0f0;
-        border: 1px solid #ffd0d0;
-        border-radius: 8px;
-        color: #c62828;
-        margin-bottom: 16px;
-    }
-
-    ul.error-list li {
-        margin: 4px 0;
-    }
-    
-    .input-error {
-        border-color: #c62828 !important;
-    }
-</style>
 </head>
 
 <body>
@@ -49,12 +18,6 @@
     <h1 class="cadastro" style="display: block !important; visibility: visible !important; color: #160B5D !important; font-size: 34px !important; text-align: center !important; margin: 20px 0 !important; font-weight: 600 !important; font-family: 'Poppins', sans-serif !important;">Cadastro</h1>
 
     <form id="empresaForm2" class="cad-form" action="/cadastro-empresa2" method="POST" novalidate>
-      <ol class="form-steps" aria-hidden="true">
-        <li><span class="step active">1</span><span class="step-label">Empresa</span></li>
-        <li><span class="step active">2</span><span class="step-label">Representante<br/>responsável</span></li>
-        <li><span class="step">3</span><span class="step-label">Eixo de<br/>atuação</span></li>
-      </ol>
-
       <section class="form-section">
         <p>Digite os dados da sua empresa para se cadastrar</p>
 
@@ -91,7 +54,8 @@
       </form>
 
       <nav class="actions-section">
-        <button type="submit" form="empresaForm2" class="btn-primary">Confirmar</button>
+        <button type="button" class="btn-secondary" onclick="window.location.href='/cadastro-empresa'">Voltar</button>
+        <button type="button" class="btn-primary" onclick="window.location.href='/'">Confirmar</button>
       </nav>
   </main>
 
@@ -107,8 +71,8 @@
     function digits(value) {
       return (value || '').replace(/\D/g, '');
     }
-    
-    // Remove formatação do telefone antes do envio
+
+
     const form = document.getElementById('empresaForm2');
     if (form) {
       form.addEventListener('submit', function (e) {
