@@ -413,51 +413,259 @@ main {
 }
 
 .filter-box {
-  display: none !important;
-  background-color: var(--card);
-  padding: 20px;
-  border-radius: 16px;
-  margin: 0 20px 20px 20px;
-  box-shadow: var(--shadow-md);
-  max-width: 100%;
-  z-index: 100;
-}
-
-/* Estado visível da caixa de filtro */
-.filter-box.visivel {
-  display: block !important; /* Forçando display block */
-}
-
-.filter-local {
-  border: none;
-  outline: none;
-}
-
-.filter-local input[type="text"] {
-  border-radius: 20px;
-  border: 2px solid rgba(22, 11, 93, 0.1);
-  padding: 18px 20px;
-  background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
-  font-size: 1rem;
-  outline: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 18px;
-  color: #333;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.filter-local input[type="text"]:focus {
-  border: 2px solid rgba(255, 197, 45, 0.6);
+  position: fixed;
+  bottom: -100vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  max-width: 320px;
+  height: auto;
+  max-height: 75vh;
   background: #ffffff;
-  box-shadow: 0 4px 15px rgba(255, 197, 45, 0.2);
-  transform: translateY(-2px);
+  padding: 16px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  transition: bottom 0.3s ease;
+  z-index: 1001;
+  overflow-y: auto;
+  border-top: 2px solid var(--secondary, #FFC52D);
+  border-radius: 12px 12px 0 0;
+  font-family: 'Poppins', sans-serif;
 }
 
-.filter-local input[type="text"]:hover {
-  border: 2px solid rgba(22, 11, 93, 0.2);
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+.filter-box.show {
+  bottom: 0;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.filter-header::before {
+  content: '';
+  width: 32px;
+  height: 3px;
+  background: #ddd;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.close-btn {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #666;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: all 0.2s ease;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
+
+.close-btn:hover {
+  background: #eee;
+  border-color: #ccc;
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filter-group {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 14px;
+  margin: 0;
+  background: #fafafa;
+  transition: border-color 0.2s ease;
+}
+
+.filter-group:hover {
+  border-color: #ddd;
+}
+
+.filter-group:first-child {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.filter-group:first-child:hover {
+  border-color: transparent;
+}
+
+.filter-legend {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: block;
+  font-family: 'Poppins', sans-serif;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 13px;
+  background: #ffffff;
+  box-sizing: border-box;
+  color: #333;
+  transition: border-color 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: var(--secondary, #FFC52D);
+}
+
+.filter-input::placeholder {
+  color: #999;
+  font-weight: 300;
+}
+
+.format-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.format-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 8px 14px;
+  transition: all 0.2s ease;
+  flex: 1;
+  min-width: 70px;
+  justify-content: center;
+  position: relative;
+}
+
+.format-option:hover {
+  border-color: var(--secondary, #FFC52D);
+  background: #fafafa;
+}
+
+.format-option input[type="radio"] {
+  display: none;
+}
+
+.format-option input[type="radio"]:checked + .format-label {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Fallback para navegadores que não suportam :has() */
+.format-option.selected {
+  background: var(--secondary, #FFC52D);
+  border-color: var(--secondary, #FFC52D);
+  color: #333;
+}
+
+/* Para navegadores modernos */
+.format-option:has(input[type="radio"]:checked) {
+  background: var(--secondary, #FFC52D);
+  border-color: var(--secondary, #FFC52D);
+  color: #333;
+}
+
+.format-label {
+  color: #333;
+  font-size: 12px;
+  margin: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  font-family: 'Poppins', sans-serif;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  font-size: 13px;
+  background: #ffffff;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #333;
+  font-weight: 400;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  transition: border-color 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--secondary, #FFC52D);
+}
+
+.filter-select:hover {
+  border-color: #ccc;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.btn-apply {
+  background: var(--primary, #160B5D);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  flex: 1;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-apply:hover {
+  background: #0f0941;
+}
+
+.btn-clear {
+  background: #ffffff;
+  color: #666;
+  border: 1px solid #ddd;
+  padding: 11px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-clear:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
 }
 
 .card {
@@ -540,6 +748,24 @@ main {
   margin-right: auto;
   display: flex;
   justify-content: center;
+}
+
+.filter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.filter-overlay.show {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Container de listagem de vagas - UX Otimizado */
@@ -635,22 +861,71 @@ main {
 }
 
 .badge-item {
-  display: flex;
+  display: flex !important;
   align-items: center;
   font-size: 0.75rem;
-  color: #000000;
+  color: #666;
   gap: 6px;
   font-weight: 400;
   justify-content: flex-start;
+  margin-bottom: 4px;
 }
 
+.badge-item svg {
+  flex-shrink: 0;
+}
+
+/* ========== ÍCONES SVG DOS JOB-CARDS ========== */
 .company-icon, .tech-icon, .type-icon, .location-icon {
-  color: #000000;
+  color: #666;
+  stroke: #666;
+  fill: none;
   min-width: 12px;
+  width: 12px;
   height: 12px;
   flex-shrink: 0;
-  margin-right: 0;
-  opacity: 0.8;
+  margin-right: 4px;
+  opacity: 1;
+  display: inline-block !important;
+  visibility: visible !important;
+}
+
+/* Garantir que os SVGs sejam visíveis */
+svg.company-icon, svg.tech-icon, svg.type-icon, svg.location-icon {
+  stroke: #666 !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Regras mais específicas para job-cards */
+.job-card .company-icon,
+.job-card .tech-icon, 
+.job-card .type-icon,
+.job-card .location-icon {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+/* Forçar exibição em todos os breakpoints */
+@media (min-width: 1px) {
+  .badge-item,
+  .job-location {
+    display: flex !important;
+  }
+  
+  .badge-item svg,
+  .job-location svg {
+    display: inline-block !important;
+    visibility: visible !important;
+  }
 }
 
 /* Título da vaga */
@@ -664,13 +939,18 @@ main {
 }
 
 .job-location {
-  display: flex;
+  display: flex !important;
   align-items: center;
   color: #666;
   font-weight: 400;
   margin: 0 0 8px 0;
   font-size: 0.75rem;
-  gap: 4px;
+  gap: 6px;
+  font-style: normal;
+}
+
+.job-location svg {
+  flex-shrink: 0;
 }
 
 /* Grupo de badges */
@@ -1272,5 +1552,200 @@ html body {
   .menu-header {
     min-height: 56px !important;
     padding: 16px !important;
+  }
+}
+
+/* ========== BARRA DE PESQUISA IDÊNTICA À HOME-JOVEM ========== */
+
+/* Aplicar os mesmos estilos da home-jovem para a vagas-header */
+.vagas-header .search-form {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.vagas-header .search-input {
+  width: 100%;
+  padding: 16px 24px 16px 20px;
+  border: 2px solid var(--border-light, #e8ecf4);
+  border-radius: var(--radius, 16px);
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--bg-card, #ffffff);
+  color: var(--text-primary, #2c3e50);
+  transition: var(--transition, all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+  box-shadow: var(--shadow-soft, 0 4px 20px rgba(22, 11, 93, 0.08));
+}
+
+.vagas-header .search-input:focus {
+  outline: none;
+  border-color: var(--primary, #160B5D);
+  box-shadow: 0 0 0 4px rgba(22, 11, 93, 0.1);
+}
+
+.vagas-header .search-input::placeholder {
+  color: var(--text-light, #95a5a6);
+}
+
+.vagas-header .search-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--secondary, #FFC52D);
+  border: none;
+  border-radius: var(--radius-small, 12px);
+  padding: 12px;
+  color: var(--primary, #160B5D);
+  cursor: pointer;
+  transition: var(--transition, all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vagas-header .search-btn:hover {
+  background: var(--accent, #f9c21b);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* Botão de filtro integrado */
+#btnMostrarFiltro {
+  background: rgba(22, 11, 93, 0.1) !important;
+  border: 2px solid var(--primary, #160B5D) !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(22, 11, 93, 0.1) !important;
+}
+
+#btnMostrarFiltro:hover {
+  background: var(--primary, #160B5D) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 4px 12px rgba(22, 11, 93, 0.2) !important;
+}
+
+#btnMostrarFiltro:hover svg {
+  stroke: #fff !important;
+}
+
+/* ========== LAYOUT RESPONSIVO - BOTÃO SEMPRE AO LADO ========== */
+
+/* Layout base para todas as telas */
+.vagas-header div[style*="display: flex"] {
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-direction: row !important;
+  gap: 8px !important;
+}
+
+.vagas-header .search-form {
+  flex: 1;
+  margin: 0;
+}
+
+#btnMostrarFiltro {
+  flex-shrink: 0 !important;
+}
+
+/* ========== TELAS GRANDES (≥1200px) ========== */
+@media (min-width: 1200px) {
+  .vagas-header .search-form {
+    max-width: 600px;
+  }
+  
+  .vagas-header div[style*="display: flex"] {
+    gap: 12px !important;
+  }
+}
+
+/* ========== TELAS MÉDIAS (768px-1199px) ========== */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .vagas-header .search-form {
+    max-width: 500px;
+  }
+  
+  .vagas-header div[style*="display: flex"] {
+    gap: 10px !important;
+  }
+}
+
+/* ========== TELAS PEQUENAS (≤767px) ========== */
+@media (max-width: 767px) {
+  .vagas-header .search-form {
+    max-width: none;
+  }
+  
+  .vagas-header .search-input {
+    padding: 14px 20px 14px 16px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .vagas-header .search-btn {
+    padding: 10px !important;
+  }
+  
+  #btnMostrarFiltro {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  /* Mobile filter styles */
+  .filter-box {
+    width: 90%;
+    max-width: none;
+    bottom: -100vh;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 70vh;
+    padding: 14px;
+  }
+  
+  .format-options {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .format-option {
+    flex: none;
+    min-width: auto;
+    padding: 10px 16px;
+  }
+  
+  .filter-actions {
+    position: sticky;
+    bottom: 0;
+    background: #ffffff;
+    padding: 16px 0;
+    margin: 16px -14px -14px -14px;
+    padding-left: 14px;
+    padding-right: 14px;
+    border-top: 1px solid #e5e5e5;
+  }
+}
+
+/* ========== TELAS MUITO PEQUENAS (≤480px) ========== */
+@media (max-width: 480px) {
+  .filter-box {
+    width: 95%;
+    max-height: 65vh;
+    padding: 12px;
+  }
+  
+  .filter-header {
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+  }
+  
+  .filter-form {
+    gap: 14px;
+  }
+  
+  .filter-group {
+    padding: 12px;
+  }
+  
+  .btn-apply, .btn-clear {
+    padding: 10px 16px;
+    font-size: 13px;
   }
 }

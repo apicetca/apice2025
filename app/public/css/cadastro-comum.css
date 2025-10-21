@@ -351,41 +351,6 @@ html, body {
   width: 100%;
 }
 
-/* Job card elements - mantém comportamento visual das divs */
-.job-card, article.job-card {
-  display: block;
-}
-
-.job-card-info, section.job-card-info {
-  display: block;
-}
-
-.job-location, address.job-location {
-  display: flex;
-  align-items: center;
-  font-style: normal;
-}
-
-.badge-list, ul.badge-list {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.badge-item, li.badge-item {
-  display: flex;
-  align-items: center;
-}
-
-.salary-section, aside.salary-section {
-  display: block;
-}
-
-.job-actions, nav.job-actions {
-  display: flex;
-}
-
 /* Divider */
 .divider {
   display: flex;

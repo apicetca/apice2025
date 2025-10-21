@@ -43,6 +43,19 @@ router.get('/empresa', function (req, res) {
     res.render('pages/empresa');
 });
 
+router.get('/home-jovem', function (req, res) {
+    // Enviar algumas vagas visualizadas como exemplo
+    const vagasVisualizadas = Object.values(infoVagas).slice(0, 3); // Pega as primeiras 3 vagas
+    
+    // Garantir que cada vaga tenha o ID correto
+    vagasVisualizadas.forEach(vaga => {
+        if (!vaga.id && vaga.numero) {
+            vaga.id = vaga.numero;
+        }
+    });
+    
+    res.render('pages/home-jovem', { vagas: vagasVisualizadas, infoVagas });
+});
 
 const vagas = require('../data/vagas');
 const infoVagas = require('../data/vagaspt2-completo');
@@ -124,10 +137,13 @@ router.post(
         if (errorRender !== null) return errorRender;
 
         // Se chegou aqui, validação passou - implementar lógica de autenticação
-        console.log('Login validado com sucesso:', req.body.email);
+        console.log('Login do jovem validado com sucesso:', req.body.email);
         
-        // TODO: Implementar autenticação real
-        res.redirect('/');
+        // TODO: Implementar autenticação real (verificar credenciais no banco)
+        // TODO: Criar sessão do usuário
+        
+        // Redirecionar para o portal do jovem
+        res.redirect('/home-jovem');
     }
 );
 
@@ -147,9 +163,12 @@ router.post(
         if (errorRender !== null) return errorRender;
 
         // Se chegou aqui, validação passou - implementar lógica de autenticação
-        console.log('Login empresa validado com sucesso:', req.body.credencial);
+        console.log('Login da empresa validado com sucesso:', req.body.credencial);
         
-        // TODO: Implementar autenticação real
+        // TODO: Implementar autenticação real (verificar credenciais no banco)
+        // TODO: Criar sessão da empresa
+        
+        // Redirecionar para o portal da empresa
         res.redirect('/empresa');
     }
 );
@@ -347,29 +366,27 @@ router.post(
 // POST: validar dados do representante da empresa (segunda etapa)
 router.post(
     '/cadastro-empresa2',
-    // validações do formulário do representante
-    body('nome').trim().notEmpty().withMessage('Nome do representante é obrigatório'),
-    body('cargo').trim().notEmpty().withMessage('Cargo é obrigatório'),
-    body('email').trim().isEmail().withMessage('Email institucional inválido'),
-    body('telefone').trim().matches(/^\d{10,11}$/).withMessage('Telefone comercial inválido. Informe 10 ou 11 números'),
-
+    validationSets.cadastroEmpresaRepresentante,
+    handleValidationErrors,
     (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            // retornar a página com erros e valores preenchidos
-            return res.render('pages/cadastro-empresa2', {
-                errors: errors.array(),
-                form: req.body,
-            });
-        }
+        // Verificar se há erros de validação e renderizar com erros
+        const errorRender = renderWithErrors(req, res, 'pages/cadastro-empresa2');
+        
+        if (errorRender !== null) return errorRender;
 
         // Se passou na validação, armazenar dados e seguir para próxima etapa
         if (!req.session) {
             req.session = {};
         }
         req.session.representanteData = req.body;
+        console.log('Dados do representante validados:', req.body);
+        
         return res.redirect('/teste3');
     }
 );
+
+router.get('/home-empresa', function (req, res) {
+    res.render('pages/home-empresa');
+});
 
 module.exports = router;
