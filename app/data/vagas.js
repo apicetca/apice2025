@@ -54,3 +54,4 @@ const vagas = {
 };
 
 module.exports = vagas;
+

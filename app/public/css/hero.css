@@ -2,57 +2,57 @@
     position: relative;
     width: 100%;
     height: auto;
-    min-height: 130vh; /* Aumentado para dar mais espaço ao container azul */
+    min-height: 120vh; 
     overflow: visible;
     background-color: #160B5D;
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
     z-index: 1;
-    padding-bottom: 0;
+    padding-bottom: 40px; 
 }
 
 .hero-img {
     width: 100%;
-    height: 50%; /* Reduzido para a imagem ocupar menos espaço */
+    height: 75%; 
     object-fit: cover;
-    object-position: center 30%; /* Ajuste para focar melhor nas pessoas */
+    object-position: center 30%; 
     position: absolute;
     top: 0;
 }
 
-/* Ajuste progressivo da imagem para telas pequenas */
+
 @media (max-width: 640px) {
   .hero-img {
-    height: 60%;
+    height: 68%; 
     object-position: center 35%;
   }
 }
 
 @media (max-width: 540px) {
   .hero-img {
-    height: 55%;
+    height: 65%;
     object-position: center 32%;
   }
 }
 
 @media (max-width: 480px) {
   .hero-img {
-    height: 50%;
+    height: 63%;
     object-position: center 30%;
   }
 }
 
 @media (max-width: 420px) {
   .hero-img {
-    height: 45%;
+    height: 61%;
     object-position: center 28%;
   }
 }
 
 @media (max-width: 375px) {
   .hero-img {
-    height: 40%;
+    height: 75%; 
     object-position: center 25%;
   }
 }
@@ -64,11 +64,12 @@
   background: linear-gradient(
     to top,
     rgba(22, 11, 93, 1) 0%,
-    rgba(22, 11, 93, 1) 50%, /* Mantém o azul sólido na parte inferior */
-    rgba(22, 11, 93, 0.9) 55%,
-    rgba(22, 11, 93, 0.5) 60%,
-    rgba(22, 11, 93, 0.2) 70%,
-    rgba(22, 11, 93, 0) 80%
+    rgba(22, 11, 93, 1) 22%, 
+    rgba(22, 11, 93, 0.9) 32%,
+    rgba(22, 11, 93, 0.7) 47%,
+    rgba(22, 11, 93, 0.4) 62%,
+    rgba(22, 11, 93, 0.1) 72%,
+    rgba(22, 11, 93, 0) 82%
   );
   display: flex;
   flex-direction: column;
@@ -77,35 +78,83 @@
   left: 0;
 }
 
+
+@media (max-width: 640px) {
+  .overlay {
+    background: linear-gradient(
+      to top,
+      rgba(22, 11, 93, 1) 0%,
+      rgba(22, 11, 93, 1) 25%,
+      rgba(22, 11, 93, 0.9) 35%,
+      rgba(22, 11, 93, 0.7) 49%,
+      rgba(22, 11, 93, 0.4) 64%,
+      rgba(22, 11, 93, 0.1) 74%,
+      rgba(22, 11, 93, 0) 84%
+    );
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    background: linear-gradient(
+      to top,
+      rgba(22, 11, 93, 1) 0%,
+      rgba(22, 11, 93, 1) 27%,
+      rgba(22, 11, 93, 0.9) 37%,
+      rgba(22, 11, 93, 0.7) 51%,
+      rgba(22, 11, 93, 0.4) 66%,
+      rgba(22, 11, 93, 0.1) 76%,
+      rgba(22, 11, 93, 0) 86%
+    );
+  }
+}
+
+@media (max-width: 375px) {
+  .overlay {
+    background: linear-gradient(
+      to top,
+      rgba(22, 11, 93, 1) 0%,
+      rgba(22, 11, 93, 1) 15%, 
+      rgba(22, 11, 93, 0.9) 25%,
+      rgba(22, 11, 93, 0.7) 40%,
+      rgba(22, 11, 93, 0.4) 55%,
+      rgba(22, 11, 93, 0.1) 70%,
+      rgba(22, 11, 93, 0) 85%
+    );
+  }
+}
+
 .title-container {
   width: 100%;
   max-width: 800px;
   padding: 0 5%;
   position: absolute;
-  top: 42%; /* Posicionado no canto inferior esquerdo da imagem */
+  top: 48%; 
+  left: 0;
   z-index: 5;
 }
 
 .content {
   width: 100%;
-  padding: 0 5% 0 5%; /* Padding lateral */
-  text-align: left; /* Alinha o texto à esquerda */
-  max-width: 800px; /* Limita a largura máxima */
+  padding: 0 5% 0 5%; 
+  text-align: left; 
+  max-width: 800px; 
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alinha à esquerda */
+  align-items: flex-start; 
   position: absolute;
-  bottom: 160px; /* Posicionado logo acima dos botões */
-  z-index: 15; /* Mantido acima da seção amarela */
+  top: 60%; 
+  bottom: auto;
+  z-index: 15; 
 }
 
 .h1 {
-  font-size: 1.8rem; /* Tamanho para desktop */
+  font-size: 1.8rem; 
   font-weight: 600;
   margin-bottom: 10px;
   text-align: left;
   color: #FFC52D;
-  max-width: 250px;
+  max-width: 350px;
   line-height: 1.2;
   position: relative;
   z-index: 10;
@@ -123,41 +172,51 @@
 .hero-description {
   color: white;
   font-size: 0.95rem;
-  max-width: 450px; /* Aumentado para ter mais espaço */
+  max-width: 450px; 
   text-align: left;
   line-height: 1.4;
   position: relative;
   z-index: 10;
   align-self: flex-start;
-  margin-bottom: 20px; /* Espaço para os botões */
+  margin-bottom: 20px; 
 }
 
-/* Media queries para ajustes responsivos */
+
 @media (max-width: 767px) {
   .hero {
-    min-height: 130vh;
-    padding-bottom: 0;
+    min-height: 120vh; 
+    padding-bottom: 30px;
+  }
+  
+  .hero-img {
+    height: 45%; 
   }
   
   .title-container {
-    top: 30%;
+    top: 48%; 
+    bottom: auto;
+    left: 0;
   }
   
   .content {
-    bottom: 165px;
+    top: 60%; 
+    bottom: auto;
+    position: absolute;
   }
   
   .hero-description {
-    margin-bottom: 0;
+    margin-bottom: 18px;
   }
   
   .btn-container-hero {
-    bottom: 35px;
+    top: 70%; 
+    bottom: auto;
+    position: absolute;
   }
   
   .h1 {
-    font-size: 1.5rem; /* Tamanho médio para mobile */
-    max-width: 210px;
+    font-size: 0.95rem;
+    max-width: 200px;
     line-height: 1.2;
   }
   
@@ -170,9 +229,10 @@
   }
   
   .hero-description {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     max-width: 100%;
     margin-bottom: 15px;
+    line-height: 1.5;
   }
   
   .btn-container-hero {
@@ -182,132 +242,203 @@
   .btnhome {
     width: 100%;
     max-width: 280px;
+    padding: 11px 18px;
+    font-size: 0.88rem;
   }
 }
 
-/* Ajustes para telas muito pequenas (375px e menores) */
-@media (max-width: 420px) {
-  .h1 {
-    font-size: 1.3rem;
-    max-width: 180px;
-    line-height: 1.2;
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: 125vh;
+  }
+  
+  .hero-img {
+    height: 32%;
   }
   
   .title-container {
-    top: 28%;
+    top: 10%;
+    bottom: auto;
+    left: 0;
   }
   
   .content {
-    bottom: 160px;
+    top: 38%;
+    bottom: auto;
+    position: absolute;
+  }
+  
+  .btn-container-hero {
+    bottom: 28px;
+    top: auto;
+    position: absolute;
+  }
+  
+  .h1 {
+    font-size: 0.9rem;
+    max-width: 170px;
   }
   
   .hero-description {
     font-size: 0.78rem;
   }
   
+  .btnhome {
+    font-size: 0.86rem;
+    padding: 10px 17px;
+  }
+}
+
+
+@media (max-width: 420px) {
+  .hero {
+    min-height: 123vh;
+  }
+  
+  .hero-img {
+    height: 30%;
+  }
+  
+  .h1 {
+    font-size: 0.88rem;
+    max-width: 165px;
+    line-height: 1.2;
+  }
+  
+  .title-container {
+    top: 9%;
+    bottom: auto;
+    left: 0;
+  }
+  
+  .content {
+    top: 35%;
+    bottom: auto;
+    position: absolute;
+  }
+  
+  .hero-description {
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+  
   .btn-container-hero {
-    bottom: 30px;
+    bottom: 26px;
+    top: auto;
+    bottom: auto;
+    position: absolute;
   }
   
   .btnhome {
-    max-width: 260px;
-    font-size: 0.9rem;
+    max-width: 280px;
+    padding: 10px 17px;
+    font-size: 0.84rem;
   }
 }
 
 @media (max-width: 375px) {
-  .h1 {
-    font-size: 1.2rem;
-    max-width: 170px;
-    line-height: 1.15;
-  }
-  
-  .title-container {
-    top: 26%;
-  }
-  
-  .content {
-    bottom: 155px;
-  }
-  
-  .hero-description {
-    font-size: 0.75rem;
-    line-height: 1.3;
-  }
-}
-
-/* Ajustes específicos para telas muito pequenas */
-@media (max-width: 640px) {
   .hero {
-    min-height: 110vh;
+    min-height: 130vh; 
   }
   
-  .title-container {
-    top: 31%;
+  .btn-container-hero {
+    top: 78%; 
+    bottom: auto;
+    position: absolute;
   }
   
-  .content {
-    bottom: 175px;
+  .btnhome {
+    padding: 10px 16px;
+    font-size: 0.82rem;
   }
 }
 
 @media (min-width: 768px) {
   .title-container .h1 {
-    font-size: 2rem;
-    max-width: 280px;
+    font-size: 2.2rem;
+    max-width: 350px;
   }
   
   .content p {
     font-size: 1rem;
     max-width: 450px;
   }
+  
+  .title-container {
+    top: 15%;
+    bottom: auto;
+    left: 0;
+  }
+  
+  .content {
+    top: 45%;
+  }
+  
+  .btn-container-hero {
+    bottom: 35px;
+  }
 }
 
 @media (min-width: 1200px) {
   .title-container .h1 {
-    font-size: 2.2rem;
-    max-width: 300px;
+    font-size: 1.8rem;
+    max-width: 280px;
   }
   
   .content .hero-description {
     font-size: 1.05rem;
     max-width: 500px;
   }
+  
+  .title-container {
+    bottom: 10%;
+    left: 5%;
+  }
+  
+  .content {
+    top: 45%;
+  }
+  
+  .btn-container-hero {
+    bottom: 120px;
+  }
 }
 
-/* Estilo para os botões no hero */
+
 .btn-container-hero {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Reduzido o espaço entre os botões */
+  gap: 15px; 
   width: 100%;
-  padding: 0 5%; /* Mantido padding lateral para alinhar com o conteúdo */
-  max-width: 1000px; /* Mantido o tamanho máximo do conteúdo */
-  margin: 0 auto; /* Mantido centralizado horizontalmente */
-  position: absolute; /* Mantido posicionamento absoluto */
-  bottom: 50px; /* Posicionado com mais espaço do fundo */
+  padding: 0 5%; 
+  max-width: 1000px; 
+  margin: 0 auto; 
+  position: absolute; 
+  top: 72%; 
   left: 0;
   right: 0;
   z-index: 15;
-  align-items: flex-start; /* Alinha os botões à esquerda */
+  align-items: flex-start; 
 }
 
-/* Estilo específico para os botões para garantir que fiquem visíveis */
+
 .btnhome {
   position: relative;
   z-index: 30;
   text-align: center;
   justify-content: space-between;
-  min-width: 250px; /* Garante largura mínima consistente */
+  min-width: 250px; 
 }
 
-/* Os estilos da seção de vagas foram movidos para home.css */
+
 
 @media (min-width: 768px) {
   .btn-container-hero {
     flex-direction: row;
-    justify-content: flex-start; /* Alinha os botões à esquerda */
+    justify-content: flex-start; 
     gap: 20px;
+    bottom: 50px; 
   }
   
   .vagas-title {
@@ -319,24 +450,17 @@
     max-width: 500px;
   }
   
-  .h1 {
-    font-size: 1.7rem; /* Tamanho reduzido para telas médias */
-    max-width: 400px;
-  }
-  
   .title-container {
-    bottom: 38%; /* Ajustado para telas maiores */
+    top: 48%;
+    bottom: auto;
+    left: 5%;
   }
   
   .content {
-    top: 60%; /* Ajustado para consistência com a versão mobile */
+    top: 60%;
   }
   
   .hero {
-    min-height: 140vh; /* Aumentado para telas maiores para dar mais espaço para o conteúdo */
-  }
-  
-  .btn-container-hero {
-    margin-bottom: 150px; /* Aumentado para telas maiores */
+    min-height: 120vh;
   }
 }

@@ -132,7 +132,7 @@ body {
   font-size: 0.9rem;
 }
 
-/* Estilo principal dos ícones de login social */
+
 .social-login {
   display: flex;
   flex-direction: row;
@@ -173,7 +173,7 @@ body {
   justify-content: center;
 }
 
-/* Estilo para as abas de perfil */
+
 .profile-selector {
   display: flex;
   justify-content: center;
@@ -212,7 +212,7 @@ body {
   color: #160B5D;
 }
 
-/* Conteúdo das abas */
+
 .profile-content {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -221,7 +221,7 @@ body {
   display: none;
 }
 
-/* Estrutura do formulário */
+
 .form-group input {
   margin-bottom: 0.25rem;
   padding: 0.8rem;
@@ -249,7 +249,7 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Acessibilidade */
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -262,7 +262,7 @@ body {
   border: 0;
 }
 
-/* Social login - definição de botões */
+
 
 .social-login-btn {
   background: none;
@@ -276,7 +276,7 @@ body {
   transform: scale(1.1);
 }
 
-/* Responsividade */
+
 @media (min-width: 600px) {
 
 .login-container {
@@ -297,7 +297,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Responsividade para os inputs */
+
 @media (max-width: 600px) {
   .input-base {
     padding: 0.8rem;

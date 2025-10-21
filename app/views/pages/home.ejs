@@ -20,43 +20,43 @@
 </head>
 <body>
   <%- include('../partials/menu') %>
-  <section class="hero">
-    <img src="/img/homeee.svg" alt="Fundo do site Ápice" class="hero-img">
-    <div class="overlay">
-      <div class="title-container">
+  <header class="hero">
+    <img src="/img/home2.svg" alt="Fundo do site Ápice" class="hero-img">
+    <section class="overlay">
+      <hgroup class="title-container">
         <h1 class="h1">Conectando jovens<br>talentos ao futuro.</h1>
-      </div>
-      <div class="content">
+      </hgroup>
+      <article class="content">
         <p class="hero-description">O Ápice é a plataforma que facilita a entrada de jovens no mercado de trabalho, unindo empresas e candidatos em processos seletivos rápidos e assertivos.</p>
-      </div>
-      <div class="btn-container-hero">
+      </article>
+      <nav class="btn-container-hero">
         <a class="btnhome" href="/vagas">Quero uma vaga <span class="seta"><img src="/img/seta.png"></span></a>
         <a class="btnhome" href="#">Quero contratar <span class="seta"><img src="/img/seta.png"></span></a>
-      </div>
-    </div>
-  </section>
+      </nav>
+    </section>
+  </header>
   
   <main>
-    <div class="vagas-title-band">
+    <header class="vagas-title-band">
       <h2 class="vagas-title">Últimas vagas postadas</h2>
-    </div>
-    <div class="carousel-container">
-    <div class="carousel-track">
-      <!-- Card 1 - ROLTA -->
-      <div class="carousel-slide">
+    </header>
+    <section class="carousel-container">
+    <article class="carousel-track">
+      
+      <section class="carousel-slide">
         <a href="/vagas/rolta" class="card-link">
           <article class="card">
             <img src="/img/rolta.png" alt="Foto do programa ROLTA Jovem Aprendiz" class="card-image" />
-            <section class="card-content">
+            <header class="card-content">
               <h2 id="title" class="card-title">ROLTA</h2>
               <p class="card-subtitle">Programa Jovem Aprendiz - 2025</p>
               <time datetime="2025-10-09">09/10</time> - <time datetime="2025-10-16">16/10</time>
-            </section>
+            </header>
           </article>
         </a>
-      </div>
+      </section>
       
-      <!-- Card 2 - RIMBERIO -->
+      
       <div class="carousel-slide">
         <a href="/vagas/rimberio" class="card-link">
           <article class="card">
@@ -70,48 +70,50 @@
         </a>
       </div>
       
-      <!-- Card 3 - CONTAFOR -->
-      <div class="carousel-slide">
+      
+      <section class="carousel-slide">
         <a href="/vagas/contafor" class="card-link">
           <article class="card">
             <img src="/img/contafor.png" alt="Foto do programa CONTAFOR Estágio Técnico" class="card-image" />
-            <section class="card-content">
+            <header class="card-content">
               <h2 class="card-title">CONTAFOR</h2>
               <p class="card-subtitle">Estágio Técnico - 2025</p>
               <time datetime="2025-09-15">15/09</time> - <time datetime="2025-10-30">30/10</time>
-            </section>
+            </header>
           </article>
         </a>
-      </div>
-    </div>
+      </section>
+    </article>
     
-    <!-- Indicadores do carrossel -->
-    <div class="carousel-indicators">
-      <span class="indicator active" data-index="0"></span>
-      <span class="indicator" data-index="1"></span>
-      <span class="indicator" data-index="2"></span>
-    </div>
-  </div>
+    
+    <nav class="carousel-indicators">
+      <button class="indicator active" data-index="0"></button>
+      <button class="indicator" data-index="1"></button>
+      <button class="indicator" data-index="2"></button>
+    </nav>
+  </section>
   
-  <div class="btn-container-carousel">
+  <nav class="btn-container-carousel">
     <a href="/vagas" class="btnhome btnhome-carousel">
       Ver todas as vagas
     </a>
-    </div>
+    </nav>
       </div>
     </div>
   </div>
   
-  <!-- Seção "Como funciona" -->
-  <div class="como-funciona-section">
-    <h2 class="como-funciona-title">Como funciona</h2>
+  
+  <section class="como-funciona-section">
+    <header class="como-funciona-title">
+      <h2>Como funciona</h2>
+    </header>
     
-    <div class="como-funciona-cards">
-      <!-- Card Para jovens -->
-      <div class="funciona-card">
-        <div class="funciona-icon">
+    <article class="como-funciona-cards">
+      
+      <section class="funciona-card">
+        <figure class="funciona-icon">
           <img src="/img/chapeuzinho.svg" alt="Ícone para jovens" class="icone-funciona">
-        </div>
+        </figure>
         <h3 class="funciona-card-title">Para jovens</h3>
         <ul class="funciona-list">
           <li><img src="/img/crie.seu.perfil.svg" alt="Ícone perfil" class="icon-item">Crie seu perfil</li>
@@ -121,7 +123,7 @@
         <p class="funciona-stats"><h4>+2.000 jovens já conseguiram entrevistas pelo Ápice.</h4></p>
       </div>
       
-      <!-- Card Para empresas -->
+      
       <div class="funciona-card">
         <div class="funciona-icon">
           <img src="/img/predios.svg" alt="Ícone para empresas" class="icone-funciona">
@@ -137,13 +139,13 @@
     </div>
   </div>
   
-  <!-- Seção Principais Clientes -->
+  
   <div class="clientes-section">
     <h2 class="clientes-title">Principais clientes</h2>
     
     <div class="clientes-slider-container">
       <div class="clientes-slider-track">
-        <!-- Logos - Primeiro conjunto -->
+        
         <div class="cliente-slide">
           <img src="/img/coca.cola.svg" alt="Logo Coca-Cola" class="cliente-logo">
         </div>
@@ -169,7 +171,7 @@
           <img src="/img/vivo.svg" alt="Logo Vivo" class="cliente-logo">
         </div>
         
-        <!-- Logos duplicados para efeito de loop infinito -->
+        
         <div class="cliente-slide">
           <img src="/img/coca.cola.svg" alt="Logo Coca-Cola" class="cliente-logo">
         </div>
@@ -198,10 +200,10 @@
     </div>
   </div>
   
-  <!-- Seção de Depoimentos/Avaliações -->
+  
   <div class="avaliacoes-carousel-container">
     <div class="avaliacoes-carousel-track">
-      <!-- Card 1 - Natura -->
+      
       <div class="avaliacoes-carousel-slide">
         <article class="avaliacao-card">
           <div class="avaliacao-texto-container">
@@ -217,7 +219,7 @@
         </article>
       </div>
       
-      <!-- Card 2 - Vazio -->
+      
       <div class="avaliacoes-carousel-slide">
         <article class="avaliacao-card">
           <div class="avaliacao-texto-container">
@@ -233,7 +235,7 @@
         </article>
       </div>
       
-      <!-- Card 3 - Vazio -->
+      
       <div class="avaliacoes-carousel-slide">
         <article class="avaliacao-card">
           <div class="avaliacao-texto-container">
@@ -249,7 +251,7 @@
         </article>
       </div>
       
-      <!-- Card 4 - Vazio -->
+      
       <div class="avaliacoes-carousel-slide">
         <article class="avaliacao-card">
           <div class="avaliacao-texto-container">
@@ -265,7 +267,7 @@
         </article>
       </div>
       
-      <!-- Card 5 - Vazio -->
+      
       <div class="avaliacoes-carousel-slide">
         <article class="avaliacao-card">
           <div class="avaliacao-texto-container">
@@ -283,7 +285,7 @@
       </div>
     </div>
     
-    <!-- Indicadores -->
+    
     <div class="avaliacoes-carousel-indicators">
       <span class="avaliacoes-indicator active" data-slide="0"></span>
       <span class="avaliacoes-indicator" data-slide="1"></span>
@@ -293,10 +295,11 @@
     </div>
   </div>
   
-  <!-- Removidos espaços desnecessários -->
+  
 
       </main>
   <script src="/js/script.js"></script>
   <%- include('../partials/footer') %>
 </body>
 </html>
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações do Usuário - Ápice</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/menu.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/config-usuario.css">
+
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100900;1,100900&family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+ </style>
+</head>
+<body>
+  <%- include('../partials/menu') %>
+  
+  <main class="config-container">
+    <header class="config-header">
+      <button class="back-button">
+        <img src="/img/seta2.png" alt="Voltar" class="back-icon">
+      </button>
+      <h2 class="config-main-title">Configurações da Empresa</h2>
+    </header>
+
+    <section class="config-content">
+      <article class="config-card">
+        <figure class="card-icon">
+          <img src="/img/user.svg" alt="Perfil" class="icon">
+        </figure>
+        <header class="card-content">
+          <h3 class="card-title">Alterar dados do perfil</h3>
+          <p class="card-description">Altere seu nome de usuário, como informações pessoais.</p>
+        </header>
+        <section class="card-arrow"></section>
+      </article>
+
+      <article class="config-card">
+        <figure class="card-icon">
+          <img src="/img/pdf.svg" alt="Conta" class="icon">
+        </figure>
+        <header class="card-content">
+          <h3 class="card-title">Alterar dados da sua conta</h3>
+          <p class="card-description">Crie uma nova que não pode ser mais usado para a Ápice</p>
+        </header>
+        <section class="card-arrow"></section>
+      </article>
+
+      <article class="config-card">
+        <figure class="card-icon">
+          <img src="/img/privacidade.svg" alt="Privacidade" class="icon">
+        </figure>
+        <header class="card-content">
+          <h3 class="card-title">Privacidade e segurança</h3>
+          <p class="card-description">Gerencie suas preferências de privacidade de comunicação</p>
+        </header>
+        <section class="card-arrow"></section>
+      </article>
+
+      <article class="config-card">
+        <figure class="card-icon">
+          <img src="/img/excluir.svg" alt="Excluir" class="icon">
+        </figure>
+        <header class="card-content">
+          <h3 class="card-title">Excluir conta</h3>
+          <p class="card-description">Remova permanentemente sua conta da Ápice</p>
+        </header>
+        <section class="card-arrow"></section>
+      </article>
+    </section>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

@@ -6,8 +6,8 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #FFFFFF; /* Alterado para branco */
-  color: #333; /* Texto escuro para melhor contraste com fundo branco */
+  background-color: #FFFFFF; 
+  color: #333; 
 }
 
 main {
@@ -15,7 +15,7 @@ main {
   color: #333;
   text-align: left;
   padding-bottom: 40px;
-  margin-top: -2px; /* Conecta-se perfeitamente ao hero */
+  margin-top: -2px; 
   position: relative;
   z-index: 2;
   overflow: visible;
@@ -30,6 +30,7 @@ main {
   color: #FFC52D;
   line-height: 1.2;
 }
+
 .txthome {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
@@ -58,19 +59,19 @@ main {
   align-items: center;
   border: 2px solid #FFC52D;
   border-radius: 30px;
-  padding: 14px 26px; /* Aumentado o padding para botões maiores */
+  padding: 14px 26px; 
   width: 280px;
   text-decoration: none;
   color: white;
-  font-size: 0.95rem; /* Aumentado ligeiramente o tamanho da fonte */
+  font-size: 0.95rem; 
   font-family: 'Poppins', sans-serif;
-  font-weight: 500; /* Adicionado peso da fonte para mais destaque */
+  font-weight: 500; 
   transition: 0.3s;
   background-color: #160B5D;
   white-space: nowrap;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adicionada sombra para destaque */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
 }
 
 .btnhome .seta {
@@ -157,13 +158,13 @@ a {
 
 .dtq-sec2 {
   font-weight: bold;
-  color: #160B5D; /* Adicionando cor azul para destacar */
+  color: #160B5D; 
 }
 
 .txt {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
-  color: #333; /* Garantindo cor de texto escuro para melhor legibilidade */
+  color: #333; 
 }
 
 .btnhome2, .btnhome3 {
@@ -257,4 +258,5 @@ a {
   object-fit: cover;
   z-index: 0;
 }
+
 

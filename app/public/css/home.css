@@ -1,16 +1,17 @@
-/* Extensão do background azul removida - agora o hero section ocupa todo o espaço necessário */
+
 
 .vagas-title-band {
-  position: relative;
-  background-color: #FFC52D; /* Amarelo */
+  background-color: #FFC52D; 
   padding: 15px 0;
   border-radius: 10px 10px 0 0;
-  margin-top: -20px; /* Posiciona em cima do azul */
+  margin-top: -20px; 
   z-index: 5;
-  width: 90%;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   text-align: center;
   margin-bottom: 30px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
@@ -21,24 +22,24 @@
   font-weight: 700;
   margin: 0;
   text-align: center;
-  color: #160B5D; /* Azul escuro para o título */
-  display: inline-block; /* Permite que o texto se ajuste à largura disponível */
+  color: #160B5D; 
+  display: inline-block; 
 }
 
-/* Removido o wrapper de conteúdo para deixar os cards soltos */
 
-/* Estilos para o carrossel */
+
+
 .carousel-container {
-  margin-top: 20px; /* Espaçamento entre o título e o carrossel */
-  width: 92%; /* Alinhado com a largura da página */
-  max-width: 320px; /* Tamanho máximo para o carousel */
+  margin-top: 20px; 
+  width: 92%; 
+  max-width: 320px; 
   margin-left: auto;
   margin-right: auto;
   position: relative;
   overflow: hidden;
-  padding-bottom: 30px; /* Espaço para os indicadores */
-  padding-top: 5px; /* Espaço reduzido na parte superior */
-  z-index: 2; /* Garantir que fique acima do fundo */
+  padding-bottom: 30px; 
+  padding-top: 5px; 
+  z-index: 2; 
 }
 
 .carousel-track {
@@ -76,13 +77,13 @@
   background-color: #160B5D;
 }
 
-/* Estilo do botão abaixo do carrossel */
+
 .btn-container-carousel {
   display: flex;
   justify-content: center;
   width: 100%;
   margin-top: 10px;
-  margin-bottom: 50px; /* Aumentado para dar mais espaço antes da próxima seção */
+  margin-bottom: 50px; 
 }
 
 .btnhome-carousel {
@@ -100,7 +101,7 @@
   border: none;
 }
 
-/* Sobrescreve a regra do hover para este botão específico */
+
 .btnhome.btnhome-carousel:hover {
   background-color: #160B5D;
   color: white;
@@ -112,7 +113,7 @@
   color: white;
 }
 
-/* Estilos para a seção "Como funciona" */
+
 .como-funciona-section {
   padding: 50px 20px;
   margin-top: 40px;
@@ -198,7 +199,7 @@
   text-shadow: 0 1px 0 rgba(255,255,255,0.8);
 }
 
-/* Estilos para os ícones de imagem */
+
 .icon-item {
   transition: transform 0.2s ease;
 }
@@ -207,7 +208,7 @@
   transform: scale(1.2);
 }
 
-/* Responsividade para a seção Como funciona */
+
 @media (min-width: 768px) {
   .como-funciona-cards {
     flex-direction: row;
@@ -301,10 +302,10 @@
 
 
 
-/* Seção Principais Clientes */
+
 .clientes-section {
-  padding: 50px 20px;
-  margin-top: 40px;
+  padding: 30px 20px;
+  margin-top: 20px;
   width: 100%;
 }
 
@@ -316,7 +317,7 @@
   margin-bottom: 40px;
 }
 
-/* Slider infinito de clientes */
+
 .clientes-slider-container {
   overflow: hidden;
   width: 100%;
@@ -355,7 +356,7 @@
 }
 
 
-/* Animação de scroll infinito */
+
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -365,7 +366,7 @@
   }
 }
 
-/* Responsividade do slider de clientes */
+
 @media (min-width: 768px) {
   .clientes-slider-track {
     animation: scroll 40s linear infinite;
@@ -392,7 +393,7 @@
   }
 }
 
-/* Seção de Avaliações/Depoimentos */
+
 .avaliacoes-title-band {
   padding: 50px 20px 0;
   margin-top: 40px;
@@ -407,7 +408,7 @@
   margin-bottom: 40px;
 }
 
-/* Carrossel de avaliações - mesmo estilo do carrossel de vagas */
+
 .avaliacoes-carousel-container {
   position: relative;
   width: 92%;
@@ -496,7 +497,7 @@
   object-position: center;
 }
 
-/* Indicadores - mesmo estilo do carrossel de vagas */
+
 .avaliacoes-carousel-indicators {
   display: flex;
   justify-content: center;
@@ -521,14 +522,14 @@
   background-color: #FFC52D;
 }
 
-/* Media queries para responsividade */
+
 @media (max-width: 767px) {
   .blue-background-extension {
-    height: 30px; /* Menor em dispositivos móveis */
+    height: 30px; 
   }
   
   .vagas-title-band {
-    width: 100%; /* Largura total em dispositivos móveis */
+    width: 100%; 
     padding: 12px 0;
   }
   
@@ -537,20 +538,20 @@
   }
   
   .carousel-container {
-    width: 100%; /* Largura total em dispositivos móveis */
-    max-width: 280px; /* Largura máxima um pouco menor */
+    width: 100%; 
+    max-width: 280px; 
   }
   
   .card {
-    max-width: 280px; /* Cards um pouco menores */
+    max-width: 280px; 
   }
   
   .btnhome-carousel {
-    padding: 10px 24px; /* Botões ligeiramente menores */
+    padding: 10px 24px; 
     font-size: 0.9rem;
   }
   
-  /* Avaliações responsivo mobile */
+  
   .avaliacoes-carousel-container {
     max-width: 280px;
   }
@@ -588,13 +589,13 @@
 
 @media (min-width: 768px) {
   .vagas-title-band {
-    width: 60%; /* Faixa amarela menor em tablets */
+    width: 60%; 
   }
 }
 
 @media (min-width: 768px) {
   .vagas-title-band {
-    width: 40%; /* Faixa amarela ainda menor em desktops */
+    width: 40%; 
     padding: 12px 0;
   }
   
@@ -603,10 +604,10 @@
   }
 }
 
-/* Media query para desktops */
+
 @media (min-width: 1200px) {
   .vagas-title-band {
-    width: 40%; /* Faixa amarela ainda menor em desktops */
+    width: 40%; 
     padding: 12px 0;
   }
   
@@ -666,7 +667,7 @@
  display: flex;
  flex-direction: column;
  cursor: pointer;
- margin: 0 auto; /* Centralizar o card horizontalmente */
+ margin: 0 auto; 
 }
 
 .card h2 {

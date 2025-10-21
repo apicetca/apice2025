@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     height: auto;
-    min-height: 130vh; /* Aumentado para dar mais espaço ao container azul */
+    min-height: 140vh; 
     overflow: visible;
     background-color: #160B5D;
     display: flex;
@@ -14,40 +14,12 @@
 
 .hero-img {
     width: 100%;
-    height: 50%; /* Reduzido para a imagem ocupar menos espaço */
-    object-fit: cover;
-    object-position: center 30%; /* Ajuste para focar melhor nas pessoas */
+    height: auto; 
+    max-height: none; 
+    object-fit: contain; 
+    object-position: center top; 
     position: absolute;
-    top: 0;
-}
-
-/* Ajuste progressivo da imagem para telas pequenas */
-@media (max-width: 640px) {
-  .hero-img {
-    height: 60%;
-    object-position: center 35%;
-  }
-}
-
-@media (max-width: 540px) {
-  .hero-img {
-    height: 55%;
-    object-position: center 32%;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-img {
-    height: 50%;
-    object-position: center 30%;
-  }
-}
-
-@media (max-width: 420px) {
-  .hero-img {
-    height: 45%;
-    object-position: center 28%;
-  }
+    top: 80px; 
 }
 
 @media (max-width: 375px) {
@@ -64,7 +36,7 @@
   background: linear-gradient(
     to top,
     rgba(22, 11, 93, 1) 0%,
-    rgba(22, 11, 93, 1) 50%, /* Mantém o azul sólido na parte inferior */
+    rgba(22, 11, 93, 1) 50%, 
     rgba(22, 11, 93, 0.9) 55%,
     rgba(22, 11, 93, 0.5) 60%,
     rgba(22, 11, 93, 0.2) 70%,
@@ -77,124 +49,255 @@
   left: 0;
 }
 
+
+@media (max-width: 640px) {
+  .overlay {
+    background: linear-gradient(
+      to top,
+      rgba(22, 11, 93, 1) 0%,
+      rgba(22, 11, 93, 1) 55%, 
+      rgba(22, 11, 93, 0.9) 62%,
+      rgba(22, 11, 93, 0.7) 68%,
+      rgba(22, 11, 93, 0.4) 72%,
+      rgba(22, 11, 93, 0.1) 76%,
+      rgba(22, 11, 93, 0) 80%
+    );
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay {
+    background: linear-gradient(
+      to top,
+      rgba(22, 11, 93, 1) 0%,
+      rgba(22, 11, 93, 1) 52%, 
+      rgba(22, 11, 93, 0.9) 60%,
+      rgba(22, 11, 93, 0.7) 66%,
+      rgba(22, 11, 93, 0.4) 70%,
+      rgba(22, 11, 93, 0.1) 74%,
+      rgba(22, 11, 93, 0) 78%
+    );
+  }
+}
+
+@media (max-width: 375px) {
+  .overlay {
+    background: linear-gradient(
+      to top,
+      rgba(22, 11, 93, 1) 0%,
+      rgba(22, 11, 93, 1) 48%, 
+      rgba(22, 11, 93, 0.9) 56%,
+      rgba(22, 11, 93, 0.7) 62%,
+      rgba(22, 11, 93, 0.4) 66%,
+      rgba(22, 11, 93, 0.1) 70%,
+      rgba(22, 11, 93, 0) 74%
+    );
+  }
+}
+
 .title-container {
   width: 100%;
   max-width: 800px;
   padding: 0 5%;
   position: absolute;
-  top: 42%; /* Posicionado no canto inferior esquerdo da imagem */
+  top: calc(32% + 80px); 
   z-index: 5;
 }
 
 .content {
   width: 100%;
-  padding: 0 5% 0 5%; /* Padding lateral */
-  text-align: left; /* Alinha o texto à esquerda */
-  max-width: 800px; /* Limita a largura máxima */
+  padding: 0 5% 0 5%; 
+  text-align: left; 
+  max-width: 800px; 
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alinha à esquerda */
+  align-items: flex-start; 
   position: absolute;
-  bottom: 160px; /* Posicionado logo acima dos botões */
-  z-index: 15; /* Mantido acima da seção amarela */
+  bottom: 160px; 
+  z-index: 15; 
 }
 
 .h1 {
-  font-size: 0.5rem; /* Reduzido o tamanho da fonte */
+  font-size: 1.4rem; 
   font-weight: 600;
-  margin-bottom: 10px; /* Reduzido o espaço abaixo do título */
+  margin-bottom: 10px;
   text-align: left;
   color: #FFC52D;
-  max-width: 220px; /* Reduzido para ficar menor */
+  max-width: 240px; 
   line-height: 1.2;
   position: relative;
-  z-index: 10; /* Garante que fique sobre a imagem */
-  text-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Adiciona sombra para destacar o texto */
+  z-index: 10;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.title-mobile {
+  display: none;
+}
+
+.title-desktop {
+  display: inline;
 }
 
 .hero-description {
   color: white;
   font-size: 0.95rem;
-  max-width: 450px; /* Aumentado para ter mais espaço */
+  max-width: 450px; 
   text-align: left;
   line-height: 1.4;
   position: relative;
   z-index: 10;
   align-self: flex-start;
-  margin-bottom: 20px; /* Espaço para os botões */
+  margin-bottom: 20px; 
 }
 
-/* Media queries para ajustes responsivos */
-@media (max-width: 767px) {
-  .hero {
-    min-height: 130vh; /* Aumentada a altura para dispositivos móveis */
-    padding-bottom: 0; /* Removido espaço extra no final */
-  }
-  
-  .title-container {
-    top: 38%; /* Ajustado para o canto inferior esquerdo da imagem em mobile */
-  }
-  
-  .content {
-    bottom: 200px; /* Posicionado logo acima dos botões para mobile */
-  }
-  
-  .hero-description {
-    margin-bottom: 0; /* Removido espaçamento, já que usamos posicionamento absoluto para os botões */
-  }
-  
-  .btn-container-hero {
-    bottom: 40px; /* Ajustado para mobile com mais espaço */
-  }
-  
-  .h1 {
-    font-size: 1.3rem; /* Texto menor para caber em telas pequenas */
-    max-width: 180px; /* Reduzido para mobile */
-  }
-  
-  .hero-description {
-    font-size: 0.85rem;
-    max-width: 100%;
-    margin-bottom: 15px;
-  }
-  
-  .btn-container-hero {
-    margin-bottom: 0; /* Removido, pois já usamos posicionamento absoluto */
-  }
-  
-  .btnhome {
-    width: 100%; /* Botões ocupam toda a largura em telas pequenas */
-    max-width: 280px;
-  }
-}
 
-/* Ajustes específicos para telas muito pequenas */
+
+
 @media (max-width: 640px) {
   .hero {
     min-height: 120vh;
   }
   
+  .hero-img {
+    top: 60px; 
+  }
+  
   .title-container {
-    top: 35%;
+    top: calc(27% + 60px); 
+  }
+  
+  .content {
+    bottom: 120px;
+  }
+  
+  .h1 {
+    font-size: 1rem;
+    max-width: 175px;
+    line-height: 1.2;
+  }
+  
+  .hero-description {
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+  
+  .btn-container-hero {
+    bottom: 25px;
+  }
+  
+  .btnhome {
+    width: 100%;
+    max-width: 280px;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+  }
+  
+  .title-mobile {
+    display: inline;
+  }
+  
+  .title-desktop {
+    display: none;
+  }
+}
+
+
+@media (min-width: 641px) and (max-width: 767px) {
+  .hero {
+    min-height: 120vh;
+    padding-bottom: 0;
+  }
+  
+  .hero-img {
+    top: 70px; 
+  }
+  
+  .title-container {
+    top: calc(32% + 70px);
+  }
+  
+  .content {
+    bottom: 135px;
+  }
+  
+  .h1 {
+    font-size: 1.2rem;
+    max-width: 200px;
+    line-height: 1.25;
+  }
+  
+  .hero-description {
+    font-size: 0.9rem;
+    max-width: 100%;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  .btn-container-hero {
+    bottom: 30px;
+    margin-bottom: 0;
+  }
+  
+  .btnhome {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+  
+  .title-mobile {
+    display: inline;
+  }
+  
+  .title-desktop {
+    display: none;
   }
 }
 
 @media (min-width: 768px) {
+  .hero {
+    min-height: 140vh;
+  }
+  
+  .hero-img {
+    top: 80px; 
+  }
+  
+  .title-container {
+    top: calc(32% + 80px); 
+  }
+  
   .title-container .h1 {
-    font-size: 1.5rem;
-    max-width: 220px;
+    font-size: 2rem;
+    max-width: 280px;
+  }
+  
+  .content {
+    bottom: 160px;
   }
   
   .content p {
     font-size: 1rem;
     max-width: 450px;
   }
+  
+  .btn-container-hero {
+    bottom: 40px;
+  }
+  
+  .title-mobile {
+    display: none;
+  }
+  
+  .title-desktop {
+    display: inline;
+  }
 }
 
 @media (min-width: 1200px) {
   .title-container .h1 {
-    font-size: 1.6rem;
-    max-width: 240px;
+    font-size: 2.2rem;
+    max-width: 300px;
   }
   
   .content .hero-description {
@@ -203,38 +306,38 @@
   }
 }
 
-/* Estilo para os botões no hero */
+
 .btn-container-hero {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Reduzido o espaço entre os botões */
+  gap: 15px; 
   width: 100%;
-  padding: 0 5%; /* Mantido padding lateral para alinhar com o conteúdo */
-  max-width: 1000px; /* Mantido o tamanho máximo do conteúdo */
-  margin: 0 auto; /* Mantido centralizado horizontalmente */
-  position: absolute; /* Mantido posicionamento absoluto */
-  bottom: 50px; /* Posicionado com mais espaço do fundo */
+  padding: 0 5%; 
+  max-width: 1000px; 
+  margin: 0 auto; 
+  position: absolute; 
+  bottom: 50px; 
   left: 0;
   right: 0;
   z-index: 15;
-  align-items: flex-start; /* Alinha os botões à esquerda */
+  align-items: flex-start; 
 }
 
-/* Estilo específico para os botões para garantir que fiquem visíveis */
+
 .btnhome {
   position: relative;
   z-index: 30;
   text-align: center;
   justify-content: space-between;
-  min-width: 250px; /* Garante largura mínima consistente */
+  min-width: 250px; 
 }
 
-/* Os estilos da seção de vagas foram movidos para home.css */
+
 
 @media (min-width: 768px) {
   .btn-container-hero {
     flex-direction: row;
-    justify-content: flex-start; /* Alinha os botões à esquerda */
+    justify-content: flex-start; 
     gap: 20px;
   }
   
@@ -247,24 +350,19 @@
     max-width: 500px;
   }
   
-  .h1 {
-    font-size: 1.7rem; /* Tamanho reduzido para telas médias */
-    max-width: 400px;
-  }
-  
   .title-container {
-    bottom: 38%; /* Ajustado para telas maiores */
+    bottom: 38%; 
   }
   
   .content {
-    top: 60%; /* Ajustado para consistência com a versão mobile */
+    top: 60%; 
   }
   
   .hero {
-    min-height: 140vh; /* Aumentado para telas maiores para dar mais espaço para o conteúdo */
+    min-height: 140vh; 
   }
   
   .btn-container-hero {
-    margin-bottom: 150px; /* Aumentado para telas maiores */
+    margin-bottom: 150px; 
   }
 }

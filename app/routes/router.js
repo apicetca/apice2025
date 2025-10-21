@@ -4,10 +4,10 @@ const { body, validationResult } = require("express-validator");
 const multer = require('multer');
 const fs = require('fs');
 
-// cria a pasta de uploads caso nao exista
+
 const uploadDir = '/uploads/';
 
-//configuração de destino de armazenamento e nome do arquivo
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, uploadDir);
@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
     }
 });
 
-//configuração do multer
+
 const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
@@ -28,7 +28,7 @@ const upload = multer({
         cb(null, true);
     },
     limits: {
-        fileSize: 5 * 1024 * 1024 // limita a 5MB
+        fileSize: 5 * 1024 * 1024 
     }
 });
 
@@ -63,7 +63,7 @@ router.get('/vagas', function(req, res) {
 });
 
 router.get('/login', (req, res) => {
-    // Determinar qual aba mostrar com base na consulta da URL
+    
     const activeTab = req.query.tab || 'jovem';
     
     res.render('pages/login', {
@@ -77,13 +77,13 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login/verify', [
-    // Validação de email
+    
     body('email')
         .notEmpty().withMessage('O campo de email é obrigatório')
         .isEmail().withMessage('Por favor, insira um email válido')
         .normalizeEmail(),
     
-    // Validação de senha
+    
     body('password')
         .notEmpty().withMessage('O campo de senha é obrigatório')
         .isLength({min: 8}).withMessage('A senha deve ter no mínimo 8 caracteres')
@@ -108,8 +108,8 @@ router.post('/login/verify', [
         
         const { email, password } = req.body;
 
-        // Aqui seria feita a autenticação
-        // Por enquanto apenas renderizamos a página novamente
+        
+        
         res.render('pages/login', {
             listaErros: [],
             email,
@@ -121,13 +121,13 @@ router.post('/login/verify', [
 });
 
 router.post('/login/empresa', [
-    // Validação de credencial
+    
     body('credencial')
         .notEmpty().withMessage('O campo de credencial é obrigatório')
         .isLength({min: 5}).withMessage('A credencial deve ter no mínimo 5 caracteres')
         .matches(/^[A-Za-z0-9]+$/).withMessage('A credencial deve conter apenas letras e números'),
     
-    // Validação de chave
+    
     body('chave')
         .notEmpty().withMessage('O campo de chave é obrigatório')
         .isLength({min: 6}).withMessage('A chave deve ter no mínimo 6 caracteres')
@@ -153,8 +153,8 @@ router.post('/login/empresa', [
         
         const { credencial, chave } = req.body;
 
-        // Aqui seria feita a autenticação da empresa
-        // Por enquanto apenas renderizamos a página novamente
+        
+        
         res.render('pages/login', {
             listaErros: [],
             email: null,
@@ -176,16 +176,16 @@ router.get('/cad2', function(req, res) {
 const users = require('../data/users');
 
 router.get('/perfil', (req, res) => {
-    const user = users.user1; // (lembrar de usar ID dinâmico posteriormente)
+    const user = users.user1; 
     res.render('pages/perfil', { 
         profileImage: null,
         user: user 
 })
 });
 
-// Rota para processar o upload
+
 router.post('/upload-profile', upload.single('profileImage'), (req, res) => {
-    const user = users.user1; // Mantém os dados do usuário
+    const user = users.user1; 
     
     if (!req.file) {
         return res.render('pages/perfil', {
@@ -215,4 +215,9 @@ router.get('/teste', function(req, res) {
     res.render('pages/testemenu');    
 });
 
+router.get('/config-usuario', function(req, res) {
+    res.render('pages/config-usuario');    
+});
+
 module.exports = router;
+

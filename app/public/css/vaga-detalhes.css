@@ -1,11 +1,11 @@
-/* Estilo geral da página */
+
 .vaga-container {
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
-/* Banner da vaga */
+
 
 .banner-overlay {
     position: absolute;
@@ -35,7 +35,7 @@
     opacity: 0.9;
 }
 
-/* Informações da empresa */
+
 .empresa-info {
     max-width: 1200px;
     margin: -50px auto 0;
@@ -79,7 +79,7 @@
     font-size: 0.9rem;
 }
 
-/* Navegação da vaga */
+
 .vaga-navegacao {
     max-width: 1200px;
     margin: 30px auto;
@@ -114,7 +114,7 @@
     background: #160B5D;
 }
 
-/* Conteúdo da vaga */
+
 .vaga-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -128,7 +128,7 @@
     font-size: 1.1rem;
 }
 
-/* Timeline */
+
 .vaga-timeline {
     background: #FFFFFF;
     border-radius: 12px;
@@ -159,7 +159,7 @@
     font-weight: 500;
 }
 
-/* Requisitos */
+
 .requisitos-section {
     margin: 40px 0;
 }
@@ -188,7 +188,7 @@
     font-size: 1.5em;
 }
 
-/* Benefícios */
+
 .beneficios-section {
     margin: 40px 0;
 }
@@ -216,7 +216,7 @@
     color: #555;
 }
 
-/* Status da vaga */
+
 .vaga-status {
     margin: 40px 0;
 }
@@ -248,7 +248,7 @@
     background: #160B5D;
 }
 
-/* Botões de ação */
+
 .vaga-acoes {
     text-align: center;
     margin: 40px 0;
@@ -275,7 +275,7 @@
     color: #666;
 }
 
-/* Responsividade */
+
 @media (max-width: 640px) {
     .banner-content h1 {
         font-size: 2rem;
