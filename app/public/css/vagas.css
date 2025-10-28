@@ -632,8 +632,8 @@ main {
 }
 
 .btn-apply {
-  background: var(--primary, #160B5D);
-  color: white;
+  background: var(--secondary);
+  color: var(--primary);
   border: none;
   padding: 12px 20px;
   border-radius: 20px;
@@ -646,7 +646,7 @@ main {
 }
 
 .btn-apply:hover {
-  background: #0f0941;
+  background: #e6b029;
 }
 
 .btn-clear {
@@ -1748,4 +1748,222 @@ html body {
     padding: 10px 16px;
     font-size: 13px;
   }
+}
+
+/* ========== CONTAINER DOS CARDS DE VAGAS ========== */
+.jobs-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+/* Responsividade para tablets */
+@media (max-width: 1024px) {
+  .jobs-container {
+    padding: 0 16px;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+  .jobs-container {
+    padding: 0 12px;
+    gap: 12px;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .jobs-container {
+    padding: 0 10px;
+    gap: 10px;
+  }
+}
+
+/* ========== FILTROS ========== */
+.filter-wrapper {
+  position: relative;
+}
+
+.filter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 998;
+}
+
+.filter-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.filter-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.filter-box.open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--input-border);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: var(--text-dark);
+}
+
+.filter-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.filter-legend {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  display: block;
+  font-size: 14px;
+}
+
+.filter-input,
+.filter-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--input-border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.format-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.format-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border: 2px solid var(--input-border);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.format-option:hover {
+  border-color: var(--primary);
+}
+
+.format-option input[type="radio"] {
+  margin: 0;
+}
+
+.format-option input[type="radio"]:checked + .format-label {
+  font-weight: 600;
+}
+
+.format-option:has(input[type="radio"]:checked) {
+  border-color: var(--primary);
+  background-color: rgba(22, 11, 93, 0.05);
+}
+
+.filter-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.btn-apply,
+.btn-clear {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-apply {
+  background: var(--secondary);
+  color: var(--primary);
+}
+
+.btn-apply:hover {
+  background: #e6b029;
+}
+
+.btn-clear {
+  background: transparent;
+  color: var(--text-light);
+  border: 2px solid var(--input-border);
+}
+
+.btn-clear:hover {
+  border-color: var(--text-light);
+  color: var(--text-dark);
 }

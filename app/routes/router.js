@@ -389,4 +389,9 @@ router.get('/home-empresa', function (req, res) {
     res.render('pages/home-empresa');
 });
 
+// Rota para Sala de Reunião
+router.get('/sala-reuniao', function (req, res) {
+    res.render('pages/saladereunião');
+});
+
 module.exports = router;

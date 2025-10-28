@@ -340,8 +340,8 @@ body {
 /* ========== BOTÃO CANDIDATAR ========== */
 .btn-candidatar {
   width: 100%;
-  background: var(--primary);
-  color: white;
+  background: var(--secondary);
+  color: var(--primary);
   border: none;
   border-radius: var(--radius-md);
   padding: 16px 24px;
@@ -367,7 +367,7 @@ body {
 }
 
 .btn-candidatar:hover {
-  background: #1e0b7e;
+  background: #e6b029;
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
