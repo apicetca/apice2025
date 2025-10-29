@@ -5,6 +5,11 @@ const multer = require('multer');
 const fs = require('fs');
 const { validationSets, handleValidationErrors, renderWithErrors } = require('../validations/validations');
 
+// Importar dados das vagas
+const vagas = require('../data/vagas');
+const infoVagas = require('../data/vagaspt2-completo');
+const { encontrarVaga } = require('../data/vagasLoader');
+
 // cria a pasta de uploads caso nao exista
 const uploadDir = '/uploads/';
 
@@ -35,12 +40,28 @@ const upload = multer({
 
 
 router.get('/', function (req, res) {
-    res.render('pages/home');
+    // Pegar as 3 primeiras vagas para exibir no carrossel
+    const vagasCarrossel = Object.values(infoVagas).slice(0, 3);
+    res.render('pages/home', { vagas: vagasCarrossel, infoVagas });
 });
 
 
 router.get('/empresa', function (req, res) {
     res.render('pages/empresa');
+});
+
+router.get('/sobre-nos', function (req, res) {
+    res.render('pages/sobre-nos');
+});
+
+router.get('/fale-conosco', function (req, res) {
+    console.log('Rota /fale-conosco acessada');
+    try {
+        res.render('pages/fale-conosco');
+    } catch (error) {
+        console.error('Erro ao renderizar fale-conosco:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
 });
 
 router.get('/home-jovem', function (req, res) {
@@ -56,10 +77,6 @@ router.get('/home-jovem', function (req, res) {
     
     res.render('pages/home-jovem', { vagas: vagasVisualizadas, infoVagas });
 });
-
-const vagas = require('../data/vagas');
-const infoVagas = require('../data/vagaspt2-completo');
-const { encontrarVaga } = require('../data/vagasLoader');
 
 // Sistema simples para armazenar candidaturas (em produção, use banco de dados)
 let vagasCandidatadas = [];
@@ -388,5 +405,6 @@ router.post(
 router.get('/home-empresa', function (req, res) {
     res.render('pages/home-empresa');
 });
+
 
 module.exports = router;

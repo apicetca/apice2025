@@ -1,8 +1,10 @@
 # Arquivos a serem ignorados pelo Git
 
+
 # Dependências
 node_modules/
 package-lock.json
+home.ejs
 
 # Arquivos de sistema
 .DS_Store

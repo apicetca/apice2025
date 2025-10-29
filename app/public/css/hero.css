@@ -1,24 +1,53 @@
-.hero {
-    position: relative;
+.home-page .hero {
+    position: fixed;
+    top: 80px;
+    left: 0;
     width: 100%;
     height: auto;
-    min-height: 130vh; /* Aumentado para dar mais espaço ao container azul */
+    min-height: calc(100vh - 80px);
     overflow: visible;
     background-color: #160B5D;
     display: flex;
     flex-direction: column;
-    margin-bottom: 0;
+    margin: 0 !important;
+    padding: 0;
     z-index: 1;
-    padding-bottom: 0;
+}
+
+.hero-image-container {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content-section {
+    background: rgba(22, 11, 93, 1);
+    padding: 50px 5% 40px 5%;
+    margin: 0;
+}
+
+.hero-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .hero-img {
     width: 100%;
-    height: 50%; /* Reduzido para a imagem ocupar menos espaço */
-    object-fit: cover;
-    object-position: center 30%; /* Ajuste para focar melhor nas pessoas */
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
     position: absolute;
     top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 /* Ajuste progressivo da imagem para telas pequenas */
@@ -63,53 +92,51 @@
   height: 100%;
   background: linear-gradient(
     to top,
-    rgba(22, 11, 93, 1) 0%,
-    rgba(22, 11, 93, 1) 50%, /* Mantém o azul sólido na parte inferior */
-    rgba(22, 11, 93, 0.9) 55%,
-    rgba(22, 11, 93, 0.5) 60%,
-    rgba(22, 11, 93, 0.2) 70%,
-    rgba(22, 11, 93, 0) 80%
+    rgba(22, 11, 93, 0.7) 0%,
+    rgba(22, 11, 93, 0.4) 30%,
+    rgba(22, 11, 93, 0.2) 50%,
+    rgba(22, 11, 93, 0) 70%
   );
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   top: 0;
   left: 0;
+  padding: 0 5%;
+  z-index: 2;
 }
 
 .title-container {
   width: 100%;
-  max-width: 800px;
-  padding: 0 5%;
-  position: absolute;
-  top: 42%; /* Posicionado no canto inferior esquerdo da imagem */
-  z-index: 5;
+  max-width: 500px;
+  margin-bottom: 0;
+  z-index: 15;
+  text-align: center;
 }
 
-.content {
+.hero-content-below .content {
   width: 100%;
-  padding: 0 5% 0 5%; /* Padding lateral */
-  text-align: left; /* Alinha o texto à esquerda */
-  max-width: 800px; /* Limita a largura máxima */
+  max-width: 800px;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alinha à esquerda */
-  position: absolute;
-  bottom: 160px; /* Posicionado logo acima dos botões */
-  z-index: 15; /* Mantido acima da seção amarela */
+  align-items: flex-start;
+  margin-bottom: 40px;
+  z-index: 15;
 }
 
 .h1 {
-  font-size: 1.8rem; /* Tamanho para desktop */
-  font-weight: 600;
-  margin-bottom: 10px;
-  text-align: left;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 0;
+  text-align: center;
   color: #FFC52D;
-  max-width: 250px;
+  max-width: 100%;
   line-height: 1.2;
   position: relative;
   z-index: 10;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  text-shadow: 0 4px 8px rgba(0,0,0,0.6);
 }
 
 .title-mobile {
@@ -120,45 +147,60 @@
   display: inline;
 }
 
-.hero-description {
+.hero-content-wrapper .content {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 35px;
+  z-index: 15;
+}
+
+.hero-content-wrapper .hero-description {
   color: white;
-  font-size: 0.95rem;
-  max-width: 450px; /* Aumentado para ter mais espaço */
-  text-align: left;
-  line-height: 1.4;
+  font-size: 1.25rem;
+  max-width: 700px;
+  text-align: center;
+  line-height: 1.7;
   position: relative;
   z-index: 10;
-  align-self: flex-start;
-  margin-bottom: 20px; /* Espaço para os botões */
+  margin: 0;
+  opacity: 0.95;
+  font-weight: 400;
 }
 
 /* Media queries para ajustes responsivos */
 @media (max-width: 767px) {
   .hero {
-    min-height: 130vh;
+    min-height: 100vh;
     padding-bottom: 0;
   }
   
-  .title-container {
-    top: 30%;
+  .overlay {
+    padding: 0 5% 40px 5%;
   }
   
   .content {
-    bottom: 165px;
+    margin-bottom: 25px;
   }
   
   .hero-description {
-    margin-bottom: 0;
+    margin-bottom: 20px;
+    font-size: 1rem;
   }
   
   .btn-container-hero {
-    bottom: 35px;
+    flex-direction: column;
+    gap: 15px;
   }
   
   .h1 {
-    font-size: 1.5rem; /* Tamanho médio para mobile */
-    max-width: 210px;
+    font-size: 2.5rem;
+    max-width: 100%;
     line-height: 1.2;
+    margin-bottom: 0;
   }
   
   .title-mobile {
@@ -188,25 +230,19 @@
 /* Ajustes para telas muito pequenas (375px e menores) */
 @media (max-width: 420px) {
   .h1 {
-    font-size: 1.3rem;
-    max-width: 180px;
+    font-size: 2rem;
+    max-width: 100%;
     line-height: 1.2;
-  }
-  
-  .title-container {
-    top: 28%;
-  }
-  
-  .content {
-    bottom: 160px;
+    margin-bottom: 0;
   }
   
   .hero-description {
-    font-size: 0.78rem;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
   }
   
   .btn-container-hero {
-    bottom: 30px;
+    gap: 12px;
   }
   
   .btnhome {
@@ -217,37 +253,31 @@
 
 @media (max-width: 375px) {
   .h1 {
-    font-size: 1.2rem;
-    max-width: 170px;
+    font-size: 1.3rem;
+    max-width: 220px;
     line-height: 1.15;
-  }
-  
-  .title-container {
-    top: 26%;
-  }
-  
-  .content {
-    bottom: 155px;
+    margin-bottom: 8px;
   }
   
   .hero-description {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  
+  .btn-container-hero {
+    gap: 10px;
   }
 }
 
-/* Ajustes específicos para telas muito pequenas */
+/* Ajustes específicos para telas intermediárias */
 @media (max-width: 640px) {
   .hero {
-    min-height: 110vh;
+    min-height: 100vh;
   }
   
-  .title-container {
-    top: 31%;
-  }
-  
-  .content {
-    bottom: 175px;
+  .overlay {
+    padding: 0 5% 50px 5%;
   }
 }
 
@@ -276,20 +306,16 @@
 }
 
 /* Estilo para os botões no hero */
-.btn-container-hero {
+.hero-content-wrapper .btn-container-hero {
   display: flex;
-  flex-direction: column;
-  gap: 15px; /* Reduzido o espaço entre os botões */
+  flex-direction: row;
+  gap: 25px;
   width: 100%;
-  padding: 0 5%; /* Mantido padding lateral para alinhar com o conteúdo */
-  max-width: 1000px; /* Mantido o tamanho máximo do conteúdo */
-  margin: 0 auto; /* Mantido centralizado horizontalmente */
-  position: absolute; /* Mantido posicionamento absoluto */
-  bottom: 50px; /* Posicionado com mais espaço do fundo */
-  left: 0;
-  right: 0;
+  max-width: 800px;
   z-index: 15;
-  align-items: flex-start; /* Alinha os botões à esquerda */
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* Estilo específico para os botões para garantir que fiquem visíveis */
