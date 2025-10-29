@@ -389,7 +389,14 @@ router.get('/home-empresa', function (req, res) {
     res.render('pages/home-empresa');
 });
 
-// Rota para Sala de Reunião
+router.get('/processos-seletivos-ativos', function (req, res) {
+    res.render('pages/processos-seletivos');
+});
+
+router.get('/analise-vagas', function (req, res) {
+    res.render('pages/analise-vagas');
+});
+
 router.get('/sala-reuniao', function (req, res) {
     res.render('pages/saladereunião');
 });

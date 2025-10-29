@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análise de Vagas - ÁPICE</title>
+  <link rel="stylesheet" href="/css/analise-vagas.css">
+</head>
+<body>
+    <header>
+        <%- include('../partials/menuempresa') %>
+    </header>
+  <main class="container">
+    <!-- Page Header -->
+    <header class="page-header">
+      <nav class="header-content">
+        <button class="back-btn" onclick="history.back()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+        </button>
+        
+        <section class="header-info">
+          <h1 class="page-title">ANÁLISE DE VAGAS</h1>
+        </section>
+        
+        <div class="header-spacer"></div>
+      </nav>
+    </header>
+
+      <section class="jobs-section">
+        <main class="jobs-container">
+          <!-- Vaga 1 - Aprovada -->
+          <article class="job-card approved">
+            <header class="job-header">
+              <h3 class="job-title">Analista de Marketing Digital</h3>
+              <p class="job-location">Analista • São Paulo</p>
+            </header>
+            <section class="job-status">
+              <span class="status-badge approved">Aprovada</span>
+            </section>
+            <footer class="job-actions">
+              <button class="action-btn primary">Ver detalhes</button>
+            </footer>
+          </article>
+
+          <!-- Vaga 2 - Em análise -->
+          <article class="job-card pending">
+            <header class="job-header">
+              <h3 class="job-title">Coordenador de Projetos Sustentáveis</h3>
+              <p class="job-location">Coordenador • Híbrido, São Paulo</p>
+            </header>
+            <section class="job-status">
+              <span class="status-badge pending">Em análise</span>
+            </section>
+            <footer class="job-actions">
+              <button class="action-btn secondary">Ver detalhes</button>
+            </footer>
+          </article>
+
+          <!-- Vaga 3 - Rejeitada -->
+          <article class="job-card rejected">
+            <header class="job-header">
+              <h3 class="job-title">Analista em Recursos Humanos Jr.</h3>
+              <p class="job-location">Jr • Presencial, Santo André</p>
+            </header>
+            <section class="job-status">
+              <span class="status-badge rejected">Rejeitada</span>
+            </section>
+            <footer class="job-actions">
+              <button class="action-btn tertiary">Ver motivos</button>
+            </footer>
+          </article>
+
+          <!-- Vaga 4 - Especial -->
+          <article class="job-card special">
+            <header class="job-header">
+              <h3 class="job-title">Desenvolvedor Full Stack</h3>
+              <p class="job-location">Pleno • Remoto</p>
+            </header>
+            <section class="job-status">
+              <span class="status-badge special">Especial</span>
+            </section>
+            <footer class="job-actions">
+              <button class="action-btn primary">Ver detalhes</button>
+            </footer>
+          </article>
+
+          <!-- Vaga 5 - Encerrada -->
+          <article class="job-card closed">
+            <header class="job-header">
+              <h3 class="job-title">Auxiliar Administrativo</h3>
+              <p class="job-location">Jovem Aprendiz • São Paulo</p>
+            </header>
+            <section class="job-status">
+              <span class="status-badge closed">Encerrada</span>
+            </section>
+            <footer class="job-actions">
+              <button class="action-btn quaternary">Ver relatório</button>
+            </footer>
+          </article>
+        </main>
+      </section>
+
+      <!-- Create Job Button -->
+      <aside class="create-job-section">
+        <button class="create-job-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Criar Nova Vaga
+        </button>
+      </aside>
+  </main>
+
+  <script>
+    // Toggle menu
+    document.querySelector('.menu-btn').addEventListener('click', function() {
+      console.log('Menu clicked');
+    });
+
+    // Search functionality
+    document.querySelector('.search-input').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const jobCards = document.querySelectorAll('.job-card');
+      
+      jobCards.forEach(card => {
+        const title = card.querySelector('.job-title').textContent.toLowerCase();
+        const location = card.querySelector('.job-location').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || location.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    // Filter functionality
+    document.querySelector('.filter-btn').addEventListener('click', function() {
+      console.log('Filter clicked');
+    });
+
+    // Action buttons
+    document.querySelectorAll('.action-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        console.log('Action button clicked:', this.textContent);
+      });
+    });
+
+    // Create job button
+    document.querySelector('.create-job-btn').addEventListener('click', function() {
+      console.log('Create new job clicked');
+    });
+  </script>
+</body>
+</html>
