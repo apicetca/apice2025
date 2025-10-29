@@ -46,9 +46,11 @@ body {
 .dashboard-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  display: grid;
-  gap: 30px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
   position: relative;
   z-index: 1;
   margin-top: 20px; /* Espaço adicional do menu fixo */
@@ -57,6 +59,8 @@ body {
 /* ========== SEÇÃO DE BOAS-VINDAS ========== */
 
 .welcome-section {
+  width: 100%;
+  max-width: 600px;
   text-align: center;
   padding: 40px 20px;
   position: relative;
@@ -67,7 +71,7 @@ body {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   position: relative;
   z-index: 10;
 }
@@ -83,13 +87,14 @@ body {
 
 .search-form {
   position: relative;
-  max-width: 500px;
+  max-width: 600px;
+  width: 100%;
   margin: 0 auto;
 }
 
 .search-input {
   width: 100%;
-  padding: 16px 24px 16px 20px;
+  padding: 16px 60px 16px 20px;
   border: 2px solid var(--border-light);
   border-radius: var(--radius);
   font-size: 1rem;
@@ -138,7 +143,8 @@ body {
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--primary);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .section-header {
@@ -146,6 +152,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .view-all-link {
@@ -160,13 +168,35 @@ body {
   color: var(--accent);
 }
 
-/* ========== AÇÕES RÁPIDAS ========== */
+/* ========== SEÇÕES PRINCIPAIS ========== */
+
+.quick-actions,
+.viewed-jobs,
+.scheduled-interviews {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quick-actions .section-title {
+  margin-bottom: 28px;
+}
+
+.viewed-jobs .section-header,
+.scheduled-interviews .section-header {
+  width: 100%;
+  justify-content: space-between;
+}
 
 .actions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  justify-content: start;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 800px;
+  justify-content: center;
 }
 
 .action-card {
@@ -186,15 +216,20 @@ body {
 .action-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-card);
-  border-color: var(--border-light);
+  border-color: var(--primary);
 }
 
 .action-icon {
   flex-shrink: 0;
-  padding: 12px;
-  border-radius: var(--radius-small);
-  background: var(--bg-light);
+  width: 24px;
+  height: 24px;
   color: var(--primary);
+}
+
+.action-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
 }
 
 .action-card.processos .action-icon {
@@ -403,6 +438,19 @@ body {
   .dashboard-container {
     padding: 20px 24px;
     max-width: 900px;
+    gap: 28px;
+  }
+  
+  .welcome-section {
+    padding: 36px 20px;
+  }
+  
+  .greeting {
+    font-size: 2.2rem;
+  }
+  
+  .search-form {
+    max-width: 500px;
   }
   
   .actions-grid {
@@ -411,7 +459,7 @@ body {
   }
   
   .jobs-container {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 18px;
   }
   
@@ -428,13 +476,38 @@ body {
     margin-top: 16px;
   }
   
+  .viewed-jobs,
+  .scheduled-interviews {
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  .welcome-section {
+    padding: 24px 16px;
+  }
+  
   .greeting {
     font-size: 2rem;
+    margin-bottom: 6px;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+  
+  .search-form {
+    max-width: 100%;
+  }
+  
+  .search-input {
+    padding: 14px 50px 14px 16px;
+    font-size: 0.95rem;
   }
   
   .actions-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 14px;
   }
   
   .action-card {
@@ -456,6 +529,10 @@ body {
   .jobs-container {
     grid-template-columns: 1fr;
     gap: 16px;
+    padding: 0 16px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
   }
   
   .job-card {
@@ -519,6 +596,54 @@ body {
   }
   
   .tagline {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+  
+  .search-input {
+    padding: 12px 45px 12px 14px;
+    font-size: 0.9rem;
+  }
+  
+  .search-btn {
+    right: 6px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+  
+  .action-card {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .action-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .action-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }  .dashboard-container {
+    gap: 20px;
+    margin-top: 12px;
+  }
+  
+  .welcome-section {
+    padding: 20px 12px;
+  }
+  
+  .greeting {
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+  }
+  
+  .tagline {
     font-size: 0.95rem;
     margin-bottom: 24px;
   }
@@ -540,6 +665,11 @@ body {
   
   .action-text {
     font-size: 0.9rem;
+  }
+  
+  .jobs-container {
+    padding: 0 12px;
+    gap: 12px;
   }
   
   .job-card {
@@ -595,6 +725,32 @@ body {
   }
 }
 
+/* Tablet grande - 1024px a 1200px */
+@media (min-width: 1025px) and (max-width: 1199px) {
+  .dashboard-container {
+    padding: 24px 32px;
+    gap: 30px;
+  }
+  
+  .welcome-section {
+    padding: 40px 24px;
+  }
+  
+  .search-form {
+    max-width: 550px;
+  }
+  
+  .actions-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .jobs-container {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+}
+
 /* Desktop large - acima de 1200px */
 @media (min-width: 1200px) {
   .dashboard-container {
@@ -626,9 +782,10 @@ body {
 /* Contêiner de vagas - idêntico ao da página de vagas */
 .jobs-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
   margin-top: 20px;
+  padding: 0 20px;
 }
 
 .no-jobs-message {

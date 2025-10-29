@@ -1,0 +1,422 @@
+/* ========== PROCESSOS SELETIVOS - SALA DE REUNIÕES ========== */
+
+:root {
+  --primary: #160B5D;
+  --secondary: #FFC52D;
+  --accent: #f9c21b;
+  --bg-light: #f8f9ff;
+  --bg-card: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-light: #95a5a6;
+  --border-light: #e8ecf4;
+  --shadow-soft: 0 4px 20px rgba(22, 11, 93, 0.08);
+  --shadow-card: 0 8px 30px rgba(22, 11, 93, 0.12);
+  --radius: 16px;
+  --radius-small: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: white;
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ========== CONTAINER PRINCIPAL ========== */
+
+.processos-container {
+  max-width: 400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ========== CABEÇALHO ========== */
+
+.page-header {
+  padding: 60px 20px 30px;
+  background: white;
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.back-btn:hover {
+  background: var(--bg-light);
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.page-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--secondary);
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.notification-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.notification-btn:hover {
+  background: var(--bg-light);
+}
+
+/* ========== SEÇÃO DE HORÁRIOS ========== */
+
+.schedule-section {
+  flex: 1;
+  padding: 0 20px;
+  background: white;
+}
+
+.section-header {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--secondary);
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.meetings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ========== ITEM DE REUNIÃO ========== */
+
+.meeting-item {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 2px solid var(--border-light);
+  transition: var(--transition);
+  box-shadow: var(--shadow-soft);
+}
+
+.meeting-item:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.meeting-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.time {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.meeting-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.candidate-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.position {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* ========== BOTÕES DE AÇÃO ========== */
+
+.action-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 70px;
+  text-align: center;
+}
+
+.action-btn.primary {
+  background: var(--primary);
+  box-shadow: 0 2px 8px rgba(22, 11, 93, 0.3);
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22, 11, 93, 0.4);
+}
+
+/* ========== SEÇÃO DE AÇÕES ========== */
+
+.actions-section {
+  padding: 30px 20px 20px;
+  text-align: center;
+  background: white;
+}
+
+.sala-reuniao-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--secondary);
+  color: var(--primary);
+  text-decoration: none;
+  padding: 16px 32px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(255, 197, 45, 0.3);
+}
+
+.sala-reuniao-btn:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 197, 45, 0.4);
+}
+
+/* ========== FOOTER ========== */
+
+.page-footer {
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid var(--border-light);
+  margin-top: auto;
+  background: white;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--bg-light);
+  border-radius: 8px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: var(--transition);
+  border: 1px solid var(--border-light);
+}
+
+.social-link:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* ========== RESPONSIVIDADE ========== */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .processos-container {
+    max-width: 100%;
+  }
+  
+  .page-header {
+    padding: 50px 16px 24px;
+  }
+  
+  .schedule-section {
+    padding: 0 16px;
+  }
+  
+  .actions-section {
+    padding: 24px 16px 16px;
+  }
+  
+  .meeting-item {
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .candidate-name {
+    font-size: 0.95rem;
+  }
+  
+  .position {
+    font-size: 0.8rem;
+  }
+  
+  .action-btn {
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    min-width: 60px;
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .page-header {
+    padding: 40px 12px 20px;
+  }
+  
+  .schedule-section {
+    padding: 0 12px;
+  }
+  
+  .actions-section {
+    padding: 20px 12px 12px;
+  }
+  
+  .page-title {
+    font-size: 1rem;
+  }
+  
+  .meeting-item {
+    padding: 14px;
+    gap: 10px;
+  }
+  
+  .time {
+    font-size: 1.1rem;
+  }
+  
+  .candidate-name {
+    font-size: 0.9rem;
+  }
+  
+  .position {
+    font-size: 0.75rem;
+  }
+  
+  .action-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    min-width: 50px;
+  }
+  
+  .sala-reuniao-btn {
+    padding: 14px 28px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ========== ANIMAÇÕES ========== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.meeting-item {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.meeting-item:nth-child(1) { animation-delay: 0.1s; }
+.meeting-item:nth-child(2) { animation-delay: 0.2s; }
+.meeting-item:nth-child(3) { animation-delay: 0.3s; }
+.meeting-item:nth-child(4) { animation-delay: 0.4s; }
+.meeting-item:nth-child(5) { animation-delay: 0.5s; }
+.meeting-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* ========== ESTADOS DE LOADING ========== */
+
+.loading .meeting-item {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.loading .action-btn {
+  background: var(--text-light);
+  cursor: not-allowed;
+}
+
+/* ========== ESTADOS ESPECIAIS ========== */
+
+.meeting-item.active {
+  background: rgba(255, 197, 45, 0.1);
+  border-color: var(--secondary);
+}
+
+.meeting-item.completed {
+  opacity: 0.6;
+}
+
+.meeting-item.completed .action-btn {
+  background: var(--text-light);
+  cursor: not-allowed;
+}
+
+.meeting-item.completed .action-btn:hover {
+  transform: none;
+  box-shadow: none;
+}
