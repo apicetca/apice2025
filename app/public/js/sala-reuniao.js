@@ -1,17 +1,12 @@
-// ========== SALA DE REUNIÃO JAVASCRIPT ==========
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ========== MEETING TYPE SELECTOR ==========
     const meetingTypeBtns = document.querySelectorAll('.meeting-type-btn');
     
     meetingTypeBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Remove active class from all buttons
             meetingTypeBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
             this.classList.add('active');
             
-            // Update meeting type in UI
             const type = this.dataset.type;
             updateMeetingType(type);
         });
@@ -46,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // ========== VIDEO CONTROLS ==========
     const controlBtns = document.querySelectorAll('.control-btn');
     
     controlBtns.forEach(btn => {
@@ -54,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (btn.classList.contains('camera-btn') || btn.classList.contains('mic-btn')) {
                 btn.classList.toggle('active');
                 
-                // Update button appearance based on state
                 const icon = btn.querySelector('i');
                 if (btn.classList.contains('camera-btn')) {
                     if (btn.classList.contains('active')) {
@@ -74,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             } else if (btn.classList.contains('screen-btn')) {
-                // Screen share toggle
                 btn.classList.toggle('active');
                 const icon = btn.querySelector('i');
                 if (btn.classList.contains('active')) {
@@ -90,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // ========== ACTION BUTTONS ==========
     const joinBtn = document.querySelector('.btn-join');
     const scheduleBtn = document.querySelector('.btn-schedule');
     const inviteBtn = document.querySelector('.btn-invite');
@@ -98,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
     joinBtn?.addEventListener('click', function() {
         showNotification('Entrando na reunião...', 'success');
         setTimeout(() => {
-            // Simulate joining meeting
             document.querySelector('.participant-name').textContent = 'Reunião iniciada!';
             joinBtn.textContent = 'Sair da Reunião';
             joinBtn.style.background = '#dc3545';
@@ -132,14 +122,12 @@ document.addEventListener('DOMContentLoaded', function() {
     closeModal?.addEventListener('click', closeModalFunc);
     cancelBtn?.addEventListener('click', closeModalFunc);
     
-    // Close modal on backdrop click
     modal?.addEventListener('click', function(e) {
         if (e.target === modal) {
             closeModalFunc();
         }
     });
     
-    // Escape key to close modal
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeModalFunc();
@@ -154,7 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (meetingName && meetingDate) {
             showNotification('Reunião agendada com sucesso!', 'success');
             closeModalFunc();
-            // Clear form
             document.querySelector('input[type="text"]').value = '';
             document.querySelector('input[type="datetime-local"]').value = '';
             document.querySelector('input[type="email"]').value = '';
@@ -163,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // ========== QUICK SETTINGS ==========
     const checkboxes = document.querySelectorAll('.setting-label input[type="checkbox"]');
     
     checkboxes.forEach(checkbox => {
@@ -189,7 +175,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // ========== UTILITY FUNCTIONS ==========
     function showNotification(message, type = 'info') {
         // Create notification element
         const notification = document.createElement('div');
@@ -229,7 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 showNotification('Link da reunião copiado!', 'success');
             });
         } else {
-            // Fallback for older browsers
             const textArea = document.createElement('textarea');
             textArea.value = meetingLink;
             document.body.appendChild(textArea);
@@ -240,7 +224,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // ========== PARTICIPANT STATUS SIMULATION ==========
     function simulateParticipantActivity() {
         const participantStatuses = document.querySelectorAll('.participant-status');
         
@@ -256,10 +239,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
     
-    // Start participant simulation
     simulateParticipantActivity();
     
-    // ========== MEETING CARDS INTERACTION ==========
     const meetingCards = document.querySelectorAll('.meeting-card');
     
     meetingCards.forEach(card => {
@@ -269,8 +250,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // ========== ANIMATIONS ==========
-    // Add CSS animations
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideIn {

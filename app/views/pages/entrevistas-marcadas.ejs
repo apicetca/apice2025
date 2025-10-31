@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ápice - Entrevistas Marcadas</title>
+  <link rel="stylesheet" href="/css/processos-seletivos.css">
+  <link rel="stylesheet" href="/css/entrevistas-marcadas.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="main-header">
+    <%- include('../partials/menujovem') %>
+  </header>
+
+  <main class="entrevistas-container">
+    <section class="page-header">
+      <nav class="header-content">
+        <button class="back-btn" onclick="history.back()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+        </button>
+        
+        <section class="header-info">
+          <h1 class="page-title">ENTREVISTAS MARCADAS</h1>
+          <p class="page-subtitle">Suas próximas entrevistas agendadas</p>
+        </section>
+      </nav>
+    </section>
+
+
+    <!-- Filtros de visualização -->
+    <section class="filters-section">
+      <header class="filters-header">
+        <h3 class="filters-title">Filtrar por período</h3>
+      </header>
+      
+      <nav class="filter-buttons">
+        <button class="filter-btn active" data-filter="hoje">Hoje</button>
+        <button class="filter-btn" data-filter="semana">Esta Semana</button>
+        <button class="filter-btn" data-filter="mes">Este Mês</button>
+        <button class="filter-btn" data-filter="todos">Todas</button>
+      </nav>
+    </section>
+
+    <!-- Lista de entrevistas -->
+    <section class="entrevistas-section">
+      <header class="section-header">
+        <h2 class="section-title">HOJE - 29 de Outubro</h2>
+        <span class="entrevistas-count">5 entrevistas</span>
+      </header>
+
+      <article class="entrevistas-list">
+        <!-- Entrevista 1 - Próxima -->
+        <section class="entrevista-item proxima" data-periodo="hoje">
+          <time class="entrevista-time">
+            <span class="time">14:30</span>
+            <span class="period">Hoje</span>
+          </time>
+          
+          <article class="entrevista-info">
+            <h3 class="empresa-name">TechCorp Solutions</h3>
+            <p class="vaga-title">Desenvolvedor Full Stack</p>
+            <p class="entrevista-tipo">Entrevista Técnica</p>
+            <p class="entrevista-local">Presencial - São Paulo, SP</p>
+          </article>
+          
+          <aside class="entrevista-actions">
+            <span class="status-badge proxima">Próxima</span>
+            <button class="action-btn primary" onclick="iniciarEntrevista('techcorp')">
+              Entrar
+            </button>
+          </aside>
+        </section>
+
+        <!-- Entrevista 2 - Agendada -->
+        <section class="entrevista-item agendada" data-periodo="hoje">
+          <time class="entrevista-time">
+            <span class="time">16:00</span>
+            <span class="period">Hoje</span>
+          </time>
+          
+          <article class="entrevista-info">
+            <h3 class="empresa-name">InnovateHub</h3>
+            <p class="vaga-title">UX/UI Designer</p>
+            <p class="entrevista-tipo">Entrevista com RH</p>
+            <p class="entrevista-local">Online - Google Meet</p>
+          </article>
+          
+          <aside class="entrevista-actions">
+            <span class="status-badge agendada">Agendada</span>
+            <button class="action-btn secondary" onclick="verDetalhes('innovatehub')">
+              Ver Detalhes
+            </button>
+            <button class="action-btn primary" onclick="iniciarEntrevista('innovatehub')" title="Entrar na sala 15 minutos antes">
+              Entrar na Sala
+            </button>
+            </button>
+          </aside>
+        </section>
+
+        <!-- Entrevista 3 - Reagendar -->
+        <section class="entrevista-item reagendar" data-periodo="hoje">
+          <time class="entrevista-time">
+            <span class="time">18:30</span>
+            <span class="period">Hoje</span>
+          </time>
+          
+          <article class="entrevista-info">
+            <h3 class="empresa-name">StartupXYZ</h3>
+            <p class="vaga-title">Product Manager</p>
+            <p class="entrevista-tipo">Entrevista Final</p>
+            <p class="entrevista-local">Presencial - Rio de Janeiro, RJ</p>
+          </article>
+          
+          <aside class="entrevista-actions">
+            <span class="status-badge reagendar">Reagendar</span>
+            <button class="action-btn warning" onclick="reagendarEntrevista('startupxyz')">
+              Reagendar
+            </button>
+          </aside>
+        </section>
+      </article>
+    </section>
+
+    <!-- Entrevistas da semana -->
+    <section class="entrevistas-section">
+      <header class="section-header">
+        <h2 class="section-title">ESTA SEMANA</h2>
+        <span class="entrevistas-count">7 entrevistas</span>
+      </header>
+
+      <article class="entrevistas-list">
+        <!-- Entrevista Amanhã -->
+        <section class="entrevista-item agendada" data-periodo="semana">
+          <time class="entrevista-time">
+            <span class="time">10:00</span>
+            <span class="period">30/10</span>
+          </time>
+          
+          <article class="entrevista-info">
+            <h3 class="empresa-name">DataScience Corp</h3>
+            <p class="vaga-title">Analista de Dados</p>
+            <p class="entrevista-tipo">Teste Prático</p>
+            <p class="entrevista-local">Online - Microsoft Teams</p>
+          </article>
+          
+          <aside class="entrevista-actions">
+            <span class="status-badge agendada">Agendada</span>
+            <button class="action-btn secondary" onclick="verDetalhes('datascience')">
+              Ver Detalhes
+            </button>
+            <button class="action-btn primary" onclick="iniciarEntrevista('datascience')" title="Entrar na sala antecipadamente">
+              Entrar na Sala
+            </button>
+            </button>
+          </aside>
+        </section>
+
+        <!-- Entrevista Quinta -->
+        <section class="entrevista-item agendada" data-periodo="semana">
+          <time class="entrevista-time">
+            <span class="time">15:30</span>
+            <span class="period">31/10</span>
+          </time>
+          
+          <article class="entrevista-info">
+            <h3 class="empresa-name">Marketing Pro</h3>
+            <p class="vaga-title">Especialista em Marketing Digital</p>
+            <p class="entrevista-tipo">Entrevista Comportamental</p>
+            <p class="entrevista-local">Presencial - Belo Horizonte, MG</p>
+          </article>
+          
+          <aside class="entrevista-actions">
+            <span class="status-badge agendada">Agendada</span>
+            <button class="action-btn secondary" onclick="verDetalhes('marketingpro')">
+              Ver Detalhes
+            </button>
+          </aside>
+        </section>
+      </article>
+    </section>
+
+    <section class="historico-section">
+      <header class="section-header">
+        <h2 class="section-title">HISTÓRICO RECENTE</h2>
+        <button class="ver-todos-btn" onclick="verHistoricoCompleto()">Ver Todos</button>
+      </header>
+
+      <article class="historico-list">
+        <section class="entrevista-item concluida">
+          <time class="entrevista-time">
+            <span class="time">14:00</span>
+            <span class="period">28/10</span>
+          </time>
+          
+          <article class="entrevista-info">
+            <h3 class="empresa-name">CloudTech Solutions</h3>
+            <p class="vaga-title">DevOps Engineer</p>
+            <p class="entrevista-tipo">Entrevista Técnica</p>
+            <p class="resultado">Aprovado para próxima fase</p>
+          </article>
+          
+          <aside class="entrevista-actions">
+            <span class="status-badge concluida">Concluída</span>
+            <button class="action-btn success" onclick="verFeedback('cloudtech')">
+              Ver Feedback
+            </button>
+          </aside>
+        </section>
+
+        <!-- Entrevista Cancelada -->
+        <section class="entrevista-item cancelada">
+          <time class="entrevista-time">
+            <span class="time">11:00</span>
+            <span class="period">27/10</span>
+          </time>
+          
+          <article class="entrevista-info">
+            <h3 class="empresa-name">RetailMax</h3>
+            <p class="vaga-title">Gerente de Vendas</p>
+            <p class="entrevista-tipo">Entrevista com Diretor</p>
+            <p class="resultado">Cancelada pela empresa</p>
+          </article>
+          
+          <aside class="entrevista-actions">
+            <span class="status-badge cancelada">Cancelada</span>
+            <button class="action-btn secondary" onclick="verDetalhes('retailmax')">
+              Ver Motivo
+            </button>
+          </aside>
+        </section>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <%- include('../partials/footer') %>
+  </footer>
+<script src="/js/script.js" defer></script>
+  <script>
+    // Funcionalidades da página
+    document.addEventListener('DOMContentLoaded', function() {
+      // Filtros de período
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const entrevistaItems = document.querySelectorAll('.entrevista-item');
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          // Remove active de todos os botões
+          filterBtns.forEach(b => b.classList.remove('active'));
+          // Adiciona active ao botão clicado
+          this.classList.add('active');
+          
+          const filter = this.dataset.filter;
+          
+          // Filtra entrevistas
+          entrevistaItems.forEach(item => {
+            const periodo = item.dataset.periodo;
+            
+            if (filter === 'todos' || periodo === filter) {
+              item.style.display = 'flex';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+          
+          // Atualiza contadores
+          atualizarContadores(filter);
+        });
+      });
+      
+      // Destacar próxima entrevista
+      const proximaEntrevista = document.querySelector('.entrevista-item.proxima');
+      if (proximaEntrevista) {
+        proximaEntrevista.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+    
+    // Funções de ação
+    function iniciarEntrevista(empresaId) {
+      // Aqui você pode adicionar lógica para entrar na sala virtual
+      console.log(`Iniciando entrevista com: ${empresaId}`);
+    }
+    
+    function iniciarEntrevista(empresaId) {
+      // Obter dados da empresa/entrevista
+      const empresasInfo = {
+        'techcorp': 'TechCorp Solutions',
+        'innovatehub': 'InnovateHub',
+        'startupxyz': 'StartupXYZ',
+        'datascience': 'DataScience Corp',
+        'marketingpro': 'Marketing Pro'
+      };
+      
+      const nomeEmpresa = empresasInfo[empresaId] || 'Empresa';
+      
+      console.log(`Iniciando entrevista com: ${nomeEmpresa}`);
+      
+      // Mostrar confirmação antes de redirecionar
+      const confirmar = confirm(`Você está prestes a entrar na sala de entrevista com ${nomeEmpresa}.\n\nCertifique-se de que:\n• Sua câmera está funcionando\n• Seu microfone está funcionando\n• Você está em um ambiente silencioso\n\nDeseja continuar?`);
+      
+      if (confirmar) {
+        // Mostrar feedback de carregamento
+        const botao = event.target;
+        const textoOriginal = botao.textContent;
+        botao.textContent = 'Conectando...';
+        botao.disabled = true;
+        
+        // Simular carregamento e depois redirecionar
+        setTimeout(() => {
+          window.location.href = '/sala-reuniao';
+        }, 1500);
+      }
+    }
+    
+    function verDetalhes(empresaId) {
+      // Redirecionar para página de detalhes
+      console.log(`Ver detalhes da entrevista: ${empresaId}`);
+    }
+    
+    function reagendarEntrevista(empresaId) {
+      // Implementar lógica de reagendamento
+      console.log(`Reagendar entrevista: ${empresaId}`);
+    }
+    
+    function verFeedback(empresaId) {
+      // Redirecionar para página de feedback
+      console.log(`Ver feedback: ${empresaId}`);
+    }
+    
+    function verHistoricoCompleto() {
+      window.location.href = '/historico-entrevistas';
+    }
+    
+    function atualizarContadores(filter) {
+      // Atualizar contadores baseado no filtro
+      const sections = document.querySelectorAll('.entrevistas-section, .historico-section');
+      sections.forEach(section => {
+        const items = section.querySelectorAll('.entrevista-item');
+        const visibleItems = Array.from(items).filter(item => item.style.display !== 'none');
+        const counter = section.querySelector('.entrevistas-count');
+        
+        if (counter) {
+          counter.textContent = `${visibleItems.length} entrevistas`;
+        }
+      });
+    }
+  </script>
+</body>
+</html>

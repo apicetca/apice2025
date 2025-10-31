@@ -17,13 +17,13 @@
   <main class="cad-container">
     <h1 class="cadastro" style="display: block !important; visibility: visible !important; color: #160B5D !important; font-size: 34px !important; text-align: center !important; margin: 20px 0 !important; font-weight: 600 !important; font-family: 'Poppins', sans-serif !important;">Cadastro</h1>
 
-    <form id="empresaForm3" class="cad-form" action="/teste3" method="get" novalidate>
+    <form id="empresaForm3" class="cad-form" action="/cadastro-empresa3" method="post" novalidate>
       <section class="form-section">
         <p>Insira as informações referentes ao eixo de atuação da empresa</p>
 
-        <input type="text" id="area" name="area" placeholder="Área" />
+        <input type="text" id="area" name="area" placeholder="Área" required />
 
-        <input type="text" id="eixo" name="eixo" placeholder="Eixo de atuação" />
+        <input type="text" id="eixo" name="eixo" placeholder="Eixo de atuação" required />
 
         <footer class="actions-section" aria-hidden="true">
           <button type="button" class="btn-add" aria-label="Adicionar">Adicionar <span aria-hidden="true">+</span></button>

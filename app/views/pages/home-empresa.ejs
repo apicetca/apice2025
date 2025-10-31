@@ -26,7 +26,7 @@
       <h2 class="section-title">Ações Rápidas</h2>
       
       <nav class="actions-grid">
-        <a href="/analise-vagas" class="action-card processos">
+        <a href="/vagas-empresa" class="action-card processos">
           <svg class="action-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="12" y1="8" x2="12" y2="16"></line>
@@ -45,18 +45,19 @@
           <span class="action-text">Processos seletivos ativos</span>
         </a>
 
-        <a href="/sala-reuniao" class="action-card reunioes">
+        <a href="/analise-vagas" class="action-card reunioes">
           <svg class="action-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
             <line x1="16" y1="2" x2="16" y2="6"></line>
             <line x1="8" y1="2" x2="8" y2="6"></line>
             <line x1="3" y1="10" x2="21" y2="10"></line>
           </svg>
-          <span class="action-text">Sala de reunião</span>
+          <span class="action-text">Analise das vagas</span>
         </a>
       </nav>
     </section>
 
+    <br>
     <!-- Anúncios Ativos -->
     <section class="viewed-jobs">
       <header class="section-header">
@@ -68,57 +69,9 @@
         <p class="no-jobs-message">Nenhuma vaga ativa no momento.</p>
       </section>
     </section>
-
-    <section class="scheduled-interviews">
-      <header class="section-header">
-        <h2 class="section-title">Entrevistas Agendadas</h2>
-      </header>
-
-      <ul class="interviews-list">
-        <li class="interview-item">
-          <time class="interview-date">
-            <span class="day">14</span>
-            <span class="month">NOV</span>
-          </time>
-          
-          <article class="interview-details">
-            <h3 class="interview-title">Arthur Silva</h3>
-            <p class="interview-company">Operador de caixa</p>
-            <time class="interview-time">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12,6 12,12 16,14"></polyline>
-              </svg>
-              14:20 - 15:00h
-            </time>
-          </article>
-        </li>
-
-        <li class="interview-item">
-          <time class="interview-date">
-            <span class="day">15</span>
-            <span class="month">NOV</span>
-          </time>
-          
-          <article class="interview-details">
-            <h3 class="interview-title">Maria Santos</h3>
-            <p class="interview-company">Auxiliar de RH</p>
-            <time class="interview-time">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12,6 12,12 16,14"></polyline>
-              </svg>
-              Reagendar - Lista
-            </time>
-          </article>
-        </li>
-      </ul>
-    </section>
   </main>
 
-  <footer class="main-footer">
-    <%- include('../partials/footer') %>
-  </footer>
+  <%- include('../partials/footer') %>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
