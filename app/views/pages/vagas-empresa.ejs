@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Vaga | Empresa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #160b5d; /* Azul principal */
+            --secondary-yellow: #ffc52d; /* Amarelo secundário */
+            --white: #FFFFFF;
+            --light-grey: #868686;
+            --medium-grey: #8f8f8f;
+            --input-bg: #120b3d; /* Mantido um ton de roxo escuro para inputs para contraste */
+            --input-border: #120b3d; /* Borda mais escura para inputs */
+            --black: #000000; /* Adicionado preto para o texto do botão */
+            /* Novas variáveis para o stepper */
+            --stepper-bg: #F0F2F5; /* Cor de fundo do stepper */
+            --stepper-inactive-color: #8f8f8f; /* Cor dos itens inativos do stepper */
+            --stepper-line-color: #ccc; /* Cor da linha inativa do stepper */
+            --error-red: #ff4d4d; /* Cor para mensagens de erro */
+        }
+
+         body {
+            font-family: 'Poppins', sans-serif; /* Certifique-se que Poppins é a primeira opção */
+            margin: 0;
+            background-color: var(--stepper-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Novo wrapper para agrupar stepper e formulário */
+        .new-main-wrapper {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column; /* Coloca os itens um abaixo do outro */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Sombra para o bloco inteiro */
+            border-radius: 15px; /* Arredonda as bordas do bloco inteiro */
+            overflow: hidden; /* Garante que os border-radius funcionem nos filhos */
+        }
+
+        .container {
+            background-color: var(--primary-blue);
+            width: 100%; /* Ocupa a largura total do new-main-wrapper */
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .form-title {
+            color: var(--white);
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group,
+        fieldset.form-group {
+            margin-bottom: 20px;
+            position: relative; /* Importante para posicionar as sugestões da cidade */
+            border: none;
+            padding: 0;
+        }
+
+        label {
+            display: block;
+            color: var(--white);
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--input-border);
+            background-color: var(--input-bg);
+            color: var(--white);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--secondary-yellow);
+            box-shadow: 0 0 0 3px rgba(255, 197, 45, 0.3);
+        }
+
+        /* Estilo para campos inválidos */
+        input.invalid,
+        select.invalid,
+        textarea.invalid,
+        fieldset.invalid {
+            border-color: var(--error-red);
+            box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.3);
+        }
+
+        /* Estilo específico para fieldset inválido */
+        fieldset.invalid {
+            border: 1px solid var(--error-red);
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .error-message,
+        small.error-message {
+            color: var(--error-red);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none; /* Escondido por padrão */
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--medium-grey);
+            opacity: 1;
+        }
+        input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: var(--medium-grey); opacity: 1; }
+        input::-moz-placeholder, textarea::-moz-placeholder { color: var(--medium-grey); opacity: 1; }
+        input::-ms-input-placeholder, textarea::-ms-input-placeholder { color: var(--medium-grey); opacity: 1; }
+        
+        select option[value=""] {
+            color: var(--medium-grey);
+        }
+        
+        select option {
+            background-color: var(--white);
+            color: var(--black);
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.4-6.3H18.9c-5%200-9.7%202-13.4%206.3-6.5%206.7-6.5%2017.7%200%2024.4l132.8%20133c6.5%206.7%2017.2%206.7%2023.6%200L287%2093.8c6.5-6.6%206.5-17.6%200-24.4z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 15px top 50%;
+            background-size: 12px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .input-group-prefix,
+        figure.input-group-prefix {
+            display: flex;
+            align-items: center;
+            background-color: var(--input-bg);
+            border-radius: 8px;
+            border: 1px solid var(--input-border);
+            color: var(--white);
+            font-size: 15px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            margin: 0;
+            padding: 0;
+        }
+         .input-group-prefix.invalid,
+         figure.input-group-prefix.invalid {
+            border-color: var(--error-red);
+            box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.3);
+        }
+
+        .input-group-prefix:focus-within,
+        figure.input-group-prefix:focus-within {
+            border-color: var(--secondary-yellow);
+            box-shadow: 0 0 0 3px rgba(255, 197, 45, 0.3);
+        }
+
+        .input-group-prefix span,
+        figure.input-group-prefix span {
+            padding: 12px 15px;
+            background-color: var(--input-bg);
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .input-group-prefix input,
+        figure.input-group-prefix input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            background-color: var(--input-bg);
+            color: var(--white);
+            border: none;
+            outline: none;
+        }
+        .input-group-prefix input:focus,
+        figure.input-group-prefix input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .benefits-list,
+        section.benefits-list {
+            margin-top: 10px;
+            min-height: 40px; /* Garante que a lista de benefícios tenha uma altura mínima */
+            border: 1px dashed var(--input-border); /* Borda para indicar a área */
+            padding: 5px;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            align-content: flex-start;
+        }
+        .benefits-list.invalid,
+        section.benefits-list.invalid {
+            border-color: var(--error-red);
+        }
+
+        .benefit-item {
+            display: inline-flex; /* Para que os itens fiquem lado a lado */
+            align-items: center;
+            background-color: var(--input-bg); /* Cor de fundo para o benefício */
+            border-radius: 8px;
+            padding: 6px 10px;
+            color: var(--white);
+            font-size: 14px;
+            white-space: nowrap; /* Impede que o texto quebre */
+        }
+
+        .benefit-item span {
+            margin-right: 8px;
+        }
+
+        .benefit-item button {
+            background: none;
+            border: none;
+            color: var(--light-grey);
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .benefit-item button:hover {
+            color: var(--white);
+        }
+
+        .add-benefit-input,
+        figure.add-benefit-input {
+            display: flex;
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding: 0;
+        }
+
+        .add-benefit-input input,
+        figure.add-benefit-input input {
+            flex-grow: 1;
+            border-radius: 8px 0 0 8px;
+            border-right: none;
+        }
+
+        .add-benefit-input button,
+        figure.add-benefit-input button {
+            background-color: var(--secondary-yellow);
+            border: 1px solid var(--secondary-yellow);
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+            color: var(--black);
+            font-size: 20px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .add-benefit-input button:hover,
+        figure.add-benefit-input button:hover {
+            background-color: #ffd76b;
+            border-color: #ffd76b;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--secondary-yellow);
+            color: var(--black);
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 550;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ---------------------------------------------------------------------------------- */
+        /* Estilos do Stepper de Formulário */
+         .form-stepper-wrapper {
+            width: 100%;
+            padding: 20px 0;
+            background-color: var(--stepper-bg);
+            box-sizing: border-box;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .form-stepper-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 350px;
+            width: 100%;
+            padding: 0 20px;
+            margin: 0 auto;
+        }
+
+        .stepper-item,
+        article.stepper-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .stepper-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            background-color: var(--stepper-inactive-color);
+            color: var(--white);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .stepper-label {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--stepper-inactive-color);
+            transition: color 0.3s ease;
+            line-height: 1.2;
+        }
+
+        .stepper-line,
+        hr.stepper-line {
+            height: 2px;
+            width: 40px;
+            background-color: var(--stepper-line-color);
+            margin: 0 5px;
+            border: none;
+        }
+
+        .stepper-item.active .stepper-circle {
+            background-color: var(--secondary-yellow);
+            color: var(--white);
+        }
+
+        .stepper-item.active .stepper-label {
+            color: var(--secondary-yellow);
+            font-weight: 400;
+        }
+
+        .stepper-item.active + .stepper-line,
+        article.stepper-item.active + hr.stepper-line {
+            background: linear-gradient(to right, var(--secondary-yellow) 50%, var(--stepper-line-color) 50%);
+        }
+
+        /* Estilos para o campo de pesquisa de cidade */
+        .city-suggestions {
+            position: absolute;
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 150px;
+            overflow-y: auto;
+            width: 100%;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            left: 0;
+            top: calc(100% + 0px); /* Posiciona abaixo do input */
+        }
+
+        .city-suggestions div {
+            padding: 10px 15px;
+            color: var(--white);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .city-suggestions div:hover {
+            background-color: var(--primary-blue);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .new-main-wrapper {
+                border-radius: 0; /* Remove border-radius em mobile */
+                box-shadow: none; /* Remove sombra em mobile */
+            }
+            .container {
+                padding: 20px;
+                border-radius: 0; /* Remove border-radius em mobile */
+            }
+            .form-title {
+                font-size: 22px;
+            }
+            .form-stepper-wrapper {
+                border-top-left-radius: 0; /* Remove border-radius em mobile */
+                border-top-right-radius: 0;
+                padding: 15px 0;
+            }
+            .form-stepper-container {
+                padding: 0 10px; /* Ajusta espaçamento horizontal em mobile */
+            }
+            .stepper-item {
+                min-width: 80px;
+            }
+            .stepper-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            .stepper-label {
+                font-size: 12px;
+            }
+            .stepper-line {
+                width: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <%- include('../partials/menuempresa') %>
+    </header>
+    <main class="new-main-wrapper">
+        <header class="form-stepper-wrapper">
+            <nav class="form-stepper-container">
+                <article class="stepper-item active">
+                    <span class="stepper-circle">1</span>
+                    <span class="stepper-label">Informações da vaga</span>
+                </article>
+                <hr class="stepper-line">
+                <article class="stepper-item">
+                    <span class="stepper-circle">2</span>
+                    <span class="stepper-label">Pagamento da taxa de publicação</span>
+                </article>
+            </nav>
+        </header>
+
+        <section class="container">
+            <h1 class="form-title">Informações da Vaga</h1>
+            <form id="job-form" method="POST" action="/vagas-empresa" novalidate> <!-- Adicionado method e action -->
+                <fieldset class="form-group">
+                    <label for="titulo">Título da vaga</label>
+                    <input type="text" id="titulo" name="titulo" placeholder="Ex: Desenvolvedor Web" required>
+                    <small class="error-message" id="titulo-error">O título da vaga é obrigatório e deve ter pelo menos 3 caracteres.</small>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="salario">Salário (sem benefícios)</label>
+                    <figure class="input-group-prefix" id="salario-group">
+                        <span>R$</span>
+                        <input type="number" id="salario" name="salario" placeholder="Ex: 2500.00" min="0" step="0.01" required>
+                    </figure>
+                    <small class="error-message" id="salario-error">O salário é obrigatório e deve ser um valor positivo.</small>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="formato-trabalho">Formato de trabalho</label>
+                    <select id="formato-trabalho" name="formato-trabalho" required>
+                        <option value="">Selecione</option>
+                        <option value="presencial">Presencial</option>
+                        <option value="remoto">Remoto</option>
+                        <option value="hibrido">Híbrido</option>
+                    </select>
+                    <small class="error-message" id="formato-trabalho-error">Selecione um formato de trabalho.</small>
+                </fieldset>
+
+                   <fieldset class="form-group">
+                    <label for="nivel-vaga">Nível da vaga (Taxa de Publicação)</label>
+                    <select id="nivel-vaga" name="nivel-vaga" required>
+                        <option value="">Selecione</option>
+                        <option value="aprendiz">Aprendiz (Taxa: R$ 22,47)</option>
+                        <option value="estagiario">Estagiário (Taxa: R$ 39,93)</option>
+                        <option value="operador">Operador (Taxa: R$ 54,15)</option>
+                        <option value="auxiliar">Auxiliar (Taxa: R$ 56,31)</option>
+                        <option value="trainee">Trainee (Taxa: R$ 63,93)</option>
+                        <option value="tecnico">Técnico (Taxa: R$ 89,49)</option>
+                        <option value="analista">Analista (Taxa: R$ 118,29)</option>
+                        <option value="consultor">Consultor (Taxa: R$ 148,32)</option>
+                        <option value="supervisor">Supervisor (Taxa: R$ 153,33)</option>
+                        <option value="especialista">Especialista (Taxa: R$ 193,29)</option>
+                        <option value="desenvolvedor">Desenvolvedor (Taxa: R$ 200,04)</option>
+                        <option value="coordenador">Coordenador (Taxa: R$ 264,51)</option>
+                        <option value="gerente">Gerente (Taxa: R$ 371,46)</option>
+                        <option value="diretor">Diretor (Taxa: R$ 654,03)</option>
+                    </select>
+                    <small class="error-message" id="nivel-vaga-error">Selecione um nível para a vaga.</small>
+                   </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="contrato">Contrato</label>
+                    <select id="contrato" name="contrato" required>
+                        <option value="">Selecione</option>
+                        <option value="clt">CLT</option>
+                        <option value="pj">PJ</option>
+                        <option value="freelancer">Freelancer</option>
+                    </select>
+                    <small class="error-message" id="contrato-error">Selecione um tipo de contrato.</small>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="setor-vaga">Setor da vaga</label>
+                    <select id="setor-vaga" name="setor-vaga" required>
+                        <option value="">Selecione</option>
+                        <option value="administracao">Administração</option>
+                        <option value="comercial_vendas">Comercial e Vendas</option>
+                        <option value="comercio_exterior">Comércio Exterior</option>
+                        <option value="educacao">Educação</option>
+                        <option value="financeira">Financeira</option>
+                        <option value="hotelaria_turismo">Hotelaria e Turismo</option>
+                        <option value="informatica">Informática</option>
+                        <option value="saude">Saúde</option>
+                        <option value="suprimentos">Suprimentos</option>
+                        <option value="agricultura">Agricultura</option>
+                        <option value="pecuaria">Pecuária</option>
+                        <option value="veterinaria">Veterinária</option>
+                        <option value="artes">Artes</option>
+                        <option value="arquitetura">Arquitetura</option>
+                        <option value="design">Design</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="engenharia">Engenharia</option>
+                        <option value="industrial">Industrial</option>
+                        <option value="juridica">Jurídica</option>
+                        <option value="tecnica">Técnica</option>
+                        <option value="telemarketing">Telemarketing</option>
+                        <option value="telecomunicacoes">Telecomunicações</option>
+                        <option value="servicos_sociais">Serviços Sociais</option>
+                    </select>
+                     <small class="error-message" id="setor-vaga-error">Selecione um setor para a vaga.</small>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="estado">Estado</label>
+                    <select id="estado" name="estado" required>
+                        <option value="">Selecione o Estado</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                    <small class="error-message" id="estado-error">Selecione um estado.</small>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" id="cidade" name="cidade" placeholder="Comece a digitar o nome da cidade" autocomplete="off" required>
+                    <aside id="city-suggestions" class="city-suggestions" style="display: none;">
+                        <!-- Sugestões de cidades aparecerão aqui -->
+                    </aside>
+                     <small class="error-message" id="cidade-error">Selecione uma cidade válida.</small>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" placeholder="Descreva as responsabilidades, o que é esperado do candidato e o ambiente de trabalho." required minlength="20"></textarea>
+                    <small class="error-message" id="descricao-error">A descrição é obrigatória e deve ter pelo menos 20 caracteres.</small>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="requisitos">Requisitos</label>
+                    <textarea id="requisitos" placeholder="Liste os requisitos essenciais e desejáveis para a vaga." required minlength="10"></textarea>
+                     <small class="error-message" id="requisitos-error">Os requisitos são obrigatórios e devem ter pelo menos 10 caracteres.</small>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="beneficios">Benefícios</label>
+                    <section id="benefits-list" class="benefits-list">
+                        <!-- Benefícios serão adicionados aqui via JS -->
+                    </section>
+                    <figure class="add-benefit-input">
+                        <input type="text" id="new-benefit-input" placeholder="Adicionar novo benefício">
+                        <button type="button" id="add-benefit-btn"><i class="fas fa-plus"></i></button>
+                    </figure>
+                    <small class="error-message" id="beneficios-error">Adicione pelo menos um benefício.</small>
+                </fieldset>
+
+                <button type="submit" class="btn-submit">Próximo: Pagamento</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addBenefitBtn = document.getElementById('add-benefit-btn');
+            const newBenefitInput = document.getElementById('new-benefit-input');
+            const benefitsList = document.getElementById('benefits-list');
+            const benefitsListError = document.getElementById('beneficios-error');
+
+            const estadoSelect = document.getElementById('estado');
+            const nivelVagaSelect = document.getElementById('nivel-vaga'); // Adicionado
+            const cidadeInput = document.getElementById('cidade');
+            const citySuggestionsDiv = document.getElementById('city-suggestions');
+
+            // Cache para cidades carregadas
+            let citiesCache = {};
+            
+            // Função para carregar cidades de um estado
+            async function loadCitiesForState(estado) {
+                if (citiesCache[estado]) {
+                    return citiesCache[estado];
+                }
+                
+                try {
+                    const response = await fetch(`/api/cidades/${estado}`);
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        citiesCache[estado] = data.cidades;
+                        return data.cidades;
+                    } else {
+                        console.error('Erro ao carregar cidades:', data.message);
+                        return [];
+                    }
+                } catch (error) {
+                    console.error('Erro na requisição de cidades:', error);
+                    return [];
+                }
+            }
+
+            // Mapeamento de Nível da Vaga para Taxa de Publicação
+            const taxaPorNivel = {
+                "aprendiz": 22.47,
+                "estagiario": 39.93,
+                "operador": 54.15,
+                "auxiliar": 56.31,
+                "trainee": 63.93,
+                "tecnico": 89.49,
+                "analista": 118.29,
+                "consultor": 148.32,
+                "supervisor": 153.33,
+                "especialista": 193.29,
+                "desenvolvedor": 200.04,
+                "coordenador": 264.51,
+                "gerente": 371.46,
+                "diretor": 654.03
+            };
+
+
+            // Função para exibir mensagem de erro
+            function showError(element, message) {
+                element.classList.add('invalid');
+                const errorMessageElement = document.getElementById(`${element.id}-error`);
+                if (errorMessageElement) {
+                    errorMessageElement.textContent = message;
+                    errorMessageElement.style.display = 'block';
+                }
+                // Adiciona classe 'invalid' ao pai se for um input-group-prefix
+                if (element.closest('.input-group-prefix')) {
+                    element.closest('.input-group-prefix').classList.add('invalid');
+                }
+            }
+
+            // Função para esconder mensagem de erro
+           
+                 // Função para esconder mensagem de erro
+            function hideError(element) {
+                element.classList.remove('invalid');
+                const errorMessageElement = document.getElementById(`${element.id}-error`);
+                if (errorMessageElement) {
+                    errorMessageElement.style.display = 'none';
+                }
+                 // Remove classe 'invalid' do pai se for um input-group-prefix
+                if (element.closest('.input-group-prefix')) {
+                    element.closest('.input-group-prefix').classList.remove('invalid');
+                }
+            }
+
+            // Validação de um campo individual
+            function validateField(inputElement) {
+                let isValid = true;
+                let errorMessage = '';
+
+                switch (inputElement.id) {
+                    case 'titulo':
+                        if (inputElement.value.trim().length < 3) {
+                            isValid = false;
+                            errorMessage = 'O título da vaga é obrigatório e deve ter pelo menos 3 caracteres.';
+                        }
+                        break;
+                    case 'salario':
+                        const salarioValue = parseFloat(inputElement.value);
+                        if (isNaN(salarioValue) || salarioValue < 0) {
+                            isValid = false;
+                            errorMessage = 'O salário é obrigatório e deve ser um valor numérico positivo.';
+                        }
+                        break;
+                    case 'formato-trabalho':
+                    case 'nivel-vaga':
+                    case 'contrato':
+                    case 'setor-vaga':
+                    case 'estado':
+                        if (inputElement.value === '') {
+                            isValid = false;
+                            errorMessage = 'Este campo é obrigatório.';
+                        }
+                        break;
+                    case 'cidade':
+                        const selectedState = estadoSelect.value;
+                        const currentCities = citiesCache[selectedState] || [];
+                        if (inputElement.value.trim() === '') {
+                            isValid = false;
+                            errorMessage = 'A cidade é obrigatória.';
+                        } else if (selectedState === '') {
+                             isValid = false;
+                             errorMessage = 'Primeiro, selecione um estado.';
+                        } else if (currentCities.length > 0 && !currentCities.includes(inputElement.value.trim())) {
+                             isValid = false;
+                             errorMessage = 'Selecione uma cidade válida para o estado selecionado.';
+                        }
+                        break;
+                    case 'descricao':
+                        if (inputElement.value.trim().length < 20) {
+                            isValid = false;
+                            errorMessage = 'A descrição é obrigatória e deve ter pelo menos 20 caracteres.';
+                        }
+                        break;
+                    case 'requisitos':
+                        if (inputElement.value.trim().length < 10) {
+                            isValid = false;
+                            errorMessage = 'Os requisitos são obrigatórios e devem ter pelo menos 10 caracteres.';
+                        }
+                        break;
+                    case 'new-benefit-input': // Este input não é validado sozinho, mas o conjunto de benefícios sim
+                        break;
+                }
+
+                if (!isValid) {
+                    showError(inputElement, errorMessage);
+                } else {
+                    hideError(inputElement);
+                }
+                return isValid;
+            }
+
+            // Adiciona listeners para validação em tempo real
+            document.querySelectorAll('#job-form input, #job-form select, #job-form textarea').forEach(input => {
+                // Remove a validação do input de benefício, pois ele não é validado individualmente
+                if (input.id !== 'new-benefit-input') {
+                    input.addEventListener('blur', () => validateField(input)); // Valida ao sair do campo
+                    input.addEventListener('input', () => { // Esconde erro ao começar a digitar/mudar
+                        // Para selects, esconde o erro imediatamente
+                        // Para inputs e textareas, esconde o erro apenas se o valor for válido
+                        if (input.tagName === 'SELECT' || validateField(input)) {
+                             hideError(input);
+                        }
+                    });
+                }
+            });
+
+            // Validação específica para o grupo de salário
+            document.getElementById('salario').addEventListener('blur', function() {
+                validateField(this);
+            });
+            document.getElementById('salario').addEventListener('input', function() {
+                 if (validateField(this)) {
+                    hideError(this);
+                 }
+            });
+
+
+            // Função para adicionar benefício
+            addBenefitBtn.addEventListener('click', () => {
+                const benefitText = newBenefitInput.value.trim();
+                if (benefitText) {
+                    const benefitItem = document.createElement('div');
+                    benefitItem.classList.add('benefit-item');
+                    benefitItem.innerHTML = `
+                        <span>${benefitText}</span>
+                        <button type="button" class="remove-benefit-btn"><i class="fas fa-times"></i></button>
+                    `;
+                    benefitsList.appendChild(benefitItem);
+                    newBenefitInput.value = '';
+
+                    // Esconde o erro se um benefício for adicionado e a lista não estiver mais vazia
+                    hideError(benefitsList);
+                    benefitsList.classList.remove('invalid'); // Remove a classe 'invalid' do container
+
+                    benefitItem.querySelector('.remove-benefit-btn').addEventListener('click', () => {
+                        benefitsList.removeChild(benefitItem);
+                        // Revalida os benefícios se o último for removido
+                        if (benefitsList.children.length === 0) {
+                            showError(benefitsList, 'Adicione pelo menos um benefício.');
+                            benefitsList.classList.add('invalid'); // Adiciona a classe 'invalid' ao container
+                        }
+                    });
+                }
+            });
+
+            newBenefitInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addBenefitBtn.click();
+                }
+            });
+
+            // Lógica para carregar cidades baseadas no estado selecionado
+            estadoSelect.addEventListener('change', () => {
+                cidadeInput.value = ''; // Limpa a cidade ao mudar o estado
+                citySuggestionsDiv.innerHTML = '';
+                citySuggestionsDiv.style.display = 'none';
+                hideError(estadoSelect); // Esconde erro do estado
+                // hideError(cidadeInput); // Não esconde erro da cidade aqui, pois ela pode ser inválida se o estado mudar
+                validateField(cidadeInput); // Revalida a cidade após a mudança de estado
+            });
+
+            // Lógica para pesquisa de cidades
+            cidadeInput.addEventListener('input', async () => {
+                const query = cidadeInput.value.trim().toLowerCase();
+                const selectedState = estadoSelect.value;
+                citySuggestionsDiv.innerHTML = ''; // Limpa sugestões anteriores
+
+                // Validação para garantir que um estado foi selecionado antes de buscar cidades
+                if (selectedState === '') {
+                    showError(cidadeInput, 'Primeiro, selecione um estado.');
+                    citySuggestionsDiv.style.display = 'none';
+                    return;
+                } else {
+                    hideError(cidadeInput); // Esconde erro se o estado já estiver selecionado
+                }
+
+                // Carrega cidades do estado selecionado
+                const availableCities = await loadCitiesForState(selectedState);
+
+                if (query.length > 1 && availableCities.length > 0) {
+                    const filteredCities = availableCities.filter(city =>
+                        city.toLowerCase().includes(query)
+                    );
+
+                    if (filteredCities.length > 0) {
+                        // Limita a 10 sugestões para melhor performance
+                        filteredCities.slice(0, 10).forEach(city => {
+                            const suggestionItem = document.createElement('div');
+                            suggestionItem.textContent = city;
+                            suggestionItem.addEventListener('click', () => {
+                                cidadeInput.value = city;
+                                citySuggestionsDiv.style.display = 'none'; // Esconde sugestões após seleção
+                                hideError(cidadeInput); // Esconde erro após seleção válida
+                            });
+                            citySuggestionsDiv.appendChild(suggestionItem);
+                        });
+                        citySuggestionsDiv.style.display = 'block'; // Mostra o container de sugestões
+                    } else {
+                        citySuggestionsDiv.style.display = 'none';
+                    }
+                } else {
+                    citySuggestionsDiv.style.display = 'none';
+                }
+            });
+
+            // Esconder sugestões quando o usuário clica fora do campo
+            document.addEventListener('click', (e) => {
+                if (!cidadeInput.contains(e.target) && !citySuggestionsDiv.contains(e.target)) {
+                    citySuggestionsDiv.style.display = 'none';
+                }
+            });
+
+            const jobForm = document.getElementById('job-form');
+            jobForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                let formIsValid = true;
+
+                // Valida todos os campos ao enviar o formulário
+                const fieldsToValidate = [
+                    document.getElementById('titulo'),
+                    document.getElementById('salario'),
+                    document.getElementById('formato-trabalho'),
+                    document.getElementById('nivel-vaga'),
+                    document.getElementById('contrato'),
+                    document.getElementById('setor-vaga'),
+                    document.getElementById('estado'),
+                    document.getElementById('cidade'),
+                    document.getElementById('descricao'),
+                    document.getElementById('requisitos')
+                ];
+
+                fieldsToValidate.forEach(field => {
+                    if (!validateField(field)) {
+                        formIsValid = false;
+                    }
+                });
+
+                // Validação de benefícios
+                if (benefitsList.children.length === 0) {
+                    showError(benefitsList, 'Adicione pelo menos um benefício.');
+                    benefitsList.classList.add('invalid'); // Adiciona a classe 'invalid' ao container
+                    formIsValid = false;
+                } else {
+                    hideError(benefitsList);
+                    benefitsList.classList.remove('invalid'); // Remove a classe 'invalid' do container
+                }
+
+                if (formIsValid) {
+                    const selectedNivel = nivelVagaSelect.value;
+                    const taxaPublicacao = taxaPorNivel[selectedNivel];
+                    const nivelTexto = nivelVagaSelect.options[nivelVagaSelect.selectedIndex].text; // Pega o texto completo da opção
+
+                    const formData = {
+                        titulo: document.getElementById('titulo').value,
+                        salario: document.getElementById('salario').value,
+                        formatoTrabalho: document.getElementById('formato-trabalho').value,
+                        nivelVaga: selectedNivel,
+                        nivelVagaTexto: nivelTexto, // Adiciona o texto do nível
+                        taxaPublicacao: taxaPublicacao, // Adiciona a taxa
+                        contrato: document.getElementById('contrato').value,
+                        setorVaga: document.getElementById('setor-vaga').value,
+                        estado: document.getElementById('estado').value,
+                        cidade: document.getElementById('cidade').value,
+                        descricao: document.getElementById('descricao').value,
+                        requisitos: document.getElementById('requisitos').value,
+                        beneficios: []
+                    };
+
+                    document.querySelectorAll('.benefit-item span').forEach(span => {
+                        formData.beneficios.push(span.textContent);
+                    });
+
+                    // Salva os dados no localStorage para serem acessados pela página de pagamento
+                    localStorage.setItem('jobFormData', JSON.stringify(formData));
+
+                    console.log('Dados da Vaga para Pagamento:', formData);
+                    // Redireciona para a página de pagamento
+                    window.location.href = '/pagamento';
+                } else {
+                    alert('Por favor, preencha todos os campos obrigatórios corretamente.');
+                     // Foca no primeiro campo inválido para melhorar a UX
+                    const firstInvalidField = document.querySelector('.invalid');
+                    if (firstInvalidField) {
+                        firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        firstInvalidField.focus();
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="/js/script.js" defer></script>
+</body>
+</html>

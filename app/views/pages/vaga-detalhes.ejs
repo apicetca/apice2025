@@ -27,7 +27,7 @@
         </nav>
         
         <!-- Header da vaga -->
-        <header class="vaga-header">
+        <section class="vaga-header">
             <figure class="empresa-logo-container">
                 <% if (vaga.imagem) { %>
                     <img src="<%= vaga.imagem %>" alt="Logo da empresa" class="empresa-logo">
@@ -58,8 +58,14 @@
                         <span>Candidatar-me</span>
                     </button>
                 </form>
+                
+                <!-- Botão Sobre a Empresa -->
+                <button class="btn-sobre-empresa" onclick="mostrarSobreEmpresa()">
+                    <i class="fas fa-building" aria-hidden="true"></i>
+                    <span>Sobre a Empresa</span>
+                </button>
             </nav>
-        </header>
+        </section>
 
         <!-- Conteúdo Principal -->
         <article class="conteudo-principal">
@@ -132,6 +138,90 @@
             </section>
         </article>
     </main>
+    
+    <!-- Modal Sobre a Empresa -->
+    <div id="modal-sobre-empresa" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Sobre a Empresa</h3>
+                <button class="modal-close" onclick="fecharSobreEmpresa()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="empresa-info">
+                    <div class="empresa-logo">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4><%= empresa || 'Alpha Robotics Pro' %></h4>
+                    <p class="empresa-descricao">
+                        Empresa líder em tecnologia e inovação, comprometida em desenvolver talentos e oferecer oportunidades de crescimento profissional. Nossa missão é conectar pessoas talentosas com projetos transformadores.
+                    </p>
+                    
+                    <div class="empresa-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <span class="stat-number">500+</span>
+                                <span class="stat-label">Funcionários</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-calendar"></i>
+                            <div>
+                                <span class="stat-number">15</span>
+                                <span class="stat-label">Anos no mercado</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-trophy"></i>
+                            <div>
+                                <span class="stat-number">50+</span>
+                                <span class="stat-label">Prêmios recebidos</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="empresa-valores">
+                        <h5>Nossos Valores</h5>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Inovação constante</li>
+                            <li><i class="fas fa-check"></i> Diversidade e inclusão</li>
+                            <li><i class="fas fa-check"></i> Desenvolvimento profissional</li>
+                            <li><i class="fas fa-check"></i> Responsabilidade social</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function mostrarSobreEmpresa() {
+            document.getElementById('modal-sobre-empresa').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function fecharSobreEmpresa() {
+            document.getElementById('modal-sobre-empresa').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Fechar modal ao clicar fora dele
+        document.getElementById('modal-sobre-empresa').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharSobreEmpresa();
+            }
+        });
+        
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                fecharSobreEmpresa();
+            }
+        });
+    </script>
+    
     <script src="/js/script.js" defer></script>
     <%- include('../partials/footer') %>
 </body>

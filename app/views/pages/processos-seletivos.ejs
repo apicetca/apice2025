@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ápice - Processos Seletivos</title>
+  <link rel="stylesheet" href="/css/processos-seletivos.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="main-header">
+    <%- include('../partials/menuempresa') %>
+  </header>
+
+  <main class="processos-container">
+    <!-- Cabeçalho da página -->
+    <header class="page-header">
+      <nav class="header-content">
+        <button class="back-btn" onclick="history.back()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+        </button>
+        
+        <section class="header-info">
+          <h1 class="page-title">SALA DE REUNIÕES</h1>
+        </section>
+        
+        <button class="notification-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+            <path d="m13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Seção de horários -->
+    <section class="schedule-section">
+      <header class="section-header">
+        <h2 class="section-title">PRÓXIMAS REUNIÕES</h2>
+      </header>
+
+      <article class="meetings-list">
+        <!-- Reunião 1 -->
+        <section class="meeting-item">
+          <time class="meeting-time">
+            <span class="time">14:30</span>
+          </time>
+          <article class="meeting-info">
+            <h3 class="candidate-name">Ana Vicente</h3>
+            <p class="position">Professor de Matemática</p>
+          </article>
+          <button class="action-btn primary">Iniciar</button>
+        </section>
+
+        <!-- Reunião 2 -->
+        <section class="meeting-item">
+          <time class="meeting-time">
+            <span class="time">15:00</span>
+          </time>
+          <article class="meeting-info">
+            <h3 class="candidate-name">Carlos Lima</h3>
+            <p class="position">Auxiliar de RH</p>
+          </article>
+          <button class="action-btn primary">Iniciar</button>
+        </section>
+
+        <!-- Reunião 3 -->
+        <section class="meeting-item">
+          <time class="meeting-time">
+            <span class="time">15:20</span>
+          </time>
+          <article class="meeting-info">
+            <h3 class="candidate-name">Antonella Gozola</h3>
+            <p class="position">Analista de Sistemas</p>
+          </article>
+          <button class="action-btn primary">Iniciar</button>
+        </section>
+
+        <!-- Reunião 4 -->
+        <section class="meeting-item">
+          <time class="meeting-time">
+            <span class="time">15:40</span>
+          </time>
+          <article class="meeting-info">
+            <h3 class="candidate-name">Edvanilze Samuré</h3>
+            <p class="position">Designer Gráfico</p>
+          </article>
+          <button class="action-btn primary">Iniciar</button>
+        </section>
+
+        <!-- Reunião 5 -->
+        <section class="meeting-item">
+          <time class="meeting-time">
+            <span class="time">16:00</span>
+          </time>
+          <article class="meeting-info">
+            <h3 class="candidate-name">João Victor Garuja</h3>
+            <p class="position">Desenvolvedor</p>
+          </article>
+          <button class="action-btn primary">Iniciar</button>
+        </section>
+
+        <!-- Reunião 6 -->
+        <section class="meeting-item">
+          <time class="meeting-time">
+            <span class="time">14:30</span>
+          </time>
+          <article class="meeting-info">
+            <h3 class="candidate-name">Ana Vicente</h3>
+            <p class="position">Professor de Matemática</p>
+          </article>
+          <button class="action-btn primary">Iniciar</button>
+        </section>
+      </article>
+    </section>
+
+    <!-- Botão para sala de reuniões -->
+    <aside class="actions-section">
+      <a href="/sala-reuniao" class="sala-reuniao-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        Entrar na Sala de Reuniões
+      </a>
+    </aside>
+  </main>
+
+  <footer>
+    <%- include('../partials/footer') %>
+  </footer>
+  <script>
+    // Adicionar funcionalidade aos botões
+    document.addEventListener('DOMContentLoaded', function() {
+      const actionBtns = document.querySelectorAll('.action-btn');
+      
+      actionBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const meetingItem = this.closest('.meeting-item');
+          const candidateName = meetingItem.querySelector('.candidate-name').textContent;
+          const time = meetingItem.querySelector('.time').textContent;
+          
+          // Aqui você pode adicionar lógica para iniciar a reunião
+          alert(`Iniciando reunião com ${candidateName} às ${time}`);
+          
+          // Redirecionar para sala de reunião
+          window.location.href = '/sala-reuniao';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

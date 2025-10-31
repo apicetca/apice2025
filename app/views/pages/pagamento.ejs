@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento da Vaga | Empresa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #160b5d; /* Azul principal */
+            --secondary-yellow: #ffc52d; /* Amarelo secundário */
+            --white: #FFFFFF;
+            --light-grey: #868686;
+            --medium-grey: #8f8f8f;
+            --input-bg: #120b3d; /* Um tom de roxo escuro para inputs para contraste */
+            --input-border: #120b3d; /* Borda mais escura para inputs */
+            --black: #000000;
+            /* Variáveis do stepper */
+            --stepper-bg: #F0F2F5;
+            --stepper-inactive-color: #8f8f8f;
+            --stepper-line-color: #ccc;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--stepper-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: var(--primary-blue);
+            width: 100%;
+            padding: 30px;
+            box-sizing: border-box;
+            color: var(--white);
+        }
+
+        .page-title {
+            color: var(--white);
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .payment-summary {
+            background-color: var(--input-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .payment-summary p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .payment-summary p span:first-child {
+            color: var(--light-grey);
+        }
+
+        .payment-summary .total {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--secondary-yellow);
+            border-top: 1px solid var(--input-border);
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .payment-options h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .payment-option {
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .payment-option.selected {
+            border-color: var(--secondary-yellow);
+            box-shadow: 0 0 0 2px rgba(255, 197, 45, 0.5);
+        }
+
+        .payment-option input[type="radio"] {
+            margin-right: 15px;
+            accent-color: var(--secondary-yellow); /* Altera a cor do radio button */
+        }
+
+        .payment-option label {
+            flex-grow: 1;
+            margin-bottom: 0;
+            font-size: 16px;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        .payment-option .icon {
+            margin-left: auto;
+            font-size: 20px;
+            color: var(--white);
+        }
+
+        /* Contêiner para os botões */
+        .button-group {
+            display: flex;
+            justify-content: space-between; /* Distribui os itens com espaço entre eles */
+            gap: 15px; /* Espaço entre os botões */
+            margin-top: 30px;
+        }
+
+        .btn-action {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 550;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            flex-grow: 1; /* Faz com que os botões ocupem o espaço disponível */
+            text-align: center; /* Centraliza o texto nos botões */
+            text-decoration: none; /* Remove sublinhado se for um <a> */
+        }
+
+        .btn-confirm-payment {
+            background-color: var(--secondary-yellow);
+            color: var(--black);
+        }
+
+        .btn-confirm-payment:hover {
+            background-color: #ffd76b;
+        }
+
+        .btn-back {
+            background-color: var(--light-grey);
+            color: var(--white);
+        }
+
+        .btn-back:hover {
+            background-color: #a0a0a0;
+        }
+
+        .form-stepper-wrapper {
+            width: 100%;
+            padding: 20px 0;
+            background-color: var(--stepper-bg);
+            box-sizing: border-box;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .form-stepper-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 350px;
+            width: 100%;
+            padding: 0 20px;
+            margin: 0 auto;
+        }
+
+        .stepper-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .stepper-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            background-color: var(--stepper-inactive-color);
+            color: var(--white);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0; /* Remove margin padrão do figure */
+        }
+
+        .stepper-label {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--stepper-inactive-color);
+            transition: color 0.3s ease;
+            line-height: 1.2;
+            margin-bottom: 0; /* Remove margin padrão do p */
+        }
+
+        .stepper-line {
+            height: 2px;
+            width: 40px;
+            background-color: var(--stepper-line-color);
+            margin: 0 5px;
+            border: none; /* Remove borda padrão do hr */
+        }
+
+        .stepper-item.active .stepper-circle {
+            background-color: var(--secondary-yellow);
+            color: var(--white);
+        }
+
+        .stepper-item.active .stepper-label {
+            color: var(--secondary-yellow);
+            font-weight: 400;
+        }
+
+        .stepper-item.active + .stepper-line {
+            background-color: var(--secondary-yellow); /* Toda amarela quando o passo anterior está ativo */
+        }
+
+        /* Estilos para fieldset */
+        .payment-option {
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Estilos para figure no popup */
+        .icon-circle {
+            margin: 0 auto 20px; /* Remove margin padrão do figure */
+        }
+
+        /* Pop-up Styles */
+        .popup-container {
+            display: none; /* Escondido por padrão */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0; /* Começa invisível para o fade-in */
+            transition: opacity 0.3s ease-in-out; /* Transição para o fade */
+        }
+
+        .popup-container.fade-in {
+            opacity: 1;
+        }
+
+        .popup-container.fade-out {
+            opacity: 0;
+        }
+
+        .popup-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+            transform: translateY(20px); /* Começa um pouco abaixo para animação */
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        .popup-container.fade-in .popup-content {
+            transform: translateY(0); /* Sobe para a posição final */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #333;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .icon-circle {
+            background-color: var(--secondary-yellow);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
+        }
+
+        .checkmark {
+            color: var(--white);
+            font-size: 40px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .popup-content h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .popup-content p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .btn-popup-primary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .btn-popup-primary:hover {
+            background-color: #20137a;
+        }
+
+        .btn-popup-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn-popup-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .main-wrapper {
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .container {
+                padding: 20px;
+                border-radius: 0;
+            }
+            .page-title {
+                font-size: 22px;
+            }
+            .form-stepper-wrapper {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                padding: 15px 0;
+            }
+            .form-stepper-container {
+                padding: 0 10px;
+            }
+            .stepper-item {
+                min-width: 80px;
+            }
+            .stepper-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            .stepper-label {
+                font-size: 12px;
+            }
+            .stepper-line {
+                width: 25px;
+            }
+
+            /* Para telas menores, os botões podem se empilhar */
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <%- include('../partials/menuempresa') %>
+    </header>
+    <main class="main-wrapper">
+        <section class="form-stepper-wrapper">
+            <nav class="form-stepper-container">
+                <section class="stepper-item active">
+                    <figure class="stepper-circle">1</figure>
+                    <p class="stepper-label">Informações da vaga</p>
+                </section>
+                <hr class="stepper-line">
+                <section class="stepper-item active">
+                    <figure class="stepper-circle">2</figure>
+                    <p class="stepper-label">Pagamento da taxa de publicação</p>
+                </section>
+            </nav>
+        </section>
+
+        <section class="container">
+            <h1 class="page-title">Pagamento da Taxa de Publicação</h1>
+
+            <article class="payment-summary">
+                <p><span>Nível da Vaga:</span> <span id="summary-nivel"></span></p>
+                <p class="total"><span>Valor Total:</span> <span id="summary-valor">R$ 0,00</span></p>
+            </article>
+
+            <section class="payment-options">
+                <h2>Selecione uma forma de pagamento:</h2>
+
+                <fieldset class="payment-option" id="option-pix">
+                    <input type="radio" id="radio-pix" name="payment-method" value="pix">
+                    <label for="radio-pix">PIX</label>
+                    <span class="icon"><i class="fas fa-qrcode"></i></span>
+                </fieldset>
+
+                <fieldset class="payment-option" id="option-card">
+                    <input type="radio" id="radio-card" name="payment-method" value="card">
+                    <label for="radio-card">Cartão de Crédito/Débito</label>
+                    <span class="icon"><i class="fas fa-credit-card"></i></span>
+                </fieldset>
+
+                <fieldset class="payment-option" id="option-boleto">
+                    <input type="radio" id="radio-boleto" name="payment-method" value="boleto">
+                    <label for="radio-boleto">Boleto Bancário</label>
+                    <span class="icon"><i class="fas fa-barcode"></i></span>
+                </fieldset>
+            </section>
+
+            <nav class="button-group">
+                <button type="button" class="btn-action btn-back" onclick="history.back()">Voltar</button>
+                <button type="button" class="btn-action btn-confirm-payment" id="btn-confirm">Confirmar Pagamento</button>
+            </nav>
+
+        </section>
+    </main>
+
+    <!-- Pop-up de Confirmação de Sucesso -->
+    <aside id="successPopup" class="popup-container">
+        <article class="popup-content">
+            <button class="close-btn" onclick="closePopup()">&times;</button>
+            <figure class="icon-circle">
+                <span class="checkmark">&#10003;</span>
+            </figure>
+            <h2>Solicitação enviada com sucesso!</h2>
+            <p>Seu pagamento foi confirmado.</p>
+            <button class="btn-popup-primary" onclick="redirectToVagas()">Clique aqui para voltar a tela de Vagas.</button>
+            <button class="btn-popup-secondary" onclick="printVagaDetails()">Imprimir detalhes da vaga</button>
+        </article>
+    </aside>
+
+    <script>
+        let currentVagaDetails = {}; // Objeto para armazenar os detalhes da vaga
+        const successPopup = document.getElementById('successPopup');
+        const popupContent = document.querySelector('#successPopup .popup-content');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedFormData = localStorage.getItem('jobFormData');
+            const summaryNivel = document.getElementById('summary-nivel');
+            const summaryValor = document.getElementById('summary-valor');
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            const btnConfirm = document.getElementById('btn-confirm');
+
+            if (storedFormData) {
+                const formData = JSON.parse(storedFormData);
+                currentVagaDetails = formData; // Armazena os detalhes para impressão
+
+                const formattedTaxa = new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }).format(formData.taxaPublicacao || 0);
+
+                summaryNivel.textContent = formData.nivelVagaTexto || 'Não especificado';
+                summaryValor.textContent = formattedTaxa;
+
+            } else {
+                summaryNivel.textContent = 'N/A';
+                summaryValor.textContent = 'R$ 0,00';
+                alert('Nenhum dado da vaga encontrado. Por favor, preencha o formulário novamente.');
+                // window.location.href = 'vagas.html';
+            }
+
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    option.querySelector('input[type="radio"]').checked = true;
+                });
+            });
+
+            btnConfirm.addEventListener('click', () => {
+                const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked');
+                if (selectedPaymentMethod) {
+                    console.log(`Pagamento com ${selectedPaymentMethod.value.toUpperCase()} confirmado!`);
+                    openSuccessPopup(); // Abre o pop-up de sucesso
+                } else {
+                    alert('Por favor, selecione uma forma de pagamento.');
+                }
+            });
+
+            // Adiciona evento para fechar o pop-up ao clicar fora do conteúdo
+            successPopup.addEventListener('click', (event) => {
+                if (!popupContent.contains(event.target) && event.target === successPopup) {
+                    closePopup();
+                }
+            });
+        });
+
+        // Função para abrir o pop-up com fade-in
+        function openSuccessPopup() {
+            successPopup.style.display = 'flex';
+            // Força o reflow para garantir que a transição de opacidade ocorra
+            void successPopup.offsetWidth; 
+            successPopup.classList.add('fade-in');
+        }
+
+        // Função para fechar o pop-up com fade-out
+        function closePopup() {
+            successPopup.classList.remove('fade-in');
+            successPopup.classList.add('fade-out');
+            successPopup.addEventListener('transitionend', function handler() {
+                successPopup.style.display = 'none';
+                successPopup.classList.remove('fade-out');
+                successPopup.removeEventListener('transitionend', handler);
+            });
+        }
+
+        function redirectToVagas() {
+            alert('Redirecionando para a tela de Vagas...');
+            // window.location.href = '/sua-pagina-de-vagas';
+            closePopup();
+        }
+
+        function printVagaDetails() {
+            if (Object.keys(currentVagaDetails).length === 0) {
+                alert('Nenhum detalhe da vaga disponível para impressão.');
+                return;
+            }
+
+            const formattedTaxa = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(currentVagaDetails.taxaPublicacao || 0);
+
+            const printContentHtml = `
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+                    :root{--primary-blue: #160b5d; --secondary-yellow: #ffc52d;} /* Variáveis CSS para a impressão */
+                    body { font-family: 'Poppins', sans-serif; margin: 40px; color: #333; line-height: 1.6; }
+                    h1 { color: var(--primary-blue); font-size: 28px; margin-bottom: 25px; text-align: center; border-bottom: 2px solid var(--secondary-yellow); padding-bottom: 10px; }
+                    h2 { color: var(--primary-blue); font-size: 22px; margin-top: 30px; margin-bottom: 15px; }
+                    p { margin-bottom: 10px; }
+                    strong { color: #000; font-weight: 600; }
+                    .details-box { border: 1px solid #ddd; padding: 25px; border-radius: 10px; background-color: #fcfcfc; margin-top: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+                    .details-box p span:first-child { font-weight: 500; }
+                    .total-value { font-size: 1.2em; font-weight: 700; color: var(--primary-blue); border-top: 1px dashed #ccc; padding-top: 15px; margin-top: 20px; text-align: right; }
+                    .header-logo { text-align: center; margin-bottom: 30px; }
+                    .header-logo img { max-width: 150px; height: auto; }
+                </style>
+                <div class="header-logo">
+                    <!-- <img src="URL_DO_SEU_LOGO.png" alt="Logo da Empresa"> -->
+                </div>
+                <h1>Comprovante de Publicação de Vaga</h1>
+                <div class="details-box">
+                    <h2>Detalhes da Vaga</h2>
+                    <p><strong>Nome da Empresa:</strong> ${currentVagaDetails.nomeEmpresa || 'Não informado'}</p>
+                    <p><strong>Cargo da Vaga:</strong> ${currentVagaDetails.cargoVaga || 'Não informado'}</p>
+                    <p><strong>Nível da Vaga:</strong> ${currentVagaDetails.nivelVagaTexto || 'Não informado'}</p>
+                    <p><strong>Tipo de Contrato:</strong> ${currentVagaDetails.tipoContrato || 'Não informado'}</p>
+                    <p><strong>Localização da Vaga:</strong> ${currentVagaDetails.localizacaoVaga || 'Não informado'}</p>
+                    <p><strong>Salário Estimado:</strong> ${currentVagaDetails.salarioEstimado || 'Não informado'}</p>
+                    <p><strong>Descrição da Vaga:</strong> ${currentVagaDetails.descricaoVaga || 'Não informado'}</p>
+                    
+                    <h2>Detalhes do Pagamento</h2>
+                    <p><strong>Método de Pagamento:</strong> ${document.querySelector('input[name="payment-method"]:checked')?.value.toUpperCase() || 'Não selecionado'}</p>
+                    <p class="total-value"><strong>Valor Total Pago:</strong> ${formattedTaxa}</p>
+                    <p style="text-align: center; margin-top: 40px; font-size: 0.9em; color: #777;">Obrigado por utilizar nossos serviços!</p>
+                </div>
+            `;
+
+            const printWindow = window.open('', '_blank', 'height=600,width=800');
+            printWindow.document.write('<html><head><title>Comprovante de Vaga</title></head><body>');
+            printWindow.document.write(printContentHtml);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+            printWindow.close();
+            closePopup();
+        }
+    </script>
+    <script src="/js/script.js" defer></script>
+</body>
+</html>

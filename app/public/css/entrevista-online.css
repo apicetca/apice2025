@@ -1,0 +1,910 @@
+/* ========== ENTREVISTA ONLINE - DESIGN LIMPO ========== */
+
+:root {
+  --primary: #160B5D;
+  --secondary: #FFC52D;
+  --accent: #f9c21b;
+  --success: #28a745;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --bg-light: #f8f9ff;
+  --bg-card: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-light: #95a5a6;
+  --border-light: #e8ecf4;
+  --shadow-soft: 0 4px 20px rgba(22, 11, 93, 0.08);
+  --shadow-card: 0 8px 30px rgba(22, 11, 93, 0.12);
+  --radius: 16px;
+  --radius-small: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: white;
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-top: 90px; /* Espaço para o menu fixo */
+  overflow-x: hidden; /* Previne scroll horizontal */
+  margin: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========== CONTAINER PRINCIPAL ========== */
+.interview-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px; /* Restaurado padding normal */
+  min-height: calc(100vh - 90px);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ========== HEADER SECTION ========== */
+.interview-header {
+  background: transparent; /* Removido background */
+  color: var(--text-primary);
+  padding: 20px 20px; /* Reduzido padding para ficar mais para cima */
+  margin: -20px -20px 20px -20px; /* Reduzido espaço inferior */
+  text-align: center;
+}
+
+.header-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.interview-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem; /* Aumentado para dar mais destaque */
+  font-weight: 800; /* Peso mais forte para título */
+  color: var(--primary);
+  margin-bottom: 12px; /* Aumentado espaçamento */
+  letter-spacing: 0.8px; /* Mais espaçamento entre letras */
+  text-transform: uppercase; /* Título em maiúsculas */
+  line-height: 1.1; /* Altura da linha otimizada */
+}
+
+.interview-subtitle {
+  font-size: 1.1rem;
+  color: var(--primary); /* Mudado para azul escuro */
+  font-weight: 400;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ========== VIDEO SECTION ========== */
+.video-section {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.video-area {
+  padding: 0;
+}
+
+.video-placeholder {
+  background: #160B5D;
+  aspect-ratio: 16/9;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  min-height: 400px;
+}
+
+.participant-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.participant-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== VIDEO CONTROLS ========== */
+.video-controls {
+  display: flex;
+  gap: 16px;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.control-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.control-btn.active {
+  background: var(--secondary);
+  color: var(--primary);
+}
+
+.control-btn.active:hover {
+  background: var(--accent);
+}
+
+/* ========== INFO PANELS ========== */
+.interview-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.interview-details,
+.participants {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+.interview-details h2,
+.participants h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.details-list,
+.participants-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-item,
+.participant-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.detail-item svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.detail-item span {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.participant-avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.participant-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.participant-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.participant-status {
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.participant-status.ready {
+  background: rgba(40, 167, 69, 0.1);
+  color: var(--success);
+}
+
+.participant-status.waiting {
+  background: rgba(255, 193, 7, 0.1);
+  color: var(--warning);
+}
+
+/* ========== ACTION BUTTONS ========== */
+.interview-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.interview-actions button {
+  padding: 16px 32px;
+  border: none;
+  border-radius: var(--radius-small);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 180px;
+  justify-content: center;
+}
+
+.btn-join.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-join.primary svg {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.btn-join.primary:hover {
+  background: var(--secondary);
+  color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.btn-test.secondary {
+  background: var(--bg-light);
+  color: var(--primary);
+  border: 2px solid var(--border-light);
+}
+
+.btn-test.secondary svg {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.btn-test.secondary:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* ========== QUICK SETTINGS ========== */
+.quick-settings {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+.quick-settings h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.settings-group {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.setting-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.setting-label:hover {
+  color: var(--text-primary);
+}
+
+.setting-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-light);
+  border-radius: 4px;
+  position: relative;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.setting-label input[type="checkbox"]:checked + .checkmark {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.setting-label input[type="checkbox"]:checked + .checkmark::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  body {
+    padding-top: 95px !important; /* Ajuste para tablet */
+  }
+
+  .interview-container {
+    padding: 16px; /* Restaurado padding normal */
+    gap: 24px;
+    min-height: calc(100vh - 95px);
+  }
+  
+  .interview-header {
+    margin: -16px -16px 20px -16px; /* Reduzido espaço inferior */
+    padding: 20px 20px; /* Reduzido padding */
+  }
+  
+  .interview-title {
+    font-size: 2.2rem; /* Proporcionalmente menor para tablet */
+    letter-spacing: 0.6px;
+  }
+  
+  .interview-info {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .interview-actions {
+    flex-direction: column;
+    align-items: center; /* Centraliza os botões */
+    gap: 16px;
+  }
+  
+  .interview-actions button {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  body {
+    padding-top: 100px !important; /* Aumentado para garantir que o título não se esconda */
+  }
+  
+  .interview-container {
+    padding: 16px; /* Restaurado padding normal */
+    gap: 20px;
+    min-height: calc(100vh - 100px);
+    max-width: 100vw;
+  }
+  
+  .interview-header {
+    margin: -16px -16px 16px -16px; /* Reduzido espaço inferior */
+    padding: 16px 16px; /* Reduzido padding para ficar mais para cima */
+  }
+  
+  .interview-title {
+    font-size: 1.8rem; /* Tamanho adequado para mobile */
+    line-height: 1.1;
+    margin-bottom: 10px;
+    letter-spacing: 0.4px;
+  }
+  
+  .interview-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+  
+  .video-section {
+    margin: 0 0 20px 0; /* Removido margem lateral pois já está no container */
+    border-radius: var(--radius);
+  }
+  
+  .video-placeholder {
+    min-height: 250px;
+    padding: 20px;
+  }
+  
+  .participant-info {
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .participant-name {
+    font-size: 0.95rem;
+    text-align: center;
+    max-width: 280px;
+  }
+  
+  .video-controls {
+    gap: 12px;
+    bottom: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    width: auto;
+    max-width: calc(100% - 32px); /* Garante espaço nas laterais */
+  }
+  
+  .control-btn {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    min-width: 44px; /* Garante tamanho mínimo para touch */
+  }
+  
+  .interview-info {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0; /* Removido padding pois já está no container */
+  }
+  
+  .interview-details,
+  .participants {
+    padding: 20px 16px;
+  }
+  
+  .interview-details h2,
+  .participants h3 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+  
+  .details-list,
+  .participants-list {
+    gap: 12px;
+  }
+  
+  .detail-item,
+  .participant-item {
+    padding: 8px 0;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .detail-item svg {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  
+  .detail-item span {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .participant-avatar {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  
+  .participant-details {
+    gap: 4px;
+  }
+  
+  .participant-details .participant-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  .participant-status {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+  
+  .interview-actions {
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0; /* Removido margem lateral pois já está no container */
+    align-items: center; /* Centraliza os botões */
+  }
+  
+  .interview-actions button {
+    width: 100%;
+    max-width: 300px; /* Limita a largura máxima */
+    padding: 16px 20px;
+    font-size: 0.95rem;
+    border-radius: var(--radius-small);
+    display: block; /* Garante que o botão se comporte como bloco */
+    text-align: center;
+  }
+  
+  .quick-settings {
+    margin: 0 0 20px 0; /* Removido margem lateral pois já está no container */
+    padding: 20px 16px;
+  }
+  
+  .quick-settings h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+  
+  .settings-group {
+    gap: 14px;
+  }
+  
+  .setting-label {
+    font-size: 0.9rem;
+    gap: 12px;
+    padding: 4px 0;
+  }
+  
+  .checkmark {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  body {
+    padding-top: 110px !important; /* Ainda mais espaço para telas muito pequenas */
+  }
+
+  .interview-container {
+    min-height: calc(100vh - 110px);
+    padding: 12px; /* Restaurado padding normal */
+  }
+
+  .interview-header {
+    padding: 12px 12px; /* Reduzido padding */
+    margin: -12px -12px 12px -12px; /* Reduzido espaço inferior */
+  }
+  
+  .interview-title {
+    font-size: 1.5rem; /* Tamanho para mobile pequeno */
+    line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+  }
+  
+  .interview-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .video-section {
+    margin: 0 0 16px 0; /* Removido margem lateral pois já está no container */
+  }
+  
+  .video-placeholder {
+    min-height: 220px;
+    padding: 16px;
+  }
+  
+  .participant-info {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .participant-name {
+    font-size: 0.9rem;
+    max-width: 250px;
+  }
+  
+  .video-controls {
+    gap: 8px;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    max-width: calc(100% - 24px); /* Ainda mais espaço nas laterais */
+  }
+  
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+  
+  .control-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .interview-info {
+    padding: 0; /* Removido padding pois já está no container */
+    gap: 12px;
+  }
+  
+  .interview-details,
+  .participants {
+    padding: 16px 12px;
+  }
+  
+  .interview-details h2,
+  .participants h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  
+  .detail-item,
+  .participant-item {
+    padding: 6px 0;
+    gap: 10px;
+  }
+  
+  .detail-item svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .detail-item span {
+    font-size: 0.85rem;
+  }
+  
+  .participant-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .participant-details .participant-name {
+    font-size: 0.85rem;
+  }
+  
+  .interview-actions {
+    margin: 16px 0; /* Removido margem lateral pois já está no container */
+    gap: 10px;
+  }
+  
+  .interview-actions button {
+    padding: 14px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .quick-settings {
+    margin: 0 0 16px 0; /* Removido margem lateral pois já está no container */
+    padding: 16px 12px;
+  }
+  
+  .quick-settings h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+  
+  .settings-group {
+    gap: 12px;
+  }
+  
+  .setting-label {
+    font-size: 0.85rem;
+    gap: 10px;
+  }
+  
+  .checkmark {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Mobile extra pequeno */
+@media (max-width: 400px) {
+  body {
+    padding-top: 120px !important; /* Mais espaço para telas muito pequenas */
+  }
+
+  .interview-container {
+    min-height: calc(100vh - 120px);
+    padding: 8px; /* Padding ainda menor */
+  }
+
+  .interview-header {
+    padding: 10px 8px; /* Padding ainda menor */
+    margin: -8px -8px 8px -8px; /* Reduzido espaço inferior */
+  }
+  
+  .interview-title {
+    font-size: 1.3rem; /* Tamanho para telas muito pequenas */
+    line-height: 1.1;
+    margin-bottom: 6px;
+    letter-spacing: 0.2px;
+  }
+  
+  .interview-subtitle {
+    font-size: 0.8rem; /* Subtítulo menor */
+  }
+
+  .video-placeholder {
+    min-height: 180px; /* Altura reduzida */
+    padding: 12px;
+  }
+
+  .participant-info {
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .avatar {
+    width: 40px; /* Avatar menor */
+    height: 40px;
+  }
+
+  .participant-name {
+    font-size: 0.8rem;
+    max-width: 200px;
+  }
+
+  .video-controls {
+    gap: 6px; /* Gap reduzido entre controles */
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    max-width: calc(100% - 16px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .control-btn {
+    width: 36px; /* Botões menores */
+    height: 36px;
+    min-width: 36px;
+    margin: 2px; /* Pequena margem entre botões */
+  }
+  
+  .control-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .interview-details,
+  .participants {
+    padding: 12px 8px; /* Padding reduzido */
+  }
+  
+  .interview-details h2,
+  .participants h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .detail-item,
+  .participant-item {
+    padding: 4px 0;
+    gap: 8px;
+  }
+
+  .detail-item svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .detail-item span {
+    font-size: 0.8rem;
+  }
+
+  .participant-avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .participant-details .participant-name {
+    font-size: 0.8rem;
+  }
+
+  .interview-actions {
+    margin: 12px 0;
+    gap: 8px;
+  }
+  
+  .interview-actions button {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    min-width: 160px; /* Largura mínima reduzida */
+  }
+
+  .quick-settings {
+    margin: 0 0 12px 0;
+    padding: 12px 8px;
+  }
+  
+  .quick-settings h3 {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
+  .settings-group {
+    gap: 8px;
+  }
+  
+  .setting-label {
+    font-size: 0.8rem;
+    gap: 8px;
+  }
+  
+  .checkmark {
+    width: 16px;
+    height: 16px;
+  }
+}
