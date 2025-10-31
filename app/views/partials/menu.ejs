@@ -7,7 +7,19 @@ html, body {
 }
 
 body {
-  padding-top: 76px; /* Reduzido para ter menos espaço */
+  padding-top: 80px; /* Altura do menu para outras páginas */
+}
+
+/* Específico para a página home - remove TODOS os espaçamentos */
+body.home-page {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body.home-page * {
+  margin-top: 0;
 }
 
 .menu-header {
@@ -24,6 +36,8 @@ body {
   box-sizing: border-box;
   max-width: 100%;
   overflow-x: hidden;
+  height: 80px;
+  box-sizing: border-box;
 }
 
 .dstqMenu2[href="/login"] {
@@ -184,6 +198,29 @@ body {
   font-weight: 300;
 }
 
+.menu-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-footer a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.menu-footer a:hover {
+  color: white;
+}
+
 @media (max-width: 640px) {
   .menu-header {
     padding: 16px;
@@ -211,7 +248,7 @@ body {
     ☰
   </button>
   <span class="logo">
-    <img src="/img/logoapc.png" alt="Logo Ápice">
+    <img src="/img/bomba.svg" alt="Logo Ápice">
   </span>
   <span class="icons">
     <a href="/perfil"><button class="icone" aria-label="Perfil"><img src="/img/Icon.png"></button></a>
@@ -225,6 +262,10 @@ body {
       <li><a href="/vagas">Vagas</a></li>
       <li><a href="/empresa">Empresas</a></li>
     </ul>
+    <div class="menu-footer">
+      <a href="/fale-conosco">Fale Conosco</a>
+      <a href="/sobre-nos">Sobre nós</a>
+    </div>
   </nav>
   <span id="menuOverlay"></span>
 </header>

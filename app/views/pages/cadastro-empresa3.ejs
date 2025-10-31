@@ -3,47 +3,206 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastro</title>
+  <title>Cadastro de Empresa - Eixo de Atuação</title>
   <link rel="stylesheet" href="/css/cadastro-comum.css" />
   <link rel="stylesheet" href="/css/validation.css" />
 </head>
 
 <body>
-
   <header>
     <%- include('../partials/menu') %>
   </header>
 
   <main class="cad-container">
-    <h1 class="cadastro" style="display: block !important; visibility: visible !important; color: #160B5D !important; font-size: 34px !important; text-align: center !important; margin: 20px 0 !important; font-weight: 600 !important; font-family: 'Poppins', sans-serif !important;">Cadastro</h1>
+    <h1 class="cadastro">Cadastro de Empresa</h1>
+    
+    <!-- Progress Steps -->
+    <nav class="step-progress">
+      <article class="step completed">
+        <span class="step-number">1</span>
+        <span class="step-label">Dados da Empresa</span>
+      </article>
+      <article class="step completed">
+        <span class="step-number">2</span>
+        <span class="step-label">Responsável</span>
+      </article>
+      <article class="step active">
+        <span class="step-number">3</span>
+        <span class="step-label">Eixo de Atuação</span>
+      </article>
+    </nav>
 
-    <form id="empresaForm3" class="cad-form" action="/cadastro-empresa3" method="post" novalidate>
+    <form id="empresaForm3" class="cad-form" action="/cadastro-empresa-submit" method="POST" novalidate>
+      
+      <!-- Área de Atuação Section -->
       <section class="form-section">
-        <p>Insira as informações referentes ao eixo de atuação da empresa</p>
-
-        <input type="text" id="area" name="area" placeholder="Área" required />
-
-        <input type="text" id="eixo" name="eixo" placeholder="Eixo de atuação" required />
-
-        <footer class="actions-section" aria-hidden="true">
-          <button type="button" class="btn-add" aria-label="Adicionar">Adicionar <span aria-hidden="true">+</span></button>
-        </footer>
+        <h2>Área de Atuação</h2>
+        <p>Selecione as áreas que melhor descrevem a atuação da sua empresa:</p>
+        
+        <fieldset class="checkbox-grid">
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="tecnologia" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Tecnologia
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="saude" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Saúde
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="educacao" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Educação
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="financas" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Finanças
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="varejo" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Varejo
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="alimenticio" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Alimentício
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="turismo" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Turismo
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="construcao" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Construção
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="industria" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Indústria
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="servicos" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Serviços
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="consultoria" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Consultoria
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="areas" value="marketing" data-required="true" data-group="areas">
+            <span class="checkmark"></span>
+            Marketing
+          </label>
+        </fieldset>
+        <aside class="error-message" data-field="areas"></aside>
       </section>
+
+      <!-- Porte da Empresa Section -->
+      <section class="form-section">
+        <h2>Porte da Empresa</h2>
+        
+        <section class="input-row">
+          <fieldset class="input-group">
+            <label for="porte">Porte da empresa</label>
+            <select id="porte" name="porte" data-required="true">
+              <option value="">Selecione o porte</option>
+              <option value="microempresa">Microempresa (até 9 funcionários)</option>
+              <option value="pequena">Pequena empresa (10 a 49 funcionários)</option>
+              <option value="media">Média empresa (50 a 499 funcionários)</option>
+              <option value="grande">Grande empresa (500+ funcionários)</option>
+            </select>
+            <aside class="error-message" data-field="porte"></aside>
+          </fieldset>
+          
+          <fieldset class="input-group">
+            <label for="numeroFuncionarios">Número de funcionários</label>
+            <input type="number" id="numeroFuncionarios" name="numeroFuncionarios" placeholder="Ex: 25" min="1" data-required="true">
+            <aside class="error-message" data-field="numeroFuncionarios"></aside>
+          </fieldset>
+        </section>
+      </section>
+
+      <!-- Informações Adicionais Section -->
+      <section class="form-section">
+        <h2>Informações Adicionais</h2>
+        
+        <fieldset class="input-group">
+          <label for="descricaoEmpresa">Descrição da empresa</label>
+          <textarea id="descricaoEmpresa" name="descricaoEmpresa" rows="4" placeholder="Descreva brevemente a empresa, seus produtos ou serviços..." data-required="true"></textarea>
+          <aside class="error-message" data-field="descricaoEmpresa"></aside>
+        </fieldset>
+
+        <section class="input-row">
+          <fieldset class="input-group">
+            <label for="website">Website (opcional)</label>
+            <input type="url" id="website" name="website" placeholder="https://www.exemplo.com.br">
+            <aside class="error-message" data-field="website"></aside>
+          </fieldset>
+          
+          <fieldset class="input-group">
+            <label for="linkedin">LinkedIn da empresa (opcional)</label>
+            <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/company/exemplo">
+            <aside class="error-message" data-field="linkedin"></aside>
+          </fieldset>
+        </section>
+
+        <section class="checkbox-container">
+          <label class="checkbox-item">
+            <input type="checkbox" id="aceitaTermos" name="aceitaTermos" data-required="true">
+            <span class="checkmark"></span>
+            Concordo com os <a href="/termos" target="_blank">termos de uso</a> e <a href="/privacidade" target="_blank">política de privacidade</a>
+          </label>
+          <aside class="error-message" data-field="aceitaTermos"></aside>
+        </section>
+
+        <section class="checkbox-container">
+          <label class="checkbox-item">
+            <input type="checkbox" id="receberNotificacoes" name="receberNotificacoes">
+            <span class="checkmark"></span>
+            Desejo receber notificações sobre candidatos e novidades da plataforma
+          </label>
+        </section>
+      </section>
+
     </form>
 
+    <!-- Navigation -->
     <nav class="actions-section">
-      <button type="button" class="btn-secondary" onclick="window.location.href='/teste2'">Voltar</button>
-      <button type="submit" form="empresaForm3" class="btn-primary">Próximo</button>
+      <button type="button" id="btnAnterior" class="btn-secondary">Anterior</button>
+      <button type="button" id="btnFinalizar" class="btn-primary">Finalizar Cadastro</button>
     </nav>
   </main>
-  <footer></footer>
+  
+  <footer>
+    <%- include('../partials/footer') %>
+  </footer>
 
   <script src="/js/validation.js"></script>
   <script>
-  // Inicializar validação para o formulário cadastro-empresa3
-  document.addEventListener('DOMContentLoaded', function() {
-    const empresaValidator3 = initFormValidation('empresaForm3');
-  });
+    document.addEventListener('DOMContentLoaded', function() {
+      const empresaValidator3 = initFormValidation('empresaForm3');
+      
+      // Botão anterior
+      document.getElementById('btnAnterior').addEventListener('click', function() {
+        window.location.href = '/cadastro-empresa2';
+      });
+      
+      // Botão finalizar com validação
+      document.getElementById('btnFinalizar').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (empresaValidator3.validateForm()) {
+          // Se validação passou, submeter o formulário
+          document.getElementById('empresaForm3').submit();
+        }
+      });
+    });
   </script>
 
 </body>

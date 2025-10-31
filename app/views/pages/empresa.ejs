@@ -14,19 +14,81 @@
 </head>
 <body>
   <%- include('../partials/menu') %>
+  
+  <!-- Hero Section -->
   <section class="hero">
-    <img src="/img/empresas.svg" alt="Empresas Ápice" class="hero-img">
-    <div class="overlay">
-      <div class="title-container">
-        <h1 class="h1">O Ápice é a ponte entre empresas e novas gerações.</h1>
-      </div>
-      <div class="content">
-        <p class="hero-description">Com iniciativas voltadas à divulgação de vagas e à organização de processos seletivos inclusivos, contribuímos para a inserção profissional de jovens e para o crescimento de organizações comprometidas com o impacto social. Juntos, construímos caminhos de oportunidade e transformação.</p>
-      </div>
-      <div class="btn-container-hero">
-        <a class="btnhome" href="#">Quero conectar a minha empresa <span class="seta"><img src="/img/seta.png"></span></a>
-      </div>
-    </div>
+    <header class="hero-content">
+      <article class="hero-content-grid">
+        <section class="hero-text-section">
+          <header class="hero-title-wrapper">
+            <h1 class="hero-title">O Ápice é a ponte entre empresas e novas gerações.</h1>
+            <p class="hero-description">Com iniciativas voltadas à divulgação de vagas e à organização de processos seletivos inclusivos, contribuímos para a inserção profissional de jovens e para o crescimento de organizações comprometidas com o impacto social. Juntos, construímos caminhos de oportunidade e transformação.</p>
+            <nav class="hero-cta">
+              <a href="#" class="btnhome">Quero conectar a minha empresa</a>
+            </nav>
+          </header>
+        </section>
+        
+        <aside class="hero-image-section">
+          <figure class="hero-img-container">
+            <img src="/img/empresas.svg" alt="Empresas Ápice" class="hero-img-modern">
+            <section class="decorative-circles">
+              <span class="circle circle-yellow-1"></span>
+              <span class="circle circle-white-1"></span>
+              <span class="circle circle-yellow-2"></span>
+              <span class="circle circle-white-2"></span>
+            </section>
+          </figure>
+        </aside>
+      </article>
+    </header>
+  </section>
+  
+  <!-- Benefícios -->
+  <section class="beneficios-section">
+    <article class="container">
+      <header class="beneficios-header">
+        <h2 class="section-title">Por que escolher o Ápice?</h2>
+      </header>
+      
+      <section class="beneficios-grid">
+        <article class="beneficio-card">
+          <figure class="beneficio-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 21V19C20 16.7909 18.2091 15 16 15H8C5.79086 15 4 16.7909 4 19V21" stroke="#FFC52D" stroke-width="2"/>
+              <circle cx="12" cy="7" r="4" stroke="#FFC52D" stroke-width="2"/>
+            </svg>
+          </figure>
+          <h3 class="beneficio-title">Talentos Diversos</h3>
+          <p class="beneficio-description">Acesso a jovens qualificados de diferentes backgrounds e áreas</p>
+        </article>
+        
+        <article class="beneficio-card">
+          <figure class="beneficio-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H8" stroke="#FFC52D" stroke-width="2"/>
+              <rect x="8" y="2" width="8" height="4" rx="1" stroke="#FFC52D" stroke-width="2"/>
+            </svg>
+          </figure>
+          <h3 class="beneficio-title">Suporte Completo</h3>
+          <p class="beneficio-description">Acompanhamento em todo processo de recrutamento</p>
+        </article>
+      </section>
+    </article>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="cta-final">
+    <article class="container">
+      <header class="cta-content">
+        <h2 class="section-title">Conecte-se ao futuro!</h2>
+        <p>Encontre os melhores talentos jovens para sua empresa</p>
+        <nav class="cta-buttons">
+          <a href="/cadastro-empresa" class="btn-primary">Cadastrar Empresa</a>
+          <a href="/fale-conosco" class="btn-secondary">Falar Conosco</a>
+        </nav>
+      </header>
+    </article>
   </section>
   
   <main>

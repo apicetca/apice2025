@@ -3,30 +3,95 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro</title>
+    <title>Cadastro de Empresa - Dados da Empresa</title>
     <link rel="stylesheet" href="/css/cadastro-comum.css" />
     <link rel="stylesheet" href="/css/validation.css" />
+    <style>
+      /* Estilos específicos para o step progress */
+      .step-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        gap: 20px;
+      }
+      
+      .step {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #e6e6f0;
+        color: #9b9bb3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      
+      .step.active {
+        background: var(--primary);
+        color: white;
+      }
+      
+      .step.completed {
+        background: var(--secundary);
+        color: var(--primary);
+      }
+      
+      .step-line {
+        width: 40px;
+        height: 2px;
+        background: #e6e6f0;
+      }
+      
+      .step-line.completed {
+        background: var(--secundary);
+      }
+      
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      
+      .col {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
   </head>
 
   <body>
+    <%- include('../partials/menu') %>
+    
     <header>
-      <%- include('../partials/menu') %>
+      <h1 class="cadastro">Dados da Empresa</h1>
     </header>
 
     <main class="cad-container">
-      <h1 class="cadastro" style="display: block !important; visibility: visible !important; color: #160B5D !important; font-size: 34px !important; text-align: center !important; margin: 20px 0 !important; font-weight: 600 !important; font-family: 'Poppins', sans-serif !important;">Cadastro</h1>
+      <!-- Indicador de Progresso -->
+      <nav class="step-progress">
+        <article class="step active">1</article>
+        <span class="step-line"></span>
+        <article class="step">2</article>
+        <span class="step-line"></span>
+        <article class="step">3</article>
+      </nav>
 
-      <form id="form-cadastro" class="cad-form" action="/cadastro-empresa" method="POST" novalidate>
-        <section class="form-section">
-          <p>Digite os dados da sua empresa para se cadastrar</p>
-
-          <% if (typeof errors !== 'undefined' && errors && errors.length) { %>
-            <article class="general-error">
-              <% errors.forEach(function (err) { %>
-                <%= err.msg %><br>
-              <% }) %>
-            </article>
-          <% } %>
+      <section class="form-section">
+        <p>Informe os dados básicos da sua empresa</p>
+        
+        <!-- Mostrar erros gerais se existirem -->
+        <% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
+          <article class="general-error">
+            <% errors.forEach(function(error) { %>
+              <%= error.msg %><br>
+            <% }) %>
+          </article>
+        <% } %>
+        
+        <form id="empresaForm1" class="cad-form" method="POST" action="/cadastro-empresa">
 
           <%
             function getFieldError(fieldName) {
@@ -96,25 +161,25 @@
           <span class="field-error"><%= e ? e.msg : '' %></span>
 
           <section class="row">
-            <article class="col">
+            <fieldset class="col">
               <% var e = getFieldError('cep'); %>
-              <input type="text" id="cep" name="cep" placeholder="00000-000" inputmode="numeric" maxlength="9" 
+              <input type="text" id="cep" name="cep" placeholder="CEP (00000-000)" inputmode="numeric" maxlength="9" 
                      value="<%= getFieldValue('cep') %>" required />
               <span class="field-error"><%= e ? e.msg : '' %></span>
-            </article>
+            </fieldset>
 
-            <article class="col">
+            <fieldset class="col">
               <% var e = getFieldError('complemento'); %>
-              <input type="text" id="complemento" name="complemento" placeholder="Complemento" 
+              <input type="text" id="complemento" name="complemento" placeholder="Complemento (opcional)" 
                      value="<%= getFieldValue('complemento') %>" />
               <span class="field-error"><%= e ? e.msg : '' %></span>
-            </article>
+            </fieldset>
           </section>
-        </section>
-      </form>
+        </form>
+      </section>
 
       <nav class="actions-section">
-        <button type="submit" form="form-cadastro" class="btn-primary">Próximo</button>
+        <button id="btnProximo" class="btn-primary">Próximo</button>
       </nav>
       
       <div class="form-footer">
@@ -125,11 +190,21 @@
 
     <footer></footer>
 
-    <!-- jQuery from CDN and our validation script -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="/js/jquery-validation.js"></script>
-    <script src="/js/script.js"></script>
+    <script src="/js/validation.js"></script>
     <script src="/js/input-masks.js"></script>
-    <script src="/js/cadastro-empresa-validation.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const empresaValidator1 = initFormValidation('empresaForm1');
+        
+        // Botão próximo com validação
+        document.getElementById('btnProximo').addEventListener('click', function(e) {
+          e.preventDefault();
+          if (empresaValidator1.validateForm()) {
+            // Se validação passou, submeter o formulário
+            document.getElementById('empresaForm1').submit();
+          }
+        });
+      });
+    </script>
   </body>
 </html>

@@ -1,19 +1,28 @@
-/* Extensão do background azul removida - agora o hero section ocupa todo o espaço necessário */
+/* CSS específico para a página home */
+.home-page {
+  background: #FFFFFF;
+}
+
+.home-page main {
+  margin-top: 0;
+  position: relative;
+  z-index: 10;
+  background: #FFFFFF;
+  padding-top: 0;
+}
 
 .vagas-title-band {
   position: relative;
   background-color: #FFC52D; /* Amarelo */
-  padding: 15px 0;
-  border-radius: 10px 10px 0 0;
-  margin-top: -20px; /* Posiciona em cima do azul */
+  padding: 20px 0;
+  margin-top: -200px; /* Sobreposição muito grande para garantir que fique sobre o azul */
   z-index: 5;
-  width: 90%;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100vw; /* Largura total da viewport */
+  margin-left: calc(-50vw + 50%); /* Centraliza ocupando toda a largura */
+  margin-right: calc(-50vw + 50%);
   text-align: center;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  margin-bottom: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .vagas-title {
@@ -23,37 +32,262 @@
   text-align: center;
   color: #160B5D; /* Azul escuro para o título */
   display: inline-block; /* Permite que o texto se ajuste à largura disponível */
+  position: relative;
 }
 
-/* Removido o wrapper de conteúdo para deixar os cards soltos */
+/* Hero Section Moderno - Home */
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #160B5D;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+/* CSS adicional para elementos semânticos - mantém o visual idêntico */
+.hero-content, .hero header,
+.hero-content-grid, .hero article,
+.hero-text-section, .hero section,
+.hero-title-wrapper, .hero header,
+.hero-cta, .hero nav,
+.hero-image-section, .hero aside,
+.hero-img-container, .hero figure,
+.decorative-circles, .hero section,
+.vagas-title-band, .vagas header,
+.carousel-container, .vagas article,
+.carousel-track, .vagas section,
+.carousel-slide, .vagas article,
+.carousel-indicators, .vagas nav,
+.btn-container-carousel, .vagas footer,
+.como-funciona-section .container, .como-funciona-section article,
+.como-funciona-cards, .como-funciona-section section,
+.funciona-card, .como-funciona-section article,
+.funciona-icon, .como-funciona-section figure,
+.clientes-section .container, .clientes-section article,
+.clientes-slider-container, .clientes-section section,
+.clientes-slider-track, .clientes-section article,
+.cliente-slide, .clientes-section figure,
+.avaliacoes-section .container, .avaliacoes-section article,
+.avaliacoes-carousel-container, .avaliacoes-section section,
+.avaliacoes-carousel-track, .avaliacoes-section article,
+.avaliacoes-carousel-slide, .avaliacoes-section article,
+.avaliacao-texto-container, .avaliacoes-section section,
+.avaliacao-autor-dentro, .avaliacoes-section footer,
+.avaliacao-logo-container, .avaliacoes-section figure,
+.avaliacoes-carousel-indicators, .avaliacoes-section nav {
+    /* Herda todas as propriedades dos elementos div originais */
+}
+
+/* Correção específica para mobile - garante que o hero não fique atrás do menu */
+@media (max-width: 1024px) {
+    .hero {
+        padding-top: 80px;
+        min-height: calc(100vh - 80px);
+    }
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    min-height: 90vh;
+    padding: 60px 0;
+}
+
+.hero-text-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-title-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.hero-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.hero-description {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 400;
+    font-family: 'Albert Sans', sans-serif;
+}
+
+.hero-cta {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.hero-image-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-img-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-img-modern {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 3;
+}
+
+/* Círculos decorativos */
+.decorative-circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.9;
+    z-index: 2;
+}
+
+/* Container geral */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+
+
+/* Seção de Vagas */
+.vagas-section {
+    padding: 30px 0 60px 0;
+    background: #FFFFFF;
+}
+
+/* Botões */
+.btnhome {
+    display: inline-block;
+    background: #FFC52D;
+    color: #160B5D;
+    padding: 16px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-family: 'Albert Sans', sans-serif;
+}
+
+.btnhome:hover {
+    background: #160B5D;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(22, 11, 93, 0.3);
+}
+
+.btnhome-primary {
+    background: #FFC52D;
+    color: #160B5D;
+}
+
+.btnhome-secondary {
+    background: transparent;
+    color: #FFFFFF;
+    border: 2px solid #FFC52D;
+}
+
+.btnhome-secondary:hover {
+    background: #FFC52D;
+    color: #160B5D;
+}
+
+.btnhome-large {
+    padding: 20px 40px;
+    font-size: 1.1rem;
+}
 
 /* Estilos para o carrossel */
 .carousel-container {
-  margin-top: 20px; /* Espaçamento entre o título e o carrossel */
-  width: 92%; /* Alinhado com a largura da página */
-  max-width: 320px; /* Tamanho máximo para o carousel */
+  margin-top: 20px;
+  width: 92%;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   overflow: hidden;
-  padding-bottom: 30px; /* Espaço para os indicadores */
-  padding-top: 5px; /* Espaço reduzido na parte superior */
-  z-index: 2; /* Garantir que fique acima do fundo */
+  padding-bottom: 30px;
+  padding-top: 5px;
+  z-index: 2;
+  border-radius: 8px;
 }
 
 .carousel-track {
   display: flex;
-  transition: transform 0.5s ease;
-  width: 100%;
+  transition: transform 0.5s ease-in-out;
+  width: 300%; /* 100% x 3 slides */
+  will-change: transform;
 }
 
 .carousel-slide {
-  min-width: 100%;
+  width: 33.33%; /* 100% / 3 slides */
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  transition: opacity 0.3s ease;
-  padding: 5px;
+  align-items: stretch;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.carousel-slide .job-card {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  box-shadow: none !important;
+}
+
+.carousel-slide .job-card:hover {
+  box-shadow: none !important;
 }
 
 .carousel-indicators {
@@ -82,12 +316,12 @@
   justify-content: center;
   width: 100%;
   margin-top: 10px;
-  margin-bottom: 50px; /* Aumentado para dar mais espaço antes da próxima seção */
+  margin-bottom: 30px;
 }
 
 .btnhome-carousel {
-  background-color: #160B5D;
-  color: white;
+  background-color: #FFC52D;
+  color: #160B5D;
   border-radius: 30px;
   padding: 12px 28px;
   font-size: 1rem;
@@ -114,9 +348,11 @@
 
 /* Estilos para a seção "Como funciona" */
 .como-funciona-section {
-  padding: 50px 20px;
-  margin-top: 40px;
+  padding: 40px 20px;
+  margin-top: 20px;
   width: 100%;
+  text-align: center;
+  background: #FFFFFF;
 }
 
 .como-funciona-title {
@@ -124,7 +360,21 @@
   color: #160B5D;
   font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.como-funciona-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #FFC52D;
+  border-radius: 2px;
 }
 
 .como-funciona-cards {
@@ -138,9 +388,9 @@
 .funciona-card {
   background-color: #FFFFFF;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   padding: 25px 20px;
   text-align: center;
+  border: 1px solid #E0E0E0;
 }
 
 .funciona-icon {
@@ -303,9 +553,11 @@
 
 /* Seção Principais Clientes */
 .clientes-section {
-  padding: 50px 20px;
-  margin-top: 40px;
+  padding: 40px 20px;
+  margin-top: 20px;
   width: 100%;
+  text-align: center;
+  background: #FFFFFF;
 }
 
 .clientes-title {
@@ -313,7 +565,159 @@
   color: #160B5D;
   font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.clientes-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #FFC52D;
+  border-radius: 2px;
+}
+
+/* Seção de Avaliações */
+.avaliacoes-section {
+  padding: 40px 20px;
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  background: #FFFFFF;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .hero-content-grid {
+        gap: 60px;
+    }
+    
+    .hero-title {
+        font-size: 2.8rem;
+    }
+    
+    .hero-img-container {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .hero-img-modern {
+        width: 320px;
+        height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: calc(100vh - 80px);
+        padding-top: 80px;
+    }
+    
+    .hero-content-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+        padding: 20px 0;
+        min-height: auto;
+    }
+    
+    .hero-title {
+        font-size: 2.4rem;
+    }
+    
+    .hero-description {
+        font-size: 1.1rem;
+    }
+    
+    .hero-cta {
+        justify-content: center;
+    }
+    
+    .hero-img-container {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .hero-img-modern {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .como-funciona-cards {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .vagas-section, .como-funciona-section, .avaliacoes-section {
+        padding: 60px 0;
+    }
+    
+    .clientes-section {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: calc(100vh - 80px);
+        padding-top: 90px;
+    }
+    
+    .hero-content-grid {
+        padding: 15px 0;
+        gap: 30px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .hero-img-container {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .hero-img-modern {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .funciona-card {
+        padding: 30px 20px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .btnhome {
+        padding: 14px 28px;
+        font-size: 0.9rem;
+    }
+    
+    .btnhome-large {
+        padding: 16px 32px;
+        font-size: 1rem;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
 }
 
 /* Slider infinito de clientes */
@@ -394,8 +798,8 @@
 
 /* Seção de Avaliações/Depoimentos */
 .avaliacoes-title-band {
-  padding: 50px 20px 0;
-  margin-top: 40px;
+  padding: 30px 20px 0;
+  margin-top: 20px;
   width: 100%;
 }
 
@@ -404,7 +808,7 @@
   color: #160B5D;
   font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 /* Carrossel de avaliações - mesmo estilo do carrossel de vagas */
@@ -412,7 +816,7 @@
   position: relative;
   width: 92%;
   max-width: 350px;
-  margin: 0 auto 50px;
+  margin: 0 auto 30px;
   overflow: hidden;
   padding-bottom: 30px;
   padding-top: 5px;
@@ -439,59 +843,70 @@
   overflow: hidden;
   width: 100%;
   max-width: 100%;
-  height: auto;
-  min-height: 380px;
+  height: 450px;
   display: flex;
   flex-direction: column;
 }
 
 .avaliacao-texto-container {
   background-color: #FFC52D;
-  padding: 30px 15px 25px;
-  flex: 3;
+  padding: 30px 20px 25px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .avaliacao-texto {
-  font-size: 0.95rem;
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.6;
   color: #000000;
   text-align: justify;
   font-style: italic;
   margin: 0 0 20px 0;
   font-weight: 400;
+  flex-grow: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  line-clamp: 10;
+  -webkit-box-orient: vertical;
 }
 
 .avaliacao-autor-dentro {
-  margin-top: 15px;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 .avaliacao-nome-dentro {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #000000;
-  margin: 0 0 3px 0;
+  margin: 0 0 5px 0;
 }
 
 .avaliacao-empresa-dentro {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #000000;
   margin: 0;
   font-weight: 500;
+  opacity: 0.8;
 }
 
 .avaliacao-logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 15px;
+  padding: 20px;
   background: #FFFFFF;
-  height: 100px;
-  flex: 1;
+  height: 120px;
+  min-height: 120px;
 }
 
 .avaliacao-logo {
-  width: 140px;
-  height: 60px;
+  width: 160px;
+  height: 80px;
   object-fit: contain;
   object-position: center;
 }
@@ -528,9 +943,14 @@
   }
   
   .vagas-title-band {
-    width: 100%; /* Largura total em dispositivos móveis */
-    padding: 12px 0;
+    width: 100vw; /* Largura total da viewport em mobile */
+    padding: 20px 0;
+    margin-top: -160px; /* Sobreposição muito grande em mobile para ficar sobre o azul */
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
   }
+  
+
   
   .vagas-title {
     font-size: 1.2rem;
@@ -588,15 +1008,14 @@
 
 @media (min-width: 768px) {
   .vagas-title-band {
-    width: 60%; /* Faixa amarela menor em tablets */
+    width: 100vw; /* Largura total da viewport em tablet */
+    padding: 22px 0;
+    margin-top: -180px; /* Sobreposição muito grande em tablet para ficar sobre o azul */
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
   }
-}
+  
 
-@media (min-width: 768px) {
-  .vagas-title-band {
-    width: 40%; /* Faixa amarela ainda menor em desktops */
-    padding: 12px 0;
-  }
   
   .vagas-title {
     font-size: 1.4rem;
@@ -606,9 +1025,14 @@
 /* Media query para desktops */
 @media (min-width: 1200px) {
   .vagas-title-band {
-    width: 40%; /* Faixa amarela ainda menor em desktops */
-    padding: 12px 0;
+    width: 100vw; /* Largura total da viewport em desktop */
+    padding: 25px 0;
+    margin-top: -200px; /* Sobreposição muito grande em desktop para ficar sobre o azul */
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
   }
+  
+
   
   .vagas-title {
     font-size: 1.4rem;

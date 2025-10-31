@@ -3,86 +3,151 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastro</title>
+  <title>Cadastro de Empresa - Dados do Responsável</title>
   <link rel="stylesheet" href="/css/cadastro-comum.css" />
   <link rel="stylesheet" href="/css/validation.css" />
+  <style>
+    /* Estilos específicos para o step progress */
+    .step-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+      gap: 20px;
+    }
+    
+    .step {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: #e6e6f0;
+      color: #9b9bb3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .step.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .step.completed {
+      background: var(--secundary);
+      color: var(--primary);
+    }
+    
+    .step-line {
+      width: 40px;
+      height: 2px;
+      background: #e6e6f0;
+    }
+    
+    .step-line.completed {
+      background: var(--secundary);
+    }
+  </style>
 </head>
 
 <body>
-
+  <%- include('../partials/menu') %>
+  
   <header>
-    <%- include('../partials/menu') %>
+    <h1 class="cadastro">Dados do Responsável</h1>
   </header>
 
   <main class="cad-container">
-    <h1 class="cadastro" style="display: block !important; visibility: visible !important; color: #160B5D !important; font-size: 34px !important; text-align: center !important; margin: 20px 0 !important; font-weight: 600 !important; font-family: 'Poppins', sans-serif !important;">Cadastro</h1>
+    <!-- Indicador de Progresso -->
+    <nav class="step-progress">
+      <article class="step completed">1</article>
+      <span class="step-line completed"></span>
+      <article class="step active">2</article>
+      <span class="step-line"></span>
+      <article class="step">3</article>
+    </nav>
 
-    <form id="empresaForm2" class="cad-form" action="/cadastro-empresa2" method="POST" novalidate>
-      <section class="form-section">
-        <p>Digite os dados da sua empresa para se cadastrar</p>
-
-        <% if (locals.errors && errors.length > 0) { %>
-          <article class="error-container">
-            <ul class="error-list">
-              <% errors.forEach(error => { %>
-                <li><%= error.msg %></li>
-              <% }); %>
-            </ul>
-          </article>
-        <% } %>
-
-        <input type="text" id="nome" name="nome" placeholder="Nome" 
-               value="<%= locals.form ? form.nome || '' : '' %>" 
-               class="<%= locals.errors && errors.find(e => e.param === 'nome') ? 'input-error' : '' %>" />
+    <section class="form-section">
+      <p>Informe os dados do responsável pela empresa</p>
+      
+      <!-- Mostrar erros gerais se existirem -->
+      <% if (locals.errors && errors.length > 0) { %>
+        <article class="general-error">
+          <% errors.forEach(error => { %>
+            <%= error.msg %><br>
+          <% }); %>
+        </article>
+      <% } %>
+      
+      <form id="empresaForm2" class="cad-form" method="POST" action="/cadastro-empresa2">
+        <input type="text" id="nome" name="nome" placeholder="Nome completo do responsável" 
+               value="<%= locals.form ? form.nome || '' : '' %>" required />
         <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'nome') ? errors.find(e => e.param === 'nome').msg : '' %></span>
 
-        <input type="text" id="cargo" name="cargo" placeholder="Cargo" 
-               value="<%= locals.form ? form.cargo || '' : '' %>" 
-               class="<%= locals.errors && errors.find(e => e.param === 'cargo') ? 'input-error' : '' %>" />
+        <input type="text" id="cargo" name="cargo" placeholder="Cargo na empresa" 
+               value="<%= locals.form ? form.cargo || '' : '' %>" required />
         <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'cargo') ? errors.find(e => e.param === 'cargo').msg : '' %></span>
 
         <input type="email" id="email" name="email" placeholder="Email institucional" 
-               value="<%= locals.form ? form.email || '' : '' %>" 
-               class="<%= locals.errors && errors.find(e => e.param === 'email') ? 'input-error' : '' %>" />
+               value="<%= locals.form ? form.email || '' : '' %>" required />
         <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'email') ? errors.find(e => e.param === 'email').msg : '' %></span>
 
         <input type="tel" id="telefone" name="telefone" placeholder="Telefone comercial" 
-               value="<%= locals.form ? form.telefone || '' : '' %>" 
-               class="<%= locals.errors && errors.find(e => e.param === 'telefone') ? 'input-error' : '' %>" />
+               value="<%= locals.form ? form.telefone || '' : '' %>" required />
         <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'telefone') ? errors.find(e => e.param === 'telefone').msg : '' %></span>
-      </section>
-      </form>
 
-      <nav class="actions-section">
-        <button type="button" class="btn-secondary" onclick="window.location.href='/cadastro-empresa'">Voltar</button>
-        <button type="button" class="btn-primary" onclick="window.location.href='/'">Confirmar</button>
-      </nav>
+        <input type="password" id="password" name="password" placeholder="Criar senha" required />
+        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'password') ? errors.find(e => e.param === 'password').msg : '' %></span>
+
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar senha" required />
+        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'confirmPassword') ? errors.find(e => e.param === 'confirmPassword').msg : '' %></span>
+      </form>
+    </section>
+
+    <nav class="actions-section">
+      <button id="btnAnterior" class="btn-secondary">Anterior</button>
+      <button id="btnProximo" class="btn-primary">Próximo</button>
+    </nav>
   </main>
 
   <footer></footer>
   
   <script src="/js/validation.js"></script>
+  <script src="/js/input-masks.js"></script>
   <script>
-  // Inicializar validação para o formulário cadastro-empresa2
-  document.addEventListener('DOMContentLoaded', function() {
-    const empresaValidator2 = initFormValidation('empresaForm2');
-    
-    // Função para remover formatação antes do envio
-    function digits(value) {
-      return (value || '').replace(/\D/g, '');
-    }
-
-
-    const form = document.getElementById('empresaForm2');
-    if (form) {
-      form.addEventListener('submit', function (e) {
-        const telefoneInput = form.querySelector('#telefone');
-        if (telefoneInput) {
-          telefoneInput.value = digits(telefoneInput.value);
+    document.addEventListener('DOMContentLoaded', function() {
+      const empresaValidator2 = initFormValidation('empresaForm2');
+      
+      // Botão anterior
+      document.getElementById('btnAnterior').addEventListener('click', function() {
+        window.location.href = '/cadastro-empresa';
+      });
+      
+      // Botão próximo com validação
+      document.getElementById('btnProximo').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (empresaValidator2.validateForm()) {
+          // Se validação passou, ir para próxima página
+          window.location.href = '/cadastro-empresa3';
         }
-      }, { capture: true });
-    }
-  });
+      });
+      
+      // Função para remover formatação antes do envio
+      function digits(value) {
+        return (value || '').replace(/\D/g, '');
+      }
+
+      const form = document.getElementById('empresaForm2');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          const telefoneInput = form.querySelector('#telefone');
+          if (telefoneInput) {
+            telefoneInput.value = digits(telefoneInput.value);
+          }
+        }, { capture: true });
+      }
+    });
   </script>
 
 </body>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fale Conosco - Ápice</title>
+  <link rel="stylesheet" href="/css/fale-conosco.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <%- include('../partials/menu') %>
+
+  <header class="hero-section">
+    <h1>Central de Ajuda</h1>
+    <p>Encontre respostas rápidas para as principais dúvidas..</p>
+  </header>
+
+  <main class="container">
+
+
+      <section class="faq-section">
+        <article class="faq-item">
+          <header class="faq-question" onclick="toggleFaq(this)">
+            <h4>Como me cadastrar na plataforma?</h4>
+            <span class="faq-icon">+</span>
+          </header>
+          <section class="faq-answer">
+            <p>Acesse a página de <a href="/cadastro">cadastro</a> e escolha o perfil adequado (jovem ou empresa). Preencha os dados solicitados e confirme seu e-mail.</p>
+          </section>
+        </article>
+
+        <article class="faq-item">
+          <header class="faq-question" onclick="toggleFaq(this)">
+            <h4>Como candidatar-se a uma vaga?</h4>
+            <span class="faq-icon">+</span>
+          </header>
+          <section class="faq-answer">
+            <p>Navegue pelas <a href="/vagas">vagas disponíveis</a>, clique na vaga de interesse e utilize o botão "Candidatar-se". É necessário estar logado na plataforma.</p>
+          </section>
+        </article>
+
+        <article class="faq-item">
+          <header class="faq-question" onclick="toggleFaq(this)">
+            <h4>Como empresas podem publicar vagas?</h4>
+            <span class="faq-icon">+</span>
+          </header>
+          <section class="faq-answer">
+            <p>Após o <a href="/cadastro-empresa"></a>cadastro como empresa</a>, acesse seu <a href="/home-empresa">painel</a> e utilize a função "Publicar Vaga". Preencha os dados da oportunidade e publique.</p>
+          </section>
+        </article>
+
+        <article class="faq-item">
+          <header class="faq-question" onclick="toggleFaq(this)">
+            <h4>Esqueci minha senha, como recuperar?</h4>
+            <span class="faq-icon">+</span>
+          </header>
+          <section class="faq-answer">
+            <p>Na página de <a href="/login">login</a>, clique em "Esqueci minha senha" e siga as instruções enviadas para seu e-mail cadastrado.</p>
+          </section>
+        </article>
+
+        <article class="faq-item">
+          <header class="faq-question" onclick="toggleFaq(this)">
+            <h4>A plataforma é gratuita?</h4>
+            <span class="faq-icon">+</span>
+          </header>
+          <section class="faq-answer">
+            <p>Sim! A Ápice é completamente gratuita tanto para <a href="/cadastro">jovens</a> quanto para <a href="/cadastro-empresa">empresas</a>. Nosso objetivo é facilitar o acesso ao mercado de trabalho. Saiba mais <a href="/sobre-nos">sobre nós</a>.</p>
+          </section>
+        </article>
+
+        <article class="faq-item">
+          <header class="faq-question" onclick="toggleFaq(this)">
+            <h4>Como acompanhar minhas candidaturas?</h4>
+            <span class="faq-icon">+</span>
+          </header>
+          <section class="faq-answer">
+            <p>Após fazer <a href="/login">login</a>, acesse a seção <a href="/minhas-vagas">"Minhas Vagas"</a> no seu <a href="/perfil">perfil</a> para acompanhar o status das suas candidaturas.</p>
+          </section>
+        </article>
+      </section>
+
+      <footer class="help-footer">
+        <p><strong>Não encontrou sua resposta?</strong> Entre em contato conosco pelos canais abaixo!</p>
+      </footer>
+    </section>
+
+    <section class="contact-section">
+      <article class="contact-item">
+        <h3>E-mail</h3>
+        <p><a href="mailto:contato@apice.utfpr.edu.br">apicetca@gmail.com</a></p>
+      </article>
+
+      <article class="contact-item">
+        <h3>Redes Sociais</h3>
+        <p><a href="https://instagram.com/apice.projeto" target="_blank">@apice.projeto</a></p>
+        <p><a href="https://linkedin.com/company/apice-utfpr" target="_blank">Ápice</a></p>
+      </article>
+
+      <article class="contact-item">
+        <h3>Telefone</h3>
+        <p><a href="tel:+5541999999999">(41) 99999-9999</a></p>
+        <p><a href="tel:+5541888888888">(41) 88888-8888</a></p>
+      </article>
+    </section>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+  <script>
+    function toggleFaq(element) {
+      const faqItem = element.parentElement;
+      const answer = faqItem.querySelector('.faq-answer');
+      const icon = element.querySelector('.faq-icon');
+      
+      // Fecha todas as outras perguntas
+      const allFaqItems = document.querySelectorAll('.faq-item');
+      allFaqItems.forEach(item => {
+        if (item !== faqItem) {
+          item.classList.remove('active');
+          item.querySelector('.faq-answer').style.maxHeight = '0';
+          item.querySelector('.faq-icon').textContent = '+';
+        }
+      });
+      
+      // Toggle da pergunta atual
+      if (faqItem.classList.contains('active')) {
+        faqItem.classList.remove('active');
+        answer.style.maxHeight = '0';
+        icon.textContent = '+';
+      } else {
+        faqItem.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.textContent = '−';
+      }
+    }
+  </script>
+</body>
+</html>

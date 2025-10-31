@@ -6,6 +6,11 @@ const fs = require('fs');
 const { validationSets, handleValidationErrors, renderWithErrors } = require('../validations/validations');
 const { cidadesPorEstado } = require('../data/cidadeProcessor');
 
+// Importar dados das vagas
+const vagas = require('../data/vagas');
+const infoVagas = require('../data/vagaspt2-completo');
+const { encontrarVaga } = require('../data/vagasLoader');
+
 // cria a pasta de uploads caso nao exista
 const uploadDir = '/uploads/';
 
@@ -36,12 +41,48 @@ const upload = multer({
 
 
 router.get('/', function (req, res) {
-    res.render('pages/home');
+    // Pegar as 3 primeiras vagas para exibir no carrossel
+    const vagasCarrossel = Object.values(infoVagas).slice(0, 3);
+    res.render('pages/home', { vagas: vagasCarrossel, infoVagas });
 });
 
 
 router.get('/empresa', function (req, res) {
     res.render('pages/empresa');
+});
+
+router.get('/sobre-nos', function (req, res) {
+    res.render('pages/sobre-nos');
+});
+
+router.get('/fale-conosco', function (req, res) {
+    console.log('Rota /fale-conosco acessada');
+    try {
+        res.render('pages/fale-conosco');
+    } catch (error) {
+        console.error('Erro ao renderizar fale-conosco:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+router.get('/config-usuario', function (req, res) {
+    console.log('Rota /config-usuario acessada');
+    try {
+        res.render('pages/config-usuario');
+    } catch (error) {
+        console.error('Erro ao renderizar config-usuario:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+router.get('/config-empresa', function (req, res) {
+    console.log('Rota /config-empresa acessada');
+    try {
+        res.render('pages/config-empresa');
+    } catch (error) {
+        console.error('Erro ao renderizar config-empresa:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
 });
 
 router.get('/home-jovem', function (req, res) {
@@ -58,9 +99,64 @@ router.get('/home-jovem', function (req, res) {
     res.render('pages/home-jovem', { vagas: vagasVisualizadas, infoVagas });
 });
 
-const vagas = require('../data/vagas');
-const infoVagas = require('../data/vagaspt2-completo');
-const { encontrarVaga } = require('../data/vagasLoader');
+// Rotas para as páginas de cadastro de currículo
+router.get('/cadCurriculo1', function (req, res) {
+    console.log('Rota /cadCurriculo1 acessada');
+    try {
+        res.render('pages/cadCurriculo1');
+    } catch (error) {
+        console.error('Erro ao renderizar cadCurriculo1:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+router.get('/cadCurriculo2', function (req, res) {
+    console.log('Rota /cadCurriculo2 acessada');
+    try {
+        res.render('pages/cadCurriculo2');
+    } catch (error) {
+        console.error('Erro ao renderizar cadCurriculo2:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+router.get('/cadCurriculo3', function (req, res) {
+    console.log('Rota /cadCurriculo3 acessada');
+    try {
+        res.render('pages/cadCurriculo3');
+    } catch (error) {
+        console.error('Erro ao renderizar cadCurriculo3:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+// POST: finalizar cadastro do currículo
+router.post('/cadCurriculo-submit', function (req, res) {
+    try {
+        // Combinar todos os dados das etapas anteriores
+        const dadosCompletos = {
+            ...req.session.curriculoEtapa1,
+            ...req.session.curriculoEtapa2,
+            ...req.body
+        };
+        
+        console.log('Cadastro de currículo finalizado:', dadosCompletos);
+        
+        // TODO: Salvar dados completos no banco de dados
+        
+        // Limpar dados da sessão
+        delete req.session.curriculoEtapa1;
+        delete req.session.curriculoEtapa2;
+        
+        // Redirecionar para página de sucesso ou home
+        res.redirect('/home-jovem?cadastro=sucesso');
+    } catch (error) {
+        console.error('Erro ao finalizar cadastro de currículo:', error);
+        res.status(500).render('pages/cadCurriculo3', {
+            error: 'Erro interno do servidor. Tente novamente.'
+        });
+    }
+});
 
 // Sistema simples para armazenar candidaturas (em produção, use banco de dados)
 let vagasCandidatadas = [];
@@ -388,7 +484,7 @@ router.get('/perfil', (req, res) => {
     });
 });
 
-
+// Rota para processar o upload
 router.post('/upload-profile', upload.single('profileImage'), (req, res) => {
     const user = users.user1;
     if (!req.file) {
@@ -454,13 +550,21 @@ router.post('/cancelar-candidatura', function (req, res) {
 });
 
 
-router.get('/teste2', function (req, res) {
+router.get('/cadastro-empresa2', function (req, res) {
     res.render('pages/cadastro-empresa2', { form: {}, errors: null });
 });
 
+router.get('/cadastro-empresa3', function (req, res) {
+    res.render('pages/cadastro-empresa3');
+});
+
+// Rotas temporárias (manter para compatibilidade)
+router.get('/teste2', function (req, res) {
+    res.redirect('/cadastro-empresa2');
+});
 
 router.get('/teste3', function (req, res) {
-    res.render('pages/cadastro-empresa3');
+    res.redirect('/cadastro-empresa3');
 });
 
 
@@ -482,7 +586,7 @@ router.post(
         console.log('Cadastro empresa validado:', req.body);
         
         
-        res.redirect('/teste2');
+        res.redirect('/cadastro-empresa2');
     }
 );
 
@@ -502,66 +606,41 @@ router.post(
         req.session.representanteData = req.body;
         console.log('Dados do representante validados:', req.body);
         
-        return res.redirect('/teste3');
+        return res.redirect('/cadastro-empresa3');
     }
 );
 
-// Rota POST para finalizar o cadastro da empresa
-router.post('/cadastro-empresa3', 
-    [
-        body('area').notEmpty().withMessage('A área é obrigatória'),
-        body('eixo').notEmpty().withMessage('O eixo de atuação é obrigatório')
-    ],
-    handleValidationErrors,
-    (req, res) => {
-        // Verificar se há erros de validação
-        const errorRender = renderWithErrors(req, res, 'pages/cadastro-empresa3');
-        if (errorRender !== null) return errorRender;
-
-        if (!req.session) {
-            req.session = {};
-        }
-        
-        // Salvar os dados finais da empresa
-        req.session.areaEixoData = req.body;
-        
-        // Aqui você pode processar todos os dados do cadastro:
+// POST: finalizar cadastro da empresa (terceira etapa)
+router.post('/cadastro-empresa-submit', function (req, res) {
+    try {
+        // Combinar todos os dados das etapas anteriores
         const dadosCompletos = {
-            empresa: req.session.cadastroEmpresa,
-            representante: req.session.representanteData,
-            areaEixo: req.session.areaEixoData
+            ...req.session.cadastroEmpresa,
+            ...req.session.representanteData,
+            ...req.body
         };
         
-        console.log('Cadastro da empresa finalizado:', dadosCompletos);
+        console.log('Cadastro de empresa finalizado:', dadosCompletos);
         
-        // Limpar os dados da sessão após processar
+        // TODO: Salvar dados completos no banco de dados
+        
+        // Limpar dados da sessão
         delete req.session.cadastroEmpresa;
         delete req.session.representanteData;
-        delete req.session.areaEixoData;
         
-        // Redirecionar para a página de login da empresa
-        return res.redirect('/login-empresa');
+        // Redirecionar para página de sucesso ou login
+        res.redirect('/home-empresa?cadastro=sucesso');
+    } catch (error) {
+        console.error('Erro ao finalizar cadastro:', error);
+        res.status(500).render('pages/cadastro-empresa3', {
+            error: 'Erro interno do servidor. Tente novamente.'
+        });
     }
-);
+});
 
 router.get('/home-empresa', function (req, res) {
     res.render('pages/home-empresa');
 });
 
-router.get('/processos-seletivos-ativos', function (req, res) {
-    res.render('pages/processos-seletivos');
-});
-
-router.get('/analise-vagas', function (req, res) {
-    res.render('pages/analise-vagas');
-});
-
-router.get('/sala-reuniao', function (req, res) {
-    res.render('pages/saladereunião');
-});
-
-router.get('/pagamento', function (req, res) {
-    res.render('pages/pagamento');
-});
 
 module.exports = router;
