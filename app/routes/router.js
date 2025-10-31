@@ -130,6 +130,12 @@ router.get('/cadCurriculo3', function (req, res) {
     }
 });
 
+// Rota para "Atualizar currículo" - redireciona para primeira página do cadastro
+router.get('/cad-curriculo', function (req, res) {
+    console.log('Rota /cad-curriculo acessada - redirecionando para cadCurriculo1');
+    res.redirect('/cadCurriculo1');
+});
+
 // POST: finalizar cadastro do currículo
 router.post('/cadCurriculo-submit', function (req, res) {
     try {
@@ -640,6 +646,64 @@ router.post('/cadastro-empresa-submit', function (req, res) {
 
 router.get('/home-empresa', function (req, res) {
     res.render('pages/home-empresa');
+});
+
+// Rota para análise de vagas
+router.get('/analise-vagas', function (req, res) {
+    console.log('Rota /analise-vagas acessada');
+    try {
+        // Enviar dados das vagas para análise
+        const todasVagas = { ...infoVagas };
+        res.render('pages/analise-vagas', { vagas: todasVagas, infoVagas });
+    } catch (error) {
+        console.error('Erro ao renderizar analise-vagas:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+// Rota para página de pagamento
+router.get('/pagamento', function (req, res) {
+    console.log('Rota /pagamento acessada');
+    try {
+        res.render('pages/pagamento');
+    } catch (error) {
+        console.error('Erro ao renderizar pagamento:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+// Rota para processos seletivos
+router.get('/processos-seletivos', function (req, res) {
+    console.log('Rota /processos-seletivos acessada');
+    try {
+        // Enviar dados dos processos seletivos se necessário
+        res.render('pages/processos-seletivos');
+    } catch (error) {
+        console.error('Erro ao renderizar processos-seletivos:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+// Rota para sala de reunião
+router.get('/sala-reuniao', function (req, res) {
+    console.log('Rota /sala-reuniao acessada');
+    try {
+        res.render('pages/saladereunião');
+    } catch (error) {
+        console.error('Erro ao renderizar sala-reuniao:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+// Rota para teste do menu (página de desenvolvimento/teste)
+router.get('/teste-menu', function (req, res) {
+    console.log('Rota /teste-menu acessada');
+    try {
+        res.render('pages/testemenu');
+    } catch (error) {
+        console.error('Erro ao renderizar teste-menu:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
 });
 
 
