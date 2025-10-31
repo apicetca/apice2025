@@ -194,6 +194,29 @@ ul li img {
   font-weight: 300;
 }
 
+.menu-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-footer a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.menu-footer a:hover {
+  color: white;
+}
+
 @media (max-width: 640px) {
   .menu-header {
     padding: 16px;
@@ -240,6 +263,10 @@ ul li img {
       <li><a href="/vagas"><span class="icon"><img src="img/vaga.svg"></span>Vaga</a></li>
       <li><a href="/config-usuario"><span class="icon"><img src="img/config.svg"></span>Configurações</a></li>
     </ul>
+    <div class="menu-footer">
+      <a href="/fale-conosco">Fale Conosco</a>
+      <a href="/sobre-nos">Sobre nós</a>
+    </div>
   </nav>
   <span id="menuOverlay"></span>
 </header>

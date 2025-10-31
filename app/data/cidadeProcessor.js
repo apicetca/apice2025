@@ -12,6 +12,14 @@ function processarMunicipios() {
         const cidadesPorEstado = {};
         
         municipios.forEach(municipio => {
+            // Verificar se o município e suas propriedades aninhadas existem
+            if (!municipio || 
+                !municipio.microrregiao || 
+                !municipio.microrregiao.mesorregiao || 
+                !municipio.microrregiao.mesorregiao.UF) {
+                return; // Pular este município se estiver incompleto
+            }
+            
             const uf = municipio.microrregiao.mesorregiao.UF.sigla;
             const nomeCidade = municipio.nome;
             
