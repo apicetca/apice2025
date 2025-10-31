@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Currículo - Informações Gerais</title>
+    <link rel="stylesheet" href="/css/cadastro-comum.css" />
+    <link rel="stylesheet" href="/css/validation.css" />
+    <style>
+      /* Estilos específicos para o step progress */
+      .step-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        gap: 20px;
+      }
+      
+      .step {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #e6e6f0;
+        color: #9b9bb3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      
+      .step.active {
+        background: var(--primary);
+        color: white;
+      }
+      
+      .step.completed {
+        background: var(--secundary);
+        color: var(--primary);
+      }
+      
+      .step-line {
+        width: 40px;
+        height: 2px;
+        background: #e6e6f0;
+      }
+      
+      .step-line.completed {
+        background: var(--secundary);
+      }
+      
+      .step-label {
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 11px;
+        font-weight: 500;
+        color: #9b9bb3;
+        white-space: nowrap;
+      }
+      
+      .step.active .step-label {
+        color: var(--primary);
+        font-weight: 600;
+      }
+      
+      .step.completed .step-label {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .checkbox-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        margin: 15px 0;
+      }
+
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: background 0.2s ease;
+      }
+
+      .checkbox-item:hover {
+        background: #f8f9fa;
+      }
+
+      .checkbox-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin: 0;
+      }
+
+      .checkbox-container {
+        margin: 15px 0;
+      }
+
+      .checkbox-container input[type="checkbox"] {
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <%- include('../partials/menujovem') %>
+    </header>
+
+    <main class="cad-container">
+      <h1 class="cadastro">Cadastro de Currículo</h1>
+      
+      <!-- Progress Steps -->
+      <nav class="step-progress">
+        <article class="step completed">
+          1
+          <span class="step-label">Formação Acadêmica</span>
+        </article>
+        <span class="step-line completed"></span>
+        <article class="step completed">
+          2
+          <span class="step-label">Experiência</span>
+        </article>
+        <span class="step-line completed"></span>
+        <article class="step active">
+          3
+          <span class="step-label">Informações Gerais</span>
+        </article>
+      </nav>
+
+      <form id="curriculoForm3" class="cad-form" action="/cadCurriculo-submit" method="POST" novalidate>
+        
+        <!-- Habilidades Section -->
+        <section class="form-section">
+          <h2>Principais Habilidades</h2>
+          <p>Selecione suas principais habilidades profissionais:</p>
+          
+          <fieldset class="checkbox-grid">
+            <label class="checkbox-item">
+              <input type="checkbox" name="habilidades" value="comunicacao" data-required="true" data-group="habilidades">
+              Comunicação
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="habilidades" value="lideranca" data-required="true" data-group="habilidades">
+              Liderança
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="habilidades" value="trabalho_equipe" data-required="true" data-group="habilidades">
+              Trabalho em equipe
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="habilidades" value="organizacao" data-required="true" data-group="habilidades">
+              Organização
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="habilidades" value="criatividade" data-required="true" data-group="habilidades">
+              Criatividade
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="habilidades" value="proatividade" data-required="true" data-group="habilidades">
+              Proatividade
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="habilidades" value="informatica" data-required="true" data-group="habilidades">
+              Informática
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="habilidades" value="vendas" data-required="true" data-group="habilidades">
+              Vendas
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="habilidades" value="atendimento" data-required="true" data-group="habilidades">
+              Atendimento ao cliente
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="habilidades" value="negociacao" data-required="true" data-group="habilidades">
+              Negociação
+            </label>
+          </fieldset>
+          <aside class="error-message" data-field="habilidades"></aside>
+        </section>
+
+        <!-- Disponibilidade Section -->
+        <section class="form-section">
+          <h2>Disponibilidade e Preferências</h2>
+          
+          <section class="input-row">
+            <fieldset class="input-group">
+              <label for="turno">Turno de trabalho</label>
+              <select id="turno" name="turno" data-required="true">
+                <option value="">Selecione o turno</option>
+                <option value="manha">Manhã</option>
+                <option value="tarde">Tarde</option>
+                <option value="noite">Noite</option>
+                <option value="integral">Integral</option>
+                <option value="flexivel">Flexível</option>
+              </select>
+              <aside class="error-message" data-field="turno"></aside>
+            </fieldset>
+            
+            <fieldset class="input-group">
+              <label for="salario">Expectativa salarial</label>
+              <select id="salario" name="salario" data-required="true">
+                <option value="">Selecione a faixa salarial</option>
+                <option value="ate_1000">Até R$ 1.000</option>
+                <option value="1000_1500">R$ 1.000 - R$ 1.500</option>
+                <option value="1500_2000">R$ 1.500 - R$ 2.000</option>
+                <option value="2000_3000">R$ 2.000 - R$ 3.000</option>
+                <option value="3000_4000">R$ 3.000 - R$ 4.000</option>
+                <option value="acima_4000">Acima de R$ 4.000</option>
+                <option value="negociar">A negociar</option>
+              </select>
+              <aside class="error-message" data-field="salario"></aside>
+            </fieldset>
+          </section>
+
+          <fieldset class="input-group">
+            <label for="idiomas">Idiomas</label>
+            <select id="idiomas" name="idiomas" multiple>
+              <option value="portugues">Português</option>
+              <option value="ingles">Inglês</option>
+              <option value="espanhol">Espanhol</option>
+              <option value="frances">Francês</option>
+              <option value="alemao">Alemão</option>
+              <option value="italiano">Italiano</option>
+            </select>
+            <small>Segure Ctrl para selecionar múltiplos idiomas</small>
+            <aside class="error-message" data-field="idiomas"></aside>
+          </fieldset>
+
+          <section class="checkbox-container">
+            <input type="checkbox" id="viajar" name="viajar" value="true">
+            <label for="viajar">Disponível para viagens</label>
+          </section>
+
+          <section class="checkbox-container">
+            <input type="checkbox" id="mudar" name="mudar" value="true">
+            <label for="mudar">Disponível para mudança de cidade</label>
+          </section>
+        </section>
+
+        <!-- Informações Adicionais Section -->
+        <section class="form-section">
+          <h2>Informações Adicionais</h2>
+          
+          <fieldset class="input-group">
+            <label for="objetivo">Objetivo profissional</label>
+            <textarea id="objetivo" name="objetivo" rows="3" placeholder="Descreva brevemente seus objetivos profissionais e o que busca em uma oportunidade de trabalho..." data-required="true"></textarea>
+            <aside class="error-message" data-field="objetivo"></aside>
+          </fieldset>
+
+          <fieldset class="input-group">
+            <label for="informacoesComplementares">Informações complementares (opcional)</label>
+            <textarea id="informacoesComplementares" name="informacoesComplementares" rows="3" placeholder="Projetos pessoais, trabalhos voluntários, hobbies relevantes ou outras informações que considere importantes..."></textarea>
+            <aside class="error-message" data-field="informacoesComplementares"></aside>
+          </fieldset>
+
+          <section class="checkbox-container">
+            <input type="checkbox" id="aceitaTermos" name="aceitaTermos" data-required="true">
+            <label for="aceitaTermos">Concordo com os <a href="/termos" target="_blank">termos de uso</a> e <a href="/privacidade" target="_blank">política de privacidade</a></label>
+            <aside class="error-message" data-field="aceitaTermos"></aside>
+          </section>
+
+          <section class="checkbox-container">
+            <input type="checkbox" id="receberNotificacoes" name="receberNotificacoes">
+            <label for="receberNotificacoes">Desejo receber notificações sobre vagas compatíveis com meu perfil</label>
+          </section>
+        </section>
+
+      </form>
+
+      <!-- Navigation -->
+      <nav class="actions-section">
+        <button type="button" id="btnAnterior" class="btn-secondary">Anterior</button>
+        <button type="button" id="btnFinalizar" class="btn-primary">Finalizar Cadastro</button>
+      </nav>
+    </main>
+    
+    <footer>
+      <%- include('../partials/footer') %>
+    </footer>
+
+    <script src="/js/validation.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const curriculoValidator3 = initFormValidation('curriculoForm3');
+        
+        // Botão anterior
+        document.getElementById('btnAnterior').addEventListener('click', function() {
+          window.location.href = '/cadCurriculo2';
+        });
+        
+        // Botão finalizar com validação
+        document.getElementById('btnFinalizar').addEventListener('click', function(e) {
+          e.preventDefault();
+          if (curriculoValidator3.validateForm()) {
+            // Se validação passou, submeter o formulário
+            document.getElementById('curriculoForm3').submit();
+          }
+        });
+      });
+    </script>
+
+  </body>
+</html>

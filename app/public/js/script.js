@@ -58,7 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (isTransitioning) return;
             
             isTransitioning = true;
-            const translateX = slideIndex * 100;
+            currentSlide = slideIndex;
+            // Cada slide ocupa 33.33% da largura, então para mostrar o slide correto
+            // precisamos mover o track por (slideIndex * 33.33)%
+            const translateX = slideIndex * 33.33;
             
             // Aplicar transformação suave
             carouselTrack.style.transform = `translateX(-${translateX}%)`;
@@ -71,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Permitir nova transição após animação completar
             setTimeout(() => {
                 isTransitioning = false;
-            }, 600);
+            }, 500);
         }
         
         // Função para avançar automaticamente

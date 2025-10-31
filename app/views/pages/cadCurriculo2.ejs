@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Currículo - Experiência Profissional</title>
+    <link rel="stylesheet" href="/css/cadastro-comum.css" />
+    <link rel="stylesheet" href="/css/validation.css" />
+    <style>
+      /* Estilos específicos para o step progress */
+      .step-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        gap: 20px;
+      }
+      
+      .step {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #e6e6f0;
+        color: #9b9bb3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      
+      .step.active {
+        background: var(--primary);
+        color: white;
+      }
+      
+      .step.completed {
+        background: var(--secundary);
+        color: var(--primary);
+      }
+      
+      .step-line {
+        width: 40px;
+        height: 2px;
+        background: #e6e6f0;
+      }
+      
+      .step-line.completed {
+        background: var(--secundary);
+      }
+      
+      .step-label {
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 11px;
+        font-weight: 500;
+        color: #9b9bb3;
+        white-space: nowrap;
+      }
+      
+      .step.active .step-label {
+        color: var(--primary);
+        font-weight: 600;
+      }
+      
+      .step.completed .step-label {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .checkbox-container {
+        margin: 15px 0;
+      }
+
+      .checkbox-container input[type="checkbox"] {
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <%- include('../partials/menujovem') %>
+    </header>
+
+    <main class="cad-container">
+      <h1 class="cadastro">Cadastro de Currículo</h1>
+      
+      <!-- Progress Steps -->
+      <nav class="step-progress">
+        <article class="step completed">
+          1
+          <span class="step-label">Formação Acadêmica</span>
+        </article>
+        <span class="step-line completed"></span>
+        <article class="step active">
+          2
+          <span class="step-label">Experiência</span>
+        </article>
+        <span class="step-line"></span>
+        <article class="step">
+          3
+          <span class="step-label">Informações Gerais</span>
+        </article>
+      </nav>
+
+      <form id="curriculoForm2" class="cad-form" action="/cadCurriculo2" method="POST" novalidate>
+        
+        <!-- Experiência Profissional Section -->
+        <section class="form-section">
+          <h2>Experiência Profissional</h2>
+          <p>Informe sua experiência profissional mais relevante. Caso não possua, deixe em branco:</p>
+          
+          <fieldset class="input-group">
+            <label for="cargo">Cargo</label>
+            <input type="text" id="cargo" name="cargo" placeholder="Ex: Assistente Administrativo">
+            <aside class="error-message" data-field="cargo"></aside>
+          </fieldset>
+
+          <fieldset class="input-group">
+            <label for="empresa">Empresa</label>
+            <input type="text" id="empresa" name="empresa" placeholder="Ex: Empresa ABC Ltda">
+            <aside class="error-message" data-field="empresa"></aside>
+          </fieldset>
+
+          <section class="input-row">
+            <fieldset class="input-group">
+              <label for="dataInicio">Data de início</label>
+              <input type="month" id="dataInicio" name="dataInicio">
+              <aside class="error-message" data-field="dataInicio"></aside>
+            </fieldset>
+            
+            <fieldset class="input-group">
+              <label for="dataFim">Data de fim</label>
+              <input type="month" id="dataFim" name="dataFim">
+              <aside class="error-message" data-field="dataFim"></aside>
+            </fieldset>
+          </section>
+
+          <section class="checkbox-container">
+            <input type="checkbox" id="empregoAtual" name="empregoAtual" value="true" onchange="toggleDataFim(this)">
+            <label for="empregoAtual">Emprego atual</label>
+          </section>
+
+          <fieldset class="input-group">
+            <label for="descricaoAtividades">Principais atividades (opcional)</label>
+            <textarea id="descricaoAtividades" name="descricaoAtividades" rows="3" placeholder="Descreva suas principais responsabilidades e conquistas neste cargo..."></textarea>
+            <aside class="error-message" data-field="descricaoAtividades"></aside>
+          </fieldset>
+        </section>
+
+        <!-- Outras Experiências Section -->
+        <section class="form-section">
+          <h2>Outras Experiências (Opcional)</h2>
+          
+          <fieldset class="input-group">
+            <label for="outrasExperiencias">Trabalhos anteriores, estágios, projetos</label>
+            <textarea id="outrasExperiencias" name="outrasExperiencias" rows="3" placeholder="Ex: Estágio em Marketing - Empresa XYZ (Jan 2022 - Jun 2022)&#10;Projeto freelance - Desenvolvimento de site (2021)"></textarea>
+            <aside class="error-message" data-field="outrasExperiencias"></aside>
+          </fieldset>
+        </section>
+
+      </form>
+
+      <!-- Navigation -->
+      <nav class="actions-section">
+        <button type="button" id="btnAnterior" class="btn-secondary">Anterior</button>
+        <button type="button" id="btnProximo" class="btn-primary">Próximo</button>
+      </nav>
+    </main>
+    
+    <footer>
+      <%- include('../partials/footer') %>
+    </footer>
+
+    <script src="/js/validation.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const curriculoValidator2 = initFormValidation('curriculoForm2');
+        
+        // Botão anterior
+        document.getElementById('btnAnterior').addEventListener('click', function() {
+          window.location.href = '/cadCurriculo1';
+        });
+        
+        // Botão próximo com validação
+        document.getElementById('btnProximo').addEventListener('click', function(e) {
+          e.preventDefault();
+          if (curriculoValidator2.validateForm()) {
+            // Se validação passou, ir para próxima página
+            window.location.href = '/cadCurriculo3';
+          }
+        });
+        
+        // Função para toggle data fim
+        window.toggleDataFim = function(checkbox) {
+          const dataFimInput = document.getElementById('dataFim');
+          if (checkbox.checked) {
+            dataFimInput.disabled = true;
+            dataFimInput.value = '';
+          } else {
+            dataFimInput.disabled = false;
+          }
+        };
+      });
+    </script>
+
+  </body>
+</html>

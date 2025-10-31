@@ -1,0 +1,267 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+main {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  box-sizing: border-box;
+}
+
+/* Novo estilo para o indicador de progresso */
+.step-indicator {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  position: relative;
+  width: 100%;
+}
+
+.step-indicator p {
+  margin: 0;
+  padding: 8px 15px;
+  border-radius: 20px;
+  background-color: #e0e0e0;
+  color: #555;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  text-align: center;
+  flex: 1;
+  margin: 0 5px;
+}
+
+.step-indicator p:nth-child(2) { /* Active step for Experiência */
+  background-color: #FFCC00;
+  color: #333;
+}
+
+.step-indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #e0e0e0;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  position: relative;
+  z-index: 10;
+}
+
+.number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.label {
+  font-size: 12px;
+  color: #555;
+}
+
+.step.active .number {
+  background-color: #FFCC00;
+  color: #333;
+  box-shadow: 0 0 0 5px #160B5D(255, 193, 7, 0.5);
+}
+
+.step.completed .number {
+  background-color: #FFCC00; /* Cor de completado (amarelo) */
+  color: #333;
+}
+
+.connector {
+  flex: 1;
+  height: 2px;
+  background-color: #e0e0e0;
+  margin-top: 20px; /* Alinha com o centro do .number */
+  position: relative;
+  z-index: 5;
+  align-self: flex-start;
+  transform: translateY(-50%);
+}
+
+.connector.completed {
+  background-color: #FFCC00;
+}
+
+/* Ajustes para o layout do step-indicator */
+.step:nth-child(1) {
+  margin-right: -20px; /* Compensar a metade do conector */
+}
+
+.step:nth-child(3) {
+  margin-left: -20px; /* Compensar a metade do conector */
+}
+
+.step-indicator .connector:nth-of-type(1) {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.step-indicator .connector:nth-of-type(2) {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/* Estilos do formulário */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+  color: #333;
+  margin-top: 20px;
+}
+
+label:first-child {
+  margin-top: 0;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px;
+  width: auto;
+}
+
+button {
+  padding: 14px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.navigation-buttons button:first-child { /* Anterior button */
+  background-color: #FFCC00;
+  color: white;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.navigation-buttons button:last-child { /* Próximo/Finalizar button */
+  background-color: #160B5D;
+  color: white;
+  flex: 1;
+}
+
+.add-button {
+  background-color: #FFCC00;
+  color: #333;
+  width: 100%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.experience-item {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.experience-item label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.experience-item label:first-child {
+  margin-top: 0;
+}
+
+.experience-item input,
+.experience-item textarea {
+  margin-bottom: 10px;
+}
+
+.remove-item-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #160B5D;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

@@ -1,54 +1,132 @@
 .home-page .hero {
-    position: fixed;
-    top: 80px;
+    position: relative;
+    top: 0;
     left: 0;
     width: 100%;
-    height: auto;
-    min-height: calc(100vh - 80px);
-    overflow: visible;
+    min-height: 100vh;
     background-color: #160B5D;
-    display: flex;
-    flex-direction: column;
-    margin: 0 !important;
-    padding: 0;
-    z-index: 1;
-}
-
-.hero-image-container {
-    position: relative;
-    width: 100%;
-    height: 60vh;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 !important;
+    padding: 80px 5% 40px 5%;
+    z-index: 1;
+    overflow: hidden;
 }
 
-.hero-content-section {
-    background: rgba(22, 11, 93, 1);
-    padding: 50px 5% 40px 5%;
-    margin: 0;
+.hero-content-grid {
+    max-width: 1400px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 3;
 }
 
-.hero-content-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
+.hero-text-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    gap: 40px;
+    animation: slideInLeft 1s ease-out;
 }
 
-.hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
+.hero-image-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: slideInRight 1s ease-out;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-img-fixed {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.25));
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.decorative-circles {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.9;
+    z-index: 2;
+}
+
+/* 5 círculos com cores embaralhadas */
+.circle-yellow-1 {
+    width: 160px;
+    height: 160px;
+    background: #FFC52D; /* Amarelo sólido da paleta */
+    top: -8%;
+    right: -12%;
+}
+
+.circle-yellow-2 {
+    width: 150px;
+    height: 150px;
+    background: #FFC52D; /* Amarelo sólido da paleta */
+    bottom: 10%;
+    left: -8%;
+}
+
+.circle-white-1 {
+    width: 180px;
+    height: 180px;
+    background: #FFFFFF; /* Branco sólido */
+    bottom: -15%;
+    right: 5%;
+}
+
+.circle-yellow-3 {
+    width: 120px;
+    height: 120px;
+    background: #FFC52D; /* Amarelo sólido da paleta */
+    top: 20%;
+    left: -10%;
+}
+
+.circle-white-2 {
+    width: 140px;
+    height: 140px;
+    background: #FFFFFF; /* Branco sólido */
+    top: 55%;
+    right: -15%;
+}
+
+
 
 /* Ajuste progressivo da imagem para telas pequenas */
 @media (max-width: 640px) {
@@ -86,33 +164,54 @@
   }
 }
 
-.overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to top,
-    rgba(22, 11, 93, 0.7) 0%,
-    rgba(22, 11, 93, 0.4) 30%,
-    rgba(22, 11, 93, 0.2) 50%,
-    rgba(22, 11, 93, 0) 70%
-  );
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  padding: 0 5%;
-  z-index: 2;
+
+
+.hero-description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
 }
 
-.title-container {
-  width: 100%;
+/* Animações */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+
+
+
+
+.hero-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.hero-subtitle {
   max-width: 500px;
-  margin-bottom: 0;
-  z-index: 15;
-  text-align: center;
 }
 
 .hero-content-below .content {
@@ -127,16 +226,14 @@
 }
 
 .h1 {
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 0;
-  text-align: center;
+  font-size: 4rem;
+  font-weight: 800;
+  margin: 0;
+  text-align: left;
   color: #FFC52D;
-  max-width: 100%;
-  line-height: 1.2;
+  line-height: 1.1;
   position: relative;
   z-index: 10;
-  text-shadow: 0 4px 8px rgba(0,0,0,0.6);
 }
 
 .title-mobile {
@@ -318,21 +415,196 @@
   flex-wrap: wrap;
 }
 
-/* Estilo específico para os botões para garantir que fiquem visíveis */
+.btn-container-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
 .btnhome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-width: 220px;
   position: relative;
   z-index: 30;
-  text-align: center;
-  justify-content: space-between;
-  min-width: 250px; /* Garante largura mínima consistente */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+
+
+.btnhome.primary {
+  background-color: #FFC52D;
+  color: #160B5D;
+}
+
+.btnhome.primary:hover {
+  transform: translateY(-2px);
+  background-color: #FFD700;
+}
+
+.btnhome.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.btnhome.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-text {
+  flex: 1;
+  text-align: left;
+}
+
+.seta {
+  margin-left: 12px;
+  transition: transform 0.3s ease;
+}
+
+.btnhome:hover .seta {
+  transform: translateX(4px);
+}
+
+.seta img {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+}
+
+.btnhome.primary .seta img {
+  filter: brightness(0);
 }
 
 /* Os estilos da seção de vagas foram movidos para home.css */
 
-@media (min-width: 768px) {
+/* Responsividade */
+@media (max-width: 1024px) {
+  .hero-content-grid {
+    gap: 60px;
+  }
+  
+  .h1 {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page .hero {
+    padding: 100px 5% 60px 5%;
+  }
+  
+  .hero-content-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    text-align: center;
+  }
+  
+  .hero-title-wrapper {
+    text-align: center;
+  }
+  
+  .h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
+  
+  .hero-subtitle {
+    max-width: 100%;
+  }
+  
+  .hero-description {
+    text-align: center;
+  }
+  
+  .btn-container-hero {
+    align-items: center;
+  }
+  
+  .image-container {
+    width: 380px;
+    height: 380px;
+  }
+  
+  .hero-img-fixed {
+    width: 350px;
+    height: 350px;
+  }
+  
+  .circle-yellow {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .circle-blue {
+    width: 115px;
+    height: 115px;
+  }
+  
+  .circle-white {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page .hero {
+    padding: 120px 5% 40px 5%;
+  }
+  
+  .h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-description {
+    font-size: 1.1rem;
+  }
+  
+  .btnhome {
+    min-width: 200px;
+    font-size: 1rem;
+  }
+  
+  .image-container {
+    width: 320px;
+    height: 320px;
+  }
+  
+  .hero-img-fixed {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .circle-yellow {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .circle-blue {
+    width: 95px;
+    height: 95px;
+  }
+  
+  .circle-white {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (min-width: 769px) {
   .btn-container-hero {
     flex-direction: row;
-    justify-content: flex-start; /* Alinha os botões à esquerda */
     gap: 20px;
   }
   

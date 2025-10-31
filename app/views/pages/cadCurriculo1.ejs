@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Currículo - Formação Acadêmica</title>
+    <link rel="stylesheet" href="/css/cadastro-comum.css" />
+    <link rel="stylesheet" href="/css/validation.css" />
+    <style>
+      /* Estilos específicos para o step progress */
+      .step-progress {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        gap: 20px;
+      }
+      
+      .step {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #e6e6f0;
+        color: #9b9bb3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      
+      .step.active {
+        background: var(--primary);
+        color: white;
+      }
+      
+      .step.completed {
+        background: var(--secundary);
+        color: var(--primary);
+      }
+      
+      .step-line {
+        width: 40px;
+        height: 2px;
+        background: #e6e6f0;
+      }
+      
+      .step-line.completed {
+        background: var(--secundary);
+      }
+      
+      .step-label {
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 11px;
+        font-weight: 500;
+        color: #9b9bb3;
+        white-space: nowrap;
+      }
+      
+      .step.active .step-label {
+        color: var(--primary);
+        font-weight: 600;
+      }
+      
+      .step.completed .step-label {
+        color: var(--primary);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <%- include('../partials/menujovem') %>
+    </header>
+
+    <main class="cad-container">
+      <h1 class="cadastro">Cadastro de Currículo</h1>
+      
+      <!-- Progress Steps -->
+      <nav class="step-progress">
+        <article class="step active">
+          1
+          <span class="step-label">Formação Acadêmica</span>
+        </article>
+        <span class="step-line"></span>
+        <article class="step">
+          2
+          <span class="step-label">Experiência</span>
+        </article>
+        <span class="step-line"></span>
+        <article class="step">
+          3
+          <span class="step-label">Informações Gerais</span>
+        </article>
+      </nav>
+
+      <form id="curriculoForm1" class="cad-form" action="/cadCurriculo1" method="POST" novalidate>
+        
+        <!-- Formação Acadêmica Section -->
+        <section class="form-section">
+          <h2>Formação Acadêmica</h2>
+          <p>Informe sua formação acadêmica. Adicione todos os cursos relevantes:</p>
+          
+          <fieldset class="input-group">
+            <label for="curso">Curso</label>
+            <input type="text" id="curso" name="curso" placeholder="Ex: Administração de Empresas" data-required="true">
+            <aside class="error-message" data-field="curso"></aside>
+          </fieldset>
+
+          <fieldset class="input-group">
+            <label for="instituicao">Instituição</label>
+            <input type="text" id="instituicao" name="instituicao" placeholder="Ex: Universidade Federal de São Paulo" data-required="true">
+            <aside class="error-message" data-field="instituicao"></aside>
+          </fieldset>
+
+          <section class="input-row">
+            <fieldset class="input-group">
+              <label for="situacao">Situação</label>
+              <select id="situacao" name="situacao" data-required="true">
+                <option value="">Selecione a situação</option>
+                <option value="concluido">Concluído</option>
+                <option value="cursando">Cursando</option>
+                <option value="interrompido">Interrompido</option>
+                <option value="trancado">Trancado</option>
+              </select>
+              <aside class="error-message" data-field="situacao"></aside>
+            </fieldset>
+            
+            <fieldset class="input-group">
+              <label for="anoConclusao">Ano de conclusão</label>
+              <input type="number" id="anoConclusao" name="anoConclusao" placeholder="Ex: 2023" min="1950" max="2030">
+              <aside class="error-message" data-field="anoConclusao"></aside>
+            </fieldset>
+          </section>
+        </section>
+
+        <!-- Cursos Complementares Section -->
+        <section class="form-section">
+          <h2>Cursos Complementares (Opcional)</h2>
+          
+          <fieldset class="input-group">
+            <label for="cursosComplementares">Cursos, certificações e qualificações</label>
+            <textarea id="cursosComplementares" name="cursosComplementares" rows="3" placeholder="Ex: Curso de Excel Avançado - Microsoft (2023)&#10;Certificação em Marketing Digital - Google (2022)"></textarea>
+            <aside class="error-message" data-field="cursosComplementares"></aside>
+          </fieldset>
+        </section>
+
+      </form>
+
+      <!-- Navigation -->
+      <nav class="actions-section">
+        <button type="button" id="btnAnterior" class="btn-secondary" disabled>Anterior</button>
+        <button type="button" id="btnProximo" class="btn-primary">Próximo</button>
+      </nav>
+    </main>
+    
+    <footer>
+      <%- include('../partials/footer') %>
+    </footer>
+
+    <script src="/js/validation.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const curriculoValidator1 = initFormValidation('curriculoForm1');
+        
+        // Botão próximo com validação
+        document.getElementById('btnProximo').addEventListener('click', function(e) {
+          e.preventDefault();
+          if (curriculoValidator1.validateForm()) {
+            // Se validação passou, ir para próxima página
+            window.location.href = '/cadCurriculo2';
+          }
+        });
+      });
+    </script>
+
+  </body>
+</html>

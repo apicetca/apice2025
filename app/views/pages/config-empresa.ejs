@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações da Empresa - Ápice</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/menu.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/config-empresa.css">
+
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100900;1,100900&family=Montserrat:ital,wght@0,100900;1,100900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+ </style>
+</head>
+<body>
+  <%- include('../partials/menuempresa') %>
+  
+  <main class="config-container">
+    <header class="config-header">
+      <button class="back-button">
+        <img src="/img/seta2.png" alt="Voltar" class="back-icon">
+      </button>
+      <h2 class="config-main-title">Configurações da Empresa</h2>
+    </header>
+
+    <section class="config-content">
+      <article class="config-card">
+        <figure class="card-icon">
+          <img src="/img/user.empre.svg" alt="Gerenciar" class="icon">
+        </figure>
+        <header class="card-content">
+          <h3 class="card-title">Gerenciar informações da empresa</h3>
+          <p class="card-description">Atualize nome comercial, CNPJ, descrição, logo e informações de contato.</p>
+        </header>
+        <section class="card-arrow"></section>
+      </article>
+
+      <article class="config-card">
+        <figure class="card-icon">
+          <img src="/img/pdf.svg" alt="Download" class="icon">
+        </figure>
+        <header class="card-content">
+          <h3 class="card-title">Baixar dados da empresa</h3>
+          <p class="card-description">Faça o download de relatórios, dados de vagas publicadas e estatísticas de candidaturas.</p>
+        </header>
+        <section class="card-arrow"></section>
+      </article>
+
+      <article class="config-card">
+        <figure class="card-icon">
+          <img src="/img/privacidade.svg" alt="Privacidade" class="icon">
+        </figure>
+        <header class="card-content">
+          <h3 class="card-title">Privacidade e segurança</h3>
+          <p class="card-description">Gerencie o uso de dados da empresa, aceite de termos e autenticação de login.</p>
+        </header>
+        <section class="card-arrow"></section>
+      </article>
+
+      <article class="config-card">
+        <figure class="card-icon">
+          <img src="/img/excluir.svg" alt="Encerrar" class="icon">
+        </figure>
+        <header class="card-content">
+          <h3 class="card-title">Encerrar conta empresarial</h3>
+          <p class="card-description">Desative ou exclua permanentemente a conta da empresa, incluindo dados e publicações.</p>
+        </header>
+        <section class="card-arrow"></section>
+      </article>
+    </section>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>
