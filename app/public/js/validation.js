@@ -333,8 +333,6 @@ class InputMasks {
   }
 }
 
-// ========== VALIDAÇÕES ESPECÍFICAS PARA LOGIN ==========
-
 class LoginValidator {
   constructor(formId, loginType = 'jovem') {
     this.form = document.getElementById(formId);

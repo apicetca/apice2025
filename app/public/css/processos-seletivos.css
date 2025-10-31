@@ -420,3 +420,440 @@ body {
   transform: none;
   box-shadow: none;
 }
+
+/* ========== ESTILOS ESPECÍFICOS PARA PROCESSOS SELETIVOS USUÁRIO ========== */
+
+/* Seção de filtros e busca */
+.filters-section {
+  padding: 20px;
+  background: var(--bg-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 20px 14px 50px;
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-small);
+  font-size: 16px;
+  background: white;
+  transition: var(--transition);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(22, 11, 93, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  background: white;
+  border: 2px solid var(--border-light);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Seção de estatísticas */
+.stats-section {
+  padding: 20px;
+  background: white;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 16px 8px;
+  background: var(--bg-light);
+  border-radius: var(--radius-small);
+}
+
+.stat-number {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Seção de vagas */
+.vagas-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.results-count {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.vagas-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vaga-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+  border: 1px solid var(--border-light);
+}
+
+.vaga-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(22, 11, 93, 0.15);
+}
+
+.vaga-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.vaga-empresa {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.empresa-icon {
+  font-size: 16px;
+}
+
+.empresa-nome {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.vaga-tipo {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--bg-light);
+  color: var(--text-secondary);
+}
+
+.vaga-tipo.efetivo {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.vaga-tipo.terceirizado {
+  background: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+}
+
+.vaga-titulo {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.vaga-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-icon {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.info-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.vaga-descricao {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.vaga-beneficios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.beneficio-tag {
+  padding: 4px 8px;
+  background: var(--bg-light);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.beneficio-tag.more {
+  background: var(--primary);
+  color: white;
+}
+
+.vaga-footer {
+  border-top: 1px solid var(--border-light);
+  padding-top: 16px;
+}
+
+.vaga-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 12px 16px;
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--primary);
+  color: white;
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  background: #1a0f6b;
+  border-color: #1a0f6b;
+  transform: translateY(-1px);
+}
+
+.vaga-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* Seção de candidaturas */
+.candidaturas-section {
+  padding: 20px;
+  background: var(--bg-light);
+  margin-top: 20px;
+}
+
+.candidaturas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.candidatura-item {
+  background: white;
+  padding: 16px;
+  border-radius: var(--radius-small);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-soft);
+}
+
+.candidatura-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.candidatura-empresa {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.candidatura-data {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.candidatura-status {
+  text-align: right;
+}
+
+.status-badge {
+  display: block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.status-badge.em-analise {
+  background: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+}
+
+.status-badge.entrevista {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.status-badge.finalizado {
+  background: rgba(108, 117, 125, 0.1);
+  color: #6c757d;
+}
+
+.btn-status {
+  padding: 6px 12px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-status:hover {
+  background: #1a0f6b;
+}
+
+/* Botão carregar mais */
+.load-more-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.btn-load-more {
+  padding: 12px 24px;
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-load-more:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 480px) {
+  .processos-container {
+    max-width: 100%;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .vaga-card {
+    padding: 16px;
+  }
+  
+  .vaga-actions {
+    flex-direction: column;
+  }
+  
+  .candidatura-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .candidatura-status {
+    text-align: left;
+    width: 100%;
+  }
+}

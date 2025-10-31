@@ -4,6 +4,7 @@ const { body, validationResult } = require('express-validator');
 const multer = require('multer');
 const fs = require('fs');
 const { validationSets, handleValidationErrors, renderWithErrors } = require('../validations/validations');
+const { cidadesPorEstado } = require('../data/cidadeProcessor');
 
 // cria a pasta de uploads caso nao exista
 const uploadDir = '/uploads/';
@@ -65,6 +66,54 @@ const { encontrarVaga } = require('../data/vagasLoader');
 let vagasCandidatadas = [];
 let vagasAnteriores = [];
 
+// IMPORTANTE: Esta rota deve vir ANTES de /vagas/:id para evitar conflitos
+router.get('/vagas-empresa', function (req, res) {
+    console.log('Acessando rota /vagas-empresa');
+    try {
+        res.render('pages/vagas-empresa');
+    } catch (error) {
+        console.error('Erro ao renderizar vagas-empresa:', error);
+        res.status(500).send('Erro interno do servidor');
+    }
+});
+
+// API para buscar cidades por estado
+router.get('/api/cidades/:estado', function (req, res) {
+    const estado = req.params.estado.toUpperCase();
+    
+    try {
+        const cidades = cidadesPorEstado[estado] || [];
+        res.json({
+            success: true,
+            estado: estado,
+            cidades: cidades
+        });
+    } catch (error) {
+        console.error('Erro ao buscar cidades:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erro interno do servidor'
+        });
+    }
+});
+
+// API para listar todos os estados disponíveis
+router.get('/api/estados', function (req, res) {
+    try {
+        const estados = Object.keys(cidadesPorEstado).sort();
+        res.json({
+            success: true,
+            estados: estados
+        });
+    } catch (error) {
+        console.error('Erro ao buscar estados:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erro interno do servidor'
+        });
+    }
+});
+
 router.get('/vagas/:id', function (req, res) {
     const vagaId = req.params.id;
     console.log('Acessando vaga:', vagaId);
@@ -88,6 +137,11 @@ router.get('/vagas', function (req, res) {
     const todasVagas = { ...infoVagas };
     
     res.render('pages/vagas', { vagas: todasVagas, infoVagas });
+});
+
+// Rota para entrevistas marcadas
+router.get('/entrevistas-marcadas', function (req, res) {
+    res.render('pages/entrevistas-marcadas');
 });
 
 router.get('/vaga-detalhes', function (req, res) {
@@ -119,6 +173,96 @@ router.get('/login', (req, res) => {
         activeTab: activeTab,
         query: req.query
     });
+});
+
+router.get('/login-usuario', (req, res) => {
+    res.render('pages/login-usuario', {
+        errors: null,
+        form: {},
+        query: req.query
+    });
+});
+
+// Rota para página de login da empresa
+router.get('/login-empresa', (req, res) => {
+    res.render('pages/login-empresa', {
+        errors: null,
+        form: {},
+        query: req.query
+    });
+});
+
+// Rota POST para login do usuário
+router.post('/login-usuario', [
+    body('email')
+        .notEmpty()
+        .withMessage('E-mail é obrigatório')
+        .isEmail()
+        .withMessage('Digite um e-mail válido'),
+    body('password')
+        .notEmpty()
+        .withMessage('Senha é obrigatória')
+        .isLength({ min: 6 })
+        .withMessage('Senha deve ter pelo menos 6 caracteres')
+], (req, res) => {
+    const errors = validationResult(req);
+    
+    if (!errors.isEmpty()) {
+        return res.render('pages/login-usuario', {
+            errors: errors.array(),
+            form: req.body,
+            query: req.query
+        });
+    }
+
+    // TODO: Implementar autenticação real (verificar credenciais no banco)
+    console.log('Login do usuário validado com sucesso:', req.body.email);
+    
+    // TODO: Criar sessão do usuário
+    // Redirecionar para o portal do usuário
+    res.redirect('/home-jovem');
+});
+
+// Rota POST para login da empresa
+router.post('/login-empresa', [
+    body('cnpj')
+        .notEmpty()
+        .withMessage('CNPJ é obrigatório')
+        .custom((value) => {
+            // Remover formatação do CNPJ
+            const cnpj = value.replace(/\D/g, '');
+            if (cnpj.length !== 14) {
+                throw new Error('CNPJ deve ter 14 dígitos');
+            }
+            return true;
+        }),
+    body('email')
+        .notEmpty()
+        .withMessage('E-mail é obrigatório')
+        .isEmail()
+        .withMessage('Digite um e-mail válido'),
+    body('password')
+        .notEmpty()
+        .withMessage('Senha é obrigatória')
+        .isLength({ min: 6 })
+        .withMessage('Senha deve ter pelo menos 6 caracteres')
+], (req, res) => {
+    const errors = validationResult(req);
+    
+    if (!errors.isEmpty()) {
+        return res.render('pages/login-empresa', {
+            errors: errors.array(),
+            form: req.body,
+            query: req.query
+        });
+    }
+
+    // TODO: Implementar autenticação real (verificar credenciais no banco)
+    console.log('Login da empresa validado com sucesso:', req.body.email);
+    
+    // TODO: Criar sessão da empresa
+    // Redirecionar para o portal da empresa
+    res.redirect('/home-empresa');
 });
 
 
@@ -206,23 +350,19 @@ router.get('/cad2', function (req, res) {
     res.render('pages/cad2', { errors: null, form: {} });
 });
 
-// POST: Validar segunda página do cadastro de jovem
 router.post(
     '/cad2',
     validationSets.cadastroJovem2,
     handleValidationErrors,
     (req, res) => {
-        // Verificar se passou pela primeira página
         if (!req.session.cadastroJovem) {
             return res.redirect('/cadastro');
         }
         
-        // Verificar se há erros de validação e renderizar com erros
         const errorRender = renderWithErrors(req, res, 'pages/cad2');
         
         if (errorRender !== null) return errorRender;
 
-        // Se validação passou, combinar dados das duas páginas
         const dadosCompletos = {
             ...req.session.cadastroJovem,
             ...req.body
@@ -230,13 +370,9 @@ router.post(
         
         console.log('Cadastro completo validado:', dadosCompletos);
         
-        // TODO: Salvar no banco de dados
-        
-        // Limpar sessão
         delete req.session.cadastroJovem;
         
-        // Redirecionar para sucesso
-        res.redirect('/login?cadastro=sucesso');
+        res.redirect('/login-usuario?cadastro=sucesso');
     }
 );
 
@@ -245,7 +381,7 @@ const users = require('../data/users');
 
 
 router.get('/perfil', (req, res) => {
-    const user = users.user1; // (lembrar de usar ID dinâmico posteriormente)
+    const user = users.user1;
     res.render('pages/perfil', {
         profileImage: '/img/default-profile.png',
         user: user,
@@ -253,10 +389,8 @@ router.get('/perfil', (req, res) => {
 });
 
 
-// Rota para processar o upload
 router.post('/upload-profile', upload.single('profileImage'), (req, res) => {
-    const user = users.user1; // Mantém os dados do usuário
-
+    const user = users.user1;
     if (!req.file) {
         return res.render('pages/perfil', {
             profileImage: '/img/default-profile.png',
@@ -283,7 +417,6 @@ router.post('/upload-profile', upload.single('profileImage'), (req, res) => {
 
 
 router.get('/minhas-vagas', function (req, res) {
-    // Enviando todas as vagas, igual à rota /vagas
     const todasVagas = { ...infoVagas };
     
     res.render('pages/minhasvagas', { 
@@ -294,26 +427,21 @@ router.get('/minhas-vagas', function (req, res) {
     });
 });
 
-// Rota para processar candidatura
 router.post('/candidatar', function (req, res) {
     const { vagaId } = req.body;
     
     if (vagaId && infoVagas[vagaId]) {
-        // Verificar se já não está candidatado
         if (!vagasCandidatadas.includes(vagaId)) {
             vagasCandidatadas.push(vagaId);
         }
     }
     
-    // Redirecionar de volta para a página de detalhes
     res.redirect(`/vaga-detalhes?id=${vagaId}`);
 });
 
-// Rota para cancelar candidatura
 router.post('/cancelar-candidatura', function (req, res) {
     const { vagaId } = req.body;
     
-    // Remover da lista de candidatadas e adicionar às anteriores
     const index = vagasCandidatadas.indexOf(vagaId);
     if (index > -1) {
         vagasCandidatadas.splice(index, 1);
@@ -336,34 +464,28 @@ router.get('/teste3', function (req, res) {
 });
 
 
-// rota de empresa, depois colocar em um arquivo separado
 router.get('/cadastro-empresa', function (req, res) {
     res.render('pages/cadastro-empresa', { form: {}, errors: null });
 });
 
 
-// POST: validar dados do cadastro da empresa no servidor
 router.post(
     '/cadastro-empresa',
     validationSets.cadastroEmpresa,
     handleValidationErrors,
     (req, res) => {
-        // Verificar se há erros de validação e renderizar com erros
         const errorRender = renderWithErrors(req, res, 'pages/cadastro-empresa');
         
         if (errorRender !== null) return errorRender;
 
-        // Se validação passou, armazenar dados na sessão e ir para próxima página
         req.session.cadastroEmpresa = req.body;
         console.log('Cadastro empresa validado:', req.body);
         
-        // TODO: Salvar no banco de dados
         
         res.redirect('/teste2');
     }
 );
 
-// POST: validar dados do representante da empresa (segunda etapa)
 router.post(
     '/cadastro-empresa2',
     validationSets.cadastroEmpresaRepresentante,
@@ -374,7 +496,6 @@ router.post(
         
         if (errorRender !== null) return errorRender;
 
-        // Se passou na validação, armazenar dados e seguir para próxima etapa
         if (!req.session) {
             req.session = {};
         }
@@ -382,6 +503,44 @@ router.post(
         console.log('Dados do representante validados:', req.body);
         
         return res.redirect('/teste3');
+    }
+);
+
+// Rota POST para finalizar o cadastro da empresa
+router.post('/cadastro-empresa3', 
+    [
+        body('area').notEmpty().withMessage('A área é obrigatória'),
+        body('eixo').notEmpty().withMessage('O eixo de atuação é obrigatório')
+    ],
+    handleValidationErrors,
+    (req, res) => {
+        // Verificar se há erros de validação
+        const errorRender = renderWithErrors(req, res, 'pages/cadastro-empresa3');
+        if (errorRender !== null) return errorRender;
+
+        if (!req.session) {
+            req.session = {};
+        }
+        
+        // Salvar os dados finais da empresa
+        req.session.areaEixoData = req.body;
+        
+        // Aqui você pode processar todos os dados do cadastro:
+        const dadosCompletos = {
+            empresa: req.session.cadastroEmpresa,
+            representante: req.session.representanteData,
+            areaEixo: req.session.areaEixoData
+        };
+        
+        console.log('Cadastro da empresa finalizado:', dadosCompletos);
+        
+        // Limpar os dados da sessão após processar
+        delete req.session.cadastroEmpresa;
+        delete req.session.representanteData;
+        delete req.session.areaEixoData;
+        
+        // Redirecionar para a página de login da empresa
+        return res.redirect('/login-empresa');
     }
 );
 
@@ -399,6 +558,10 @@ router.get('/analise-vagas', function (req, res) {
 
 router.get('/sala-reuniao', function (req, res) {
     res.render('pages/saladereunião');
+});
+
+router.get('/pagamento', function (req, res) {
+    res.render('pages/pagamento');
 });
 
 module.exports = router;

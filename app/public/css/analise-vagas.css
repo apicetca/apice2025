@@ -345,12 +345,16 @@ body {
   gap: 8px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-decoration: none;
+  width: fit-content;
 }
 
 .create-job-btn:hover {
   background: #FFD93D;
+  color: var(--primary);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(255, 197, 45, 0.3);
+  text-decoration: none;
 }
 
 .create-job-btn:active {
