@@ -1,7 +1,6 @@
 const { body, validationResult } = require('express-validator');
 const { validationSets: empresaValidationSets } = require('./empresa-validations');
 const commonValidations = {
-  // Nome completo
   nome: body('nome')
     .trim()
     .notEmpty()
@@ -21,7 +20,6 @@ const commonValidations = {
     .withMessage('Digite um email válido')
     .normalizeEmail(),
 
-  // Telefone
   telefone: body('telefone')
     .trim()
     .notEmpty()
@@ -29,7 +27,6 @@ const commonValidations = {
     .matches(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)
     .withMessage('Digite um telefone válido no formato (XX) XXXXX-XXXX'),
 
-  // Senha
   password: body('password')
     .notEmpty()
     .withMessage('Senha é obrigatória')
@@ -38,7 +35,6 @@ const commonValidations = {
     .isLength({ max: 128 })
     .withMessage('Senha muito longa'),
 
-  // Confirmação de senha
   confirmPassword: body('confirmPassword')
     .notEmpty()
     .withMessage('Confirmação de senha é obrigatória')
@@ -49,7 +45,6 @@ const commonValidations = {
       return true;
     }),
 
-  // RG
   rg: body('rg')
     .trim()
     .notEmpty()
@@ -57,7 +52,6 @@ const commonValidations = {
     .isLength({ min: 7, max: 12 })
     .withMessage('RG deve ter entre 7 e 12 caracteres'),
 
-  // Data de nascimento
   data: body('data')
     .notEmpty()
     .withMessage('Data de nascimento é obrigatória')
@@ -74,21 +68,18 @@ const commonValidations = {
       return true;
     }),
 
-  // Sexo
   sexo: body('sexo')
     .notEmpty()
     .withMessage('Sexo é obrigatório')
     .isIn(['masculino', 'feminino', 'outro'])
     .withMessage('Selecione uma opção válida'),
 
-  // Estado civil
   estado: body('estado')
     .notEmpty()
     .withMessage('Estado civil é obrigatório')
     .isIn(['solteiro', 'casado', 'divorciado', 'viuvo'])
     .withMessage('Selecione uma opção válida'),
 
-  // Endereço
   endereco: body('endereco')
     .trim()
     .notEmpty()
@@ -96,7 +87,6 @@ const commonValidations = {
     .isLength({ min: 5, max: 200 })
     .withMessage('Endereço deve ter entre 5 e 200 caracteres'),
 
-  // CEP
   cep: body('cep')
     .trim()
     .notEmpty()
@@ -104,7 +94,6 @@ const commonValidations = {
     .matches(/^\d{5}-\d{3}$/)
     .withMessage('CEP deve estar no formato XXXXX-XXX'),
 
-  // Complemento (opcional)
   complemento: body('complemento')
     .optional({ checkFalsy: true })
     .trim()
@@ -112,9 +101,7 @@ const commonValidations = {
     .withMessage('Complemento deve ter no máximo 100 caracteres')
 };
 
-// Validações específicas para empresa
 const empresaValidations = {
-  // Razão social
   razao_social: body('razao_social')
     .trim()
     .notEmpty()
@@ -122,7 +109,6 @@ const empresaValidations = {
     .isLength({ min: 2, max: 200 })
     .withMessage('Razão social deve ter entre 2 e 200 caracteres'),
 
-  // Nome fantasia
   nome_fantasia: body('nome_fantasia')
     .trim()
     .notEmpty()
@@ -130,7 +116,6 @@ const empresaValidations = {
     .isLength({ min: 2, max: 100 })
     .withMessage('Nome fantasia deve ter entre 2 e 100 caracteres'),
 
-  // CNPJ
   cnpj: body('cnpj')
     .trim()
     .notEmpty()
@@ -140,21 +125,17 @@ const empresaValidations = {
     .custom((value) => {
       const cnpj = value.replace(/\D/g, '');
       
-      // Verificar se tem 14 dígitos
       if (cnpj.length !== 14) {
         throw new Error('CNPJ deve ter 14 dígitos');
       }
       
-      // Verificar se todos os dígitos são iguais
       if (/^(\d)\1+$/.test(cnpj)) {
         throw new Error('CNPJ inválido');
       }
       
-      // Validar dígitos verificadores
       let sum = 0;
       let weight = 5;
       
-      // Primeiro dígito verificador
       for (let i = 0; i < 12; i++) {
         sum += parseInt(cnpj[i]) * weight;
         weight = weight === 2 ? 9 : weight - 1;
@@ -165,7 +146,6 @@ const empresaValidations = {
         throw new Error('CNPJ inválido');
       }
       
-      // Segundo dígito verificador
       sum = 0;
       weight = 6;
       
@@ -182,7 +162,6 @@ const empresaValidations = {
       return true;
     }),
 
-  // Logradouro
   logradouro: body('logradouro')
     .trim()
     .notEmpty()
@@ -190,7 +169,6 @@ const empresaValidations = {
     .isLength({ min: 5, max: 200 })
     .withMessage('Logradouro deve ter entre 5 e 200 caracteres'),
 
-  // Cidade
   cidade: body('cidade')
     .trim()
     .notEmpty()
@@ -200,7 +178,6 @@ const empresaValidations = {
     .matches(/^[a-zA-ZÀ-ÿ\s]+$/)
     .withMessage('Cidade deve conter apenas letras e espaços'),
 
-  // Estado
   estado_empresa: body('estado')
     .notEmpty()
     .withMessage('Estado é obrigatório')
@@ -208,9 +185,7 @@ const empresaValidations = {
     .withMessage('Selecione um estado válido')
 };
 
-// Validações para login
 const loginValidations = {
-  // Login jovem
   loginJovem: [
     body('email')
       .trim()
@@ -229,7 +204,6 @@ const loginValidations = {
       .withMessage('Senha inválida')
   ],
 
-  // Login empresa
   loginEmpresa: [
     body('credencial')
       .trim()
@@ -248,9 +222,7 @@ const loginValidations = {
   ]
 };
 
-// Conjuntos de validações por página
 const validationSets = {
-  // Cadastro jovem - primeira página
   cadastroJovem: [
     commonValidations.nome,
     commonValidations.email,
@@ -259,7 +231,6 @@ const validationSets = {
     commonValidations.confirmPassword
   ],
 
-  // Cadastro jovem - segunda página (cad2)
   cadastroJovem2: [
     commonValidations.rg,
     commonValidations.data,
@@ -270,36 +241,28 @@ const validationSets = {
     commonValidations.complemento
   ],
 
-  // Cadastro empresa - primeira página (importado do arquivo específico)
   cadastroEmpresa: empresaValidationSets.cadastroEmpresaEtapa1,
 
-  // Cadastro empresa - segunda página (representante)
   cadastroEmpresaRepresentante: empresaValidationSets.cadastroEmpresaRepresentante,
 
-  // Login jovem
   loginJovem: loginValidations.loginJovem,
 
-  // Login empresa
   loginEmpresa: loginValidations.loginEmpresa
 };
 
-// Middleware para processar erros de validação
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   
   if (!errors.isEmpty()) {
-    // Armazenar dados do formulário para reexibir
     req.formData = req.body;
     req.validationErrors = errors.array();
     
-    // Para debugging - log dos erros
     console.log('Erros de validação:', errors.array());
   }
   
   next();
 };
 
-// Função para verificar se há erros e renderizar página com erros
 const renderWithErrors = (req, res, viewName, additionalData = {}) => {
   if (req.validationErrors) {
     return res.render(viewName, {
@@ -310,7 +273,6 @@ const renderWithErrors = (req, res, viewName, additionalData = {}) => {
     });
   }
   
-  // Se não há erros, continuar para próxima página ou ação
   return null;
 };
 

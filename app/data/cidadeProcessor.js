@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-// Ler e processar os dados dos municípios
 function processarMunicipios() {
     try {
         const dataPath = path.join(__dirname, 'municipios_all.json');
@@ -45,7 +44,6 @@ function processarMunicipios() {
     }
 }
 
-// Exportar a função e os dados processados
 const cidadesPorEstado = processarMunicipios();
 
 module.exports = {

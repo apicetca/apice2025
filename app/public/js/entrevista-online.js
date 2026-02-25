@@ -1,28 +1,20 @@
-// ========== ENTREVISTA ONLINE - FUNCIONALIDADES ========== 
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Elementos dos controles de vídeo
     const cameraBtn = document.querySelector('.camera-btn');
     const micBtn = document.querySelector('.mic-btn');
     const screenBtn = document.querySelector('.screen-btn');
     const settingsBtn = document.querySelector('.settings-btn');
     
-    // Botões de ação
     const joinBtn = document.getElementById('joinInterview');
     const testBtn = document.getElementById('testEquipment');
     
-    // Configurações
     const defaultCameraCheckbox = document.getElementById('defaultCamera');
     const defaultMicCheckbox = document.getElementById('defaultMic');
     const recordCheckbox = document.getElementById('recordInterview');
 
-    // Estado dos controles
     let cameraActive = true;
     let micActive = true;
     let screenSharing = false;
 
-    // ========== CONTROLES DE VÍDEO ========== 
-    
     function toggleCamera() {
         cameraActive = !cameraActive;
         cameraBtn.classList.toggle('active', cameraActive);
@@ -58,11 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function openSettings() {
-        // Simular abertura de configurações
         alert('Configurações de áudio e vídeo seriam abertas aqui');
     }
 
-    // ========== EVENT LISTENERS DOS CONTROLES ========== 
     
     if (cameraBtn) {
         cameraBtn.addEventListener('click', toggleCamera);
@@ -80,10 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         settingsBtn.addEventListener('click', openSettings);
     }
 
-    // ========== BOTÕES DE AÇÃO ========== 
-
     function joinInterview() {
-        // Verificar se equipamentos estão prontos
         if (!cameraActive && !micActive) {
             if (confirm('Câmera e microfone estão desligados. Deseja continuar mesmo assim?')) {
                 startInterview();
@@ -94,18 +81,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function startInterview() {
-        // Simular início da entrevista
         console.log('Iniciando entrevista...');
         
-        // Atualizar interface
         const participantInfo = document.querySelector('.participant-info');
         participantInfo.querySelector('.participant-name').textContent = 'Conectando com o entrevistador...';
         
-        // Simular conexão após 2 segundos
         setTimeout(() => {
             participantInfo.querySelector('.participant-name').textContent = 'Entrevista em andamento';
             
-            // Atualizar status do participante
             const entrevistadorStatus = document.querySelector('.participant-item:nth-child(2) .participant-status');
             if (entrevistadorStatus) {
                 entrevistadorStatus.textContent = 'Conectado';
@@ -117,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function testEquipment() {
         console.log('Testando equipamentos...');
         
-        // Simular teste de equipamentos
         const originalText = testBtn.textContent;
         testBtn.disabled = true;
         testBtn.textContent = 'Testando...';
@@ -129,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 
-    // Event listeners dos botões de ação
     if (joinBtn) {
         joinBtn.addEventListener('click', joinInterview);
     }
@@ -138,9 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
         testBtn.addEventListener('click', testEquipment);
     }
 
-    // ========== CONFIGURAÇÕES RÁPIDAS ========== 
-
-    // Aplicar configurações padrão ao carregar
     function applyDefaultSettings() {
         if (defaultCameraCheckbox && defaultCameraCheckbox.checked) {
             cameraActive = true;
@@ -153,7 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Salvar configurações quando alteradas
     if (defaultCameraCheckbox) {
         defaultCameraCheckbox.addEventListener('change', function() {
             localStorage.setItem('defaultCamera', this.checked);
@@ -181,10 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ========== CARREGAR CONFIGURAÇÕES SALVAS ========== 
-
     function loadSavedSettings() {
-        // Carregar configurações do localStorage
         const savedCameraSetting = localStorage.getItem('defaultCamera');
         const savedMicSetting = localStorage.getItem('defaultMic');
         const savedRecordSetting = localStorage.getItem('recordInterview');
@@ -202,23 +176,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ========== INICIALIZAÇÃO ========== 
-
-    // Carregar configurações salvas
     loadSavedSettings();
     
-    // Aplicar configurações padrão
     applyDefaultSettings();
 
-    // Simular status inicial
     console.log('Página de entrevista carregada');
     console.log('Status inicial - Câmera:', cameraActive, 'Microfone:', micActive);
-
-    // ========== UTILIDADES ========== 
-
-    // Verificar compatibilidade do navegador (simulado)
     function checkBrowserCompatibility() {
-        // Em uma implementação real, verificaria suporte a WebRTC
         const isCompatible = 'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices;
         
         if (!isCompatible) {
@@ -228,13 +192,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return isCompatible;
     }
 
-    // Executar verificação
     checkBrowserCompatibility();
 
-    // ========== ATALHOS DE TECLADO ========== 
-
     document.addEventListener('keydown', function(event) {
-        // Atalhos apenas se não estiver digitando em um campo
         if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
             switch(event.key) {
                 case 'c':

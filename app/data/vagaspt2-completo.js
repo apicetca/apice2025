@@ -1,4 +1,3 @@
-// Arquivo consolidado com todas as vagas
 const infoVagas = {
     // Parte 1
     desenvolvedor_full_stack: {
@@ -48,7 +47,6 @@ const infoVagas = {
         }
     },
 
-    // Adicionando vaga de parte 2
     tecnico_biotecnologia: {
         id: 'tecnico_biotecnologia',
         numero: 11,
@@ -72,10 +70,6 @@ const infoVagas = {
         }
     },
 
-    // Mais vagas serão consolidadas aqui...
-    // Mantenha as vagas mais importantes/utilizadas para o sistema funcionar
-
-    // Uma última vaga para exemplificar
     assistente_administrativo: {
         id: 'assistente_administrativo',
         numero: 8,
@@ -146,7 +140,6 @@ const infoVagas = {
     }
 ,
 
-    // Vaga ROLTA - Programa Jovem Aprendiz
     rolta: {
         id: 'rolta',
         numero: 9,
@@ -177,7 +170,6 @@ const infoVagas = {
         dataFimFormatada: '30/09/2024'
     },
 
-    // Vaga RIMBERIO - Programa Jovem Aprendiz
     rimberio: {
         id: 'rimberio',
         numero: 10,

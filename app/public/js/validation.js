@@ -1,6 +1,3 @@
-// ========== VALIDAÇÕES PADRONIZADAS ==========
-
-// Classe principal de validação
 class FormValidator {
   constructor(formId) {
     this.form = document.getElementById(formId);
@@ -11,28 +8,23 @@ class FormValidator {
   init() {
     if (!this.form) return;
     
-    // Adicionar validação em tempo real para todos os inputs
     const inputs = this.form.querySelectorAll('input, select, textarea');
     inputs.forEach(input => {
       input.addEventListener('blur', () => this.validateField(input));
       input.addEventListener('input', () => this.clearFieldError(input));
     });
 
-    // Interceptar submit do formulário
     this.form.addEventListener('submit', (e) => this.handleSubmit(e));
   }
 
-  // Validar campo individual
   validateField(field) {
     const fieldName = field.name || field.id;
     const value = field.value.trim();
     let isValid = true;
     let errorMessage = '';
 
-    // Limpar erro anterior
     this.clearFieldError(field);
 
-    // Validações por tipo de campo
     switch(field.type) {
       case 'email':
         if (!value) {
@@ -65,7 +57,6 @@ class FormValidator {
         break;
 
       case 'text':
-        // Validações específicas por name/id
         if (fieldName === 'nome' || fieldName === 'nomeCompleto') {
           if (!value) {
             errorMessage = 'Nome é obrigatório';
@@ -135,25 +126,19 @@ class FormValidator {
     return isValid;
   }
 
-  // Mostrar erro no campo
   showFieldError(field, message) {
     field.classList.add('error');
     field.classList.remove('valid');
     
-    // Verificar se já existe um span.field-error (sistema antigo)
     const existingFieldError = field.parentNode.querySelector('.field-error');
     if (existingFieldError) {
-      // Usar o sistema existente
       existingFieldError.textContent = message;
       existingFieldError.style.display = 'block';
     } else {
-      // Remover mensagem de erro existente
       const existingError = field.parentNode.querySelector('.error-message');
       if (existingError) {
         existingError.remove();
       }
-
-      // Adicionar nova mensagem de erro
       const errorDiv = document.createElement('div');
       errorDiv.className = 'error-message';
       errorDiv.textContent = message;
@@ -161,18 +146,14 @@ class FormValidator {
     }
   }
 
-  // Limpar erro do campo
   clearFieldError(field) {
     field.classList.remove('error');
     
-    // Verificar se existe um span.field-error (sistema antigo)
     const existingFieldError = field.parentNode.querySelector('.field-error');
     if (existingFieldError) {
-      // Limpar o conteúdo mas manter o elemento
       existingFieldError.textContent = '';
       existingFieldError.style.display = 'none';
     } else {
-      // Remover mensagem de erro do sistema novo
       const errorMessage = field.parentNode.querySelector('.error-message');
       if (errorMessage) {
         errorMessage.remove();
@@ -180,7 +161,6 @@ class FormValidator {
     }
   }
 
-  // Obter label do campo
   getFieldLabel(field) {
     const label = this.form.querySelector(`label[for="${field.id}"]`);
     if (label) {
@@ -189,33 +169,27 @@ class FormValidator {
     return field.placeholder || field.name || 'Campo';
   }
 
-  // Validar e-mail
+  
   isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  // Validar telefone
   isValidPhone(phone) {
     const cleanPhone = phone.replace(/\D/g, '');
     return cleanPhone.length >= 10 && cleanPhone.length <= 11;
   }
 
-  // Validar CNPJ
   isValidCNPJ(cnpj) {
     const cleanCNPJ = cnpj.replace(/\D/g, '');
     
-    // Verificar se tem 14 dígitos
     if (cleanCNPJ.length !== 14) return false;
     
-    // Verificar se todos os dígitos são iguais
     if (/^(\d)\1+$/.test(cleanCNPJ)) return false;
     
-    // Validar dígitos verificadores
     let sum = 0;
     let weight = 5;
     
-    // Primeiro dígito verificador
     for (let i = 0; i < 12; i++) {
       sum += parseInt(cleanCNPJ[i]) * weight;
       weight = weight === 2 ? 9 : weight - 1;
@@ -224,7 +198,6 @@ class FormValidator {
     let digit1 = sum % 11 < 2 ? 0 : 11 - (sum % 11);
     if (digit1 !== parseInt(cleanCNPJ[12])) return false;
     
-    // Segundo dígito verificador
     sum = 0;
     weight = 6;
     
@@ -237,7 +210,6 @@ class FormValidator {
     return digit2 === parseInt(cleanCNPJ[13]);
   }
 
-  // Validar formulário completo
   validateForm() {
     const inputs = this.form.querySelectorAll('input, select, textarea');
     let isFormValid = true;
@@ -251,9 +223,7 @@ class FormValidator {
     return isFormValid;
   }
 
-  // Manipular submit do formulário
   handleSubmit(event) {
-    // Limpar mensagem de erro geral
     this.clearGeneralError();
 
     if (!this.validateForm()) {
@@ -262,7 +232,6 @@ class FormValidator {
       return false;
     }
 
-    // Mostrar loading no botão
     const submitBtn = this.form.querySelector('button[type="submit"], input[type="submit"]');
     if (submitBtn) {
       submitBtn.classList.add('btn-loading');
@@ -272,7 +241,6 @@ class FormValidator {
     return true;
   }
 
-  // Mostrar erro geral
   showGeneralError(message) {
     const errorDiv = document.createElement('div');
     errorDiv.className = 'general-error';
@@ -280,7 +248,6 @@ class FormValidator {
     this.form.insertBefore(errorDiv, this.form.firstChild);
   }
 
-  // Limpar erro geral
   clearGeneralError() {
     const existingError = this.form.querySelector('.general-error');
     if (existingError) {
@@ -288,7 +255,6 @@ class FormValidator {
     }
   }
 
-  // Mostrar mensagem de sucesso
   showSuccess(message) {
     this.clearGeneralError();
     const successDiv = document.createElement('div');
@@ -298,7 +264,6 @@ class FormValidator {
   }
 }
 
-// Máscaras de input
 class InputMasks {
   static phone(input) {
     input.addEventListener('input', function() {
@@ -345,14 +310,12 @@ class LoginValidator {
   }
 
   init() {
-    // Adicionar validação em tempo real
     const inputs = this.form.querySelectorAll('input');
     inputs.forEach(input => {
       input.addEventListener('blur', () => this.validateField(input));
       input.addEventListener('input', () => this.clearFieldError(input));
     });
 
-    // Interceptar submit
     this.form.addEventListener('submit', (e) => this.handleSubmit(e));
   }
 
@@ -362,11 +325,9 @@ class LoginValidator {
     let isValid = true;
     let errorMessage = '';
 
-    // Limpar erro anterior
     this.clearFieldError(field);
 
     if (this.loginType === 'jovem') {
-      // Validações para login de jovem
       if (fieldName === 'email') {
         if (!value) {
           errorMessage = 'Email é obrigatório';
@@ -382,7 +343,6 @@ class LoginValidator {
         }
       }
     } else if (this.loginType === 'empresa') {
-      // Validações para login de empresa
       if (fieldName === 'credencial') {
         if (!value) {
           errorMessage = 'Credencial é obrigatória';
@@ -425,13 +385,10 @@ class LoginValidator {
   handleSubmit(e) {
     e.preventDefault();
     
-    // Validar todos os campos
     if (this.validateForm()) {
-      // Se válido, remover prevent default e submeter o formulário
       this.form.removeEventListener('submit', this.handleSubmit.bind(this));
       this.form.submit();
     } else {
-      // Focar no primeiro campo com erro
       const firstErrorField = this.form.querySelector('.field-error');
       if (firstErrorField) {
         firstErrorField.focus();
@@ -442,13 +399,11 @@ class LoginValidator {
   showFieldError(field, message) {
     field.classList.add('field-error');
     
-    // Remover mensagem de erro existente
     const existingError = field.parentNode.querySelector('.error-message');
     if (existingError) {
       existingError.remove();
     }
 
-    // Adicionar nova mensagem de erro
     const errorDiv = document.createElement('div');
     errorDiv.className = 'error-message';
     errorDiv.textContent = message;
@@ -469,9 +424,7 @@ class LoginValidator {
   }
 }
 
-// Inicialização automática quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', function() {
-  // Aplicar máscaras automaticamente
   document.querySelectorAll('input[type="tel"]').forEach(input => {
     InputMasks.phone(input);
   });
@@ -484,7 +437,6 @@ document.addEventListener('DOMContentLoaded', function() {
     InputMasks.cnpj(input);
   });
 
-  // Inicializar validação de login automaticamente se houver formulário de login
   const loginForms = document.querySelectorAll('form[data-login-type]');
   loginForms.forEach(form => {
     const loginType = form.getAttribute('data-login-type');
@@ -492,7 +444,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Função global para inicializar validação em qualquer formulário
 function initFormValidation(formId) {
   return new FormValidator(formId);
 }
