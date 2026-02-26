@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastro de Empresa - Dados do Responsável</title>
+  <%- include('../partials/seo', {
+        title: 'Cadastro de Empresa - Dados do Responsável',
+        description: 'Cadastre o responsável pela empresa na plataforma. Informe nome, cargo, e-mail e telefone comercial.',
+        prev: '/cadastro-empresa',
+        next: '/cadastro-empresa3'
+      }) %>
   <link rel="stylesheet" href="/css/cadastro-comum.css" />
   <link rel="stylesheet" href="/css/validation.css" />
   <style>
@@ -60,50 +63,98 @@
 
   <main class="cad-container">
     <!-- Indicador de Progresso -->
-    <nav class="step-progress">
-      <article class="step completed">1</article>
-      <span class="step-line completed"></span>
-      <article class="step active">2</article>
-      <span class="step-line"></span>
-      <article class="step">3</article>
+    <nav class="step-progress" aria-label="Progresso do cadastro">
+      <ol>
+        <li class="step completed" aria-current="step">1</li>
+        <li class="step-line completed" aria-hidden="true"></li>
+        <li class="step active" aria-current="step">2</li>
+        <li class="step-line" aria-hidden="true"></li>
+        <li class="step">3</li>
+      </ol>
     </nav>
 
     <section class="form-section">
-      <p>Informe os dados do responsável pela empresa</p>
+-      <p>Informe os dados do responsável pela empresa</p>
++      <h2>Informe os dados do responsável pela empresa</h2>
       
       <!-- Mostrar erros gerais se existirem -->
       <% if (locals.errors && errors.length > 0) { %>
-        <article class="general-error">
+        <article class="general-error" role="alert">
           <% errors.forEach(error => { %>
             <%= error.msg %><br>
           <% }); %>
         </article>
       <% } %>
       
-      <form id="empresaForm2" class="cad-form" method="POST" action="/cadastro-empresa2">
-        <input type="text" id="nome" name="nome" placeholder="Nome completo do responsável" 
-               value="<%= locals.form ? form.nome || '' : '' %>" required />
-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'nome') ? errors.find(e => e.param === 'nome').msg : '' %></span>
-
-        <input type="text" id="cargo" name="cargo" placeholder="Cargo na empresa" 
-               value="<%= locals.form ? form.cargo || '' : '' %>" required />
-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'cargo') ? errors.find(e => e.param === 'cargo').msg : '' %></span>
-
-        <input type="email" id="email" name="email" placeholder="Email institucional" 
-               value="<%= locals.form ? form.email || '' : '' %>" required />
-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'email') ? errors.find(e => e.param === 'email').msg : '' %></span>
-
-        <input type="tel" id="telefone" name="telefone" placeholder="Telefone comercial" 
-               value="<%= locals.form ? form.telefone || '' : '' %>" required />
-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'telefone') ? errors.find(e => e.param === 'telefone').msg : '' %></span>
-
-        <input type="password" id="password" name="password" placeholder="Criar senha" required />
-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'password') ? errors.find(e => e.param === 'password').msg : '' %></span>
-
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar senha" required />
-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'confirmPassword') ? errors.find(e => e.param === 'confirmPassword').msg : '' %></span>
-      </form>
-    </section>
+-      <form id="empresaForm2" class="cad-form" method="POST" action="/cadastro-empresa2">
+-        <input type="text" id="nome" name="nome" placeholder="Nome completo do responsável" 
+-               value="<%= locals.form ? form.nome || '' : '' %>" required />
+-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'nome') ? errors.find(e => e.param === 'nome').msg : '' %></span>
+-
+-        <input type="text" id="cargo" name="cargo" placeholder="Cargo na empresa" 
+-               value="<%= locals.form ? form.cargo || '' : '' %>" required />
+-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'cargo') ? errors.find(e => e.param === 'cargo').msg : '' %></span>
+-
+-        <input type="email" id="email" name="email" placeholder="Email institucional" 
+-               value="<%= locals.form ? form.email || '' : '' %>" required />
+-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'email') ? errors.find(e => e.param === 'email').msg : '' %></span>
+-
+-        <input type="tel" id="telefone" name="telefone" placeholder="Telefone comercial" 
+-               value="<%= locals.form ? form.telefone || '' : '' %>" required />
+-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'telefone') ? errors.find(e => e.param === 'telefone').msg : '' %></span>
+-
+-        <input type="password" id="password" name="password" placeholder="Criar senha" required />
+-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'password') ? errors.find(e => e.param === 'password').msg : '' %></span>
+-
+-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar senha" required />
+-        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'confirmPassword') ? errors.find(e => e.param === 'confirmPassword').msg : '' %></span>
+-      </form>
++      <form id="empresaForm2" class="cad-form" method="POST" action="/cadastro-empresa2">
++        <fieldset>
++          <legend class="visually-hidden">Dados do responsável</legend>
++
++          <div class="form-group">
++            <label for="nome">Nome completo do responsável</label>
++            <input type="text" id="nome" name="nome" placeholder="Nome completo do responsável"
++                   value="<%= locals.form ? form.nome || '' : '' %>" required />
++            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'nome') ? errors.find(e => e.param === 'nome').msg : '' %></span>
++          </div>
++
++          <div class="form-group">
++            <label for="cargo">Cargo na empresa</label>
++            <input type="text" id="cargo" name="cargo" placeholder="Cargo na empresa"
++                   value="<%= locals.form ? form.cargo || '' : '' %>" required />
++            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'cargo') ? errors.find(e => e.param === 'cargo').msg : '' %></span>
++          </div>
++
++          <div class="form-group">
++            <label for="email">Email institucional</label>
++            <input type="email" id="email" name="email" placeholder="Email institucional"
++                   value="<%= locals.form ? form.email || '' : '' %>" required />
++            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'email') ? errors.find(e => e.param === 'email').msg : '' %></span>
++          </div>
++
++          <div class="form-group">
++            <label for="telefone">Telefone comercial</label>
++            <input type="tel" id="telefone" name="telefone" placeholder="Telefone comercial"
++                   value="<%= locals.form ? form.telefone || '' : '' %>" required />
++            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'telefone') ? errors.find(e => e.param === 'telefone').msg : '' %></span>
++          </div>
++
++          <div class="form-group">
++            <label for="password">Criar senha</label>
++            <input type="password" id="password" name="password" placeholder="Criar senha" required />
++            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'password') ? errors.find(e => e.param === 'password').msg : '' %></span>
++          </div>
++
++          <div class="form-group">
++            <label for="confirmPassword">Confirmar senha</label>
++            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar senha" required />
++            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'confirmPassword') ? errors.find(e => e.param === 'confirmPassword').msg : '' %></span>
++          </div>
++        </fieldset>
++      </form>
+     </section>
 
     <nav class="actions-section">
       <button id="btnAnterior" class="btn-secondary">Anterior</button>
