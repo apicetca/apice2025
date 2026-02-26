@@ -1,9 +1,6 @@
 const { body } = require('express-validator');
 
-// ========== VALIDAÇÕES PARA CADASTRO DE EMPRESA ==========
-
 const empresaCadastroValidations = {
-  // Razão social
   razaoSocial: body('razao_social')
     .trim()
     .notEmpty()
@@ -11,7 +8,6 @@ const empresaCadastroValidations = {
     .isLength({ min: 2, max: 200 })
     .withMessage('Razão social deve ter entre 2 e 200 caracteres'),
 
-  // Nome fantasia
   nomeFantasia: body('nome_fantasia')
     .trim()
     .notEmpty()
@@ -19,7 +15,6 @@ const empresaCadastroValidations = {
     .isLength({ min: 2, max: 100 })
     .withMessage('Nome fantasia deve ter entre 2 e 100 caracteres'),
 
-  // CNPJ - aceita formato XX.XXX.XXX/XXXX-XX
   cnpj: body('cnpj')
     .trim()
     .notEmpty()
@@ -29,21 +24,17 @@ const empresaCadastroValidations = {
     .custom((value) => {
       const cnpj = value.replace(/\D/g, '');
       
-      // Verificar se tem 14 dígitos
       if (cnpj.length !== 14) {
         throw new Error('CNPJ deve ter 14 dígitos');
       }
       
-      // Verificar se todos os dígitos são iguais
       if (/^(\d)\1+$/.test(cnpj)) {
         throw new Error('CNPJ inválido');
       }
       
-      // Validar dígitos verificadores
       let sum = 0;
       let weight = 5;
       
-      // Primeiro dígito verificador
       for (let i = 0; i < 12; i++) {
         sum += parseInt(cnpj[i]) * weight;
         weight = weight === 2 ? 9 : weight - 1;
@@ -56,7 +47,6 @@ const empresaCadastroValidations = {
         throw new Error('CNPJ inválido');
       }
       
-      // Segundo dígito verificador
       sum = 0;
       weight = 6;
       
@@ -75,7 +65,6 @@ const empresaCadastroValidations = {
       return true;
     }),
 
-  // Telefone - aceita formato (XX) XXXXX-XXXX
   telefone: body('telefone')
     .trim()
     .notEmpty()
@@ -83,7 +72,6 @@ const empresaCadastroValidations = {
     .matches(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)
     .withMessage('Digite um telefone válido no formato (XX) XXXXX-XXXX'),
 
-  // Logradouro
   logradouro: body('logradouro')
     .trim()
     .notEmpty()
@@ -91,7 +79,6 @@ const empresaCadastroValidations = {
     .isLength({ min: 5, max: 200 })
     .withMessage('Logradouro deve ter entre 5 e 200 caracteres'),
 
-  // Cidade
   cidade: body('cidade')
     .trim()
     .notEmpty()
@@ -101,30 +88,24 @@ const empresaCadastroValidations = {
     .matches(/^[a-zA-ZÀ-ÿ\s]+$/)
     .withMessage('Cidade deve conter apenas letras e espaços'),
 
-  // Estado
   estado: body('estado')
     .notEmpty()
     .withMessage('Estado é obrigatório')
     .isIn(['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO', 'DF'])
     .withMessage('Selecione um estado válido'),
 
-  // CEP
   cep: body('cep')
     .optional()
     .matches(/^\d{5}-?\d{3}$/)
     .withMessage('CEP deve estar no formato XXXXX-XXX'),
 
-  // Complemento (opcional)
   complemento: body('complemento')
     .optional()
     .isLength({ max: 100 })
     .withMessage('Complemento deve ter no máximo 100 caracteres')
 };
 
-// ========== VALIDAÇÕES PARA REPRESENTANTE (SEGUNDA ETAPA) ==========
-
 const representanteValidations = {
-  // Nome do representante (diferente de nomeCompleto)
   nome: body('nome')
     .trim()
     .notEmpty()
@@ -134,7 +115,6 @@ const representanteValidations = {
     .matches(/^[a-zA-ZÀ-ÿ\s]+$/)
     .withMessage('Nome deve conter apenas letras e espaços'),
 
-  // Cargo do representante
   cargo: body('cargo')
     .trim()
     .notEmpty()
@@ -142,7 +122,6 @@ const representanteValidations = {
     .isLength({ min: 2, max: 100 })
     .withMessage('Cargo deve ter entre 2 e 100 caracteres'),
 
-  // Nome completo
   nomeCompleto: body('nomeCompleto')
     .trim()
     .notEmpty()
@@ -152,7 +131,6 @@ const representanteValidations = {
     .matches(/^[a-zA-ZÀ-ÿ\s]+$/)
     .withMessage('Nome deve conter apenas letras e espaços'),
 
-  // Email
   email: body('email')
     .trim()
     .notEmpty()
@@ -161,7 +139,6 @@ const representanteValidations = {
     .withMessage('Digite um email válido')
     .normalizeEmail(),
 
-  // CPF
   cpf: body('cpf')
     .trim()
     .notEmpty()
@@ -171,20 +148,16 @@ const representanteValidations = {
     .custom((value) => {
       const cpf = value.replace(/\D/g, '');
       
-      // Verificar se tem 11 dígitos
       if (cpf.length !== 11) {
         throw new Error('CPF deve ter 11 dígitos');
       }
       
-      // Verificar se todos os dígitos são iguais
       if (/^(\d)\1+$/.test(cpf)) {
         throw new Error('CPF inválido');
       }
       
-      // Validar dígitos verificadores
       let sum = 0;
       
-      // Primeiro dígito verificador
       for (let i = 0; i < 9; i++) {
         sum += parseInt(cpf[i]) * (10 - i);
       }
@@ -196,7 +169,6 @@ const representanteValidations = {
         throw new Error('CPF inválido');
       }
       
-      // Segundo dígito verificador
       sum = 0;
       for (let i = 0; i < 10; i++) {
         sum += parseInt(cpf[i]) * (11 - i);
@@ -212,7 +184,6 @@ const representanteValidations = {
       return true;
     }),
 
-  // Telefone comercial (campo telefone no cadastro-empresa2)
   telefone: body('telefone')
     .trim()
     .notEmpty()
@@ -220,7 +191,6 @@ const representanteValidations = {
     .matches(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)
     .withMessage('Digite um telefone válido no formato (XX) XXXXX-XXXX'),
 
-  // Telefone do representante
   telefoneRepresentante: body('telefone')
     .trim()
     .notEmpty()
@@ -228,7 +198,6 @@ const representanteValidations = {
     .matches(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)
     .withMessage('Digite um telefone válido no formato (XX) XXXXX-XXXX'),
 
-  // Senha
   senha: body('senha')
     .notEmpty()
     .withMessage('Senha é obrigatória')
@@ -237,7 +206,6 @@ const representanteValidations = {
     .isLength({ max: 128 })
     .withMessage('Senha muito longa'),
 
-  // Confirmação de senha
   confirmarSenha: body('confirmarSenha')
     .notEmpty()
     .withMessage('Confirmação de senha é obrigatória')
@@ -249,10 +217,7 @@ const representanteValidations = {
     })
 };
 
-// ========== CONJUNTOS DE VALIDAÇÃO ==========
-
 const validationSets = {
-  // Primeira etapa: dados da empresa
   cadastroEmpresaEtapa1: [
     empresaCadastroValidations.razaoSocial,
     empresaCadastroValidations.nomeFantasia,
@@ -265,7 +230,6 @@ const validationSets = {
     empresaCadastroValidations.complemento
   ],
 
-  // Segunda etapa: dados do representante (campos originais)
   cadastroEmpresaEtapa2: [
     representanteValidations.nomeCompleto,
     representanteValidations.email,
@@ -275,7 +239,6 @@ const validationSets = {
     representanteValidations.confirmarSenha
   ],
 
-  // Segunda etapa: dados do representante (campos do formulário atual)
   cadastroEmpresaRepresentante: [
     representanteValidations.nome,
     representanteValidations.cargo,

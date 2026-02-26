@@ -1,7 +1,5 @@
-// Máscaras de formatação simples para formulários
 document.addEventListener('DOMContentLoaded', function() {
   
-  // Aplicar máscara de CNPJ
   const cnpjInputs = document.querySelectorAll('input[data-mask="cnpj"], input[name="cnpj"]');
   cnpjInputs.forEach(function(input) {
     input.addEventListener('input', function(e) {
