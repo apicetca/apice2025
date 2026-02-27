@@ -29,7 +29,7 @@
 
       <section class="jobs-section">
         <main class="jobs-container">
-          <!-- Vaga 1 - Aprovada -->
+
           <article class="job-card approved">
             <header class="job-header">
               <h3 class="job-title">Analista de Marketing Digital</h3>
@@ -43,7 +43,6 @@
             </footer>
           </article>
 
-          <!-- Vaga 2 - Em análise -->
           <article class="job-card pending">
             <header class="job-header">
               <h3 class="job-title">Coordenador de Projetos Sustentáveis</h3>
@@ -57,7 +56,6 @@
             </footer>
           </article>
 
-          <!-- Vaga 3 - Rejeitada -->
           <article class="job-card rejected">
             <header class="job-header">
               <h3 class="job-title">Analista em Recursos Humanos Jr.</h3>
@@ -71,7 +69,6 @@
             </footer>
           </article>
 
-          <!-- Vaga 4 - Especial -->
           <article class="job-card special">
             <header class="job-header">
               <h3 class="job-title">Desenvolvedor Full Stack</h3>
@@ -85,7 +82,6 @@
             </footer>
           </article>
 
-          <!-- Vaga 5 - Encerrada -->
           <article class="job-card closed">
             <header class="job-header">
               <h3 class="job-title">Auxiliar Administrativo</h3>
@@ -101,7 +97,6 @@
         </main>
       </section>
 
-      <!-- Create Job Button -->
       <aside class="create-job-section">
         <a href="/vagas-empresa" class="create-job-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -114,12 +109,10 @@
   </main>
 
   <script>
-    // Toggle menu
     document.querySelector('.menu-btn').addEventListener('click', function() {
       console.log('Menu clicked');
     });
 
-    // Search functionality
     document.querySelector('.search-input').addEventListener('input', function(e) {
       const searchTerm = e.target.value.toLowerCase();
       const jobCards = document.querySelectorAll('.job-card');
@@ -136,12 +129,10 @@
       });
     });
 
-    // Filter functionality
     document.querySelector('.filter-btn').addEventListener('click', function() {
       console.log('Filter clicked');
     });
 
-    // Action buttons
     document.querySelectorAll('.action-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         console.log('Action button clicked:', this.textContent);

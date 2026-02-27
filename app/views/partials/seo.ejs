@@ -1,0 +1,9 @@
+<!-- SEO Partial: Gera metatags básicas (title, description, robots, canonical, prev, next) -->
+<title><%= typeof title !== 'undefined' ? title : 'Apice2025' %></title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Plataforma Apice2025' %>" />
+<meta name="robots" content="<%= typeof robots !== 'undefined' ? robots : 'index, follow' %>" />
+<% if (typeof canonical !== 'undefined' && canonical) { %><link rel="canonical" href="<%= canonical %>" /><% } %>
+<% if (typeof prev !== 'undefined' && prev) { %><link rel="prev" href="<%= prev %>" /><% } %>
+<% if (typeof next !== 'undefined' && next) { %><link rel="next" href="<%= next %>" /><% } %>
