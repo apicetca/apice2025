@@ -15,7 +15,8 @@ app.use(session({
 }));
 
 app.use(express.static(path.join(__dirname, 'app/public')));
-app.use('/uploads', express.static('/uploads'));
+// Servir uploads a partir da pasta do projeto (app/public/uploads)
+app.use('/uploads', express.static(path.join(__dirname, 'app/public/uploads')));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'app/views'));

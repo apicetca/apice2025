@@ -1,5 +1,5 @@
 # Arquivos a serem ignorados pelo Git
-
+.gitignore
 
 # Dependências
 node_modules/
@@ -27,3 +27,4 @@ arquivos-para-remover.txt
 /.cache
 VALIDACAO_PADRONIZADA.md
 PADRONIZACAO_FRONTEND.md
+CHANGELOG_SEO_REFACTORACAO.md
