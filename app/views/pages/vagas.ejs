@@ -7,10 +7,7 @@
       }) %>
   <link rel="stylesheet" href="/css/vagas.css">
   <link rel="stylesheet" href="/css/home-jovem.css">
-  <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
- </style>
+  <link rel="stylesheet" href="/css/vagas-inline.css">
 </head>
 <body>
   <header>
@@ -58,12 +55,10 @@
           </nav>
 
           <form class="filter-form">
-            <!-- Local -->
             <fieldset class="filter-group">
               <input type="text" class="filter-input" placeholder="Local...">
             </fieldset>
 
-            <!-- Formato de trabalho -->
             <fieldset class="filter-group">
               <legend class="filter-legend">Formato de trabalho</legend>
               <nav class="format-options">
@@ -82,7 +77,6 @@
               </nav>
             </fieldset>
 
-            <!-- Área -->
             <fieldset class="filter-group">
               <legend class="filter-legend">Área</legend>
               <select class="filter-select">
@@ -95,7 +89,6 @@
               </select>
             </fieldset>
 
-            <!-- Faixa salarial -->
             <fieldset class="filter-group">
               <legend class="filter-legend">Faixa salarial</legend>
               <select class="filter-select">
@@ -108,7 +101,6 @@
               </select>
             </fieldset>
 
-            <!-- Contrato -->
             <fieldset class="filter-group">
               <legend class="filter-legend">Contrato</legend>
               <select class="filter-select">
@@ -121,7 +113,6 @@
               </select>
             </fieldset>
 
-            <!-- Botões -->
             <nav class="filter-actions">
               <button type="submit" class="btn-apply">Aplicar filtros</button>
               <button type="button" class="btn-clear" id="limparFiltros">Limpar</button>
@@ -139,12 +130,10 @@
     <p>Nenhuma vaga encontrada.</p>
   <% } %>
 </section>
-  </section>
     </main>
     <br>
     <br>
     <script>
-      // Adicionar interatividade para busca
       document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.querySelector('.search-input');
         const searchForm = document.querySelector('.search-form');

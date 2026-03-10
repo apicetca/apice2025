@@ -1,322 +1,263 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro de Currículo - Experiência Profissional</title>
-    <link rel="stylesheet" href="/css/cadastro-comum.css" />
-    <link rel="stylesheet" href="/css/validation.css" />
-    <style>
-      /* Estilos específicos para o step progress */
-      .step-progress {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 30px;
-        gap: 20px;
-      }
-      
-      .step {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        background: #e6e6f0;
-        color: #9b9bb3;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 600;
-        font-size: 14px;
-      }
-      
-      .step.active {
-        background: var(--primary);
-        color: white;
-      }
-      
-      .step.completed {
-        background: var(--secundary);
-        color: var(--primary);
-      }
-      
-      .step-line {
-        width: 40px;
-        height: 2px;
-        background: #e6e6f0;
-      }
-      
-      .step-line.completed {
-        background: var(--secundary);
-      }
-      
-      .step-label {
-        position: absolute;
-        top: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 11px;
-        font-weight: 500;
-        color: #9b9bb3;
-        white-space: nowrap;
-      }
-      
-      .step.active .step-label {
-        color: var(--primary);
-        font-weight: 600;
-      }
-      
-      .step.completed .step-label {
-        color: var(--primary);
-        font-weight: 600;
-      }
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cadastro de Currículo - Experiência Profissional</title>
 
-      .checkbox-container {
-        margin: 15px 0;
-      }
+<link rel="stylesheet" href="/css/cadastro-comum.css" />
+<link rel="stylesheet" href="/css/validation.css" />
+<link rel="stylesheet" href="/css/cadCurriculo2.css" />
+</head>
 
-      .checkbox-container input[type="checkbox"] {
-        margin-right: 8px;
-      }
-      
-      /* Remover backgrounds cinzas dos inputs */
-      input, select, textarea {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
-      }
-      
-      input:focus, select:focus, textarea:focus {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
-      }
-      
-      input[readonly], select[readonly], textarea[readonly] {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
-      }
-      
-      input:disabled, select:disabled, textarea:disabled {
-        background: #ffffff !important;
-        background-color: #ffffff !important;
-        opacity: 0.6;
-      }
-      
-      /* Remover bordas cinzas dos fieldsets */
-      fieldset {
-        border: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        background: transparent !important;
-      }
-      
-      .input-group {
-        border: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        background: transparent !important;
-      }
-      
-      /* Forçar inputs de data dentro do formulário */
-      .input-group input[type="date"] {
-        padding: 16px 22px !important;
-        border: 1px solid #e6e6f0 !important;
-        border-radius: 12px !important;
-        font-family: 'Poppins', 'Montserrat', Arial, sans-serif !important;
-        font-size: 16px !important;
-        font-weight: 400 !important;
-        width: 100% !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        background: #ffffff !important;
-        color: #333333 !important;
-        line-height: 1.4 !important;
-        text-align: left !important;
-        appearance: none !important;
-        -webkit-appearance: none !important;
-        -moz-appearance: textfield !important;
-        overflow: hidden !important;
-        display: block !important;
-        margin: 0 !important;
-      }
-      
-      .input-row .input-group input[type="date"] {
-        width: 100% !important;
-        flex: 1 !important;
-      }
-      
-      .input-group input[type="date"]:focus {
-        box-shadow: 0 0 0 3px rgba(22, 11, 93, 0.06) !important;
-        border-color: rgba(22, 11, 93, 0.12) !important;
-        outline: none !important;
-      }
-      
-      .input-group input[type="date"]:disabled {
-        background-color: #f8f9fa !important;
-        opacity: 0.6 !important;
-      }
-      
-      /* Resetar estilos específicos do navegador */
-      .input-group input[type="date"]::-webkit-datetime-edit {
-        padding: 0 !important;
-      }
-      
-      .input-group input[type="date"]::-webkit-calendar-picker-indicator {
-        background: transparent !important;
-        bottom: 0 !important;
-        color: transparent !important;
-        cursor: pointer !important;
-        height: auto !important;
-        left: 0 !important;
-        position: absolute !important;
-        right: 0 !important;
-        top: 0 !important;
-        width: auto !important;
-      }
-      
-      /* Forçar contenção no grid */
-      .input-row {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 20px !important;
-        width: 100% !important;
-        margin-bottom: 20px !important;
-        overflow: hidden !important;
-      }
-      
-      .input-row .input-group {
-        width: 100% !important;
-        min-width: 0 !important;
-        overflow: hidden !important;
-      }
-    </style>
-  </head>
+<body>
 
-  <body>
-    <header>
-      <%- include('../partials/menujovem') %>
-    </header>
+<header>
+<%- include('../partials/menujovem') %>
+</header>
 
-    <main class="cad-container">
-      <h1 class="cadastro">Cadastro de Currículo</h1>
-      
-      <!-- Progress Steps -->
-      <nav class="step-progress">
-        <article class="step completed">
-          1
-          <span class="step-label">Formação Acadêmica</span>
-        </article>
-        <span class="step-line completed"></span>
-        <article class="step active">
-          2
-          <span class="step-label">Experiência</span>
-        </article>
-        <span class="step-line"></span>
-        <article class="step">
-          3
-          <span class="step-label">Informações Gerais</span>
-        </article>
-      </nav>
+<main class="cad-container">
 
-      <form id="curriculoForm2" class="cad-form" action="/cadCurriculo2" method="POST" novalidate>
-        
-        <!-- Experiência Profissional Section -->
-        <section class="form-section">
-          <h2>Experiência Profissional</h2>
-          <p>Informe sua experiência profissional mais relevante. Caso não possua, deixe em branco:</p>
-          
-          <fieldset class="input-group">
-            <label for="cargo">Cargo</label>
-            <input type="text" id="cargo" name="cargo" placeholder="Ex: Assistente Administrativo">
-            <aside class="error-message" data-field="cargo"></aside>
-          </fieldset>
+<h1 class="cadastro">Cadastro de Currículo</h1>
 
-          <fieldset class="input-group">
-            <label for="empresa">Empresa</label>
-            <input type="text" id="empresa" name="empresa" placeholder="Ex: Empresa ABC Ltda">
-            <aside class="error-message" data-field="empresa"></aside>
-          </fieldset>
 
-          <section class="input-row">
-            <fieldset class="input-group">
-              <label for="dataInicio">Data de início</label>
-              <input type="date" id="dataInicio" name="dataInicio" data-required="true">
-              <aside class="error-message" data-field="dataInicio"></aside>
-            </fieldset>
-            
-            <fieldset class="input-group">
-              <label for="dataFim">Data de fim</label>
-              <input type="date" id="dataFim" name="dataFim">
-              <aside class="error-message" data-field="dataFim"></aside>
-            </fieldset>
-          </section>
+<section class="step-progress">
 
-          <section class="checkbox-container">
-            <input type="checkbox" id="empregoAtual" name="empregoAtual" value="true" onchange="toggleDataFim(this)">
-            <label for="empregoAtual">Este é meu emprego atual</label>
-          </section>
+<article class="step completed">
+1
+<span class="step-label">Formação Acadêmica</span>
+</article>
 
-          <fieldset class="input-group">
-            <label for="descricaoAtividades">Principais atividades (opcional)</label>
-            <textarea id="descricaoAtividades" name="descricaoAtividades" rows="3" placeholder="Descreva suas principais responsabilidades e conquistas neste cargo..."></textarea>
-            <aside class="error-message" data-field="descricaoAtividades"></aside>
-          </fieldset>
-        </section>
+<span class="step-line completed"></span>
 
-        <!-- Outras Experiências Section -->
-        <section class="form-section">
-          <h2>Outras Experiências (Opcional)</h2>
-          
-          <fieldset class="input-group">
-            <label for="outrasExperiencias">Trabalhos anteriores, estágios, projetos</label>
-            <textarea id="outrasExperiencias" name="outrasExperiencias" rows="3" placeholder="Ex: Estágio em Marketing - Empresa XYZ (Jan 2022 - Jun 2022)&#10;Projeto freelance - Desenvolvimento de site (2021)"></textarea>
-            <aside class="error-message" data-field="outrasExperiencias"></aside>
-          </fieldset>
-        </section>
+<article class="step active">
+2
+<span class="step-label">Experiência</span>
+</article>
 
-      </form>
+<span class="step-line"></span>
 
-      <!-- Navigation -->
-      <nav class="actions-section">
-        <button type="button" id="btnAnterior" class="btn-secondary">Anterior</button>
-        <button type="button" id="btnProximo" class="btn-primary">Próximo</button>
-      </nav>
-    </main>
-    
-    <footer>
-      <%- include('../partials/footer') %>
-    </footer>
+<article class="step">
+3
+<span class="step-label">Informações Gerais</span>
+</article>
 
-    <script src="/js/validation.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const curriculoValidator2 = initFormValidation('curriculoForm2');
-        
-        // Botão anterior
-        document.getElementById('btnAnterior').addEventListener('click', function() {
-          window.location.href = '/cadCurriculo1';
-        });
-        
-        // Botão próximo com validação
-        document.getElementById('btnProximo').addEventListener('click', function(e) {
-          e.preventDefault();
-          if (curriculoValidator2.validateForm()) {
-            // Se validação passou, ir para próxima página
-            window.location.href = '/cadCurriculo3';
-          }
-        });
-        
-        // Função para toggle data fim
-        window.toggleDataFim = function(checkbox) {
-          const dataFimInput = document.getElementById('dataFim');
-          if (checkbox.checked) {
-            dataFimInput.disabled = true;
-            dataFimInput.value = '';
-          } else {
-            dataFimInput.disabled = false;
-          }
-        };
-      });
-    </script>
+</section>
 
-  </body>
+
+<form id="curriculoForm2" class="cad-form" action="/cadCurriculo2" method="POST" novalidate>
+
+
+<section class="form-section">
+
+<h2>Experiência Profissional</h2>
+
+<p>
+Informe sua experiência profissional mais relevante.
+Caso não possua, deixe em branco.
+</p>
+
+
+<fieldset class="input-group">
+
+<label for="cargo">Cargo</label>
+
+<input
+type="text"
+id="cargo"
+name="cargo"
+placeholder="Ex: Assistente Administrativo">
+
+<p class="error-message" data-field="cargo"></p>
+
+</fieldset>
+
+
+<fieldset class="input-group">
+
+<label for="empresa">Empresa</label>
+
+<input
+type="text"
+id="empresa"
+name="empresa"
+placeholder="Ex: Empresa ABC Ltda">
+
+<p class="error-message" data-field="empresa"></p>
+
+</fieldset>
+
+
+<section class="input-row">
+
+<fieldset class="input-group">
+
+<label for="dataInicio">Data de início</label>
+
+<input
+type="date"
+id="dataInicio"
+name="dataInicio"
+data-required="true">
+
+<p class="error-message" data-field="dataInicio"></p>
+
+</fieldset>
+
+
+<fieldset class="input-group">
+
+<label for="dataFim">Data de fim</label>
+
+<input
+type="date"
+id="dataFim"
+name="dataFim">
+
+<p class="error-message" data-field="dataFim"></p>
+
+</fieldset>
+
+</section>
+
+
+<section class="checkbox-container">
+
+<input
+type="checkbox"
+id="empregoAtual"
+name="empregoAtual"
+value="true"
+onchange="toggleDataFim(this)">
+
+<label for="empregoAtual">
+Este é meu emprego atual
+</label>
+
+</section>
+
+
+<fieldset class="input-group">
+
+<label for="descricaoAtividades">
+Principais atividades (opcional)
+</label>
+
+<textarea
+id="descricaoAtividades"
+name="descricaoAtividades"
+rows="3"
+placeholder="Descreva suas principais responsabilidades e conquistas neste cargo...">
+</textarea>
+
+<p class="error-message" data-field="descricaoAtividades"></p>
+
+</fieldset>
+
+</section>
+
+
+<section class="form-section">
+
+<h2>Outras Experiências (Opcional)</h2>
+
+<fieldset class="input-group">
+
+<label for="outrasExperiencias">
+Trabalhos anteriores, estágios, projetos
+</label>
+
+<textarea
+id="outrasExperiencias"
+name="outrasExperiencias"
+rows="3"
+placeholder="Ex: Estágio em Marketing - Empresa XYZ (Jan 2022 - Jun 2022)&#10;Projeto freelance - Desenvolvimento de site (2021)">
+</textarea>
+
+<p class="error-message" data-field="outrasExperiencias"></p>
+
+</fieldset>
+
+</section>
+
+</form>
+
+
+<nav class="actions-section">
+
+<button
+type="button"
+id="btnAnterior"
+class="btn-secondary">
+Anterior
+</button>
+
+<button
+type="button"
+id="btnProximo"
+class="btn-primary">
+Próximo
+</button>
+
+</nav>
+
+</main>
+
+
+<footer>
+<%- include('../partials/footer') %>
+</footer>
+
+
+<script src="/js/validation.js"></script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+
+const curriculoValidator2 = initFormValidation('curriculoForm2');
+
+
+document.getElementById('btnAnterior').addEventListener('click', function(){
+
+window.location.href = '/cadCurriculo1';
+
+});
+
+
+document.getElementById('btnProximo').addEventListener('click', function(e){
+
+e.preventDefault();
+
+if(curriculoValidator2.validateForm()){
+
+window.location.href = '/cadCurriculo3';
+
+}
+
+});
+
+
+window.toggleDataFim = function(checkbox){
+
+const dataFimInput = document.getElementById('dataFim');
+
+if(checkbox.checked){
+
+dataFimInput.disabled = true;
+dataFimInput.value = '';
+
+}else{
+
+dataFimInput.disabled = false;
+
+}
+
+};
+
+});
+
+</script>
+
+</body>
 </html>

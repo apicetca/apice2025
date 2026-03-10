@@ -1,157 +1,215 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <%- include('../partials/seo', {
         title: 'Perfil Profissional - Apice2025',
         description: 'Visualize e edite seu perfil profissional na plataforma Apice2025.'
       }) %>
+
   <link rel="stylesheet" href="/css/perfil.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/menu.css">
   <link rel="stylesheet" href="/css/footer.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-  </style>
+  <link rel="stylesheet" href="/css/perfil-inline.css">
 </head>
 
 <body>
-  <header class="main-header">
-    <%- include('../partials/menujovem') %>
-  </header>
-  <main class="profile-container">
-    <!-- Header da página -->
-    <header class="profile-page-header">
-      <button class="back-button" onclick="history.back()" aria-label="Voltar à página anterior">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="m15 18-6-6 6-6"/>
-        </svg>
-      </button>
-      <h1 class="page-title">Meu Perfil</h1>
-    </header>
 
-    <!-- Seção Avatar e Upload -->
-    <section class="profile-hero">
-      <figure class="profile-avatar-wrapper">
-        <% if (profileImage && profileImage.trim() !== '') { %>
-          <img src="<%= profileImage %>" alt="Foto de perfil do usuário" class="profile-avatar">
-        <% } else { %>
-          <img src="/img/profile-pic.jpg" alt="Foto de perfil padrão" class="profile-avatar">
-        <% } %>
-      </figure>
+<header class="main-header">
+  <%- include('../partials/menujovem') %>
+</header>
 
-      <form action="/upload-profile" method="POST" enctype="multipart/form-data" class="avatar-upload-form">
-        <input type="file" name="profileImage" accept="image/*" id="profileImage" class="visually-hidden" />
-        <button type="button" class="btn btn--secondary" onclick="document.getElementById('profileImage').click()" aria-label="Clique para alterar foto de perfil">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M12 5v14M5 12h14"/>
-          </svg>
-          Alterar foto
-        </button>
-      </form>
-    </section>
 
-    <!-- Informações Pessoais -->
-    <section class="profile-section">
-      <header class="section-header">
-        <h2>Informações Pessoais</h2>
-      </header>
-      <div class="profile-grid">
-        <article class="profile-card">
-          <dt class="card-label">Nome</dt>
-          <dd class="card-value"><%= user.informacoesPessoais.nome %></dd>
-        </article>
-        <article class="profile-card">
-          <dt class="card-label">Idade</dt>
-          <dd class="card-value"><%= user.informacoesPessoais.idade %></dd>
-        </article>
-        <article class="profile-card">
-          <dt class="card-label">Gênero</dt>
-          <dd class="card-value">Feminino</dd>
-        </article>
-        <article class="profile-card">
-          <dt class="card-label">Estado Civil</dt>
-          <dd class="card-value">Solteira</dd>
-        </article>
-        <article class="profile-card">
-          <dt class="card-label">Endereço</dt>
-          <dd class="card-value">Rua Francisco Marques, Vila Formosa</dd>
-        </article>
-        <article class="profile-card">
-          <dt class="card-label">CEP</dt>
-          <dd class="card-value">14400-342</dd>
-        </article>
-      </div>
-    </section>
+<main class="profile-container">
 
-    <!-- Formação Acadêmica -->
-    <section class="profile-section">
-      <header class="section-header">
-        <h2>Formação Acadêmica</h2>
-      </header>
-      <div class="profile-grid">
-        <article class="profile-card">
-          <dt class="card-label">Curso</dt>
-          <dd class="card-value"><%= user.formacaoAcademica.curso %></dd>
-        </article>
-        <article class="profile-card">
-          <dt class="card-label">Instituição</dt>
-          <dd class="card-value">UNESP</dd>
-        </article>
-        <article class="profile-card">
-          <dt class="card-label">Ano de Formação</dt>
-          <dd class="card-value">2023</dd>
-        </article>
-      </div>
-    </section>
+<header class="profile-page-header">
 
-    <!-- Experiência Profissional -->
-    <section class="profile-section">
-      <header class="section-header">
-        <h2>Experiência Profissional</h2>
-      </header>
-      <div class="profile-grid">
-        <article class="profile-card">
-          <dt class="card-label">Cargo</dt>
-          <dd class="card-value">Assistente</dd>
-        </article>
-        <article class="profile-card">
-          <dt class="card-label">Empresa</dt>
-          <dd class="card-value">DataSmart</dd>
-        </article>
-        <article class="profile-card">
-          <dt class="card-label">Período</dt>
-          <dd class="card-value">2022 - Presente</dd>
-        </article>
-      </div>
-    </section>
+<button class="back-button" onclick="history.back()" aria-label="Voltar à página anterior">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m15 18-6-6 6-6"/>
+</svg>
+</button>
 
-    <!-- Habilidades -->
-    <section class="profile-section">
-      <header class="section-header">
-        <h2>Habilidades</h2>
-      </header>
-      <nav class="skills-container" aria-label="Competências e habilidades">
-        <span class="skill-badge">Python</span>
-        <span class="skill-badge">SQL</span>
-        <span class="skill-badge">Análise de Dados</span>
-        <span class="skill-badge">Machine Learning</span>
-      </nav>
-    </section>
-  </main>
-    
+<h1 class="page-title">
+Meu Perfil
+</h1>
 
-  <footer>
-    <%- include('../partials/footer') %>
-  </footer>
+</header>
 
-  <script>
-    document.getElementById('profileImage').addEventListener('change', function() {
-      if (this.files && this.files[0]) {
-        document.querySelector('form').submit();
-      }
-    });
-  </script>
-  <script src="/js/script.js" defer></script>
+
+<section class="profile-hero">
+
+<figure class="profile-avatar-wrapper">
+
+<% if (profileImage && profileImage.trim() !== '') { %>
+<img src="<%= profileImage %>" alt="Foto de perfil do usuário" class="profile-avatar">
+<% } else { %>
+<img src="/img/profile-pic.jpg" alt="Foto de perfil padrão" class="profile-avatar">
+<% } %>
+
+</figure>
+
+
+<form action="/upload-profile" method="POST" enctype="multipart/form-data" class="avatar-upload-form">
+
+<input type="file" name="profileImage" accept="image/*" id="profileImage" class="visually-hidden" />
+
+<button type="button" class="btn btn--secondary" onclick="document.getElementById('profileImage').click()" aria-label="Clique para alterar foto de perfil">
+
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+<path d="M12 5v14M5 12h14"/>
+</svg>
+
+Alterar foto
+
+</button>
+
+</form>
+
+</section>
+
+
+<section class="profile-section">
+
+<header class="section-header">
+<h2>Informações Pessoais</h2>
+</header>
+
+<dl class="profile-grid">
+
+<article class="profile-card">
+<dt class="card-label">Nome</dt>
+<dd class="card-value"><%= user.informacoesPessoais.nome %></dd>
+</article>
+
+<article class="profile-card">
+<dt class="card-label">Idade</dt>
+<dd class="card-value"><%= user.informacoesPessoais.idade %></dd>
+</article>
+
+<article class="profile-card">
+<dt class="card-label">Gênero</dt>
+<dd class="card-value">Feminino</dd>
+</article>
+
+<article class="profile-card">
+<dt class="card-label">Estado Civil</dt>
+<dd class="card-value">Solteira</dd>
+</article>
+
+<article class="profile-card">
+<dt class="card-label">Endereço</dt>
+<dd class="card-value">Rua Francisco Marques, Vila Formosa</dd>
+</article>
+
+<article class="profile-card">
+<dt class="card-label">CEP</dt>
+<dd class="card-value">14400-342</dd>
+</article>
+
+</dl>
+
+</section>
+
+
+
+<section class="profile-section">
+
+<header class="section-header">
+<h2>Formação Acadêmica</h2>
+</header>
+
+<dl class="profile-grid">
+
+<article class="profile-card">
+<dt class="card-label">Curso</dt>
+<dd class="card-value"><%= user.formacaoAcademica.curso %></dd>
+</article>
+
+<article class="profile-card">
+<dt class="card-label">Instituição</dt>
+<dd class="card-value">UNESP</dd>
+</article>
+
+<article class="profile-card">
+<dt class="card-label">Ano de Formação</dt>
+<dd class="card-value">2023</dd>
+</article>
+
+</dl>
+
+</section>
+
+
+
+<section class="profile-section">
+
+<header class="section-header">
+<h2>Experiência Profissional</h2>
+</header>
+
+<dl class="profile-grid">
+
+<article class="profile-card">
+<dt class="card-label">Cargo</dt>
+<dd class="card-value">Assistente</dd>
+</article>
+
+<article class="profile-card">
+<dt class="card-label">Empresa</dt>
+<dd class="card-value">DataSmart</dd>
+</article>
+
+<article class="profile-card">
+<dt class="card-label">Período</dt>
+<dd class="card-value">2022 - Presente</dd>
+</article>
+
+</dl>
+
+</section>
+
+
+
+<section class="profile-section">
+
+<header class="section-header">
+<h2>Habilidades</h2>
+</header>
+
+<nav class="skills-container" aria-label="Competências e habilidades">
+
+<span class="skill-badge">Python</span>
+<span class="skill-badge">SQL</span>
+<span class="skill-badge">Análise de Dados</span>
+<span class="skill-badge">Machine Learning</span>
+
+</nav>
+
+</section>
+
+</main>
+
+
+<footer>
+<%- include('../partials/footer') %>
+</footer>
+
+
+<script>
+
+document.getElementById('profileImage').addEventListener('change', function() {
+
+if (this.files && this.files[0]) {
+document.querySelector('.avatar-upload-form').submit();
+}
+
+});
+
+</script>
+
+<script src="/js/script.js" defer></script>
+
 </body>
 </html>

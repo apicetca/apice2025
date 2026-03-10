@@ -1,92 +1,123 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ápice</title>
-  <link rel="stylesheet" href="/css/cadastro-comum.css" />
-  <link rel="stylesheet" href="/css/validation.css" /> 
+
+  <link rel="stylesheet" href="/css/cadastro-comum.css">
+  <link rel="stylesheet" href="/css/validation.css">
 </head>
+
 <body>
 
-  <header>
-    <%- include('../partials/menu') %>
-    <h1 class="cadastro">Cadastro</h1>
-  </header>
+<header>
+  <%- include('../partials/menu') %>
+  <h1 class="cadastro">Cadastro</h1>
+</header>
 
-  <main class="cad-container">
+<main class="cad-container">
 
   <section class="form-section">
-        <p>Informe suas informações para o registro</p>
-        
-        <!-- Mostrar erros gerais se existirem -->
-        <% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
-          <article class="general-error">
-            <% errors.forEach(function(error) { %>
-              <%= error.msg %><br>
-            <% }) %>
-          </article>
-        <% } %>
-        
+
+    <header>
+      <p>Informe suas informações para o registro</p>
+    </header>
+
+    <!-- erros gerais -->
+    <% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
+      <article class="general-error">
+        <% errors.forEach(function(error) { %>
+          <p><%= error.msg %></p>
+        <% }) %>
+      </article>
+    <% } %>
+
     <form id="cad2Form" class="cad-form" method="POST" action="/cad2">
-      <input type="text" id="rg" name="rg" placeholder="RG" required />
 
-      <input type="date" id="data" name="data" placeholder="Data de nascimento" required />
+      <section class="form-group">
+        <input type="text" id="rg" name="rg" placeholder="RG" required>
+      </section>
 
-  
-      <select id="sexo" name="sexo" required>
-        <option value="">Selecione o sexo</option>
-        <option value="masculino">Masculino</option>
-        <option value="feminino">Feminino</option>
-        <option value="outro">Outro</option>
-      </select>
+      <section class="form-group">
+        <input type="date" id="data" name="data" placeholder="Data de nascimento" required>
+      </section>
 
+      <section class="form-group">
+        <select id="sexo" name="sexo" required>
+          <option value="">Selecione o sexo</option>
+          <option value="masculino">Masculino</option>
+          <option value="feminino">Feminino</option>
+          <option value="outro">Outro</option>
+        </select>
+      </section>
 
-      <select id="estado" name="estado" required>
-        <option value="">Estado civil</option>
-        <option value="solteiro">Solteiro(a)</option>
-        <option value="casado">Casado(a)</option>
-        <option value="divorciado">Divorciado(a)</option>
-        <option value="viuvo">Viúvo(a)</option>
-      </select>
+      <section class="form-group">
+        <select id="estado" name="estado" required>
+          <option value="">Estado civil</option>
+          <option value="solteiro">Solteiro(a)</option>
+          <option value="casado">Casado(a)</option>
+          <option value="divorciado">Divorciado(a)</option>
+          <option value="viuvo">Viúvo(a)</option>
+        </select>
+      </section>
 
+      <section class="form-group">
+        <input type="text" id="endereco" name="endereco" placeholder="Endereço" required>
+      </section>
 
-      <input type="text" id="endereco" name="endereco" placeholder="Endereço" required />
+      <section class="lado">
 
-    <section class="lado">
-      <input type="text" id="cep" name="cep" placeholder="CEP" required class="cep"/>
+        <section class="form-group">
+          <input type="text" id="cep" name="cep" placeholder="CEP" required class="cep">
+        </section>
 
-      <input type="text" id="complemento" name="complemento" placeholder="Complemento" class="comp"/>
-      
-    </section>
+        <section class="form-group">
+          <input type="text" id="complemento" name="complemento" placeholder="Complemento" class="comp">
+        </section>
+
+      </section>
 
     </form>
+
   </section>
 
-  <nav class="actions-section">
-      <button form="cad2Form" type="submit" class="btn-primary">Próximo</button>
-  </nav></main>
+  <section class="actions-section">
+    <button form="cad2Form" type="submit" class="btn-primary">
+      Próximo
+    </button>
+  </section>
+
+</main>
 
 <footer>
-
 </footer>
 
 <script src="/js/validation.js"></script>
+
 <script>
-// Inicializar validação para o formulário cad2
+
 document.addEventListener('DOMContentLoaded', function() {
+
   const cad2Validator = initFormValidation('cad2Form');
-  
-  // Máscara para CEP
+
   const cepInput = document.getElementById('cep');
+
   if (cepInput) {
+
     cepInput.addEventListener('input', function() {
+
       let value = this.value.replace(/\D/g, '');
       value = value.replace(/(\d{5})(\d{3})/, '$1-$2');
+
       this.value = value;
+
     });
+
   }
+
 });
+
 </script>
 
 </body>

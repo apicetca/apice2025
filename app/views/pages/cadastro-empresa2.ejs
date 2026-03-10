@@ -7,199 +7,262 @@
         prev: '/cadastro-empresa',
         next: '/cadastro-empresa3'
       }) %>
-  <link rel="stylesheet" href="/css/cadastro-comum.css" />
-  <link rel="stylesheet" href="/css/validation.css" />
-  <style>
-    /* Estilos específicos para o step progress */
-    .step-progress {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 30px;
-      gap: 20px;
-    }
-    
-    .step {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      background: #e6e6f0;
-      color: #9b9bb3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    
-    .step.active {
-      background: var(--primary);
-      color: white;
-    }
-    
-    .step.completed {
-      background: var(--secundary);
-      color: var(--primary);
-    }
-    
-    .step-line {
-      width: 40px;
-      height: 2px;
-      background: #e6e6f0;
-    }
-    
-    .step-line.completed {
-      background: var(--secundary);
-    }
-  </style>
+
+  <link rel="stylesheet" href="/css/cadastro-comum.css">
+  <link rel="stylesheet" href="/css/validation.css">
+  <link rel="stylesheet" href="/css/cadastro-empresa2.css">
 </head>
 
 <body>
+
+<header>
   <%- include('../partials/menu') %>
-  
-  <header>
-    <h1 class="cadastro">Dados do Responsável</h1>
-  </header>
+  <h1 class="cadastro">Dados do Responsável</h1>
+</header>
 
-  <main class="cad-container">
-    <!-- Indicador de Progresso -->
-    <nav class="step-progress" aria-label="Progresso do cadastro">
-      <ol>
-        <li class="step completed" aria-current="step">1</li>
-        <li class="step-line completed" aria-hidden="true"></li>
-        <li class="step active" aria-current="step">2</li>
-        <li class="step-line" aria-hidden="true"></li>
-        <li class="step">3</li>
-      </ol>
-    </nav>
+<main class="cad-container">
 
-    <section class="form-section">
--      <p>Informe os dados do responsável pela empresa</p>
-+      <h2>Informe os dados do responsável pela empresa</h2>
-      
-      <!-- Mostrar erros gerais se existirem -->
-      <% if (locals.errors && errors.length > 0) { %>
-        <article class="general-error" role="alert">
-          <% errors.forEach(error => { %>
-            <%= error.msg %><br>
-          <% }); %>
-        </article>
-      <% } %>
-      
--      <form id="empresaForm2" class="cad-form" method="POST" action="/cadastro-empresa2">
--        <input type="text" id="nome" name="nome" placeholder="Nome completo do responsável" 
--               value="<%= locals.form ? form.nome || '' : '' %>" required />
--        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'nome') ? errors.find(e => e.param === 'nome').msg : '' %></span>
--
--        <input type="text" id="cargo" name="cargo" placeholder="Cargo na empresa" 
--               value="<%= locals.form ? form.cargo || '' : '' %>" required />
--        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'cargo') ? errors.find(e => e.param === 'cargo').msg : '' %></span>
--
--        <input type="email" id="email" name="email" placeholder="Email institucional" 
--               value="<%= locals.form ? form.email || '' : '' %>" required />
--        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'email') ? errors.find(e => e.param === 'email').msg : '' %></span>
--
--        <input type="tel" id="telefone" name="telefone" placeholder="Telefone comercial" 
--               value="<%= locals.form ? form.telefone || '' : '' %>" required />
--        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'telefone') ? errors.find(e => e.param === 'telefone').msg : '' %></span>
--
--        <input type="password" id="password" name="password" placeholder="Criar senha" required />
--        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'password') ? errors.find(e => e.param === 'password').msg : '' %></span>
--
--        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar senha" required />
--        <span class="field-error"><%= locals.errors && errors.find(e => e.param === 'confirmPassword') ? errors.find(e => e.param === 'confirmPassword').msg : '' %></span>
--      </form>
-+      <form id="empresaForm2" class="cad-form" method="POST" action="/cadastro-empresa2">
-+        <fieldset>
-+          <legend class="visually-hidden">Dados do responsável</legend>
-+
-+          <div class="form-group">
-+            <label for="nome">Nome completo do responsável</label>
-+            <input type="text" id="nome" name="nome" placeholder="Nome completo do responsável"
-+                   value="<%= locals.form ? form.nome || '' : '' %>" required />
-+            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'nome') ? errors.find(e => e.param === 'nome').msg : '' %></span>
-+          </div>
-+
-+          <div class="form-group">
-+            <label for="cargo">Cargo na empresa</label>
-+            <input type="text" id="cargo" name="cargo" placeholder="Cargo na empresa"
-+                   value="<%= locals.form ? form.cargo || '' : '' %>" required />
-+            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'cargo') ? errors.find(e => e.param === 'cargo').msg : '' %></span>
-+          </div>
-+
-+          <div class="form-group">
-+            <label for="email">Email institucional</label>
-+            <input type="email" id="email" name="email" placeholder="Email institucional"
-+                   value="<%= locals.form ? form.email || '' : '' %>" required />
-+            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'email') ? errors.find(e => e.param === 'email').msg : '' %></span>
-+          </div>
-+
-+          <div class="form-group">
-+            <label for="telefone">Telefone comercial</label>
-+            <input type="tel" id="telefone" name="telefone" placeholder="Telefone comercial"
-+                   value="<%= locals.form ? form.telefone || '' : '' %>" required />
-+            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'telefone') ? errors.find(e => e.param === 'telefone').msg : '' %></span>
-+          </div>
-+
-+          <div class="form-group">
-+            <label for="password">Criar senha</label>
-+            <input type="password" id="password" name="password" placeholder="Criar senha" required />
-+            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'password') ? errors.find(e => e.param === 'password').msg : '' %></span>
-+          </div>
-+
-+          <div class="form-group">
-+            <label for="confirmPassword">Confirmar senha</label>
-+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar senha" required />
-+            <span class="field-error" aria-live="polite"><%= locals.errors && errors.find(e => e.param === 'confirmPassword') ? errors.find(e => e.param === 'confirmPassword').msg : '' %></span>
-+          </div>
-+        </fieldset>
-+      </form>
-     </section>
+  <section class="step-progress" aria-label="Progresso do cadastro">
 
-    <nav class="actions-section">
-      <button id="btnAnterior" class="btn-secondary">Anterior</button>
-      <button id="btnProximo" class="btn-primary">Próximo</button>
-    </nav>
-  </main>
+    <ol class="steps">
 
-  <footer></footer>
-  
-  <script src="/js/validation.js"></script>
-  <script src="/js/input-masks.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const empresaValidator2 = initFormValidation('empresaForm2');
-      
-      // Botão anterior
-      document.getElementById('btnAnterior').addEventListener('click', function() {
-        window.location.href = '/cadastro-empresa';
-      });
-      
-      // Botão próximo com validação
-      document.getElementById('btnProximo').addEventListener('click', function(e) {
-        e.preventDefault();
-        if (empresaValidator2.validateForm()) {
-          // Se validação passou, ir para próxima página
-          window.location.href = '/cadastro-empresa3';
-        }
-      });
-      
-      // Função para remover formatação antes do envio
-      function digits(value) {
-        return (value || '').replace(/\D/g, '');
+      <li class="step completed" aria-current="step">
+        <span>1</span>
+      </li>
+
+      <li class="step-line completed" aria-hidden="true"></li>
+
+      <li class="step active">
+        <span>2</span>
+      </li>
+
+      <li class="step-line" aria-hidden="true"></li>
+
+      <li class="step">
+        <span>3</span>
+      </li>
+
+    </ol>
+
+  </section>
+
+
+  <section class="form-section">
+
+    <header>
+      <h2>Informe os dados do responsável pela empresa</h2>
+    </header>
+
+    <% if (locals.errors && errors.length > 0) { %>
+      <article class="general-error" role="alert">
+        <% errors.forEach(error => { %>
+          <p><%= error.msg %></p>
+        <% }) %>
+      </article>
+    <% } %>
+
+
+    <form id="empresaForm2" class="cad-form" method="POST" action="/cadastro-empresa2">
+
+      <fieldset>
+
+        <legend class="visually-hidden">
+          Dados do responsável
+        </legend>
+
+
+        <section class="form-group">
+
+          <label for="nome">Nome completo do responsável</label>
+
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            placeholder="Nome completo do responsável"
+            value="<%= locals.form ? form.nome || '' : '' %>"
+            required>
+
+          <span class="field-error" aria-live="polite">
+            <%= locals.errors && errors.find(e => e.param === 'nome') ? errors.find(e => e.param === 'nome').msg : '' %>
+          </span>
+
+        </section>
+
+
+        <section class="form-group">
+
+          <label for="cargo">Cargo na empresa</label>
+
+          <input
+            type="text"
+            id="cargo"
+            name="cargo"
+            placeholder="Cargo na empresa"
+            value="<%= locals.form ? form.cargo || '' : '' %>"
+            required>
+
+          <span class="field-error" aria-live="polite">
+            <%= locals.errors && errors.find(e => e.param === 'cargo') ? errors.find(e => e.param === 'cargo').msg : '' %>
+          </span>
+
+        </section>
+
+
+        <section class="form-group">
+
+          <label for="email">Email institucional</label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email institucional"
+            value="<%= locals.form ? form.email || '' : '' %>"
+            required>
+
+          <span class="field-error" aria-live="polite">
+            <%= locals.errors && errors.find(e => e.param === 'email') ? errors.find(e => e.param === 'email').msg : '' %>
+          </span>
+
+        </section>
+
+
+        <section class="form-group">
+
+          <label for="telefone">Telefone comercial</label>
+
+          <input
+            type="tel"
+            id="telefone"
+            name="telefone"
+            placeholder="Telefone comercial"
+            value="<%= locals.form ? form.telefone || '' : '' %>"
+            required>
+
+          <span class="field-error" aria-live="polite">
+            <%= locals.errors && errors.find(e => e.param === 'telefone') ? errors.find(e => e.param === 'telefone').msg : '' %>
+          </span>
+
+        </section>
+
+
+        <section class="form-group">
+
+          <label for="password">Criar senha</label>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Criar senha"
+            required>
+
+          <span class="field-error" aria-live="polite">
+            <%= locals.errors && errors.find(e => e.param === 'password') ? errors.find(e => e.param === 'password').msg : '' %>
+          </span>
+
+        </section>
+
+
+        <section class="form-group">
+
+          <label for="confirmPassword">Confirmar senha</label>
+
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirmar senha"
+            required>
+
+          <span class="field-error" aria-live="polite">
+            <%= locals.errors && errors.find(e => e.param === 'confirmPassword') ? errors.find(e => e.param === 'confirmPassword').msg : '' %>
+          </span>
+
+        </section>
+
+      </fieldset>
+
+    </form>
+
+  </section>
+
+
+  <section class="actions-section">
+
+    <button id="btnAnterior" class="btn-secondary">
+      Anterior
+    </button>
+
+    <button id="btnProximo" class="btn-primary">
+      Próximo
+    </button>
+
+  </section>
+
+</main>
+
+
+<footer></footer>
+
+
+<script src="/js/validation.js"></script>
+<script src="/js/input-masks.js"></script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function(){
+
+  const empresaValidator2 = initFormValidation('empresaForm2');
+
+  document.getElementById('btnAnterior')
+  .addEventListener('click', function(){
+
+    window.location.href = '/cadastro-empresa';
+
+  });
+
+  document.getElementById('btnProximo')
+  .addEventListener('click', function(e){
+
+    e.preventDefault();
+
+    if(empresaValidator2.validateForm()){
+
+      window.location.href = '/cadastro-empresa3';
+
+    }
+
+  });
+
+  function digits(value){
+
+    return (value || '').replace(/\D/g, '');
+
+  }
+
+  const form = document.getElementById('empresaForm2');
+
+  if(form){
+
+    form.addEventListener('submit', function(){
+
+      const telefoneInput = form.querySelector('#telefone');
+
+      if(telefoneInput){
+
+        telefoneInput.value = digits(telefoneInput.value);
+
       }
 
-      const form = document.getElementById('empresaForm2');
-      if (form) {
-        form.addEventListener('submit', function (e) {
-          const telefoneInput = form.querySelector('#telefone');
-          if (telefoneInput) {
-            telefoneInput.value = digits(telefoneInput.value);
-          }
-        }, { capture: true });
-      }
-    });
-  </script>
+    }, { capture:true });
+
+  }
+
+});
+
+</script>
 
 </body>
 </html>
