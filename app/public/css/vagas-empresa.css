@@ -1,0 +1,438 @@
+:root {
+    --primary-blue: #160b5d; /* Azul principal */
+    --secondary-yellow: #ffc52d; /* Amarelo secundário */
+    --white: #FFFFFF;
+    --light-grey: #868686;
+    --medium-grey: #8f8f8f;
+    --input-bg: #120b3d; /* Mantido um ton de roxo escuro para inputs para contraste */
+    --input-border: #120b3d; /* Borda mais escura para inputs */
+    --black: #000000; /* Adicionado preto para o texto do botão */
+    /* Novas variáveis para o stepper */
+    --stepper-bg: #F0F2F5; /* Cor de fundo do stepper */
+    --stepper-inactive-color: #8f8f8f; /* Cor dos itens inativos do stepper */
+    --stepper-line-color: #ccc; /* Cor da linha inativa do stepper */
+    --error-red: #ff4d4d; /* Cor para mensagens de erro */
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Certifique-se que Poppins é a primeira opção */
+    margin: 0;
+    background-color: var(--stepper-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Novo wrapper para agrupar stepper e formulário */
+.new-main-wrapper {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column; /* Coloca os itens um abaixo do outro */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Sombra para o bloco inteiro */
+    border-radius: 15px; /* Arredonda as bordas do bloco inteiro */
+    overflow: hidden; /* Garante que os border-radius funcionem nos filhos */
+}
+
+.container {
+    background-color: var(--primary-blue);
+    width: 100%; /* Ocupa a largura total do new-main-wrapper */
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.form-title {
+    color: var(--white);
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-group,
+fieldset.form-group {
+    margin-bottom: 20px;
+    position: relative; /* Importante para posicionar as sugestões da cidade */
+    border: none;
+    padding: 0;
+}
+
+label {
+    display: block;
+    color: var(--white);
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--white);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--secondary-yellow);
+    box-shadow: 0 0 0 3px rgba(255, 197, 45, 0.3);
+}
+
+input.invalid,
+select.invalid,
+textarea.invalid,
+fieldset.invalid {
+    border-color: var(--error-red);
+    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.3);
+}
+
+/* Estilo específico para fieldset inválido */
+fieldset.invalid {
+    border: 1px solid var(--error-red);
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.error-message,
+small.error-message {
+    color: var(--error-red);
+    font-size: 12px;
+    margin-top: 5px;
+    display: none; /* Escondido por padrão */
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--medium-grey);
+    opacity: 1;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: var(--medium-grey); opacity: 1; }
+input::-moz-placeholder, textarea::-moz-placeholder { color: var(--medium-grey); opacity: 1; }
+input::-ms-input-placeholder, textarea::-ms-input-placeholder { color: var(--medium-grey); opacity: 1; }
+
+select option[value=""] {
+    color: var(--medium-grey);
+}
+
+select option {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.4-6.3H18.9c-5%200-9.7%202-13.4%206.3-6.5%206.7-6.5%2017.7%200%2024.4l132.8%20133c6.5%206.7%2017.2%206.7%2023.6%200L287%2093.8c6.5-6.6%206.5-17.6%200-24.4z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px top 50%;
+    background-size: 12px;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.input-group-prefix,
+figure.input-group-prefix {
+    display: flex;
+    align-items: center;
+    background-color: var(--input-bg);
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    color: var(--white);
+    font-size: 15px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin: 0;
+    padding: 0;
+}
+ .input-group-prefix.invalid,
+ figure.input-group-prefix.invalid {
+    border-color: var(--error-red);
+    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.3);
+}
+
+.input-group-prefix:focus-within,
+figure.input-group-prefix:focus-within {
+    border-color: var(--secondary-yellow);
+    box-shadow: 0 0 0 3px rgba(255, 197, 45, 0.3);
+}
+
+.input-group-prefix span,
+figure.input-group-prefix span {
+    padding: 12px 15px;
+    background-color: var(--input-bg);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.input-group-prefix input,
+figure.input-group-prefix input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border-radius: 0 8px 8px 0;
+    background-color: var(--input-bg);
+    color: var(--white);
+    border: none;
+    outline: none;
+}
+.input-group-prefix input:focus,
+figure.input-group-prefix input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.benefits-list,
+section.benefits-list {
+    margin-top: 10px;
+    min-height: 40px; /* Garante que a lista de benefícios tenha uma altura mínima */
+    border: 1px dashed var(--input-border); /* Borda para indicar a área */
+    padding: 5px;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    align-content: flex-start;
+}
+.benefits-list.invalid,
+section.benefits-list.invalid {
+    border-color: var(--error-red);
+}
+
+.benefit-item {
+    display: inline-flex; /* Para que os itens fiquem lado a lado */
+    align-items: center;
+    background-color: var(--input-bg); /* Cor de fundo para o benefício */
+    border-radius: 8px;
+    padding: 6px 10px;
+    color: var(--white);
+    font-size: 14px;
+    white-space: nowrap; /* Impede que o texto quebre */
+}
+
+.benefit-item span {
+    margin-right: 8px;
+}
+
+.benefit-item button {
+    background: none;
+    border: none;
+    color: var(--light-grey);
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.benefit-item button:hover {
+    color: var(--white);
+}
+
+.add-benefit-input,
+figure.add-benefit-input {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.add-benefit-input input,
+figure.add-benefit-input input {
+    flex-grow: 1;
+    border-radius: 8px 0 0 8px;
+    border-right: none;
+}
+
+.add-benefit-input button,
+figure.add-benefit-input button {
+    background-color: var(--secondary-yellow);
+    border: 1px solid var(--secondary-yellow);
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    color: var(--black);
+    font-size: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.add-benefit-input button:hover,
+figure.add-benefit-input button:hover {
+    background-color: #ffd76b;
+    border-color: #ffd76b;
+}
+
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--secondary-yellow);
+    color: var(--black);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 550;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estilos do Stepper de Formulário */
+ .form-stepper-wrapper {
+    width: 100%;
+    padding: 20px 0;
+    background-color: var(--stepper-bg);
+    box-sizing: border-box;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.form-stepper-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 350px;
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.stepper-item,
+article.stepper-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 100px;
+}
+
+.stepper-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    background-color: var(--stepper-inactive-color);
+    color: var(--white);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.stepper-label {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--stepper-inactive-color);
+    transition: color 0.3s ease;
+    line-height: 1.2;
+}
+
+.stepper-line,
+hr.stepper-line {
+    height: 2px;
+    width: 40px;
+    background-color: var(--stepper-line-color);
+    margin: 0 5px;
+    border: none;
+}
+
+.stepper-item.active .stepper-circle {
+    background-color: var(--secondary-yellow);
+    color: var(--white);
+}
+
+.stepper-item.active .stepper-label {
+    color: var(--secondary-yellow);
+    font-weight: 400;
+}
+
+.stepper-item.active + .stepper-line,
+article.stepper-item.active + hr.stepper-line {
+    background: linear-gradient(to right, var(--secondary-yellow) 50%, var(--stepper-line-color) 50%);
+}
+
+/* Estilos para o campo de pesquisa de cidade */
+.city-suggestions {
+    position: absolute;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    left: 0;
+    top: calc(100% + 0px); /* Posiciona abaixo do input */
+}
+
+.city-suggestions div {
+    padding: 10px 15px;
+    color: var(--white);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.city-suggestions div:hover {
+    background-color: var(--primary-blue);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .new-main-wrapper {
+        border-radius: 0; /* Remove border-radius em mobile */
+        box-shadow: none; /* Remove sombra em mobile */
+    }
+    .container {
+        padding: 20px;
+        border-radius: 0; /* Remove border-radius em mobile */
+    }
+    .form-title {
+        font-size: 22px;
+    }
+    .form-stepper-wrapper {
+        border-top-left-radius: 0; /* Remove border-radius em mobile */
+        border-top-right-radius: 0;
+        padding: 15px 0;
+    }
+    .form-stepper-container {
+        padding: 0 10px; /* Ajusta espaçamento horizontal em mobile */
+    }
+    .stepper-item {
+        min-width: 80px;
+    }
+    .stepper-circle {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    .stepper-label {
+        font-size: 12px;
+    }
+    .stepper-line {
+        width: 25px;
+    }
+}

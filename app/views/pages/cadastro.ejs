@@ -1,94 +1,178 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ápice</title>
-  <link rel="stylesheet" href="/css/cadastro-comum.css" />
-  <link rel="stylesheet" href="/css/validation.css" /> 
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ápice</title>
+
+<link rel="stylesheet" href="/css/cadastro-comum.css" />
+<link rel="stylesheet" href="/css/validation.css" />
 </head>
 
 <body>
 
-  <header>
-    
-  <%- include('../partials/menu') %>
+<header>
+<%- include('../partials/menu') %>
+</header>
 
-    <h1 class="cadastro" style="display: block !important; visibility: visible !important; color: #160B5D !important; font-size: 34px !important; text-align: center !important; margin: 20px 0 !important; font-weight: 600 !important; font-family: 'Poppins', sans-serif !important;">Cadastro</h1>
-
-  </header>  
 
 <main class="cad-container">
 
+<header>
+<h1 class="cadastro"
+style="display: block !important; visibility: visible !important; color: #160B5D !important; font-size: 34px !important; text-align: center !important; margin: 20px 0 !important; font-weight: 600 !important; font-family: 'Poppins', sans-serif !important;">
+Cadastro
+</h1>
+</header>
 
-  <section class="form-section">
-        <p>Digite seus dados de acesso para se cadastrar</p>
-        
-        <!-- Mostrar erros gerais se existirem -->
-        <% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
-          <article class="general-error">
-            <% errors.forEach(function(error) { %>
-              <%= error.msg %><br>
-            <% }) %>
-          </article>
-        <% } %>
-        
-    <form id="cadastroForm" class="cad-form" method="POST" action="/cadastro">
-      <input type="text" id="nome" name="nome" placeholder="Nome completo" 
-             value="<%= typeof form !== 'undefined' && form.nome ? form.nome : '' %>" required />
 
-      <input type="email" id="email" name="email" placeholder="Email" 
-             value="<%= typeof form !== 'undefined' && form.email ? form.email : '' %>" required />
+<section class="form-section">
 
-      <input type="tel" id="telefone" name="telefone" placeholder="Telefone" 
-             value="<%= typeof form !== 'undefined' && form.telefone ? form.telefone : '' %>" required />
+<header>
+<p>Digite seus dados de acesso para se cadastrar</p>
+</header>
 
-      <input type="password" id="password" name="password" placeholder="Crie uma senha" required />
 
-      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirme sua senha" required />
+<% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
 
-    </form>
-  </section> 
+<section class="general-error" aria-live="polite">
+
+<ul>
+
+<% errors.forEach(function(error) { %>
+
+<li><%= error.msg %></li>
+
+<% }) %>
+
+</ul>
+
+</section>
+
+<% } %>
+
+
+<form id="cadastroForm" class="cad-form" method="POST" action="/cadastro">
+
+<label for="nome">Nome completo</label>
+<input
+type="text"
+id="nome"
+name="nome"
+placeholder="Nome completo"
+value="<%= typeof form !== 'undefined' && form.nome ? form.nome : '' %>"
+required
+/>
+
+
+<label for="email">Email</label>
+<input
+type="email"
+id="email"
+name="email"
+placeholder="Email"
+value="<%= typeof form !== 'undefined' && form.email ? form.email : '' %>"
+required
+/>
+
+
+<label for="telefone">Telefone</label>
+<input
+type="tel"
+id="telefone"
+name="telefone"
+placeholder="Telefone"
+value="<%= typeof form !== 'undefined' && form.telefone ? form.telefone : '' %>"
+required
+/>
+
+
+<label for="password">Crie uma senha</label>
+<input
+type="password"
+id="password"
+name="password"
+placeholder="Crie uma senha"
+required
+/>
+
+
+<label for="confirmPassword">Confirme sua senha</label>
+<input
+type="password"
+id="confirmPassword"
+name="confirmPassword"
+placeholder="Confirme sua senha"
+required
+/>
+
 
 <nav class="actions-section">
-      <button id="btnProximo" class="btn-primary">Próximo</button>
-      <span class="divider">
-        <span>ou</span>
-      </span>
-      <button id="btnEmpresa" class="btn-secondary">Cadastrar Empresa</button>
-  </nav>
-  
-  <div class="form-footer">
-    <p>Já tem uma conta? <a href="/login-usuario">Fazer login</a></p>
-  </div>
-  
-<script src="/js/validation.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const cadastroValidator = initFormValidation('cadastroForm');
-  
-  // Botão próximo com validação
-  document.getElementById('btnProximo').addEventListener('click', function(e) {
-    e.preventDefault();
-    if (cadastroValidator.validateForm()) {
-      // Se validação frontend passou, submeter o formulário
-      document.getElementById('cadastroForm').submit();
-    }
-  });
-  
-  // Botão empresa (sem validação)
-  document.getElementById('btnEmpresa').addEventListener('click', function() {
-    window.location.href = '/cadastro-empresa';
-  });
-});
-</script>
 
-</main>
+<button type="submit" id="btnProximo" class="btn-primary">
+Próximo
+</button>
 
-<footer>
+<span class="divider">
+<span>ou</span>
+</span>
+
+<button type="button" id="btnEmpresa" class="btn-secondary">
+Cadastrar Empresa
+</button>
+
+</nav>
+
+</form>
+
+</section>
+
+
+<footer class="form-footer">
+
+<p>
+Já tem uma conta?
+<a href="/login-usuario">Fazer login</a>
+</p>
 
 </footer>
 
+</main>
+
+
+<script src="/js/validation.js"></script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+
+const cadastroValidator = initFormValidation('cadastroForm');
+
+document.getElementById('btnProximo').addEventListener('click', function(e) {
+
+e.preventDefault();
+
+if (cadastroValidator.validateForm()) {
+
+document.getElementById('cadastroForm').submit();
+
+}
+
+});
+
+document.getElementById('btnEmpresa').addEventListener('click', function() {
+
+window.location.href = '/cadastro-empresa';
+
+});
+
+});
+
+</script>
+
+
+<footer>
+</footer>
 
 </body>
 </html>
